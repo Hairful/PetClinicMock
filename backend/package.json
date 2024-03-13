@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "PCM系统后端",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "YYZ",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
