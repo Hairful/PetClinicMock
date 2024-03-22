@@ -5,24 +5,15 @@
         data-thq="thq-navbar"
         class="navbarContainer login-navbar-interactive"
       >
-        <span class="logo">PETCLINICMock</span>
-        <!-- 桌面端顶端导航栏 -->
+        <router-link to="/" class="login-logo logo">PETCLINICMock</router-link>
         <div data-thq="thq-navbar-nav" class="login-desktop-menu">
-          <nav class="login-links">
-            <RouterLink :to="{path:'/'}">
-                <button class="buttonFlat">Home</button>
-              </RouterLink>
-              <button class="buttonFlat">Services</button>
-              <button class="buttonFlat">Our Team</button>
-              <button class="buttonFlat">Contact</button>
-          </nav>
           <div class="login-buttons">
-          <RouterLink :to="{path:'/login'}">
-            <button class="login-login buttonFilled">Login</button>
-          </RouterLink>
-          <RouterLink :to="{path:'/register'}">
-            <button class="buttonFilled">Register</button>
-          </RouterLink>
+            <router-link to="/login" class="login-login buttonFlat">
+              Login
+            </router-link>
+            <router-link to="/register" class="login-register buttonFilled">
+              Register
+            </router-link>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="login-burger-menu">
@@ -32,7 +23,6 @@
             ></path>
           </svg>
         </div>
-        <!-- 移动端顶端导航栏 -->
         <div data-thq="thq-mobile-menu" class="login-mobile-menu1 mobileMenu">
           <div class="login-nav">
             <div class="login-top">
@@ -45,21 +35,15 @@
                 </svg>
               </div>
             </div>
-            <nav class="login-links1">
-              <RouterLink :to="{path:'/'}">
-                <button class="buttonFlat">Home</button>
-              </RouterLink>
-              <button class="buttonFlat">Services</button>
-              <button class="buttonFlat">Our Team</button>
-              <button class="buttonFlat">Contact</button>
+            <nav class="login-links">
+              <span class="login-nav12 bodySmall">Home</span>
+              <span class="login-nav22 bodySmall">Services</span>
+              <span class="login-nav32 bodySmall">Our Team</span>
+              <span class="login-nav42 bodySmall">Contact</span>
             </nav>
             <div class="login-buttons1">
-              <RouterLink :to="{path:'/login'}">
-            <button class="buttonFilled" >Login</button>
-            </RouterLink>
-            <RouterLink :to="{path:'/register'}">
+              <button class="buttonFlat">Login</button>
               <button class="buttonFilled">Register</button>
-            </RouterLink>
             </div>
           </div>
           <div>
@@ -69,15 +53,15 @@
             >
               <path
                 d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-              ></path></svg>
-              <svg
+              ></path></svg
+            ><svg
               viewBox="0 0 877.7142857142857 1024"
               class="login-icon06 socialIcons"
             >
               <path
                 d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-              ></path></svg>
-              <svg
+              ></path></svg
+            ><svg
               viewBox="0 0 602.2582857142856 1024"
               class="login-icon08 socialIcons"
             >
@@ -98,21 +82,21 @@
             <span>
               <span>
                 <span>Caring for your furry friends</span>
-                <span><span v-html="rawv3ho"></span></span>
+                <span><span v-html="raweqtt"></span></span>
               </span>
               <span>
-                <span><span v-html="rawt5eh"></span></span>
-                <span><span v-html="raw2aay"></span></span>
+                <span><span v-html="rawm61n"></span></span>
+                <span><span v-html="rawi3hz"></span></span>
               </span>
             </span>
             <span>
               <span>
-                <span><span v-html="raw4lsm"></span></span>
-                <span><span v-html="raw5cdp"></span></span>
+                <span><span v-html="rawrvn4"></span></span>
+                <span><span v-html="rawkeau"></span></span>
               </span>
               <span>
-                <span><span v-html="rawgct5"></span></span>
-                <span><span v-html="raw1pab"></span></span>
+                <span><span v-html="rawa4n5"></span></span>
+                <span><span v-html="rawyrlc"></span></span>
               </span>
             </span>
           </span>
@@ -135,12 +119,7 @@
     <div class="login-footer">
       <footer class="login-footer1 footerContainer">
         <div class="login-container2">
-          <span class="logo">PETCLINICMOCK</span>
-          <nav class="login-nav1">
-            <span class="login-nav122">Home</span>
-            <span class="login-nav322 bodySmall">Our Team</span>
-            <span class="login-nav422 bodySmall">Contact</span>
-          </nav>
+          <router-link to="/" class="login-logo2 logo">PETCLINICMOCK</router-link>
         </div>
         <div class="login-separator"></div>
         <div class="login-container3">
@@ -159,13 +138,13 @@ export default {
   props: {},
   data() {
     return {
-      rawv3ho: ' ',
-      rawt5eh: ' ',
-      raw2aay: ' ',
-      raw4lsm: ' ',
-      raw5cdp: ' ',
-      rawgct5: ' ',
-      raw1pab: ' ',
+      raweqtt: ' ',
+      rawm61n: ' ',
+      rawi3hz: ' ',
+      rawrvn4: ' ',
+      rawkeau: ' ',
+      rawa4n5: ' ',
+      rawyrlc: ' ',
     }
   },
   metaInfo: {
@@ -198,23 +177,13 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+.login-logo {
+  text-decoration: none;
+}
 .login-desktop-menu {
   flex: 1;
   display: flex;
-  justify-content: space-between;
-}
-.login-links {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.login-nav32 {
-  margin-left: var(--dl-space-space-unit);
-}
-.login-nav42 {
-  margin-left: var(--dl-space-space-unit);
+  justify-content: flex-end;
 }
 .login-buttons {
   display: flex;
@@ -224,6 +193,10 @@ export default {
 }
 .login-login {
   margin-right: 32px;
+  text-decoration: none;
+}
+.login-register {
+  text-decoration: none;
 }
 .login-burger-menu {
   display: none;
@@ -267,23 +240,23 @@ export default {
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
-.login-links1 {
+.login-links {
   flex: 0 0 auto;
   display: flex;
   align-self: flex-start;
   align-items: flex-start;
   flex-direction: column;
 }
-.login-nav121 {
+.login-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
 .login-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
-.login-nav321 {
+.login-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
-.login-nav421 {
+.login-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
 .login-buttons1 {
@@ -317,22 +290,26 @@ export default {
   justify-content: center;
 }
 .login-hero1 {
-  border-color: var(--dl-color-gray-black);
+  border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
-  border-radius: var(--dl-radius-radius-radius4);
+  background-color: var(--dl-color-gray-black);
 }
 .login-container1 {
   gap: var(--dl-space-space-oneandhalfunits);
+  flex: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: var(--dl-space-space-twounits);
   justify-content: flex-start;
 }
 .login-hero-heading {
+  color: var(--dl-color-gray-white);
   max-width: 800px;
   text-align: center;
 }
 .login-hero-heading1 {
+  color: var(--dl-color-gray-white);
   max-width: 800px;
   text-align: center;
 }
@@ -352,14 +329,14 @@ export default {
   border-radius: 16px;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--dl-color-gray-900);
+  background-color: #D9D9D9;
 }
 .login-textinput {
   width: 300px;
   height: 44px;
   align-self: center;
   font-family: "Noto Sans";
-  border-color: var(--dl-color-custom-neutral-dark);
+  border-color: #191818;
   border-style: solid;
   border-width: 3px;
   margin-bottom: var(--dl-space-space-unit);
@@ -370,7 +347,7 @@ export default {
   height: 44px;
   align-self: center;
   font-family: "Noto Sans";
-  border-color: var(--dl-color-custom-neutral-dark);
+  border-color: #191818;
   border-style: solid;
   border-width: 3px;
   margin-bottom: var(--dl-space-space-unit);
@@ -400,24 +377,8 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
-.login-nav1 {
-  flex: 0 0 auto;
-  display: flex;
-  margin-top: 0px;
-  align-items: center;
-  flex-direction: row;
-}
-.login-nav122 {
-  font-size: 16px;
-  font-family: Noto Sans;
-  font-weight: 400;
-  line-height: 150%;
-}
-.login-nav322 {
-  margin-left: var(--dl-space-space-unit);
-}
-.login-nav422 {
-  margin-left: var(--dl-space-space-unit);
+.login-logo2 {
+  text-decoration: none;
 }
 .login-separator {
   flex: 0 0 auto;
@@ -480,16 +441,16 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  .login-nav121 {
+  .login-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
   .login-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .login-nav321 {
+  .login-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .login-nav421 {
+  .login-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
   .login-hero1 {

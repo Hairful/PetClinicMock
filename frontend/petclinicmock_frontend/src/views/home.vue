@@ -3,26 +3,30 @@
     <div class="home-header">
       <header
         data-thq="thq-navbar"
-        class="navbarContainer home-navbar-interactive"
+        class="home-navbar-interactive navbarContainer"
       >
         <span class="logo">PETCLINICMOCK</span>
-        <!-- 桌面端顶端导航栏 -->
         <div data-thq="thq-navbar-nav" class="home-desktop-menu">
-          <nav class="home-links">
-            <RouterLink :to="{path:'/'}">
-                <button class="buttonFlat">Home</button>
-            </RouterLink>
-              <button class="buttonFlat">Services</button>
-              <button class="buttonFlat">Our Team</button>
-              <button class="buttonFlat">Contact</button>
-          </nav>
           <div class="home-buttons">
-            <RouterLink :to="{path:'/login'}">
-            <button class="home-login buttonFilled" >Login</button>
-            </RouterLink>
-            <RouterLink to="/register">
-              <button class="buttonFilled">Register</button>
-            </RouterLink>
+            <router-link to="/login" class="home-login buttonFlat">
+              Login
+            </router-link>
+            <animate-on-reveal
+              animation="rubberBand"
+              duration="300ms"
+              delay="2s"
+              direction="normal"
+              easing="ease"
+              iteration="100000"
+            >
+              <router-link
+                to="/register"
+                data-thq-animate-on-reveal="true"
+                class="home-register buttonFilled"
+              >
+                Register
+              </router-link>
+            </animate-on-reveal>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="home-burger-menu">
@@ -32,7 +36,6 @@
             ></path>
           </svg>
         </div>
-        <!-- 移动端顶端导航栏 -->
         <div data-thq="thq-mobile-menu" class="home-mobile-menu1 mobileMenu">
           <div class="home-nav">
             <div class="home-top">
@@ -45,24 +48,16 @@
                 </svg>
               </div>
             </div>
-            <nav class="home-links1">
-              <RouterLink :to="{path:'/'}">
-                <button class="buttonFlat">Home</button>
-              </RouterLink>
-              <button class="buttonFlat">Services</button>
-              <button class="buttonFlat">Our Team</button>
-              <button class="buttonFlat">Contact</button>
+            <nav class="home-links">
+              <span class="home-nav12 bodySmall">Home</span>
+              <span class="home-nav22 bodySmall">Services</span>
+              <span class="home-nav32 bodySmall">Our Team</span>
+              <span class="home-nav42 bodySmall">Contact</span>
             </nav>
-            
             <div class="home-buttons1">
-                <RouterLink :to="{path:'/login'}">
-                  <button class="buttonFilled">Login</button>
-                </RouterLink> 
-              <RouterLink :to="{path:'/register'}">
-                <button class="buttonFilled">Register</button>
-              </RouterLink>
+              <button class="buttonFlat">Login</button>
+              <button class="buttonFilled">Register</button>
             </div>
-
           </div>
           <div>
             <svg
@@ -71,13 +66,15 @@
             >
               <path
                 d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-              ></path></svg><svg
+              ></path></svg
+            ><svg
               viewBox="0 0 877.7142857142857 1024"
               class="home-icon06 socialIcons"
             >
               <path
                 d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-              ></path></svg><svg
+              ></path></svg
+            ><svg
               viewBox="0 0 602.2582857142856 1024"
               class="home-icon08 socialIcons"
             >
@@ -90,186 +87,85 @@
       </header>
     </div>
     <div class="home-hero">
-      <div class="heroContainer home-hero1">
+      <div class="home-hero1 heroContainer">
         <div class="home-container1">
-            <h1 class="home-hero-heading heading1"
-            >
-              Introducing the Next Generation of  Clinic Training
-            </h1>
+          <h1 class="home-hero-heading heading1">
+            Introducing the Next Generation of  Clinic Training
+          </h1>
           <span class="home-hero-sub-heading bodyLarge">
             <span>
               <span>
                 <span>Caring for your furry friends</span>
-                <span><span v-html="rawwxan"></span></span>
+                <span><span v-html="raw4lfp"></span></span>
               </span>
               <span>
-                <span><span v-html="rawyc28"></span></span>
-                <span><span v-html="rawtbmz"></span></span>
+                <span><span v-html="rawdg2p"></span></span>
+                <span><span v-html="rawvmsq"></span></span>
               </span>
             </span>
             <span>
               <span>
-                <span><span v-html="rawahmw"></span></span>
-                <span><span v-html="raw5701"></span></span>
+                <span><span v-html="raw3m1y"></span></span>
+                <span><span v-html="raw0kbt"></span></span>
               </span>
               <span>
-                <span><span v-html="rawl7zs"></span></span>
-                <span><span v-html="rawxeul"></span></span>
+                <span><span v-html="rawaqg9"></span></span>
+                <span><span v-html="raww3ko"></span></span>
               </span>
             </span>
           </span>
         </div>
       </div>
     </div>
-    <div class="home-features">
-      <div class="featuresContainer">
-        <div class="home-features1">
-          <div class="home-container2">
-            <span class="overline">
-              <span>features</span>
-              <br />
-            </span>
-            <h2 class="home-features-heading heading2">
-              Why Choose Our Platform?
-            </h2>
-            <span class="home-features-sub-heading bodyLarge">
-              <span>
-                <span>
-                  <span>
-                    Discover the features that set our pet clinic apart and make
-                    us the best choice for your pet&apos;s health.
-                  </span>
-                  <span><span v-html="raw9ac5"></span></span>
-                </span>
-                <span>
-                  <span><span v-html="raw6ie3"></span></span>
-                  <span><span v-html="rawqf4l"></span></span>
-                </span>
-              </span>
-              <span>
-                <span>
-                  <span><span v-html="rawtrzm"></span></span>
-                  <span><span v-html="raw7qi9"></span></span>
-                </span>
-                <span>
-                  <span><span v-html="rawdlkx"></span></span>
-                  <span><span v-html="raw6yeh"></span></span>
-                </span>
-              </span>
-            </span>
-          </div>
-          <div class="home-container3">
-            <feature-card
-              heading="Experienced Veterinarians"
-              subHeading="Our team of skilled and compassionate veterinarians are dedicated to providing the best care for your pets."
-            ></feature-card>
-            <feature-card
-              heading="State-of-the-Art Facilities"
-              subHeading="We have modern facilities equipped with the latest technology to ensure the well-being of your furry friends."
-            ></feature-card>
-            <feature-card
-              heading="Comprehensive Pet Care Services"
-              subHeading="From routine check-ups to emergency care, we offer a wide range of services to meet all your pet's healthcare needs."
-            ></feature-card>
-            <feature-card
-              heading="Personalized Treatment Plans"
-              subHeading="We understand that every pet is unique, which is why we tailor treatment plans to suit your pet's individual needs."
-            ></feature-card>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="home-faq">
-      <div class="faqContainer">
-        <div class="home-faq1">
-          <div class="home-container4">
-            <span class="overline">
-              <span>FAQ</span>
-              <br />
-            </span>
-            <h2 class="home-text34 heading2">Common questions</h2>
-            <span class="home-text35 bodyLarge">
-              <span>Here are some of the most common questions that we get.</span>
-              <br />
-            </span>
-          </div>
-          <div class="home-container5">
-            <app-question1
-              answer="Our pet clinic offers a wide range of services including vaccinations, spaying/neutering, dental care, and more."
-              question="What services does the pet clinic offer?"
-            ></app-question1>
-            <app-question1
-              answer="You can easily make an appointment by calling our clinic or using our online booking system on our website."
-              question="How can I make an appointment for my pet?"
-            ></app-question1>
-            <app-question1
-              answer="While we recommend making an appointment to ensure timely care for your pet, we do accept walk-ins based on availability."
-              question="Are walk-ins accepted at the pet clinic?"
-            ></app-question1>
-            <app-question1
-              answer="Our pet clinic is open from Monday to Friday, 9:00 AM to 6:00 PM, and on Saturdays from 10:00 AM to 4:00 PM."
-              question="What are the operating hours of the pet clinic?"
-            ></app-question1>
-            <app-question1
-              answer="Yes, we provide emergency services for pets during our regular business hours. For after-hours emergencies, we recommend contacting the nearest emergency veterinary clinic."
-              question="Do you offer emergency services for pets?"
-            ></app-question1>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="home-footer">
+      <animate-on-reveal
+        animation="none"
+        duration="300ms"
+        delay="0s"
+        direction="normal"
+        easing="ease"
+        iteration="1000"
+      >
         <footer
+          data-thq-animate-on-reveal="true"
           class="home-footer1 footerContainer"
         >
-          <div class="home-container6">
+          <div class="home-container2">
             <span class="logo">PETCLINICMOCK</span>
             <nav class="home-nav1">
               <span class="bodySmall">Home</span>
-              <span class="home-nav322 bodySmall">Our Team</span>
-              <span class="home-nav422 bodySmall">Contact</span>
+              <span class="home-nav321 bodySmall">Our Team</span>
+              <span class="home-nav421 bodySmall">Contact</span>
             </nav>
           </div>
           <div class="home-separator"></div>
-          <div class="home-container7">
-            <span class="bodySmall home-text38">
+          <div class="home-container3">
+            <span class="bodySmall home-text14">
               © 2024 SWD-G02, All Rights Reserved.
             </span>
+            <router-link to="/login-admin" class="home-navlink button">
+              Admin Login
+            </router-link>
           </div>
         </footer>
+      </animate-on-reveal>
     </div>
   </div>
 </template>
 
 <script>
-import { RouterLink } from 'vue-router';
-import FeatureCard from '../components/feature-card'
-import AppQuestion1 from '../components/question1'
-
-
 export default {
   name: 'Home',
   props: {},
-  components: {
-    FeatureCard,
-    AppQuestion1,
-  },
   data() {
     return {
-      rawwxan: ' ',
-      rawyc28: ' ',
-      rawtbmz: ' ',
-      rawahmw: ' ',
-      raw5701: ' ',
-      rawl7zs: ' ',
-      rawxeul: ' ',
-      raw9ac5: ' ',
-      raw6ie3: ' ',
-      rawqf4l: ' ',
-      rawtrzm: ' ',
-      raw7qi9: ' ',
-      rawdlkx: ' ',
-      raw6yeh: ' ',
+      raw4lfp: ' ',
+      rawdg2p: ' ',
+      rawvmsq: ' ',
+      raw3m1y: ' ',
+      raw0kbt: ' ',
+      rawaqg9: ' ',
+      raww3ko: ' ',
     }
   },
   metaInfo: {
@@ -302,32 +198,26 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+.home-navbar-interactive {
+  justify-content: space-between;
+}
 .home-desktop-menu {
   flex: 1;
   display: flex;
-  justify-content: space-between;
-}
-.home-links {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.home-nav32 {
-  margin-left: var(--dl-space-space-unit);
-}
-.home-nav42 {
-  margin-left: var(--dl-space-space-unit);
+  justify-content: flex-end;
 }
 .home-buttons {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .home-login {
   margin-right: 32px;
+  text-decoration: none;
+}
+.home-register {
+  text-decoration: none;
 }
 .home-burger-menu {
   display: none;
@@ -371,23 +261,23 @@ export default {
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
-.home-links1 {
+.home-links {
   flex: 0 0 auto;
   display: flex;
   align-self: flex-start;
   align-items: flex-start;
   flex-direction: column;
 }
-.home-nav121 {
+.home-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
 .home-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
-.home-nav321 {
+.home-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
-.home-nav421 {
+.home-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
 .home-buttons1 {
@@ -420,6 +310,9 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
+.home-hero1 {
+  height: 667px;
+}
 .home-container1 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -435,85 +328,6 @@ export default {
   font-size: 18px;
   text-align: center;
 }
-.home-features {
-  flex: 0 0 auto;
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.home-features1 {
-  gap: var(--dl-space-space-threeunits);
-  width: 100%;
-  display: flex;
-  max-width: var(--dl-size-size-maxwidth);
-  align-items: center;
-  padding-top: var(--dl-space-space-fourunits);
-  padding-left: var(--dl-space-space-threeunits);
-  padding-right: var(--dl-space-space-threeunits);
-  flex-direction: column;
-  padding-bottom: var(--dl-space-space-fourunits);
-  justify-content: flex-start;
-}
-.home-container2 {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.home-features-heading {
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
-}
-.home-features-sub-heading {
-  font-size: 18px;
-  text-align: center;
-}
-.home-container3 {
-  width: 100%;
-  display: grid;
-  grid-gap: var(--dl-space-space-oneandhalfunits);
-  grid-template-columns: 1fr 1fr;
-}
-.home-faq {
-  flex: 0 0 auto;
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.home-faq1 {
-  gap: var(--dl-space-space-twounits);
-  width: 100%;
-  display: flex;
-  max-width: var(--dl-size-size-maxwidth);
-  align-items: flex-start;
-  padding-top: var(--dl-space-space-fourunits);
-  padding-left: var(--dl-space-space-threeunits);
-  padding-right: var(--dl-space-space-threeunits);
-  flex-direction: row;
-  padding-bottom: var(--dl-space-space-fourunits);
-}
-.home-container4 {
-  display: flex;
-  max-width: 35%;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.home-text34 {
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
-}
-.home-text35 {
-  text-align: left;
-}
-.home-container5 {
-  gap: var(--dl-space-space-oneandhalfunits);
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
 .home-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -525,11 +339,9 @@ export default {
 .home-footer1 {
   z-index: 100;
   box-shadow: 5px 5px 10px 0px #d4d4d4;
-  border-color: var(--dl-color-gray-black);
-  border-width: 1px;
   border-radius: var(--dl-radius-radius-radius4);
 }
-.home-container6 {
+.home-container2 {
   gap: var(--dl-space-space-unit);
   display: flex;
   max-width: var(--dl-size-size-maxwidth);
@@ -544,10 +356,10 @@ export default {
   align-items: center;
   flex-direction: row;
 }
-.home-nav322 {
+.home-nav321 {
   margin-left: var(--dl-space-space-unit);
 }
-.home-nav422 {
+.home-nav421 {
   margin-left: var(--dl-space-space-unit);
 }
 .home-separator {
@@ -568,13 +380,19 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
-.home-container7 {
+.home-container3 {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+}
+.home-navlink {
+  color: var(--dl-color-primary-700);
+  border-width: 0px;
+  text-decoration: none;
+  background-color: transparent;
 }
 @media(max-width: 991px) {
   .home-hero1 {
@@ -594,16 +412,6 @@ export default {
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
-  .home-features-sub-heading {
-    text-align: center;
-    padding-left: var(--dl-space-space-threeunits);
-    padding-right: var(--dl-space-space-threeunits);
-  }
-  .home-text35 {
-    text-align: center;
-    padding-left: var(--dl-space-space-threeunits);
-    padding-right: var(--dl-space-space-threeunits);
-  }
 }
 @media(max-width: 767px) {
   .home-navbar-interactive {
@@ -618,16 +426,16 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  .home-nav121 {
+  .home-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
   .home-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .home-nav321 {
+  .home-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .home-nav421 {
+  .home-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
   .home-hero1 {
@@ -635,30 +443,6 @@ export default {
     padding-right: var(--dl-space-space-twounits);
   }
   .home-hero-sub-heading {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .home-features1 {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-  }
-  .home-features-sub-heading {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .home-container3 {
-    grid-template-columns: 1fr;
-  }
-  .home-faq1 {
-    flex-direction: column;
-  }
-  .home-container4 {
-    max-width: 100%;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-  }
-  .home-text35 {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
@@ -672,12 +456,12 @@ export default {
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
-  .home-container7 {
+  .home-container3 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
-  .home-text38 {
+  .home-text14 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
@@ -697,12 +481,6 @@ export default {
   .home-container1 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .home-features1 {
-    padding-top: var(--dl-space-space-twounits);
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-    padding-bottom: var(--dl-space-space-twounits);
-  }
   .home-footer1 {
     padding: var(--dl-space-space-unit);
   }
@@ -710,12 +488,12 @@ export default {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
-  .home-container7 {
+  .home-container3 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
-  .home-text38 {
+  .home-text14 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
