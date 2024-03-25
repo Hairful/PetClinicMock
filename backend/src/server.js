@@ -1,26 +1,15 @@
-const sequelize = require('./database');
-const Medicine = require('./models/Medicine');
-const User = require('./models/User');
-const Department = require('./models/Department');
-const Item = require('./models/Item');
-const Case = require('./models/Case');
-const Disease = require('./models/Disease');
-const Media = require('./models/Media');
-const Token = require('./models/Token');
-const Prob = require('./models/Prob');
-const UserProb = require('./models/UserProb');
-const Quiz = require('./models/Quiz');
-const UserQuiz = require('./models/UserQuiz');
+const sequelize = require('./config/database'); // 导入 Sequelize 实例
+const app = require('./app');
+const PORT = process.env.PORT || 3000;
 
-
-async function syncDatabase() {
-    try {
-        await sequelize.sync({ alter: true });
-        console.log('Database synchronized successfully');
-    } catch (error) {
-        console.error('Error synchronizing database:', error);
-    }
-}
-
-// 调用同步函数
-syncDatabase();
+sequelize.authenticate()
+    .then(() => {
+        console.log('Database connection has been established successfully.');
+        // 如果数据库连接成功，启动服务器
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
