@@ -1,5 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const Quiz = require('./Quiz');
+const Prob = require('./Prob');
+const UserProb = require('./UserProb')
+const UserQuiz = require('./UserQuiz')
 
 const User = sequelize.define('User', {
     userID: {
@@ -21,5 +25,8 @@ const User = sequelize.define('User', {
         defaultValue: false
     }
 });
+
+User.belongsToMany(Quiz, { through: UserQuiz });
+User.belongsToMany(Prob, { through: UserProb });
 
 module.exports = User;

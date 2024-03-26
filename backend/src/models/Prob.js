@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const User = require('./User');
-const UserProb = require('./UserProb');
 
 const Prob = sequelize.define('Prob', {
     probID: {
@@ -26,7 +24,5 @@ const Prob = sequelize.define('Prob', {
         allowNull: false
     }
 });
-
-Prob.belongsToMany(User, { through: UserProb });
 
 module.exports = Prob;

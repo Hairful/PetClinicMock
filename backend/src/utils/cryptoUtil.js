@@ -1,22 +1,32 @@
+/**
+ * 文件: cryptoUtil.js
+ * 描述: 定义加解密函数
+ * 作者: {YYZ}
+ */
+
 const crypto = require('crypto');
-//const { cryptoKey } = require('../config/cryptoConfig');
+const { cryptoKey, cryptoIV, cryptoAlgorithm } = require('../config/cryptoConfig');
 
-const algorithm = 'aes-128-gcm';
-
-function encrypt(text) {
-    const iv = crypto.randomBytes(16); // 生成随机的初始化向量
-    let cryptoKey = crypto.createHash('sha256').digest('base64').slice(0, 16)
-    const cipher = crypto.createCipheriv(algorithm, cryptoKey, iv);
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return encrypted.toString('hex');
+/**
+ * encrypt - AES-128-CBC对称加密
+ * @param text {string} 要加密的明文
+ * @returns {string} 加密后的密文，16进制字符串
+ */
+exports.encrypt = (text) => {
+    const cipher = crypto.createCipheriv(cryptoAlgorithm, cryptoKey, cryptoIV);
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    return encrypted;
 }
 
-function decrypt(iv, encryptedData) {
-    const decipher = crypto.createDecipheriv(algorithm, Buffer.from(cryptoKey), Buffer.from(iv, 'hex'));
-    let decrypted = decipher.update(Buffer.from(encryptedData, 'hex'));
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
+/**
+ * encrypt - AES-128-CBC对称加密
+ * @param encryptedText {string} 要解密的密文，16进制字符串
+ * @returns {string} 解密后的明文
+ */
+exports.decrypt = (encryptedText) => {
+    const decipher = crypto.createDecipheriv(cryptoAlgorithm, cryptoKey, cryptoIV);
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
 }
-
-module.exports = { encrypt, decrypt };

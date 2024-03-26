@@ -21,7 +21,5 @@ const Quiz = sequelize.define('Quiz', {
 });
 
 Quiz.hasMany(Prob, { foreignKey: 'quizID' });
-Quiz.belongsToMany(User, { through: UserQuiz });
-
 
 module.exports = Quiz;
