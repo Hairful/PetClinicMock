@@ -51,6 +51,11 @@ export default new Router({
       component: Register,
     },
     {
+      name: 'Login',
+      path: '/login',
+      component: Login,
+    },
+    {
       name: 'QuizList',
       path: '/quiz-list',
       component: QuizList,
@@ -131,12 +136,6 @@ export default new Router({
       component: AdminCaseStudyList,
     },
     {
-      name: 'Page',
-      path: '**',
-      component: Page,
-      fallback: true,
-    },
-    {
       name: 'QuizResult',
       path: '/quiz-result',
       component: QuizResult,
@@ -162,9 +161,10 @@ export default new Router({
       component: CaseStudyMenu,
     },
     {
-      name: 'Login',
-      path: '/login',
-      component: Login,
+      name: 'Page',
+      path: '**',
+      component: Page,
+      fallback: true,
     },
   ],
 })

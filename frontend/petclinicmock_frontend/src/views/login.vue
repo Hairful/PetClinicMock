@@ -53,15 +53,13 @@
             >
               <path
                 d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-              ></path></svg
-            ><svg
+              ></path></svg><svg
               viewBox="0 0 877.7142857142857 1024"
               class="login-icon06 socialIcons"
             >
               <path
                 d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-              ></path></svg
-            ><svg
+              ></path></svg><svg
               viewBox="0 0 602.2582857142856 1024"
               class="login-icon08 socialIcons"
             >
@@ -78,42 +76,45 @@
         <div class="login-container1">
           <h1 class="login-hero-heading heading1">LOGIN</h1>
           <h1 class="login-hero-heading1 heading1">Welcome Back!</h1>
-          <span class="login-hero-sub-heading bodyLarge">
-            <span>
-              <span>
-                <span>Caring for your furry friends</span>
-                <span><span v-html="raweqtt"></span></span>
-              </span>
-              <span>
-                <span><span v-html="rawm61n"></span></span>
-                <span><span v-html="rawi3hz"></span></span>
-              </span>
-            </span>
-            <span>
-              <span>
-                <span><span v-html="rawrvn4"></span></span>
-                <span><span v-html="rawkeau"></span></span>
-              </span>
-              <span>
-                <span><span v-html="rawa4n5"></span></span>
-                <span><span v-html="rawyrlc"></span></span>
-              </span>
-            </span>
-          </span>
         </div>
-        <form class="login-form">
-          <input
+        <el-form :model="formLogin" class="login-form" method="get" :rules="rules" ref="formLogin">
+        <el-form-item prop="name" class="login-textinput">
+          <el-input
+            prop="name"
             type="text"
             placeholder="User Name"
-            class="login-textinput input"
-          />
-          <input
-            type="text"
+            autocomplete="true"
+            v-model="formLogin.name"
+          /></el-form-item>
+        <el-form-item prop="password" class="login-textinput">
+          <el-input
+            prop="password"
+            type="password"
             placeholder="Password"
-            class="login-textinput1 input"
+            show-password
+            autocomplete="true"
+            v-model="formLogin.password"
           />
-          <button class="login-register2 buttonFilled">Register</button>
-        </form>
+        </el-form-item>
+          <table>
+            <tr>
+              <td>
+                <el-input
+                  class="login-validcode"
+                  type="text"
+                  placeholder="enter validcode"
+                  v-model="formLogin.code"
+                />
+              </td>
+              <td
+                width="100%" 
+                @click="refreshCode">
+              <ValidCode class="login-code" :identifyCode="identifyCode"></ValidCode>
+              </td>
+            </tr>
+          </table>
+          <el-button class="login-register2 buttonFilled" @click="submit">Login</el-button>
+        </el-form> 
       </div>
     </div>
     <div class="login-footer">
@@ -133,18 +134,74 @@
 </template>
 
 <script>
+import ValidCode from '../components/validcode.vue'
 export default {
   name: 'Login',
   props: {},
+  components: {
+    ValidCode,
+  },
   data() {
     return {
-      raweqtt: ' ',
-      rawm61n: ' ',
-      rawi3hz: ' ',
-      rawrvn4: ' ',
-      rawkeau: ' ',
-      rawa4n5: ' ',
-      rawyrlc: ' ',
+      formLogin: {
+        code: "", //验证码输入框
+        name: "",
+        password: "",
+      },
+      rules: {
+      name: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { pattern:"^[\\u4e00-\\u9fa5\\w]{2,20}$", message: '用户名长度在 2~20 位不含特殊字符', trigger: 'blur' }
+      ],
+      password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { pattern:"^\\w{6,18}$", message: '密码长度在 6~18 位不含特殊字符', trigger: 'blur',  }
+      ]
+      },
+      identifyCodes: "1234567890abcdefjhijklinpqrsduvwxyz", //随机串内容,从这里随机抽几个显示验证码
+      identifyCode: "", //验证码图片内容
+    }
+  },
+    mounted() {
+    // 初始化验证码
+    this.identifyCode = "";
+    //参数：（1）随机串内容。（2）验证码显示位数
+    this.makeCode(this.identifyCodes, 4);
+  },
+  methods: {
+    // 重置验证码
+    refreshCode() {
+      this.identifyCode = "";
+      this.makeCode(this.identifyCodes, 4);
+    },
+    //获取验证码的值
+    makeCode(o, l) {
+      for (let i = 0; i < l; i++) {
+        //通过循环获取字符串内随机几位
+        this.identifyCode +=
+          this.identifyCodes[this.randomNum(0, this.identifyCodes.length)];
+      }
+    },
+    //随机数字：用于当角标拿字符串的值
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+    submit() {
+      this.$refs.formLogin.validate((valid) => {
+         if (valid) { //valid成功为true，失败为false
+          console.log("验证码:", this.identifyCode);
+          console.log("用户输入的验证码:",this.formLogin.code);
+          console.log('是否验证通过:',this.identifyCode==this.formLogin.code);
+          if(!(this.identifyCode==this.formLogin.code))
+          {
+            alert('验证码错误！')
+            this.refreshCode() 
+          }
+         } else {
+             console.log('校验失败');
+             return false;
+         }
+     });
     }
   },
   metaInfo: {
@@ -329,34 +386,42 @@ export default {
   border-radius: 16px;
   flex-direction: column;
   justify-content: center;
-  background-color: #D9D9D9;
+  background-color: var(--dl-color-gray-900);
 }
 .login-textinput {
   width: 300px;
   height: 44px;
-  align-self: center;
+  align-self: left;
+  margin-left: 40px;
   font-family: "Noto Sans";
-  border-color: #191818;
-  border-style: solid;
-  border-width: 3px;
   margin-bottom: var(--dl-space-space-unit);
-  background-color: transparent;
+
 }
 .login-textinput1 {
   width: 300px;
   height: 44px;
-  align-self: center;
+  align-self: left;
+  margin-left: 40px;
   font-family: "Noto Sans";
-  border-color: #191818;
-  border-style: solid;
-  border-width: 3px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.login-validcode {
+  width: 200px;
+  height: 44px;
+  align-self: left;
+  margin-left: 37px;
+  font-family: "Noto Sans";
   margin-bottom: var(--dl-space-space-unit);
   background-color: transparent;
 }
+.login-code {
+  margin-left: 10px;
+  margin-bottom: var(--dl-space-space-unit);
+}
 .login-register2 {
   height: 34px;
+  width: 100px;
   align-self: center;
-  background-color: var(--dl-color-custom-primary2);
 }
 .login-footer {
   flex: 0 0 auto;
