@@ -150,6 +150,7 @@
 
 <script>
 import ValidCode from '../components/validcode.vue'
+import axios from 'axios'
 export default {
   name: 'Register',
   props: {},
@@ -197,6 +198,35 @@ export default {
     this.makeCode(this.identifyCodes, 4);
   },
   methods: {
+    // HTTP request
+    async register() {
+      try {
+        axios.interceptors.request.use(function (config) {
+            // Do something before request is sent
+            console.log(config);
+            return config;
+          }, function (error) {
+            // Do something with request error
+            return Promise.reject(error);
+        });
+        const response = await axios.post('/register', {
+          userName: this.formLogin.name,
+          password: this.formLogin.password,
+        });
+
+        if (response.data.status === 0) {
+          // Register successful
+          // Redirect or do something
+          this.$router.push('/'); // Navigate to menu page
+        } else {
+          // Register failed
+          // Show error message
+          this.$message.warning('The username has been used.');
+        }
+      } catch (error) {
+        // Handle error
+      }
+    },
     // 重置验证码
     refreshCode() {
       this.identifyCode = "";
@@ -220,6 +250,7 @@ export default {
           console.log("验证码:", this.identifyCode);
           console.log("用户输入的验证码:",this.formLogin.code);
           console.log('是否验证通过:',this.identifyCode==this.formLogin.code);
+          this.register();
           if(!(this.identifyCode==this.formLogin.code))
           {
             alert('验证码错误！')
