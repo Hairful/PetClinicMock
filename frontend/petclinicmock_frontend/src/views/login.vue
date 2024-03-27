@@ -102,7 +102,7 @@
                 <el-input
                   class="login-validcode"
                   type="text"
-                  placeholder="enter validcode"
+                  placeholder="Enter validcode"
                   v-model="formLogin.code"
                 />
               </td>
@@ -135,6 +135,7 @@
 
 <script>
 import ValidCode from '../components/validcode.vue'
+import axios from 'axios';
 export default {
   name: 'Login',
   props: {},
@@ -169,6 +170,31 @@ export default {
     this.makeCode(this.identifyCodes, 4);
   },
   methods: {
+    // HTTP request
+    async login() {
+      try {
+        const response = await axios.post('/login', {
+          userName: this.formLogin.name,
+          password: this.formLogin.password,
+        });
+
+        if (response.data.status === 0) {
+          // Login successful
+          // Redirect or do something
+          console.log('Login successful');
+          this.$router.push('/menu'); // Navigate to menu page
+        } else if (response.data.status === 1) {
+          // Login failed
+          // Show error message
+          this.$message.warning('Wrong username or password.');
+        } else {
+          // Handle other status
+          this.$message.warning('Username not found.');
+        }
+      } catch (error) {
+        // Handle error
+      }
+    },
     // 重置验证码
     refreshCode() {
       this.identifyCode = "";
@@ -192,6 +218,7 @@ export default {
           console.log("验证码:", this.identifyCode);
           console.log("用户输入的验证码:",this.formLogin.code);
           console.log('是否验证通过:',this.identifyCode==this.formLogin.code);
+          this.login()
           if(!(this.identifyCode==this.formLogin.code))
           {
             alert('验证码错误！')
