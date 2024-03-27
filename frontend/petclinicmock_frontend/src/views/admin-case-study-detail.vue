@@ -1,0 +1,2649 @@
+<template>
+  <div class="admin-case-study-detail-container">
+    <div class="admin-case-study-detail-header">
+      <header
+        data-thq="thq-navbar"
+        class="navbarContainer admin-case-study-detail-navbar-interactive"
+      >
+        <router-link to="/" class="admin-case-study-detail-logo logo">
+          PETCLINICMock
+        </router-link>
+        <div class="admin-case-study-detail-container01">
+          <div
+            data-thq="thq-navbar-nav"
+            class="admin-case-study-detail-desktop-menu"
+          >
+            <span>
+              <span>
+                Logged in as
+                <span v-html="rawv2p0"></span>
+              </span>
+              <span class="admin-case-study-detail-text002">Allen</span>
+            </span>
+          </div>
+        </div>
+        <div
+          data-thq="thq-burger-menu"
+          class="admin-case-study-detail-burger-menu"
+        >
+          <svg
+            viewBox="0 0 1024 1024"
+            class="admin-case-study-detail-icon socialIcons"
+          >
+            <path
+              d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          data-thq="thq-mobile-menu"
+          class="admin-case-study-detail-mobile-menu1 mobileMenu"
+        >
+          <div class="admin-case-study-detail-nav">
+            <div class="admin-case-study-detail-top">
+              <span class="logo">PETSCLINIC</span>
+              <div
+                data-thq="thq-close-menu"
+                class="admin-case-study-detail-close-menu"
+              >
+                <svg
+                  viewBox="0 0 1024 1024"
+                  class="admin-case-study-detail-icon02 socialIcons"
+                >
+                  <path
+                    d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <nav class="admin-case-study-detail-links">
+              <span class="admin-case-study-detail-nav12 bodySmall">Home</span>
+              <span class="admin-case-study-detail-nav22 bodySmall">
+                Services
+              </span>
+              <span class="admin-case-study-detail-nav32 bodySmall">
+                Our Team
+              </span>
+              <span class="admin-case-study-detail-nav42 bodySmall">Contact</span>
+            </nav>
+            <div class="admin-case-study-detail-buttons">
+              <button class="buttonFlat">Login</button>
+              <button class="buttonFilled">Register</button>
+            </div>
+          </div>
+          <div>
+            <svg
+              viewBox="0 0 950.8571428571428 1024"
+              class="admin-case-study-detail-icon04 socialIcons"
+            >
+              <path
+                d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
+              ></path></svg><svg
+              viewBox="0 0 877.7142857142857 1024"
+              class="admin-case-study-detail-icon06 socialIcons"
+            >
+              <path
+                d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
+              ></path></svg><svg
+              viewBox="0 0 602.2582857142856 1024"
+              class="admin-case-study-detail-icon08 socialIcons"
+            >
+              <path
+                d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="admin-case-study-detail-container02"></div>
+    <div class="admin-case-study-detail-hero heroContainer">
+      <div class="admin-case-study-detail-container03">
+        <h1 class="admin-case-study-detail-hero-heading">
+          <span class="heading1">
+            Manage Cases:
+            <span v-html="raw06q6"></span>
+          </span>
+          <span class="admin-case-study-detail-text004">Disease 1</span>
+        </h1>
+      </div>
+    </div>
+    <div class="admin-case-study-detail-container04"></div>
+    <div class="admin-case-study-detail-hero1 heroContainer">
+      <div class="admin-case-study-detail-container05">
+        <h1 class="admin-case-study-detail-hero-heading1 heading1">
+          <span class="heading1">Introduction</span>
+          <br />
+        </h1>
+        <div class="admin-case-study-detail-container06">
+          <div class="admin-case-study-detail-container07">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container08">
+            <button type="button" class="admin-case-study-detail-button01 button">
+              <span>
+                <span>Upload Picture</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container09">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container10">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image01"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container11">
+            <button type="button" class="admin-case-study-detail-button04 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container12">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button05 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container13">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video01"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button06 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-case-study-detail-container14">
+        <div class="admin-case-study-detail-container15">
+          <h1 class="admin-case-study-detail-hero-heading2 heading1">
+            <span class="heading1">Case 1</span>
+            <br />
+          </h1>
+          <button type="button" class="button">Delete Case</button>
+        </div>
+        <div class="admin-case-study-detail-container16">
+          <span class="admin-case-study-detail-text041 heading2">Summary</span>
+          <div class="admin-case-study-detail-container17">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea1 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button08 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container18">
+            <button type="button" class="admin-case-study-detail-button09 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container19">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image02"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container20">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image03"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container21">
+            <button type="button" class="admin-case-study-detail-button12 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container22">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video02"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button13 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container23">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video03"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button14 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container24">
+          <span class="admin-case-study-detail-text060 heading2">Examine</span>
+          <div class="admin-case-study-detail-container25">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea2 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button15 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container26">
+            <button type="button" class="admin-case-study-detail-button16 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container27">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image04"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container28">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image05"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container29">
+            <button type="button" class="admin-case-study-detail-button19 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container30">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video04"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button20 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container31">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video05"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button21 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container32">
+          <span class="admin-case-study-detail-text079 heading2">Diagnose</span>
+          <div class="admin-case-study-detail-container33">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea3 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button22 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container34">
+            <button type="button" class="admin-case-study-detail-button23 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container35">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image06"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container36">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image07"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container37">
+            <button type="button" class="admin-case-study-detail-button26 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container38">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video06"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button27 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container39">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video07"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button28 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container40">
+          <span class="admin-case-study-detail-text098 heading2">Treatment</span>
+          <div class="admin-case-study-detail-container41">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea4 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button29 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container42">
+            <button type="button" class="admin-case-study-detail-button30 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container43">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image08"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container44">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image09"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container45">
+            <button type="button" class="admin-case-study-detail-button33 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container46">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video08"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button34 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container47">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video09"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button35 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container48">
+          <span class="admin-case-study-detail-text117 heading2">Pharmacy</span>
+          <div class="admin-case-study-detail-container49">
+            <button type="button" class="button">
+              <span>
+                <span>Add</span>
+                <br />
+              </span>
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container50">
+            <select name="fff">
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 3">Option 3</option>
+            </select>
+            <input type="text" placeholder="Dosage" class="input" />
+            <div class="admin-case-study-detail-container51">
+              <button type="button" class="button">Add</button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container52">
+            <select name="fff">
+              <option value="Option 1">Option 1</option>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 3">Option 3</option>
+              <option value="Option 3">Option 3</option>
+            </select>
+            <input type="text" placeholder="Dosage" class="input" />
+            <div class="admin-case-study-detail-container53">
+              <button type="button" class="button">Modify</button>
+              <button type="button" class="button">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-case-study-detail-container54">
+        <div class="admin-case-study-detail-container55">
+          <h1 class="admin-case-study-detail-hero-heading3 heading1">
+            <span class="heading1">Add Case</span>
+            <br />
+          </h1>
+        </div>
+        <div class="admin-case-study-detail-container56">
+          <span class="admin-case-study-detail-text123 heading2">Summary</span>
+          <div class="admin-case-study-detail-container57">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea5 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button40 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container58">
+            <button type="button" class="admin-case-study-detail-button41 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container59">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image10"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container60">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image11"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container61">
+            <button type="button" class="admin-case-study-detail-button44 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container62">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video10"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button45 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container63">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video11"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button46 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container64">
+          <span class="admin-case-study-detail-text142 heading2">Examine</span>
+          <div class="admin-case-study-detail-container65">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea6 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button47 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container66">
+            <button type="button" class="admin-case-study-detail-button48 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container67">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image12"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container68">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image13"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container69">
+            <button type="button" class="admin-case-study-detail-button51 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container70">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video12"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button52 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container71">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video13"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button53 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container72">
+          <span class="admin-case-study-detail-text161 heading2">Diagnose</span>
+          <div class="admin-case-study-detail-container73">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea7 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button54 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container74">
+            <button type="button" class="admin-case-study-detail-button55 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container75">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image14"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container76">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image15"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container77">
+            <button type="button" class="admin-case-study-detail-button58 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container78">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video14"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button59 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container79">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video15"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button60 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container80">
+          <span class="admin-case-study-detail-text180 heading2">Treatment</span>
+          <div class="admin-case-study-detail-container81">
+            <textarea
+              placeholder="placeholder"
+              class="admin-case-study-detail-textarea8 textarea"
+            ></textarea>
+            <button type="button" class="admin-case-study-detail-button61 button">
+              Modify
+            </button>
+          </div>
+          <div class="admin-case-study-detail-container82">
+            <button type="button" class="admin-case-study-detail-button62 button">
+              <span>
+                <span>Upload</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container83">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image16"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container84">
+              <img
+                alt="image"
+                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                class="admin-case-study-detail-image17"
+              />
+              <button type="button" class="button">
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container85">
+            <button type="button" class="admin-case-study-detail-button65 button">
+              <span>
+                <span>Upload Video</span>
+                <br />
+              </span>
+            </button>
+            <div class="admin-case-study-detail-container86">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video16"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button66 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+            <div class="admin-case-study-detail-container87">
+              <video
+                src
+                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                class="admin-case-study-detail-video17"
+              ></video>
+              <button
+                type="button"
+                class="admin-case-study-detail-button67 button"
+              >
+                <span>
+                  <span>Delete</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-case-study-detail-container88">
+          <span class="admin-case-study-detail-text199 heading2">Pharmacy</span>
+          <div class="admin-case-study-detail-container89"></div>
+          <div class="admin-case-study-detail-container90">
+            <select name="fff">
+              <option value="Option 1">Option 1</option>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 3">Option 3</option>
+              <option value="Option 3">Option 3</option>
+            </select>
+            <input type="text" placeholder="Dosage" class="input" />
+            <div class="admin-case-study-detail-container91">
+              <button type="button" class="button">Add</button>
+            </div>
+          </div>
+          <div class="admin-case-study-detail-container92">
+            <select name="fff">
+              <option value="Option 1">Option 1</option>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 3">Option 3</option>
+              <option value="Option 3">Option 3</option>
+              <option value="Option 3">Option 3</option>
+            </select>
+            <input type="text" placeholder="Dosage" class="input" />
+            <div class="admin-case-study-detail-container93">
+              <button type="button" class="button">Modify</button>
+              <button type="button" class="button">Delete</button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="admin-case-study-detail-button71 button">
+          Add Case
+        </button>
+      </div>
+    </div>
+    <div class="admin-case-study-detail-container94">
+      <router-link
+        to="/admin-case-study-list"
+        class="admin-case-study-detail-navlink button"
+      >
+        <span>
+          <span>Save</span>
+          <br />
+        </span>
+      </router-link>
+    </div>
+    <div class="admin-case-study-detail-footer">
+      <footer class="admin-case-study-detail-footer1 footerContainer">
+        <div class="admin-case-study-detail-container95">
+          <router-link to="/" class="admin-case-study-detail-logo2 logo">
+            PETCLINICMOCK
+          </router-link>
+        </div>
+        <div class="admin-case-study-detail-separator"></div>
+        <div class="admin-case-study-detail-container96">
+          <span class="bodySmall admin-case-study-detail-text203">
+            © 2024 SWD-G02, All Rights Reserved.
+          </span>
+        </div>
+      </footer>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AdminCaseStudyDetail',
+  props: {},
+  data() {
+    return {
+      rawv2p0: ' ',
+      raw06q6: ' ',
+      rawv73j: ' ',
+      rawu3bc: ' ',
+      rawb03w: ' ',
+      rawpcyx: ' ',
+      rawym07: ' ',
+      rawbprc: ' ',
+      rawxc41: ' ',
+    }
+  },
+  metaInfo: {
+    title: 'AdminCaseStudyDetail - Roasted Rusty Swallow',
+    meta: [
+      {
+        property: 'og:title',
+        content: 'AdminCaseStudyDetail - Roasted Rusty Swallow',
+      },
+    ],
+  },
+}
+</script>
+
+<style scoped>
+.admin-case-study-detail-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.admin-case-study-detail-header {
+  width: 100%;
+  display: flex;
+  z-index: 100;
+  position: fixed;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--dl-color-gray-white);
+}
+.admin-case-study-detail-logo {
+  text-decoration: none;
+}
+.admin-case-study-detail-container01 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: space-between;
+  flex-direction: column;
+}
+.admin-case-study-detail-desktop-menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.admin-case-study-detail-text002 {
+  color: var(--dl-color-custom-primary1);
+  font-weight: 700;
+}
+.admin-case-study-detail-burger-menu {
+  display: none;
+}
+.admin-case-study-detail-icon {
+  width: var(--dl-size-size-xsmall);
+  cursor: pointer;
+  height: var(--dl-size-size-xsmall);
+}
+.admin-case-study-detail-mobile-menu1 {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  padding: 32px;
+  z-index: 100;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.admin-case-study-detail-nav {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--dl-space-space-threeunits);
+  justify-content: space-between;
+}
+.admin-case-study-detail-close-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-case-study-detail-icon02 {
+  width: var(--dl-size-size-xsmall);
+  cursor: pointer;
+  height: var(--dl-size-size-xsmall);
+}
+.admin-case-study-detail-links {
+  flex: 0 0 auto;
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-nav12 {
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-nav22 {
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-nav32 {
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-nav42 {
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-buttons {
+  display: flex;
+  margin-top: var(--dl-space-space-unit);
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.admin-case-study-detail-icon04 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.admin-case-study-detail-icon06 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.admin-case-study-detail-icon08 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.admin-case-study-detail-container02 {
+  width: 200px;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 92px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-hero {
+  padding-bottom: var(--dl-space-space-sixunits);
+}
+.admin-case-study-detail-container03 {
+  gap: var(--dl-space-space-oneandhalfunits);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-hero-heading {
+  font-size: 48px;
+  max-width: 800px;
+  text-align: center;
+  font-family: "STIX Two Text";
+  line-height: 150%;
+}
+.admin-case-study-detail-text004 {
+  color: var(--dl-color-custom-primary2);
+  font-weight: 900;
+}
+.admin-case-study-detail-hero-sub-heading {
+  font-size: 18px;
+  text-align: center;
+}
+.admin-case-study-detail-container04 {
+  width: 100%;
+  height: 138px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--dl-color-gray-black);
+}
+.admin-case-study-detail-hero1 {
+  padding-top: 0px;
+  border-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+  padding-bottom: 0px;
+  background-color: var(--dl-color-gray-black);
+}
+.admin-case-study-detail-container05 {
+  flex: 0 0 auto;
+  width: 1021px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-case-study-detail-hero-heading1 {
+  color: var(--dl-color-gray-white);
+  max-width: 800px;
+  align-self: center;
+  text-align: center;
+  padding-bottom: var(--dl-space-space-twounits);
+}
+.admin-case-study-detail-container06 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-container07 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container08 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button01 {
+  align-self: center;
+}
+.admin-case-study-detail-container09 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container10 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image01 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container11 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button04 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container12 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button05 {
+  align-self: center;
+}
+.admin-case-study-detail-container13 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video01 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button06 {
+  align-self: center;
+}
+.admin-case-study-detail-container14 {
+  flex: 0 0 auto;
+  width: 1021px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-case-study-detail-container15 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-case-study-detail-hero-heading2 {
+  color: var(--dl-color-gray-white);
+  max-width: 800px;
+  align-self: center;
+  text-align: center;
+}
+.admin-case-study-detail-container16 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text041 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container17 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea1 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button08 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container18 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button09 {
+  align-self: center;
+}
+.admin-case-study-detail-container19 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image02 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container20 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image03 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container21 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button12 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container22 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video02 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button13 {
+  align-self: center;
+}
+.admin-case-study-detail-container23 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video03 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button14 {
+  align-self: center;
+}
+.admin-case-study-detail-container24 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text060 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container25 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea2 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button15 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container26 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button16 {
+  align-self: center;
+}
+.admin-case-study-detail-container27 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image04 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container28 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image05 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container29 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button19 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container30 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video04 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button20 {
+  align-self: center;
+}
+.admin-case-study-detail-container31 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video05 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button21 {
+  align-self: center;
+}
+.admin-case-study-detail-container32 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text079 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container33 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea3 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button22 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container34 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button23 {
+  align-self: center;
+}
+.admin-case-study-detail-container35 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image06 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container36 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image07 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container37 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button26 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container38 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video06 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button27 {
+  align-self: center;
+}
+.admin-case-study-detail-container39 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video07 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button28 {
+  align-self: center;
+}
+.admin-case-study-detail-container40 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text098 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container41 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea4 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button29 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container42 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button30 {
+  align-self: center;
+}
+.admin-case-study-detail-container43 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image08 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container44 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image09 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container45 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button33 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container46 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video08 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button34 {
+  align-self: center;
+}
+.admin-case-study-detail-container47 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video09 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button35 {
+  align-self: center;
+}
+.admin-case-study-detail-container48 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text117 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container49 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container50 {
+  flex: 1;
+  width: 288px;
+  height: auto;
+  display: flex;
+  margin-top: var(--dl-space-space-oneandhalfunits);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container51 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container52 {
+  flex: 1;
+  width: 288px;
+  height: auto;
+  display: flex;
+  margin-top: var(--dl-space-space-oneandhalfunits);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container53 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container54 {
+  flex: 0 0 auto;
+  width: 1021px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-case-study-detail-container55 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-case-study-detail-hero-heading3 {
+  color: var(--dl-color-gray-white);
+  max-width: 800px;
+  align-self: center;
+  text-align: center;
+}
+.admin-case-study-detail-container56 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text123 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container57 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea5 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button40 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container58 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button41 {
+  align-self: center;
+}
+.admin-case-study-detail-container59 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image10 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container60 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image11 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container61 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button44 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container62 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video10 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button45 {
+  align-self: center;
+}
+.admin-case-study-detail-container63 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video11 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button46 {
+  align-self: center;
+}
+.admin-case-study-detail-container64 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text142 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container65 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea6 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button47 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container66 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button48 {
+  align-self: center;
+}
+.admin-case-study-detail-container67 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image12 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container68 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image13 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container69 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button51 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container70 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video12 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button52 {
+  align-self: center;
+}
+.admin-case-study-detail-container71 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video13 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button53 {
+  align-self: center;
+}
+.admin-case-study-detail-container72 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text161 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container73 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea7 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button54 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container74 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button55 {
+  align-self: center;
+}
+.admin-case-study-detail-container75 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image14 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container76 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image15 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container77 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button58 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container78 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video14 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button59 {
+  align-self: center;
+}
+.admin-case-study-detail-container79 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video15 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button60 {
+  align-self: center;
+}
+.admin-case-study-detail-container80 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text180 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container81 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-textarea8 {
+  width: 994px;
+  height: 82px;
+}
+.admin-case-study-detail-button61 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container82 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.admin-case-study-detail-button62 {
+  align-self: center;
+}
+.admin-case-study-detail-container83 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-left: var(--dl-space-space-twounits);
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image16 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container84 {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  margin-right: var(--dl-space-space-twounits);
+  flex-direction: column;
+}
+.admin-case-study-detail-image17 {
+  width: 200px;
+  margin-top: var(--dl-space-space-twounits);
+  object-fit: cover;
+  margin-left: 0px;
+  margin-bottom: var(--dl-space-space-unit);
+}
+.admin-case-study-detail-container85 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-button65 {
+  align-self: flex-start;
+}
+.admin-case-study-detail-container86 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video16 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button66 {
+  align-self: center;
+}
+.admin-case-study-detail-container87 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 180px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-bottom: var(--dl-space-space-twounits);
+  justify-content: flex-start;
+}
+.admin-case-study-detail-video17 {
+  width: 320px;
+  height: 180px;
+  margin-top: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  margin-bottom: 0px;
+}
+.admin-case-study-detail-button67 {
+  align-self: center;
+}
+.admin-case-study-detail-container88 {
+  flex: 1;
+  width: 100%;
+  height: 266px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.admin-case-study-detail-text199 {
+  color: var(--dl-color-gray-white);
+  text-align: center;
+}
+.admin-case-study-detail-container89 {
+  flex: 0 0 auto;
+  width: auto;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container90 {
+  flex: 1;
+  width: 288px;
+  height: auto;
+  display: flex;
+  margin-top: var(--dl-space-space-oneandhalfunits);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container91 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container92 {
+  flex: 1;
+  width: 288px;
+  height: auto;
+  display: flex;
+  margin-top: var(--dl-space-space-oneandhalfunits);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-container93 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-button71 {
+  align-self: center;
+  margin-top: var(--dl-space-space-twounits);
+}
+.admin-case-study-detail-container94 {
+  width: 100%;
+  height: 138px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--dl-color-gray-black);
+}
+.admin-case-study-detail-navlink {
+  color: var(--dl-color-gray-white);
+  font-size: 20px;
+  align-self: center;
+  font-style: normal;
+  font-weight: 600;
+  border-width: 0px;
+  margin-right: 0px;
+  border-radius: var(--dl-radius-radius-radius8);
+  text-decoration: none;
+  background-color: var(--dl-color-custom-primary2);
+}
+.admin-case-study-detail-footer {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-case-study-detail-footer1 {
+  height: 246;
+}
+.admin-case-study-detail-container95 {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin-case-study-detail-logo2 {
+  text-decoration: none;
+}
+.admin-case-study-detail-separator {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 0px;
+  display: flex;
+  margin-top: var(--dl-space-space-twounits);
+  align-items: flex-start;
+  margin-left: 0px;
+  border-color: var(--dl-color-gray-900);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 0px;
+  margin-bottom: var(--dl-space-space-twounits);
+  flex-direction: row;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+.admin-case-study-detail-container96 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media(max-width: 991px) {
+  .admin-case-study-detail-hero {
+    flex-direction: column;
+  }
+  .admin-case-study-detail-container03 {
+    align-items: center;
+    margin-right: 0px;
+    margin-bottom: var(--dl-space-space-twounits);
+    padding-right: 0px;
+  }
+  .admin-case-study-detail-hero-heading {
+    text-align: center;
+  }
+  .admin-case-study-detail-hero-sub-heading {
+    text-align: center;
+    padding-left: var(--dl-space-space-threeunits);
+    padding-right: var(--dl-space-space-threeunits);
+  }
+  .admin-case-study-detail-hero1 {
+    flex-direction: column;
+  }
+  .admin-case-study-detail-hero-heading1 {
+    text-align: center;
+  }
+  .admin-case-study-detail-hero-heading2 {
+    text-align: center;
+  }
+  .admin-case-study-detail-hero-heading3 {
+    text-align: center;
+  }
+}
+@media(max-width: 767px) {
+  .admin-case-study-detail-navbar-interactive {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .admin-case-study-detail-desktop-menu {
+    display: none;
+  }
+  .admin-case-study-detail-burger-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .admin-case-study-detail-nav12 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-nav22 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-nav32 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-nav42 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-hero {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .admin-case-study-detail-hero-sub-heading {
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-hero1 {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .admin-case-study-detail-footer1 {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .admin-case-study-detail-separator {
+    margin-top: var(--dl-space-space-oneandhalfunits);
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: var(--dl-space-space-oneandhalfunits);
+  }
+  .admin-case-study-detail-container96 {
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .admin-case-study-detail-text203 {
+    margin-bottom: var(--dl-space-space-oneandhalfunits);
+  }
+}
+@media(max-width: 479px) {
+  .admin-case-study-detail-navbar-interactive {
+    padding: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-mobile-menu1 {
+    padding: 16px;
+  }
+  .admin-case-study-detail-hero {
+    padding-top: var(--dl-space-space-twounits);
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-twounits);
+  }
+  .admin-case-study-detail-container03 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-hero1 {
+    padding-top: var(--dl-space-space-twounits);
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-twounits);
+  }
+  .admin-case-study-detail-footer1 {
+    padding: var(--dl-space-space-unit);
+  }
+  .admin-case-study-detail-separator {
+    margin-top: var(--dl-space-space-oneandhalfunits);
+    margin-bottom: var(--dl-space-space-oneandhalfunits);
+  }
+  .admin-case-study-detail-container96 {
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .admin-case-study-detail-text203 {
+    text-align: center;
+    margin-bottom: var(--dl-space-space-oneandhalfunits);
+  }
+}
+</style>
