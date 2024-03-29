@@ -96,7 +96,7 @@
       </div>
     </div>
     <div class="case-study-list-container3">
-      <router-link to="/role-play-menu" class="case-study-list-navlink button">
+      <router-link to="/case-study-menu" class="case-study-list-navlink button">
         Choose Disease Type
       </router-link>
       <router-link to="/menu" class="case-study-list-navlink1 button">
@@ -116,7 +116,7 @@
             :class="`case-study-list-li Content list-item`"
           >
             <router-link
-              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${diseaseName}&diseaseType=${diseaseType}`"
+              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
               :class="`case-study-list-navlink2 bodyLarge button`"
             >
               {{ disease.diseaseName }}
