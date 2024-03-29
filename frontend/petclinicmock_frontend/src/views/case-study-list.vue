@@ -86,7 +86,7 @@
             Case Study:
             <span v-html="rawndcw"></span>
           </span>
-          <span class="case-study-list-text04">Type 1</span>
+          <span class="case-study-list-text04"> {{ this.diseaseType }} </span>
         </h1>
       </div>
     </div>
@@ -105,20 +105,16 @@
       </h1>
       <div class="case-study-list-container4">
         <ul class="case-study-list-ul list">
-          <li class="case-study-list-li list-item Content">
+          <li
+            v-for="(disease, index) in diseases"
+            :key="disease.diseaseID"
+            :class="`case-study-list-li Content list-item`"
+          >
             <router-link
-              to="/case-study-detail"
-              class="case-study-list-navlink2 bodyLarge button"
+              :to="`/case-study-detail?diseaseID=${disease.diseaseID}?diseaseName=${diseaseName}`"
+              :class="`case-study-list-navlink2 bodyLarge button`"
             >
-              Disease 1
-            </router-link>
-          </li>
-          <li class="case-study-list-li1 Content list-item">
-            <router-link
-              to="/case-study-detail"
-              class="case-study-list-navlink3 button bodyLarge"
-            >
-              Disease 2
+              {{ disease.diseaseName }}
             </router-link>
           </li>
         </ul>
@@ -143,6 +139,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'CaseStudyList',
   props: {},
@@ -157,7 +155,26 @@ export default {
       rawrv43: ' ',
       raw0efx: ' ',
       rawlq2c: ' ',
+      diseaseType: ' ',
+      diseases: [],
     }
+  },
+  created() {
+    this.diseaseType = this.$route.query.diseaseType;
+    axios
+      .get(`/casestudy/disease/list?diseaseType=${this.diseaseType}`) // replace with your actual endpoint
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.diseases = response.data.diseases;
+        } else if (response.data.status === 1) {
+          console.log('No corresponding diseaseType');
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   metaInfo: {
     title: 'CaseStudyList - Roasted Rusty Swallow',
@@ -381,26 +398,6 @@ export default {
   list-style-position: outside;
 }
 .case-study-list-navlink2 {
-  color: var(--dl-color-gray-white);
-  text-align: left;
-  border-color: var(--dl-color-gray-white);
-  border-width: 0px;
-  border-radius: 0px;
-  text-decoration: none;
-  background-color: transparent;
-}
-.case-study-list-li1 {
-  color: var(--dl-color-gray-white);
-  width: auto;
-  text-align: left;
-  border-radius: var(--dl-radius-radius-radius8);
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
-  list-style-type: disc;
-  background-color: var(--dl-color-custom-primary2);
-  list-style-image: none;
-  list-style-position: outside;
-}
-.case-study-list-navlink3 {
   color: var(--dl-color-gray-white);
   text-align: left;
   border-color: var(--dl-color-gray-white);

@@ -97,25 +97,12 @@
       <div class="case-study-menu-container4">
         <div class="case-study-menu-container5">
           <router-link
-            to="/case-study-list"
-            class="case-study-menu-navlink1 button"
+            v-for="(diseaseType, index) in diseaseTypes"
+            :key="index"
+            :to="{path: '/case-study-list', query: { diseaseType: diseaseType }}"
+            :class="`case-study-menu-navlink1 button`"
           >
-            <span class="heading3">Type 1</span>
-          </router-link>
-          <router-link
-            to="/case-study-list"
-            class="case-study-menu-navlink2 button"
-          >
-            <span class="heading3">
-              <span>Type 2</span>
-              <br />
-            </span>
-          </router-link>
-          <router-link
-            to="/case-study-list"
-            class="case-study-menu-navlink3 button"
-          >
-            <span class="heading3">Type 3</span>
+            <span class="heading3">{{ diseaseType }}</span>
           </router-link>
         </div>
       </div>
@@ -152,16 +139,22 @@ export default {
       raw5sv7: ' ',
       raw2f87: ' ',
       rawll5g: ' ',
+      diseaseTypes: [],
     }
   },
-  metaInfo: {
-    title: 'CaseStudyMenu - Roasted Rusty Swallow',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'CaseStudyMenu - Roasted Rusty Swallow',
-      },
-    ],
+  created() {
+    axios
+      .get('/casestudy/disease/type') 
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.diseaseTypes = response.data.diseaseTypes;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 }
 </script>
@@ -352,26 +345,6 @@ export default {
   justify-content: center;
 }
 .case-study-menu-navlink1 {
-  width: 515px;
-  height: 91px;
-  margin-top: var(--dl-space-space-oneandhalfunits);
-  margin-left: var(--dl-space-space-oneandhalfunits);
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  border-radius: var(--dl-radius-radius-radius8);
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
-  text-decoration: none;
-}
-.case-study-menu-navlink2 {
-  width: 515px;
-  height: 91px;
-  margin-top: var(--dl-space-space-oneandhalfunits);
-  margin-left: var(--dl-space-space-oneandhalfunits);
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  border-radius: var(--dl-radius-radius-radius8);
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
-  text-decoration: none;
-}
-.case-study-menu-navlink3 {
   width: 515px;
   height: 91px;
   margin-top: var(--dl-space-space-oneandhalfunits);

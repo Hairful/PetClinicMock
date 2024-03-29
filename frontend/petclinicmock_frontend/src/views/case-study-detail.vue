@@ -296,7 +296,13 @@ export default {
       raw2v0y: ' ',
       raw4oma: ' ',
       rawlrae: ' ',
+      diseaseID: ' ',
+      diseaseName: ' ',
     }
+  },
+  created() {
+    this.diseaseID = this.$route.query.diseaseID;
+    this.diseaseName = this.$route.query.diseaseName;
   },
   metaInfo: {
     title: 'CaseStudyDetail - Roasted Rusty Swallow',
