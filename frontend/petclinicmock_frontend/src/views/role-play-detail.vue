@@ -162,13 +162,25 @@ export default {
     logout(){
       localStorage.clear();
       this.$router.push('/');
+    },
+    role2number(role) {
+      switch (role) {
+        case 'Front Desk':
+          return 0;
+        case 'Medical Assistant':
+          return 1;
+        case 'Doctor':
+          return 2;
+        default:
+          return -1;
+      }
     }
   },
   created() {
     this.role = this.$route.query.role;
     this.job = this.$route.query.job;
     axios
-      .get(`/roleplaying/detail?role=${this.role}&job=${this.job}`, 
+      .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${this.job}`, 
         {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
