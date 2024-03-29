@@ -114,8 +114,8 @@
             :key="index"
             class="role-play-list=li list-item Content">
             <router-link
-              :to="{path: '/role-play-detail', query: { role: this.role, job: this.job } }"
-              class="role-play-list-navlink2 button bodyLarge"
+              :to="{path:'/role-play-detail', query:{ role: role, job: job } }"
+              class="role-play-list-navlink button bodyLarge"
             >
               {{ job }}
             </router-link>
@@ -156,7 +156,7 @@ export default {
       rawszzz: ' ',
       rawh591: ' ',
       raws6fs: ' ',
-      role: '',
+      role: ' ',
       jobs: [],
       name:localStorage.getItem('username'),
     }
@@ -165,6 +165,18 @@ export default {
     logout(){
       localStorage.clear();
       this.$router.push('/');
+    },
+    role2number(role) {
+      switch (role) {
+        case 'Front Desk':
+          return 0;
+        case 'Medical Assistant':
+          return 1;
+        case 'Doctor':
+          return 2;
+        default:
+          return -1;
+      }
     }
   },
   metaInfo: {
@@ -179,7 +191,7 @@ export default {
   created() {
     this.role = this.$route.query.role;
     axios
-      .get(`/roleplaying/list?role=${this.role}`, 
+      .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
         {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
