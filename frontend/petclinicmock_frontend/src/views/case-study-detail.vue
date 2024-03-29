@@ -123,10 +123,10 @@
         </h1>
         <div class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">Summary</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.summary }} </span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.summary }} </span>
           <div class="case-study-detail-container11">
             <img
-              v-for="(pic, picIndex) in caseItem.summaryPictures"
+              v-for="(pic, picIndex) in caseItem.details.summaryPictures"
               :key="`summary-pic-${picIndex}`"
               alt="image"
               :src="pic"
@@ -135,7 +135,7 @@
           </div>
           <div class="case-study-detail-container12">
             <video
-              v-for="(vid, vidIndex) in caseItem.summaryVideos"
+              v-for="(vid, vidIndex) in caseItem.details.summaryVideos"
               :key="`summary-vid-${vidIndex}`"
               :src="vid"
               class="case-study-detail-video02"
@@ -145,10 +145,10 @@
         </div>
         <div class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">Examine</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.examine }} </span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.examine }} </span>
           <div class="case-study-detail-container11">
             <img
-              v-for="(pic, picIndex) in caseItem.examinePictures"
+              v-for="(pic, picIndex) in caseItem.details.examinePictures"
               :key="`examine-pic-${picIndex}`"
               alt="image"
               :src="pic"
@@ -157,7 +157,7 @@
           </div>
           <div class="case-study-detail-container12">
             <video
-              v-for="(vid, vidIndex) in caseItem.examineVideos"
+              v-for="(vid, vidIndex) in caseItem.details.examineVideos"
               :key="`examine-vid-${vidIndex}`"
               :src="vid"
               class="case-study-detail-video02"
@@ -167,10 +167,10 @@
         </div>
         <div class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">Diagnose</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.diagnose }} </span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.diagnose }} </span>
           <div class="case-study-detail-container11">
             <img
-              v-for="(pic, picIndex) in caseItem.diagnosePictures"
+              v-for="(pic, picIndex) in caseItem.details.diagnosePictures"
               :key="`diagnose-pic-${picIndex}`"
               alt="image"
               :src="pic"
@@ -179,7 +179,7 @@
           </div>
           <div class="case-study-detail-container12">
             <video
-              v-for="(vid, vidIndex) in caseItem.diagnoseVideos"
+              v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos"
               :key="`diagnose-vid-${vidIndex}`"
               :src="vid"
               class="case-study-detail-video02"
@@ -189,10 +189,10 @@
         </div>
         <div class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">Treatment</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.treatment }} </span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.treatment }} </span>
           <div class="case-study-detail-container11">
             <img
-              v-for="(pic, picIndex) in caseItem.treatmentPictures"
+              v-for="(pic, picIndex) in caseItem.details.treatmentPictures"
               :key="`treatment-pic-${picIndex}`"
               alt="image"
               :src="pic"
@@ -201,7 +201,7 @@
           </div>
           <div class="case-study-detail-container12">
             <video
-              v-for="(vid, vidIndex) in caseItem.treatmentVideos"
+              v-for="(vid, vidIndex) in caseItem.details.treatmentVideos"
               :key="`treatment-vid-${vidIndex}`"
               :src="vid"
               class="case-study-detail-video02"
@@ -213,7 +213,7 @@
           <span class="case-study-detail-text32 heading2">Pharmacy</span>
           // todo link to pharmacy
           <router-link 
-            v-for="(medicine, medIndex) in caseItem.medicines" 
+            v-for="(medicine, medIndex) in caseItem.details.medicines" 
             :key="`medicine-${medIndex}`" 
             to="/pharmacy" 
             class="case-study-detail-navlink3"
@@ -243,6 +243,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'CaseStudyDetail',
   props: {},
@@ -279,7 +281,7 @@ export default {
     const authToken = localStorage.getItem('authToken'); // replace 'authToken' with the key you used to store the token
 
     // Fetch disease details
-    axios.get(`/disease/detail?id=${this.diseaseID}`, {
+    axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
       headers: {
         'Authorization': `Bearer ${authToken}`
       }
@@ -292,31 +294,36 @@ export default {
       }
     });
     // Fetch case list
-    axios.get(`/casestudy/case/list?disease=${this.diseaseID}`, {
+    axios.get(`/casestudy/case/list?diseaseID=${this.diseaseID}`, {
       headers: {
         'Authorization': `Bearer ${authToken}`
       }
     })
-    .then(response => {
+    .then(async response => {
       if (response.data.status === 0) {
         this.cases = response.data.cases;
         // Fetch details for each case
-        this.cases.forEach(caseItem => {
-          axios.get(`/casestudy/case/detail?id=${caseItem.caseID}`, {
+        const casePromises = this.cases.map(caseItem => {
+          return axios.get(`/casestudy/case/detail?caseID=${caseItem.caseID}`, {
             headers: {
               'Authorization': `Bearer ${authToken}`
             }
           })
           .then(response => {
             if (response.data.status === 0) {
-              caseItem.details = response.data;
+              return response.data;
             } else if (response.data.status === 1) {
               console.log('No corresponding caseID');
+              return null;
             }
           });
         });
-      } else if (response.data.status === 1) {
-        console.log('No corresponding type');
+
+        const caseDetails = await Promise.all(casePromises);
+        this.cases = this.cases.map((caseItem, index) => {
+          caseItem.details = caseDetails[index];
+          return caseItem;
+        });
       }
     });
 
