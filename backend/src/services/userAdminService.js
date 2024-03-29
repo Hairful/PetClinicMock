@@ -1,32 +1,26 @@
 /**
- * 文件: amdinUser.js
+ * 文件: /backend/src/services/userAdminService.js
  * 描述: 后台管理
  * 作者: {HGN}
  */
 
 const User = require('../models/User');
-
+const { encrypt, decrypt } = require('../utils/cryptoUtil')
 
 /**
  * getAllUser - 获取所有用户
- * @returns {Object} 包含所有用户的对象
+ * @returns {Object} 对象
  */
-
 exports.getAllUsers = async () => {
     try {
         const usersFromDB = await User.findAll({ attributes: ['userID', 'userName', 'password', 'isAdmin'] });
-        
-        // 打印查询结果
-        console.log('Query result:', usersFromDB);
-        
         const users = usersFromDB.map(user => ({
             userID: user.userID,
             userName: user.userName,
-            password: user.password,
+            password: decrypt(user.password),
             isAdmin: user.isAdmin
         }));
-
-        return { status: 0, message: '成功', users};
+        return { status: 0, message: '成功', users };
     } catch (error) {
         console.error('Error in getAllUsers:', error);
         return { status: -9, message: '失败' };
@@ -40,17 +34,17 @@ exports.getAllUsers = async () => {
  * @param {boolean} isAdmin - 是否为管理员
  * @returns {Object} 包含添加用户结果的对象
  */
-
-exports.addNewUser = async (userName,password,isAdmin) => {
-    try{
+exports.addNewUser = async (userName, password, isAdmin) => {
+    try {
         const existingUser = await User.findOne({ where: { userName: userName } });
-        if (existingUser){
-            return{status: 1,message:'重复用户'};
+        if (existingUser) {
+            return { status: 1, message: '重复用户' };
         }
-        const newUser = await User.create({userName, password, isAdmin});
-        return{ status: 0, message: '成功', usrID: newUser.userID};
+        const encryptPassword = encrypt(password);
+        const newUser = await User.create({ userName, encryptPassword, isAdmin });
+        return { status: 0, message: '成功', usrID: newUser.userID };
     }
-    catch(error){
+    catch (error) {
         console.error('Error in addNewUser:', error);
         return { status: -9, message: '失败' };
     }
@@ -64,20 +58,16 @@ exports.addNewUser = async (userName,password,isAdmin) => {
  * @param {boolean} isAdmin - 是否为管理员 (可选)
  * @returns {Object} 包含修改用户信息结果的对象
  */
-
 exports.updateUser = async (userID, userName, password, isAdmin) => {
     try {
         const user = await User.findByPk(userID);
         if (!user) {
             return { status: 1, message: '无对应userID' };
         }
-
         if (userName) user.userName = userName;
-        if (password) user.password = password;
+        if (password) user.password = encrypt(password);
         if (isAdmin !== undefined) user.isAdmin = isAdmin;
-
         await user.save();
-
         return { status: 0, message: '成功' };
     } catch (error) {
         console.error('Error in updateUser:', error);
@@ -91,7 +81,6 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
  * @param {integer} userID - 用户ID
  * @returns {Object} 包含删除用户信息结果的对象
  */
-
 exports.deleteUser = async (userID) => {
     try {
         const user = await User.findByPk(userID);
