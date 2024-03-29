@@ -8,15 +8,20 @@
         <router-link to="/" class="role-play-list-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="role-play-list-desktop-menu">
           <span>
             <span>
               Logged in as
-              <span v-html="raw9ci3"></span>
+              <span v-html="rawiv06"></span>
             </span>
-            <span class="role-play-list-text02">Allen</span>
+            <span class="role-play-list-text02">{{name}}</span>
           </span>
         </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+        </div>
+      </div>
         <div data-thq="thq-burger-menu" class="role-play-list-burger-menu">
           <svg viewBox="0 0 1024 1024" class="role-play-list-icon socialIcons">
             <path
@@ -85,7 +90,7 @@
           <span class="heading1">
             Role Play:
           </span>
-          <span class="role-play-list-text04">Front Desk</span>
+          <span class="role-play-list-text04">{{ this.role }}</span>
         </h1>
       </div>
     </div>
@@ -104,20 +109,15 @@
       </h1>
       <div class="role-play-list-container4">
         <ul class="role-play-list-ul list">
-          <li class="role-play-list-li list-item Content">
+          <li 
+            v-for="(job, index) in jobs"
+            :key="index"
+            class="role-play-list=li list-item Content">
             <router-link
-              to="/role-play-detail"
+              :to="{path: '/role-play-detail', query: { role: this.role, job: this.job } }"
               class="role-play-list-navlink2 button bodyLarge"
             >
-              Job 1
-            </router-link>
-          </li>
-          <li class="role-play-list-li1 list-item Content">
-            <router-link
-              to="/role-play-detail"
-              class="role-play-list-navlink3 button bodyLarge"
-            >
-              Job 2
+              {{ job }}
             </router-link>
           </li>
         </ul>
@@ -142,9 +142,9 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'RolePlayList',
-  props: {},
   data() {
     return {
       raw9ci3: ' ',
@@ -156,6 +156,15 @@ export default {
       rawszzz: ' ',
       rawh591: ' ',
       raws6fs: ' ',
+      role: '',
+      jobs: [],
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {
@@ -166,6 +175,26 @@ export default {
         content: 'RolePlayList - Roasted Rusty Swallow',
       },
     ],
+  },
+  created() {
+    this.role = this.$route.query.role;
+    axios
+      .get(`/roleplaying/list?role=${this.role}`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.jobs = response.data.jobs;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 }
 </script>

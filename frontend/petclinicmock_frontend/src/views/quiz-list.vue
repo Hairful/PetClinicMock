@@ -8,14 +8,19 @@
         <router-link to="/" class="quiz-list-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="quiz-list-desktop-menu">
-          <span>
             <span>
-              Logged in as
-              <span v-html="rawqwc5"></span>
+              <span>
+                Logged in as
+                <span v-html="rawqwc5"></span>
+              </span>
+              <span class="quiz-list-text02">{{name}}</span>
             </span>
-            <span class="quiz-list-text02">Allen</span>
-          </span>
+          </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+          </div>
         </div>
         <div data-thq="thq-burger-menu" class="quiz-list-burger-menu">
           <svg viewBox="0 0 1024 1024" class="quiz-list-icon socialIcons">
@@ -144,13 +149,13 @@ export default {
   data() {
     return {
       rawqwc5: ' ',
-      rawlux5: ' ',
-      rawunzv: ' ',
-      rawa1tx: ' ',
-      rawjbth: ' ',
-      rawh3c5: ' ',
-      raw73rk: ' ',
-      rawciux: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {

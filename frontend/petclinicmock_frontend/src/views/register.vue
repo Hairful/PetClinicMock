@@ -217,7 +217,7 @@ export default {
         if (response.data.status === 0) {
           // Register successful
           // Redirect or do something
-          this.$router.push('/'); // Navigate to menu page
+          this.$router.push('/login'); // Navigate to menu page
         } else {
           // Register failed
           // Show error message
@@ -250,11 +250,13 @@ export default {
           console.log("验证码:", this.identifyCode);
           console.log("用户输入的验证码:",this.formLogin.code);
           console.log('是否验证通过:',this.identifyCode==this.formLogin.code);
-          this.register();
           if(!(this.identifyCode==this.formLogin.code))
           {
             alert('验证码错误！')
             this.refreshCode() 
+          }
+          else {
+            this.register();
           }
          } else {
              console.log('校验失败');

@@ -8,15 +8,20 @@
         <router-link to="/" class="virtual-tour-logo logo">
           PETCLINICMock
         </router-link>
+      <div>
         <div data-thq="thq-navbar-nav" class="virtual-tour-desktop-menu">
           <span>
             <span>
               Logged in as
               <span v-html="rawiv06"></span>
             </span>
-            <span class="virtual-tour-text02">Allen</span>
+            <span class="virtual-tour-text02">{{name}}</span>
           </span>
         </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+        </div>
+      </div>
         <div data-thq="thq-burger-menu" class="virtual-tour-burger-menu">
           <svg viewBox="0 0 1024 1024" class="virtual-tour-icon socialIcons">
             <path
@@ -85,7 +90,10 @@
       </div>
     </div>
     <div class="virtual-tour-hero1 heroContainer">
-      <div class="virtual-tour-container3"></div>
+      <div class="virtual-tour-container3">
+        //3D导览
+        <Threed />
+      </div>
     </div>
     <div class="virtual-tour-footer">
       <footer class="virtual-tour-footer1 footerContainer">
@@ -106,19 +114,24 @@
 </template>
 
 <script>
+import Threed from '../components/Threed.vue';
+
 export default {
+  components: {
+    Threed
+  },
   name: 'VirtualTour',
   props: {},
   data() {
     return {
       rawiv06: ' ',
-      rawwnnj: ' ',
-      rawx28r: ' ',
-      rawylrc: ' ',
-      raw8l2y: ' ',
-      rawq04c: ' ',
-      rawefty: ' ',
-      rawo6yd: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {
