@@ -179,7 +179,12 @@ export default {
   created() {
     this.role = this.$route.query.role;
     axios
-      .get('/roleplaying/list?role=${this.role}')
+      .get(`/roleplaying/list?role=${this.role}`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
       .then((response) => {
         if (response.data.status === 0) {
           this.jobs = response.data.jobs;

@@ -116,7 +116,7 @@
             :class="`case-study-list-li Content list-item`"
           >
             <router-link
-              :to="`/case-study-detail?diseaseID=${disease.diseaseID}?diseaseName=${diseaseName}`"
+              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${diseaseName}&diseaseType=${diseaseType}`"
               :class="`case-study-list-navlink2 bodyLarge button`"
             >
               {{ disease.diseaseName }}
@@ -174,7 +174,12 @@ export default {
   created() {
     this.diseaseType = this.$route.query.diseaseType;
     axios
-      .get(`/casestudy/disease/list?diseaseType=${this.diseaseType}`) // replace with your actual endpoint
+      .get(`/casestudy/disease/list?diseaseType=${this.diseaseType}`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
       .then((response) => {
         if (response.data.status === 0) {
           this.diseases = response.data.diseases;

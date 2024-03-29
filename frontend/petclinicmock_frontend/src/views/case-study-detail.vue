@@ -91,12 +91,12 @@
             Case Study:
             <span v-html="rawvn6p"></span>
           </span>
-          <span class="case-study-detail-text04">Disease 1</span>
+          <span class="case-study-detail-text04"> {{ this.diseaseName }} </span>
         </h1>
       </div>
     </div>
     <div class="case-study-detail-container04">
-      <router-link to="/role-play-list" class="case-study-detail-navlink button">
+      <router-link :to="{path:'/case-study-list', query:{diseaseType:this.diseaseType}}" class="case-study-detail-navlink button">
         Choose Disease
       </router-link>
       <router-link to="/role-play-menu" class="case-study-detail-navlink1 button">
@@ -113,31 +113,7 @@
           <br />
         </h1>
         <div class="case-study-detail-container06">
-          <span class="case-study-detail-text21 bodyLarge">xxx</span>
-          <div class="case-study-detail-container07">
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image01"
-            />
-          </div>
-          <div class="case-study-detail-container08">
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video"
-            ></video>
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video01"
-            ></video>
-          </div>
+          <span class="case-study-detail-text21 bodyLarge"> {{ this.diseaseIntro }} </span>
         </div>
       </div>
       <div class="case-study-detail-container09">
@@ -301,7 +277,10 @@ export default {
       rawlrae: ' ',
       diseaseID: ' ',
       diseaseName: ' ',
+      diseaseType: ' ',
       name:localStorage.getItem('username'),
+      diseaseIntro: ' ',
+      cases: [],
     }
   },
   methods:{
@@ -311,8 +290,39 @@ export default {
     }
   },
   created() {
+    this.diseaseType = this.$route.query.diseaseType;
     this.diseaseID = this.$route.query.diseaseID;
     this.diseaseName = this.$route.query.diseaseName;
+
+    const authToken = localStorage.getItem('authToken'); // replace 'authToken' with the key you used to store the token
+
+    // Fetch disease details
+    axios.get(`/disease/detail?id=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.diseaseIntro = response.data.diseaseIntro;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding diseaseID');
+      }
+    });
+
+    // Fetch case list
+    axios.get(`/case/list?type=${this.diseaseType}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.cases = response.data.cases;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding type');
+      }
+    });
   },
   metaInfo: {
     title: 'CaseStudyDetail - Roasted Rusty Swallow',

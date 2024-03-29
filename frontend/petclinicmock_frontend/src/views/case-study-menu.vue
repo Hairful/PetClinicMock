@@ -156,7 +156,12 @@ export default {
   },
   created() {
     axios
-      .get('/casestudy/disease/type') 
+      .get(`/casestudy/disease/type`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
       .then((response) => {
         if (response.data.status === 0) {
           this.diseaseTypes = response.data.diseaseTypes;
