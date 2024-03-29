@@ -66,20 +66,20 @@ exports.getUniqueDiseaseType = async () => {
  */
 exports.getDiseasesByID = async (diseaseID) => {
     try {
-        const diseases = await Disease.findAll({
+        const diseases = await Disease.findOne({
             where: { diseaseID: diseaseID },
             attributes: ['diseaseID', 'diseaseType', 'diseaseName', 'diseaseIntro']
         });
-        if (diseases.length > 0) {
+        if (diseases) {
             return {
                 status: 0,
                 message: "成功",
-                diseases: diseases.map(d => ({
-                    diseaseID: d.diseaseID,
-                    diseaseType: d.diseaseType,
-                    diseaseName: d.diseaseName,
-                    diseaseIntro: d.diseaseIntro
-                }))
+                diseaseDetail: {
+                    diseaseID: diseases.diseaseID,
+                    diseaseType: diseases.diseaseType,
+                    diseaseName: diseases.diseaseName,
+                    diseaseIntro: diseases.diseaseIntro
+                }
             };
         } else {
             return { status: 1, message: "无对应diseaseID" };

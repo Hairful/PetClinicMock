@@ -283,14 +283,12 @@ Content-Type: application/json
 {
     "status": 0,
     "message": "成功",
-    "diseases": [
-        {
-            "diseaseID":1,
-            "diseaseName":"犬蛔虫病",
-            "diseaseType": "寄生虫病",
-            "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
-        }
-    ]
+    "diseaseDetail": {
+        "diseaseID":1,
+        "diseaseName":"犬蛔虫病",
+        "diseaseType": "寄生虫病",
+        "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
+    }
 }
 
 HTTP/1.1 404 Not Found
@@ -592,14 +590,12 @@ Content-Type: application/json
 {
     "status": 0,
     "message": "成功",
-    "diseases": [
-        {
-            "diseaseID":1,
-            "diseaseName":"犬蛔虫病",
-            "diseaseType": "寄生虫病",
-            "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
-        }
-    ]
+    "diseaseDetail": {
+        "diseaseID":1,
+        "diseaseName":"犬蛔虫病",
+        "diseaseType": "寄生虫病",
+        "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
+    }
 }
 
 HTTP/1.1 
