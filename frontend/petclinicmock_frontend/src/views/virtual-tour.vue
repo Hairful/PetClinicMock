@@ -8,6 +8,7 @@
         <router-link to="/" class="virtual-tour-logo logo">
           PETCLINICMock
         </router-link>
+      <div>
         <div data-thq="thq-navbar-nav" class="virtual-tour-desktop-menu">
           <span>
             <span>
@@ -17,7 +18,10 @@
             <span class="virtual-tour-text02">{{name}}</span>
           </span>
         </div>
-        <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+        </div>
+      </div>
         <div data-thq="thq-burger-menu" class="virtual-tour-burger-menu">
           <svg viewBox="0 0 1024 1024" class="virtual-tour-icon socialIcons">
             <path

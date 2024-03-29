@@ -17,6 +17,8 @@
               </span>
               <span class="case-study-detail-text02">{{name}}</span>
             </span>
+          </div>
+          <div>
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
@@ -89,12 +91,12 @@
             Case Study:
             <span v-html="rawvn6p"></span>
           </span>
-          <span class="case-study-detail-text04">Disease 1</span>
+          <span class="case-study-detail-text04"> {{ this.diseaseName }} </span>
         </h1>
       </div>
     </div>
     <div class="case-study-detail-container04">
-      <router-link to="/role-play-list" class="case-study-detail-navlink button">
+      <router-link :to="{path:'/case-study-list', query:{diseaseType:this.diseaseType}}" class="case-study-detail-navlink button">
         Choose Disease
       </router-link>
       <router-link to="/role-play-menu" class="case-study-detail-navlink1 button">
@@ -111,154 +113,112 @@
           <br />
         </h1>
         <div class="case-study-detail-container06">
-          <span class="case-study-detail-text21 bodyLarge">xxx</span>
-          <div class="case-study-detail-container07">
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image01"
-            />
-          </div>
-          <div class="case-study-detail-container08">
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video"
-            ></video>
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video01"
-            ></video>
-          </div>
+          <span class="case-study-detail-text21 bodyLarge"> {{ this.diseaseIntro }} </span>
         </div>
       </div>
-      <div class="case-study-detail-container09">
+      <div class="case-study-detail-container09" v-for="(caseItem, index) in cases" :key="index">
         <h1 class="case-study-detail-hero-heading2 heading1">
-          <span class="heading1">Case 1</span>
+          <span class="heading1">Case {{ caseItem.caseID }}</span>
           <br />
         </h1>
         <div class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">Summary</span>
-          <span class="case-study-detail-text25 bodyLarge">xxx</span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.summary }} </span>
           <div class="case-study-detail-container11">
             <img
+              v-for="(pic, picIndex) in caseItem.summaryPictures"
+              :key="`summary-pic-${picIndex}`"
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
+              :src="pic"
               class="case-study-detail-image02"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image03"
             />
           </div>
           <div class="case-study-detail-container12">
             <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+              v-for="(vid, vidIndex) in caseItem.summaryVideos"
+              :key="`summary-vid-${vidIndex}`"
+              :src="vid"
               class="case-study-detail-video02"
-            ></video>
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video03"
+              controls
             ></video>
           </div>
         </div>
-        <div class="case-study-detail-container13">
-          <span class="case-study-detail-text26 heading2">Examine</span>
-          <span class="case-study-detail-text27 bodyLarge">xxx</span>
-          <div class="case-study-detail-container14">
+        <div class="case-study-detail-container10">
+          <span class="case-study-detail-text24 heading2">Examine</span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.examine }} </span>
+          <div class="case-study-detail-container11">
             <img
+              v-for="(pic, picIndex) in caseItem.examinePictures"
+              :key="`examine-pic-${picIndex}`"
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image04"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image05"
+              :src="pic"
+              class="case-study-detail-image02"
             />
           </div>
-          <div class="case-study-detail-container15">
+          <div class="case-study-detail-container12">
             <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video04"
-            ></video>
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video05"
+              v-for="(vid, vidIndex) in caseItem.examineVideos"
+              :key="`examine-vid-${vidIndex}`"
+              :src="vid"
+              class="case-study-detail-video02"
+              controls
             ></video>
           </div>
         </div>
-        <div class="case-study-detail-container16">
-          <span class="case-study-detail-text28 heading2">Diagnose</span>
-          <span class="case-study-detail-text29 bodyLarge">xxx</span>
-          <div class="case-study-detail-container17">
+        <div class="case-study-detail-container10">
+          <span class="case-study-detail-text24 heading2">Diagnose</span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.diagnose }} </span>
+          <div class="case-study-detail-container11">
             <img
+              v-for="(pic, picIndex) in caseItem.diagnosePictures"
+              :key="`diagnose-pic-${picIndex}`"
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image06"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image07"
+              :src="pic"
+              class="case-study-detail-image02"
             />
           </div>
-          <div class="case-study-detail-container18">
+          <div class="case-study-detail-container12">
             <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video06"
-            ></video>
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video07"
+              v-for="(vid, vidIndex) in caseItem.diagnoseVideos"
+              :key="`diagnose-vid-${vidIndex}`"
+              :src="vid"
+              class="case-study-detail-video02"
+              controls
             ></video>
           </div>
         </div>
-        <div class="case-study-detail-container19">
-          <span class="case-study-detail-text30 heading2">Treatment</span>
-          <span class="case-study-detail-text31 bodyLarge">xxx</span>
-          <div class="case-study-detail-container20">
+        <div class="case-study-detail-container10">
+          <span class="case-study-detail-text24 heading2">Treatment</span>
+          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.treatment }} </span>
+          <div class="case-study-detail-container11">
             <img
+              v-for="(pic, picIndex) in caseItem.treatmentPictures"
+              :key="`treatment-pic-${picIndex}`"
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image08"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="case-study-detail-image09"
+              :src="pic"
+              class="case-study-detail-image02"
             />
           </div>
-          <div class="case-study-detail-container21">
+          <div class="case-study-detail-container12">
             <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video08"
-            ></video>
-            <video
-              src
-              poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-              class="case-study-detail-video09"
+              v-for="(vid, vidIndex) in caseItem.treatmentVideos"
+              :key="`treatment-vid-${vidIndex}`"
+              :src="vid"
+              class="case-study-detail-video02"
+              controls
             ></video>
           </div>
         </div>
         <div class="case-study-detail-container22">
           <span class="case-study-detail-text32 heading2">Pharmacy</span>
-          <router-link to="/pharmacy" class="case-study-detail-navlink3">
-            <span class="bodyLarge">1. Name, Dosage</span>
+          // todo link to pharmacy
+          <router-link 
+            v-for="(medicine, medIndex) in caseItem.medicines" 
+            :key="`medicine-${medIndex}`" 
+            to="/pharmacy" 
+            class="case-study-detail-navlink3"
+          >
+            <span class="bodyLarge"> {{ medicine.medicineName }}, {{ medicine.medicineIntro }}</span>
             <br />
           </router-link>
         </div>
@@ -289,7 +249,20 @@ export default {
   data() {
     return {
       rawfj20: ' ',
+      rawvn6p: ' ',
+      rawladw: ' ',
+      rawavtc: ' ',
+      rawa98j: ' ',
+      raw1zgt: ' ',
+      raw2v0y: ' ',
+      raw4oma: ' ',
+      rawlrae: ' ',
+      diseaseID: ' ',
+      diseaseName: ' ',
+      diseaseType: ' ',
       name:localStorage.getItem('username'),
+      diseaseIntro: ' ',
+      cases: []
     }
   },
   methods:{
@@ -297,6 +270,56 @@ export default {
       localStorage.clear();
       this.$router.push('/');
     }
+  },
+  created() {
+    this.diseaseType = this.$route.query.diseaseType;
+    this.diseaseID = this.$route.query.diseaseID;
+    this.diseaseName = this.$route.query.diseaseName;
+
+    const authToken = localStorage.getItem('authToken'); // replace 'authToken' with the key you used to store the token
+
+    // Fetch disease details
+    axios.get(`/disease/detail?id=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.diseaseIntro = response.data.diseaseIntro;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding diseaseID');
+      }
+    });
+    // Fetch case list
+    axios.get(`/casestudy/case/list?disease=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.cases = response.data.cases;
+        // Fetch details for each case
+        this.cases.forEach(caseItem => {
+          axios.get(`/casestudy/case/detail?id=${caseItem.caseID}`, {
+            headers: {
+              'Authorization': `Bearer ${authToken}`
+            }
+          })
+          .then(response => {
+            if (response.data.status === 0) {
+              caseItem.details = response.data;
+            } else if (response.data.status === 1) {
+              console.log('No corresponding caseID');
+            }
+          });
+        });
+      } else if (response.data.status === 1) {
+        console.log('No corresponding type');
+      }
+    });
+
   },
   metaInfo: {
     title: 'CaseStudyDetail - Roasted Rusty Swallow',

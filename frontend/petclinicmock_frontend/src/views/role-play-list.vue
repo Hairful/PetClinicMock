@@ -8,16 +8,20 @@
         <router-link to="/" class="role-play-list-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="role-play-list-desktop-menu">
           <span>
             <span>
               Logged in as
-              <span v-html="raw9ci3"></span>
+              <span v-html="rawiv06"></span>
             </span>
             <span class="role-play-list-text02">{{name}}</span>
           </span>
+        </div>
+        <div>
           <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
         </div>
+      </div>
         <div data-thq="thq-burger-menu" class="role-play-list-burger-menu">
           <svg viewBox="0 0 1024 1024" class="role-play-list-icon socialIcons">
             <path
@@ -175,7 +179,12 @@ export default {
   created() {
     this.role = this.$route.query.role;
     axios
-      .get('/roleplaying/list?role=${this.role}')
+      .get(`/roleplaying/list?role=${this.role}`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
       .then((response) => {
         if (response.data.status === 0) {
           this.jobs = response.data.jobs;
