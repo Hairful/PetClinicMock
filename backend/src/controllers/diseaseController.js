@@ -46,7 +46,7 @@ exports.getDiseaseList = async (req, res) => {
 
 exports.getDiseaseDetail = async (req, res) => {
     try {
-        const { diseaseID } = req.params;
+        const { diseaseID } = req.query;
         const result = await getDiseasesByID(diseaseID);
         let httpStatus;
         switch (result.status) {

@@ -7,7 +7,8 @@
 const express = require('express');
 const router = express.Router();
 const { getDiseaseTypes, getDiseaseList, getDiseaseDetail } = require('../controllers/diseaseController');
-const { isQueryValid } = require('../middlewares/formatCheck')
+const { isQueryValid } = require('../middlewares/formatCheck');
+const { isTokenValid } = require('../middlewares/authMiddleware');
 
 const paramsInQueryOfType = [];
 const paramsInQueryOfDetail = ['diseaseID'];

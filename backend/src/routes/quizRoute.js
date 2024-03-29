@@ -8,6 +8,7 @@ const express = require('express');
 const router = express.Router();
 const { getQuizDetail, getQuizList, recordExamEntry } = require('../controllers/quizController');
 const { isQueryValid, isBodyValid } = require('../middlewares/formatCheck');
+const { isTokenValid } = require('../middlewares/authMiddleware');
 
 const paramsInBodyOfResult = ['quizID', 'userID', 'credit', 'answers'];
 const paramsInQueryOfList = ['userID'];

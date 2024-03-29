@@ -13,11 +13,19 @@ const Media = require('../models/Media');
  * getAllCases - 病例列表
  * @returns {Object} 对象
  */
-exports.getAllCases = async () => {
+exports.getCaseList = async (diseaseID) => {
   try {
-    const cases = await Case.findAll({
-      attributes: ['caseID', 'summary']
-    });
+    let cases
+    if (diseaseID) {
+      cases = await Case.findAll({
+        where: { diseaseID: diseaseID },
+        attributes: ['caseID', 'summary']
+      });
+    } else {
+      cases = await Case.findAll({
+        attributes: ['caseID', 'summary']
+      });
+    }
     if (cases.length > 0) {
       return {
         status: 0,
@@ -28,10 +36,11 @@ exports.getAllCases = async () => {
         }))
       };
     } else {
-      return { status: 1, message: "无对应Type" };
+      return { status: 1, message: "无对应diseaseID" };
     }
   } catch (error) {
     console.error('Error in getAllCases', error);
+    return { status: -9, message: "错误" };
   }
 }
 
@@ -40,7 +49,7 @@ exports.getAllCases = async () => {
  * @param {integer} caseID - 病例ID
  * @returns {Object} 对象
  */
-exports.getCaseDetails = async (caseID) => {
+exports.getCaseDetail = async (caseID) => {
   try {
     const caseInfo = await Case.findByPk(caseID, {
       attributes: { exclude: ['createdAt', 'updatedAt'] },
