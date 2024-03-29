@@ -42,12 +42,12 @@ exports.loginUser = async (userName, password) => {
         if (!userExist) {
             return { status: 2, message: '无对应userName' };
         }
-        const decryptedPassword = decrypt(user.password);
+        const decryptedPassword = decrypt(userExist.password);
         if (password !== decryptedPassword) {
             return { status: 1, message: 'userName或password错误' };
         }
         const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });
-        return { status: 0, message: '登录成功', userID: user.userID, token: token };
+        return { status: 0, message: '登录成功', userID: userExist.userID, token: token };
     } catch (error) {
         console.error('Error in loginUser:', error);
         return { status: -9, message: '错误' };
