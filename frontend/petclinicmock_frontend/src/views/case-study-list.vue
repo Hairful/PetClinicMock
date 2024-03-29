@@ -8,14 +8,19 @@
         <router-link to="/" class="case-study-list-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="case-study-list-desktop-menu">
           <span>
             <span>
               Logged in as
               <span v-html="raw04s3"></span>
             </span>
-            <span class="case-study-list-text02">Allen</span>
+            <span class="case-study-list-text02">{{name}}</span>
           </span>
+        </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+        </div>
         </div>
         <div data-thq="thq-burger-menu" class="case-study-list-burger-menu">
           <svg viewBox="0 0 1024 1024" class="case-study-list-icon socialIcons">
@@ -157,6 +162,13 @@ export default {
       rawlq2c: ' ',
       diseaseType: ' ',
       diseases: [],
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   created() {

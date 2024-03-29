@@ -15,8 +15,11 @@
                 Logged in as
                 <span v-html="rawfj20"></span>
               </span>
-              <span class="case-study-detail-text02">Allen</span>
+              <span class="case-study-detail-text02">{{name}}</span>
             </span>
+          </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="case-study-detail-burger-menu">
@@ -298,6 +301,13 @@ export default {
       rawlrae: ' ',
       diseaseID: ' ',
       diseaseName: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   created() {

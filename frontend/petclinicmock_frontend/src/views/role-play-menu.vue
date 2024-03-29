@@ -8,15 +8,20 @@
         <router-link to="/" class="role-play-menu-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="role-play-menu-desktop-menu">
           <span>
             <span>
               Logged in as
-              <span v-html="rawqlrv"></span>
+              <span v-html="rawiv06"></span>
             </span>
-            <span class="role-play-menu-text02">Allen</span>
+            <span class="role-play-menu-text02">{{name}}</span>
           </span>
         </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+        </div>
+      </div>
         <div data-thq="thq-burger-menu" class="role-play-menu-burger-menu">
           <svg viewBox="0 0 1024 1024" class="role-play-menu-icon socialIcons">
             <path
@@ -145,13 +150,13 @@ export default {
   data() {
     return {
       rawqlrv: ' ',
-      raww8et: ' ',
-      rawp99c: ' ',
-      rawexct: ' ',
-      rawwc21: ' ',
-      raw5vcx: ' ',
-      rawvhs8: ' ',
-      rawfz58: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {

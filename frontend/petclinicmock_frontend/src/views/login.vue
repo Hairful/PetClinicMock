@@ -149,6 +149,7 @@ export default {
         name: "",
         password: "",
       },
+      token: "",
       rules: {
       name: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -177,10 +178,12 @@ export default {
           userName: this.formLogin.name,
           password: this.formLogin.password,
         });
-
+        console.log(response.data);
         if (response.data.status === 0) {
           // Login successful
-          // Redirect or do something
+          this.token = response.data.token;
+          localStorage.setItem('Token',this.token);//将token存在localstorage中
+          localStorage.setItem('username',this.formLogin.name);
           console.log('Login successful');
           this.$router.push('/menu'); // Navigate to menu page
         } else if (response.data.status === 1) {
@@ -218,11 +221,13 @@ export default {
           console.log("验证码:", this.identifyCode);
           console.log("用户输入的验证码:",this.formLogin.code);
           console.log('是否验证通过:',this.identifyCode==this.formLogin.code);
-          this.login()
           if(!(this.identifyCode==this.formLogin.code))
           {
-            alert('验证码错误！')
+            this.$message.warning('验证码错误');
             this.refreshCode() 
+          }
+          else {
+            this.login();
           }
          } else {
              console.log('校验失败');

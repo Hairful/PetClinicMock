@@ -9,11 +9,14 @@
         <div class="menu-container1">
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
             <span>
+              <span>
                 Logged in as 
-              </span>
-            <span>
-              <span class="menu-text02">Allen</span>
             </span>
+              <span class="menu-text02">{{name}}</span>
+            </span>
+          </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="menu-burger-menu">
@@ -131,13 +134,13 @@ export default {
   data() {
     return {
       rawzkyy: ' ',
-      raw7gax: ' ',
-      rawlnc5: ' ',
-      raw8596: ' ',
-      rawz9m5: ' ',
-      rawbw8i: ' ',
-      rawvvcl: ' ',
-      rawgz4k: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {
