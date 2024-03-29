@@ -28,13 +28,13 @@ exports.getAllUsers = async () => {
 }
 
 /**
- * addNewUser - 添加用户
+ * createUser - 添加用户
  * @param {string} userName - 用户名
  * @param {string} password - 密码
  * @param {boolean} isAdmin - 是否为管理员
  * @returns {Object} 包含添加用户结果的对象
  */
-exports.addNewUser = async (userName, password, isAdmin) => {
+exports.createUser = async (userName, password, isAdmin) => {
     try {
         const existingUser = await User.findOne({ where: { userName: userName } });
         if (existingUser) {
@@ -45,7 +45,7 @@ exports.addNewUser = async (userName, password, isAdmin) => {
         return { status: 0, message: '成功', usrID: newUser.userID };
     }
     catch (error) {
-        console.error('Error in addNewUser:', error);
+        console.error('Error in createUser:', error);
         return { status: -9, message: '失败' };
     }
 }

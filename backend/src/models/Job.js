@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
-const Role = sequelize.define('Role', {
-    roleID: {
+
+const Job = sequelize.define('Job', {
+    jobID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -20,4 +21,4 @@ const Role = sequelize.define('Role', {
         allowNull: false
     }
 });
-module.exports = Role;
+module.exports = Job;

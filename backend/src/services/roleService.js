@@ -1,19 +1,25 @@
-const Role = require('../models/Role');
-//查找角色工作
-exports.getJobsByRol = async (role) => {
+/**
+ * 文件: /backend/src/services/roleService.js
+ * 描述: 试题信息服务，处理获取试卷、题目相关逻辑
+ * 作者: {SSR}
+ */
+
+const Job = require('../models/Job');
+
+/**
+ * getJobsByRole - 获取工作列表
+ * @param {integer} role - 角色
+ * @returns {Object} 对象
+ */
+exports.getJobsByRole = async (role) => {
     try {
-        const roles = await Role.findAll({
-            where: {
-                role: role,
-            },
+        const roles = await Job.findAll({
+            where: { role: role },
             attributes: ['job'],
         });
         const jobs = roles.map((role) => role.job);
         if (jobs.length === 0) {
-            return {
-                status: 1,
-                message: '无对应role',
-            };
+            return { status: 1, message: '无对应role', };
         }
         return {
             status: 0,
@@ -22,25 +28,23 @@ exports.getJobsByRol = async (role) => {
         };
     } catch (error) {
         console.error('Error In getJobsByRole', error);
-        return {
-            status: -9,
-            message: `错误`,
-        };
+        return { status: -9, message: `错误`, };
     }
 }
-//查看工作详情
+
+/**
+ * getJobDetail - 获取工作详情
+ * @param {integer} role - 角色
+ * @param {string} job - 工作 
+ * @returns {Object} 对象
+ */
 exports.getJobDetail = async (role, job) => {
     try {
-        const rolejob = await Role.findOne({
-            where: { role }
-        });
+        const rolejob = await Job.findOne({ where: { role } });
         if (!rolejob) {
             return { status: 1, message: '无对应role' };
         }
-
-        const roleInstance = await Role.findOne({
-            where: { role, job }
-        });
+        const roleInstance = await Job.findOne({ where: { role, job } });
         if (!roleInstance) {
             return { status: 2, message: '无对应job' };
         }
@@ -51,9 +55,6 @@ exports.getJobDetail = async (role, job) => {
         }
     } catch (error) {
         console.error('Error In getJobDetail', error);
-        return {
-            status: -9,
-            message: `错误`,
-        };
+        return { status: -9, message: '错误' };
     }
 }

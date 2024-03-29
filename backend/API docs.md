@@ -1,18 +1,5 @@
 # 0. 说明
 
-==Discuss==
-
->1. 添加病例时如果要上传视频，图片，前端需要添加上传视频的界面，后端还需要提供上传视频以及将视频转为url的接口（这功能真的要做吗？）
->2. 关于管理药品和疾病数据库的接口，我设想可以复用前面的部分接口用来显示列表如/medicine/list;/disease/type;/disease/list，故没有在/admin处单独给出关于获取列表的接口
->3. 关于职能学习/角色扮演和quiz，开发的时候估计还会遇到问题，接口可能还需要补充
->4. job和对应task的增删查改逻辑有点怪。现在按我的思路，如果想实现单独删掉某job下的task，就直接用put里写的task覆盖掉原先所有的task；对应的，增加task可以放入post，post的body中如果是旧job的新task，则加入该旧job对应的tasks。看不懂就对了，我也看不懂我在想什么
->5. ~~3D导览需要展示信息，这部分的接口还未设计~~ 现在有了
->6. 总之这版先这样吧，改不动了
->7. 还有，这次修改主要是把接口换成了传ID（主要是疾病和药品）的形式，否则如果做后台修改，修改名字时会出问题；然后就是按老师的意思，如果我们修改了某个药品/疾病名，病例上的信息都有相应变动，所以只能传ID。我设计了能获取相应ID的接口（==大概==是都给了）
->8. 最后就是，前端那边是怎么做身份验证的，我目前查到的基本就是JSON Web Token的思路，这篇[https://zhuanlan.zhihu.com/p/164696755]有提，反正大概就是后端只需对比你们在HEADER里的Authorization: Bearer qwguodgkqwqgd这串玩意，希望是这么干的，:pray::dizzy_face::pray::dizzy_face::pray::dizzy_face::pray:
->9. 有些不能判断的小错误直接问我就行，我有些Example没改过来，错误码和请求类型什么的
->10. :sleepy:
-
 ## 常用status
 
 ```json
@@ -723,10 +710,8 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应medicineID"
-}
+a}
 ```
-
-# 5. 角色扮演
 
 ## `GET /roleplaying/list`
 
@@ -788,7 +773,7 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/detail?role=2&job=注射
-: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 
 GET /roleplaying/list?role=1
@@ -797,17 +782,11 @@ Authorization: Bearer fakeToken
 
 ### 返回响应
 
-| 名称    | 位置 | 类型     | 必选 | 备注 |
-| ------- | ---- | -------- | ---- | ---- |
-| status  | Body | integer  | 是   | 状态 |
-| message | Body | string   | 是   | 消息 |
-| tasks   | Body | object[] | 否   | 任务 |
-
-对于tasks的元素
-| 名称       | 位置 | 类型   | 必选 | 备注     |
-| ---------- | ---- | ------ | ---- | -------- |
-| taskName   | Body | string | 是   | 任务名称 |
-| taskDetail | Body | string | 是   | 具体信息 |
+| 名称      | 位置 | 类型    | 必选 | 备注 |
+| --------- | ---- | ------- | ---- | ---- |
+| status    | Body | integer | 是   | 状态 |
+| message   | Body | string  | 是   | 消息 |
+| jobDetail | Body | string  | 否   | 任务 |
 
 `Example`
 
@@ -817,16 +796,7 @@ Content-Type: application/json
 {
     "status": 0,
     "message": "成功",
-    "tasks": [
-        {
-            "taskName": "注射",
-            "taskDetail": "准备药物，选择注射部位，进行注射操作。"
-        },
-        {
-            "taskName": "手术前准备",
-            "taskDetail": "准备手术器械，消毒手术区域，等待医生指示。"
-        }
-    ]
+    "tasks": "注射成功"
 }
 
 HTTP/1.1 404 Not Found
