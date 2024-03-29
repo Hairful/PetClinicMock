@@ -1,35 +1,35 @@
 <template>
-<div>
+<Div>
   <div class="container" ref="container"></div>
   <div class="map">
     <div class="tag" ref="tagDiv"></div>
     <img src="../assets/map.gif" alt="" />
   </div>
-  <div class="loading" v-if="progress != 100"></div>
-  <div class="progress" v-if="progress != 100">
+  <div class="loading" ></div>
+  <div class="progress">
    <img src="../assets/loading.gif" alt="" /> 
     <span>新房奔跑中：{{ progress }}%</span>
   </div>
   <div class="title">小吴VR全景看房</div>
-</div>
+</Div>
 </template>
 
 <script>
-export default{}
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { ref, onMounted } from "vue";
 import gsap from "gsap";
 import SpriteCanvas from "../three/SpriteCanvas";
-
-let tagDiv = ref(null);
-let progress = ref(0);
+export default{
+setup() {
+    let tagDiv = ref(null);
+    let progress = ref(0);
 // 初始化场景
-const scene = new THREE.Scene();
+    const scene = new THREE.Scene();
 
 // 初始化相机
-const camera = new THREE.PerspectiveCamera(
+    const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
@@ -59,8 +59,7 @@ geometry.scale(1, 1, -1);
 // const cube = new THREE.Mesh(geometry, material);
 // scene.add(cube);
 
-// 挂载完毕之后获取dom
-onMounted(() => {
+  onMounted(() => {
   function moveTag(name) {
     let positions = {
       客厅: [100, 110],
@@ -84,14 +83,14 @@ onMounted(() => {
 
   // 创建客厅
   let livingIndex = 0;
-  let livingUrl = "./img/surgery/";
+  let livingUrl = "../img/surgery";
   let livingPosition = new THREE.Vector3(0, 0, 0);
   const living = new Room("手术室", livingIndex, livingUrl, livingPosition);
 
   // 创建厨房
   let kitPosition = new THREE.Vector3(-5, 0, -10);
   let kitIndex = 2;
-  let textureUrl = "./img/clinic1";
+  let textureUrl = "../img/clinic1";
   let kitEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const room = new Room("病房", kitIndex, textureUrl, kitPosition, kitEuler);
   // 创建文字精灵
@@ -130,7 +129,7 @@ onMounted(() => {
   // 创建阳台
   let balconyPosition = new THREE.Vector3(0, 0, 15);
   let balconyIndex = 8;
-  let balconyUrl = "./img/balcony";
+  let balconyUrl = "../img/balcony";
   let balconyEuler = new THREE.Euler(0, Math.PI / 16, 0);
   const balcony = new Room(
     "阳台",
@@ -179,7 +178,7 @@ onMounted(() => {
   // 创建走廊
   let hallwayPosition = new THREE.Vector3(-15, 0, 0);
   let hallwayIndex = 9;
-  let hallwayUrl = "./img/corridor";
+  let hallwayUrl = "../img/corridor";
   let hallwayEuler = new THREE.Euler(0, -Math.PI + Math.PI / 16, 0);
   const hallway = new Room(
     "走廊",
@@ -228,7 +227,7 @@ onMounted(() => {
   // 创建主卧
   let mainPosition = new THREE.Vector3(-25, 0, 2);
   let mainIndex = 1;
-  let mainUrl = "./img/clinic1";
+  let mainUrl = "../img/clinic1";
   //let mainEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const main = new Room(
     "诊室",
@@ -271,7 +270,7 @@ onMounted(() => {
     });
     moveTag("走廊");
   }),
-    container.value.appendChild(renderer.domElement);
+  container.value.appendChild(renderer.domElement);
   render();
 
   let isMouseDown = false;
@@ -303,7 +302,13 @@ onMounted(() => {
     },
     false
   );
-});
+  });
+    return {
+      tagDiv,
+      progress,
+     }; 
+  }
+};
 
 class Room {
   constructor(
@@ -356,6 +361,8 @@ class Room {
     };
   }
 }
+
+
 </script>
 
 <style>
