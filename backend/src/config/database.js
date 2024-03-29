@@ -1,3 +1,9 @@
+/**
+ * 文件: /backend/src/config/database.js
+ * 描述: 数据库连接配置
+ * 作者: {YYZ}
+ */
+
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('PetClinicMock', 'PCM', 'Pcm123456@', {

@@ -1,11 +1,20 @@
+/**
+ * 文件: /backend/src/services/medicineService.js
+ * 描述: 药品信息服务，处理获取药品信息相关逻辑
+ * 作者: {SSR; YYZ}
+ */
+
 const Medicine = require('../models/Medicine');
-//查看药品列表
-exports.getAllMedicines=async () => {
+
+/**
+ * getAllMedicines - 获取所有药品列表
+ * @returns {Object} 对象
+ */
+exports.getAllMedicines = async () => {
     try {
         const medicines = await Medicine.findAll({
             attributes: ['medicineID', 'medicineName']
         });
-
         if (medicines.length > 0) {
             return {
                 status: 0,
@@ -16,18 +25,20 @@ exports.getAllMedicines=async () => {
                 }))
             };
         } else {
-            // 如果没有找到药品，返回错误状态和消息
-            return {
-                status: 1,
-                message: "无药品数据"
-            };
+            return { status: 1, message: "无药品数据" };
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error in getAllMedicines', error);
+        return { status: -9, message: '错误' };
     }
 }
-//查看药品详情
-exports.getMedicineById=async (medicineId) =>{
+
+/**
+ * getMedicineById - 通过药品ID获取药品信息
+ * @param {integer} medicineId - 药品ID
+ * @returns {Object} 对象
+ */
+exports.getMedicineById = async (medicineId) => {
     try {
         const medicine = await Medicine.findByPk(medicineId, {
             attributes: ['medicineID', 'medicineName', 'medicineIntro']
@@ -42,14 +53,11 @@ exports.getMedicineById=async (medicineId) =>{
                 medicineIntro: medicine.medicineIntro
             };
         } else {
-            // 如果没有找到药品，返回404状态码和消息
-            return {
-                status: 1,
-                message: "无对应medicineID"
-            };
+            return { status: 1, message: "无对应medicineID" };
         }
     } catch (error) {
-            console.error('Error:', error);
+        console.error('Error in getMedicineById', error);
+        return { status: -9, message: '错误' };
     }
 }
 
