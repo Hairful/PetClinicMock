@@ -1,463 +1,439 @@
 <template>
-  <div class="virtual-tour-container">
-    <div class="virtual-tour-header">
-      <header
-        data-thq="thq-navbar"
-        class="navbarContainer virtual-tour-navbar-interactive"
-      >
-        <router-link to="/" class="virtual-tour-logo logo">
-          PETCLINICMock
-        </router-link>
-      <div>
-        <div data-thq="thq-navbar-nav" class="virtual-tour-desktop-menu">
-          <span>
-            <span>
-              Logged in as
-              <span v-html="rawiv06"></span>
-            </span>
-            <span class="virtual-tour-text02">{{name}}</span>
-          </span>
-        </div>
-        <div>
-          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
-        </div>
-      </div>
-        <div data-thq="thq-burger-menu" class="virtual-tour-burger-menu">
-          <svg viewBox="0 0 1024 1024" class="virtual-tour-icon socialIcons">
-            <path
-              d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-            ></path>
-          </svg>
-        </div>
-        <div
-          data-thq="thq-mobile-menu"
-          class="virtual-tour-mobile-menu1 mobileMenu"
-        >
-          <div class="virtual-tour-nav">
-            <div class="virtual-tour-top">
-              <span class="logo">PETSCLINIC</span>
-              <div data-thq="thq-close-menu" class="virtual-tour-close-menu">
-                <svg
-                  viewBox="0 0 1024 1024"
-                  class="virtual-tour-icon02 socialIcons"
-                >
-                  <path
-                    d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <nav class="virtual-tour-links">
-              <span class="virtual-tour-nav12 bodySmall">Home</span>
-              <span class="virtual-tour-nav22 bodySmall">Services</span>
-              <span class="virtual-tour-nav32 bodySmall">Our Team</span>
-              <span class="virtual-tour-nav42 bodySmall">Contact</span>
-            </nav>
-            <div class="virtual-tour-buttons">
-              <button class="buttonFlat">Login</button>
-              <button class="buttonFilled">Register</button>
-            </div>
-          </div>
-          <div>
-            <svg
-              viewBox="0 0 950.8571428571428 1024"
-              class="virtual-tour-icon04 socialIcons"
-            >
-              <path
-                d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-              ></path></svg><svg
-              viewBox="0 0 877.7142857142857 1024"
-              class="virtual-tour-icon06 socialIcons"
-            >
-              <path
-                d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-              ></path></svg><svg
-              viewBox="0 0 602.2582857142856 1024"
-              class="virtual-tour-icon08 socialIcons"
-            >
-              <path
-                d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </header>
-    </div>
-    <div class="virtual-tour-container1"></div>
-    <div class="heroContainer virtual-tour-hero">
-      <div class="virtual-tour-container2">
-        <h1 class="virtual-tour-hero-heading heading1">3D Virtual Tour</h1>
-      </div>
-    </div>
-    <div class="virtual-tour-hero1 heroContainer">
-      <div class="virtual-tour-container3">
-        //3D导览
-        <Threed />
-      </div>
-    </div>
-    <div class="virtual-tour-footer">
-      <footer class="virtual-tour-footer1 footerContainer">
-        <div class="virtual-tour-container4">
-          <router-link to="/" class="virtual-tour-logo2 logo">
-            PETCLINICMOCK
-          </router-link>
-        </div>
-        <div class="virtual-tour-separator"></div>
-        <div class="virtual-tour-container5">
-          <span class="bodySmall virtual-tour-text17">
-            © 2024 SWD-G02, All Rights Reserved.
-          </span>
-        </div>
-      </footer>
-    </div>
+  <div>
+  <div class="container" ref="container"></div>
+  <div class="map">
+    <div class="tag" ref="tagDiv"></div>
+    <img src="../assets/map.gif" alt="" />
   </div>
+  <div class="loading" v-if="progress != 100"></div>
+  <div class="progress" v-if="progress != 100">
+    <img src="../assets/loading.gif" alt="" />
+    <span>医院加载中：{{ progress }}%</span>
+  </div>
+  <div class="title">3D导览</div>
+</div>
 </template>
 
-<script>
-import Threed from '../components/Threed.vue';
+<script setup>
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
+import { ref, onMounted } from "vue";
+import gsap from "gsap";
+import SpriteCanvas from "../three/SpriteCanvas";
 
-export default {
-  components: {
-    Threed
-  },
-  name: 'VirtualTour',
-  props: {},
-  data() {
-    return {
-      rawiv06: ' ',
-      name:localStorage.getItem('username'),
+let tagDiv = ref(null);
+let progress = ref(0);
+// 初始化场景
+const scene = new THREE.Scene();
+
+// 初始化相机
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+// 设置相机位置
+camera.position.set(0, 0, 0);
+// 初始化渲染器
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const container = ref(null);
+
+const render = () => {
+  renderer.render(scene, camera);
+  requestAnimationFrame(render);
+};
+
+// 创建辅助坐标轴
+// const axes = new THREE.AxesHelper(5);
+// scene.add(axes);
+
+// 添加立方体
+const geometry = new THREE.BoxGeometry(10, 10, 10);
+geometry.scale(1, 1, -1);
+// const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+// const cube = new THREE.Mesh(geometry, material);
+// scene.add(cube);
+
+// 挂载完毕之后获取dom
+onMounted(() => {
+  function moveTag(name) {
+    let positions = {
+      客厅: [100, 110],
+      厨房: [180, 190],
+      阳台: [50, 50],
+      卧室: [160, 40],
+      走廊: [150, 90],
+    };
+    if (positions[name]) {
+      gsap.to(tagDiv.value, {
+        duration: 1,
+        x: positions[name][0],
+        y: positions[name][1],
+        ease: "power3.inOut",
+      });
     }
-  },
-  methods:{
-    logout(){
-      localStorage.clear();
-      this.$router.push('/');
-    }
-  },
-  metaInfo: {
-    title: 'VirtualTour - Roasted Rusty Swallow',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'VirtualTour - Roasted Rusty Swallow',
-      },
-    ],
-  },
+  }
+  tagDiv.value.style.cssText = `
+    transform: translate(100px,110px);
+  `;
+
+  // 创建客厅
+  let livingIndex = 0;
+  let livingUrl = "./img/surgery/";
+  let livingPosition = new THREE.Vector3(0, 0, 0);
+  const living = new Room("手术室", livingIndex, livingUrl, livingPosition);
+
+  // 创建厨房
+  let kitPosition = new THREE.Vector3(-5, 0, -10);
+  let kitIndex = 2;
+  let textureUrl = "./img/clinic1";
+  let kitEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const room = new Room("病房", kitIndex, textureUrl, kitPosition, kitEuler);
+  // 创建文字精灵
+  const text = new SpriteCanvas(camera, "病房", new THREE.Vector3(-1, 0, -3));
+  // text.mesh.rotation.y = Math.PI / 3;
+  scene.add(text.mesh);
+  text.onClick(() => {
+    console.log("病房");
+    gsap.to(camera.position, {
+      x: kitPosition.x,
+      y: kitPosition.y,
+      z: kitPosition.z,
+      duration: 1,
+    });
+    moveTag("病房");
+  });
+
+  // 创建客厅文字精灵
+  const textLiving = new SpriteCanvas(
+    camera,
+    "手术室",
+    new THREE.Vector3(-4, 0, -6)
+  );
+  scene.add(textLiving.mesh);
+  textLiving.onClick(() => {
+    console.log("手术室");
+    gsap.to(camera.position, {
+      x: livingPosition.x,
+      y: livingPosition.y,
+      z: livingPosition.z,
+      duration: 1,
+    });
+    moveTag("手术室");
+  });
+
+  // 创建阳台
+  let balconyPosition = new THREE.Vector3(0, 0, 15);
+  let balconyIndex = 8;
+  let balconyUrl = "./img/balcony";
+  let balconyEuler = new THREE.Euler(0, Math.PI / 16, 0);
+  const balcony = new Room(
+    "阳台",
+    balconyIndex,
+    balconyUrl,
+    balconyPosition,
+    balconyEuler
+  );
+
+  // 创建阳台文字精灵
+  const textBalcony = new SpriteCanvas(
+    camera,
+    "阳台",
+    new THREE.Vector3(0, 0, 3)
+  );
+  scene.add(textBalcony.mesh);
+  textBalcony.onClick(() => {
+    console.log("阳台");
+    gsap.to(camera.position, {
+      x: balconyPosition.x,
+      y: balconyPosition.y,
+      z: balconyPosition.z,
+      duration: 1,
+    });
+    moveTag("阳台");
+  });
+
+  // 创建阳台回客厅文字精灵
+  const textBalconyToLiving = new SpriteCanvas(
+    camera,
+    "手术室",
+    new THREE.Vector3(-1, 0, 11)
+  );
+  scene.add(textBalconyToLiving.mesh);
+  textBalconyToLiving.onClick(() => {
+    console.log("手术室");
+    gsap.to(camera.position, {
+      x: livingPosition.x,
+      y: livingPosition.y,
+      z: livingPosition.z,
+      duration: 1,
+    });
+    moveTag("手术室");
+  });
+
+  // 创建走廊
+  let hallwayPosition = new THREE.Vector3(-15, 0, 0);
+  let hallwayIndex = 9;
+  let hallwayUrl = "./img/corridor";
+  let hallwayEuler = new THREE.Euler(0, -Math.PI + Math.PI / 16, 0);
+  const hallway = new Room(
+    "走廊",
+    hallwayIndex,
+    hallwayUrl,
+    hallwayPosition,
+    hallwayEuler
+  );
+
+  // 走廊文字精灵
+  const textCorridor = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(-4, 0, 0.5)
+  );
+  scene.add(textCorridor.mesh);
+  textCorridor.onClick(() => {
+    console.log("走廊");
+    gsap.to(camera.position, {
+      x: hallwayPosition.x,
+      y: hallwayPosition.y,
+      z: hallwayPosition.z,
+      duration: 1,
+    });
+    moveTag("走廊");
+  });
+
+  // 创建走廊回客厅文字精灵
+  const textCorridorToLiving = new SpriteCanvas(
+    camera,
+    "手术室",
+    new THREE.Vector3(-11, 0, 0)
+  );
+  scene.add(textCorridorToLiving.mesh);
+  textCorridorToLiving.onClick(() => {
+    console.log("手术室");
+    gsap.to(camera.position, {
+      x: livingPosition.x,
+      y: livingPosition.y,
+      z: livingPosition.z,
+      duration: 1,
+    });
+    moveTag("手术室");
+  });
+
+  // 创建主卧
+  let mainPosition = new THREE.Vector3(-25, 0, 2);
+  let mainIndex = 1;
+  let mainUrl = "./img/clinic1";
+  //let mainEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const main = new Room(
+    "诊室",
+    mainIndex,
+    mainUrl,
+    mainPosition
+    //mainEuler
+  );
+  // 主卧文字精灵
+  const textMain = new SpriteCanvas(
+    camera,
+    "诊室",
+    new THREE.Vector3(-19, 0, 2)
+  );
+  scene.add(textMain.mesh);
+  textMain.onClick(() => {
+    console.log("诊室");
+    gsap.to(camera.position, {
+      x: mainPosition.x,
+      y: mainPosition.y,
+      z: mainPosition.z,
+      duration: 1,
+    });
+    moveTag("诊室");
+  });
+  // 创建主卧回走廊文字精灵
+  const textMainToCorridor = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(-23, 0, -2)
+  );
+  scene.add(textMainToCorridor.mesh);
+  textMainToCorridor.onClick(() => {
+    console.log("走廊");
+    gsap.to(camera.position, {
+      x: hallwayPosition.x,
+      y: hallwayPosition.y,
+      z: hallwayPosition.z,
+      duration: 1,
+    });
+    moveTag("走廊");
+  }),
+    container.value.appendChild(renderer.domElement);
+  render();
+
+  let isMouseDown = false;
+
+  // 监听鼠标按下事件
+  window.addEventListener(
+    "mousedown",
+    () => {
+      isMouseDown = true;
+    },
+    false
+  );
+  // 监听鼠标抬起事件
+  window.addEventListener(
+    "mouseup",
+    () => {
+      isMouseDown = false;
+    },
+    false
+  );
+  // 监听鼠标移动事件
+  window.addEventListener(
+    "mousemove",
+    (e) => {
+      if (isMouseDown) {
+        camera.rotation.y += (e.movementX / window.innerWidth) * Math.PI;
+        // camera.rotation.x += (e.movementY / window.innerHeight) * Math.PI;
+      }
+    },
+    false
+  );
+});
+
+class Room {
+  constructor(
+    name,
+    roomIndex,
+    textureUrl,
+    position = new THREE.Vector3(0, 0, 0),
+    euler = new THREE.Euler(0, 0, 0)
+  ) {
+    this.name = name;
+    // 添加立方体
+    const geometry = new THREE.BoxGeometry(10, 10, 10);
+    geometry.scale(1, 1, -1);
+    // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    // const cube = new THREE.Mesh(geometry, material);
+    // scene.add(cube);
+
+    // 4_b,
+    var arr = [
+      `${roomIndex}_l`,
+      `${roomIndex}_r`,
+      `${roomIndex}_u`,
+      `${roomIndex}_d`,
+      `${roomIndex}_b`,
+      `${roomIndex}_f`,
+    ];
+    var boxMaterials = [];
+
+    arr.forEach((item) => {
+      // 纹理加载
+      let texture = new THREE.TextureLoader().load(`${textureUrl}/${item}.jpg`);
+      // 创建材质
+      if (item === `${roomIndex}_u` || item === `${roomIndex}_d`) {
+        texture.rotation = Math.PI;
+        texture.center = new THREE.Vector2(0.5, 0.5);
+        boxMaterials.push(new THREE.MeshBasicMaterial({ map: texture }));
+      } else {
+        boxMaterials.push(new THREE.MeshBasicMaterial({ map: texture }));
+      }
+    });
+    const cube = new THREE.Mesh(geometry, boxMaterials);
+    cube.position.copy(position);
+    cube.rotation.copy(euler);
+    // cube.geometry.scale(1, 1, -1);
+    scene.add(cube);
+
+    THREE.DefaultLoadingManager.onProgress = function (item, loaded, total) {
+      console.log(item, loaded, total);
+      progress.value = new Number((loaded / total) * 100).toFixed(2);
+    };
+  }
 }
 </script>
 
-<style scoped>
-.virtual-tour-container {
-  width: 100%;
-  display: flex;
-  overflow: auto;
-  min-height: 100vh;
-  align-items: center;
-  flex-direction: column;
+<style>
+* {
+  margin: 0;
+  padding: 0;
 }
-.virtual-tour-header {
-  width: 100%;
-  display: flex;
-  z-index: 100;
-  position: fixed;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--dl-color-gray-white);
-}
-.virtual-tour-logo {
-  text-decoration: none;
-}
-.virtual-tour-desktop-menu {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-.virtual-tour-text02 {
-  color: var(--dl-color-custom-primary1);
-  font-weight: 700;
-}
-.virtual-tour-burger-menu {
-  display: none;
-}
-.virtual-tour-icon {
-  width: var(--dl-size-size-xsmall);
-  cursor: pointer;
-  height: var(--dl-size-size-xsmall);
-}
-.virtual-tour-mobile-menu1 {
-  top: 0px;
-  left: 0px;
-  width: 100%;
+.container {
   height: 100vh;
-  display: none;
-  padding: 32px;
-  z-index: 100;
+  width: 100vw;
+  background-color: #f0f0f0;
+}
+
+.map {
+  width: 300px;
+  height: 260px;
   position: absolute;
-  flex-direction: column;
-  justify-content: space-between;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.virtual-tour-nav {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.virtual-tour-top {
+.map > img {
   width: 100%;
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--dl-space-space-threeunits);
-  justify-content: space-between;
-}
-.virtual-tour-close-menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.virtual-tour-icon02 {
-  width: var(--dl-size-size-xsmall);
-  cursor: pointer;
-  height: var(--dl-size-size-xsmall);
-}
-.virtual-tour-links {
-  flex: 0 0 auto;
-  display: flex;
-  align-self: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.virtual-tour-nav12 {
-  margin-bottom: var(--dl-space-space-unit);
-}
-.virtual-tour-nav22 {
-  margin-bottom: var(--dl-space-space-unit);
-}
-.virtual-tour-nav32 {
-  margin-bottom: var(--dl-space-space-unit);
-}
-.virtual-tour-nav42 {
-  margin-bottom: var(--dl-space-space-unit);
-}
-.virtual-tour-buttons {
-  display: flex;
-  margin-top: var(--dl-space-space-unit);
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.virtual-tour-icon04 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
-}
-.virtual-tour-icon06 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-  margin-right: var(--dl-space-space-twounits);
-}
-.virtual-tour-icon08 {
-  width: var(--dl-size-size-xsmall);
-  height: var(--dl-size-size-xsmall);
-}
-.virtual-tour-container1 {
-  width: 200px;
-  border: 2px dashed rgba(120, 120, 120, 0.4);
-  height: 92px;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.virtual-tour-container2 {
-  gap: var(--dl-space-space-oneandhalfunits);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.virtual-tour-hero-heading {
-  max-width: 800px;
-  text-align: center;
-}
-.virtual-tour-hero-sub-heading {
-  font-size: 18px;
-  text-align: center;
-}
-.virtual-tour-hero1 {
-  border-color: rgba(0, 0, 0, 0);
-  border-width: 1px;
-  background-color: var(--dl-color-gray-black);
-}
-.virtual-tour-container3 {
-  flex: 0 0 auto;
-  width: auto;
-  border: 2px dashed rgba(120, 120, 120, 0.4);
   height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.map > .tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url(./assets/location.png);
+  background-size: cover;
+  z-index: 1;
+}
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./assets/loading.png);
+  background-size: cover;
+  filter: blur(50px);
+  z-index: 100;
+}
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-}
-.virtual-tour-footer {
-  flex: 0 0 auto;
-  width: 100%;
-  height: auto;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  font-size: 20px;
+  color: #fff;
 }
-.virtual-tour-footer1 {
-  height: 246;
+.progress > img {
+  padding: 0 15px;
 }
-.virtual-tour-container4 {
-  gap: var(--dl-space-space-unit);
-  display: flex;
-  max-width: var(--dl-size-size-maxwidth);
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.virtual-tour-logo2 {
-  text-decoration: none;
-}
-.virtual-tour-separator {
-  flex: 0 0 auto;
-  width: 100%;
-  height: 0px;
-  display: flex;
-  margin-top: var(--dl-space-space-twounits);
-  align-items: flex-start;
-  margin-left: 0px;
-  border-color: var(--dl-color-gray-900);
-  border-style: solid;
-  border-width: 1px;
-  margin-right: 0px;
-  margin-bottom: var(--dl-space-space-twounits);
-  flex-direction: row;
-  border-top-width: 0px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-}
-.virtual-tour-container5 {
-  flex: 0 0 auto;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
-@media(max-width: 991px) {
-  .virtual-tour-hero {
-    flex-direction: column;
-  }
-  .virtual-tour-container2 {
-    align-items: center;
-    margin-right: 0px;
-    margin-bottom: var(--dl-space-space-twounits);
-    padding-right: 0px;
-  }
-  .virtual-tour-hero-heading {
-    text-align: center;
-  }
-  .virtual-tour-hero-sub-heading {
-    text-align: center;
-    padding-left: var(--dl-space-space-threeunits);
-    padding-right: var(--dl-space-space-threeunits);
-  }
-  .virtual-tour-hero1 {
-    flex-direction: column;
-  }
-}
-@media(max-width: 767px) {
-  .virtual-tour-navbar-interactive {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-  }
-  .virtual-tour-desktop-menu {
-    display: none;
-  }
-  .virtual-tour-burger-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .virtual-tour-nav12 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .virtual-tour-nav22 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .virtual-tour-nav32 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .virtual-tour-nav42 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .virtual-tour-hero {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-  }
-  .virtual-tour-hero-sub-heading {
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-  }
-  .virtual-tour-hero1 {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-  }
-  .virtual-tour-footer1 {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
-  }
-  .virtual-tour-separator {
-    margin-top: var(--dl-space-space-oneandhalfunits);
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: var(--dl-space-space-oneandhalfunits);
-  }
-  .virtual-tour-container5 {
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .virtual-tour-text17 {
-    margin-bottom: var(--dl-space-space-oneandhalfunits);
-  }
-}
-@media(max-width: 479px) {
-  .virtual-tour-navbar-interactive {
-    padding: var(--dl-space-space-unit);
-  }
-  .virtual-tour-mobile-menu1 {
-    padding: 16px;
-  }
-  .virtual-tour-hero {
-    padding-top: var(--dl-space-space-twounits);
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-    padding-bottom: var(--dl-space-space-twounits);
-  }
-  .virtual-tour-container2 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .virtual-tour-hero1 {
-    padding-top: var(--dl-space-space-twounits);
-    padding-left: var(--dl-space-space-unit);
-    padding-right: var(--dl-space-space-unit);
-    padding-bottom: var(--dl-space-space-twounits);
-  }
-  .virtual-tour-footer1 {
-    padding: var(--dl-space-space-unit);
-  }
-  .virtual-tour-separator {
-    margin-top: var(--dl-space-space-oneandhalfunits);
-    margin-bottom: var(--dl-space-space-oneandhalfunits);
-  }
-  .virtual-tour-container5 {
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .virtual-tour-text17 {
-    text-align: center;
-    margin-bottom: var(--dl-space-space-oneandhalfunits);
-  }
+
+.title {
+  width: 180px;
+  height: 40px;
+  position: fixed;
+  right: 100px;
+  top: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  z-index: 110;
 }
 </style>
