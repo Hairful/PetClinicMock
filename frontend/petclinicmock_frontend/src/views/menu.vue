@@ -9,9 +9,9 @@
         <div class="menu-container1">
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
             <span>
+              <span>
                 Logged in as 
             </span>
-            <span>
               <span class="menu-text02">{{name}}</span>
             </span>
           </div>

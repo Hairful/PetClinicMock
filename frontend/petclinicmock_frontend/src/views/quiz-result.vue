@@ -17,6 +17,8 @@
               </span>
               <span class="quiz-result-text02">{{name}}</span>
             </span>
+          </div>
+          <div>
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
