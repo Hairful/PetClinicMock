@@ -7,11 +7,11 @@
 const Job = require('../models/Job');
 
 /**
- * getJobsByRole - 获取工作列表
+ * getJobList - 获取工作列表
  * @param {integer} role - 角色
  * @returns {Object} 对象
  */
-exports.getJobsByRole = async (role) => {
+exports.getJobList = async (role) => {
     try {
         const roles = await Job.findAll({
             where: { role: role },
@@ -27,7 +27,7 @@ exports.getJobsByRole = async (role) => {
             jobs: jobs,
         };
     } catch (error) {
-        console.error('Error In getJobsByRole', error);
+        console.error('Error In getJobList', error);
         return { status: -9, message: `错误`, };
     }
 }

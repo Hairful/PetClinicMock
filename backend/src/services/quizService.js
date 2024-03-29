@@ -11,11 +11,11 @@ const UserProb = require('../models/UserProb');
 const UserQuiz = require('../models/UserQuiz');
 
 /**
- * getUserQuizzes - 获取试卷列表
+ * getQuizList - 获取试卷列表
  * @param {integer} userID - 用户ID
  * @returns {Object} 对象
  */
-exports.getUserQuizzes = async (userID) => {
+exports.getQuizList = async (userID) => {
     try {
         const userQuizzes = await UserQuiz.findAll({
             where: { UserUserID: userID },

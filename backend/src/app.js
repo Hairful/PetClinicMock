@@ -4,6 +4,7 @@ const userAuthRoute = require('./routes/userAuthRoute');
 const diseaseRoute = require('./routes/diseaseRoute');
 const quizRoute = require('./routes/quizRoute');
 const caseRoute = require('./routes/caseRoute');
+const roleRoute = require('./routes/roleRoute');
 const cors = require('cors');
 const Item = require('./models/Item');
 const Case = require('./models/Case');
@@ -20,5 +21,7 @@ app.use('/disease', diseaseRoute);
 app.use('/casestudy/disease', diseaseRoute);
 app.use('/quiz', quizRoute);
 app.use('/casestudy/case', caseRoute);
+app.use('/roleplaying', roleRoute);
+app.use('/quiz', quizRoute);
 
 module.exports = app;

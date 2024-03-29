@@ -4,12 +4,12 @@
  * 作者: {YYZ}
  */
 
-const { getQuizDetails, getUserQuizzes, recordExamEntry } = require('../services/quizService')
+const { getQuizDetails, getQuizList, recordExamEntry } = require('../services/quizService')
 
 exports.getQuizList = async (req, res) => {
     try {
         const { userID } = req.query;
-        const result = await getUserQuizzes(userID);
+        const result = await getQuizList(userID);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -78,7 +78,7 @@ exports.recordExamEntry = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getQuizDetail:', error);
+        console.error('Error in recordExamEntry:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }

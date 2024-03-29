@@ -815,6 +815,110 @@ Content-Type: application/json
 
 ```
 
+# 5. 角色扮演
+
+## `GET /roleplaying/list`
+
+选择该角色工作职责
+
+### 请求参数
+
+| 名称 | 位置  | 类型    | 必选 | 备注                              |
+| ---- | ----- | ------- | ---- | --------------------------------- |
+| role | Param | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+
+`Example`
+
+```json
+GET /roleplaying/list?role=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注         |
+| ------- | ---- | -------- | ---- | ------------ |
+| status  | Body | integer  | 是   | 状态         |
+| message | Body | string   | 是   | 消息         |
+| jobs    | Body | string[] | 否   | 工作内容选择 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "jobs": ["注射", "术前准备"]
+}
+
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role"
+}
+```
+
+## `GET /roleplaying/detail`
+
+具体工作流程
+
+### 请求参数
+
+| 名称 | 位置  | 类型    | 必选 | 备注                                    |
+| ---- | ----- | ------- | ---- | --------------------------------------- |
+| role | Param | integer | 是   | 角色，0代表前台、1代表医助、2代表兽医师 |
+| job  | Param | string  | 是   | 工作内容选择                            |
+
+`Example`
+
+```json
+GET /roleplaying/detail?role=2&job=注射
+: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+
+GET /roleplaying/list?role=1
+Authorization: Bearer fakeToken
+```
+
+### 返回响应
+
+| 名称      | 位置 | 类型    | 必选 | 备注 |
+| --------- | ---- | ------- | ---- | ---- |
+| status    | Body | integer | 是   | 状态 |
+| message   | Body | string  | 是   | 消息 |
+| jobDetail | Body | string  | 否   | 任务 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "jobDetail": "注射成功"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应job",
+}
+
+```
+
 # 6. 在线测试
 
 ## `GET /quiz/list`
