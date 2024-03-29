@@ -1,12 +1,11 @@
 /**
- * 文件: userAuthService.js
- * 描述: 登录与注册服务
+ * 文件: /backend/src/services/userAuthService.js
+ * 描述: 用户验证服务，处理注册、登录逻辑
  * 作者: {YYZ}
  */
 
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const Token = require('../models/Token');
 const { encrypt, decrypt } = require('../utils/cryptoUtil');
 const { tokenKey } = require('../config/authConfig')
 
@@ -18,8 +17,8 @@ const { tokenKey } = require('../config/authConfig')
  */
 exports.registerUser = async (userName, password) => {
     try {
-        const existingUser = await User.findOne({ where: { userName } });
-        if (existingUser) {
+        const userExist = await User.findOne({ where: { userName } });
+        if (userExist) {
             return { status: 1, message: '重复userName' };
         }
         const encryptedPassword = encrypt(password);
@@ -27,7 +26,7 @@ exports.registerUser = async (userName, password) => {
         return { status: 0, message: '注册成功', userID: newUser.userID };
     } catch (error) {
         console.error('Error in registerUser:', error);
-        return { status: -9, message: "失败" };
+        return { status: -9, message: '错误' };
     }
 }
 
@@ -39,26 +38,18 @@ exports.registerUser = async (userName, password) => {
  */
 exports.loginUser = async (userName, password) => {
     try {
-        const user = await User.findOne({ where: { userName } });
-        if (!user) {
+        const userExist = await User.findOne({ where: { userName } });
+        if (!userExist) {
             return { status: 2, message: '无对应userName' };
         }
         const decryptedPassword = decrypt(user.password);
         if (password !== decryptedPassword) {
             return { status: 1, message: 'userName或password错误' };
         }
-        const token = jwt.sign({ userID: user.userID }, tokenKey, { expiresIn: '1h' });
-        let existingToken = await Token.findOne({ where: { userID: user.userID } });
-        if (existingToken) {
-            existingToken.token = token;
-            existingToken.expiresAt = new Date(Date.now() + 3600000);
-            await existingToken.save();
-        } else {
-            await Token.create({ token, expiresAt: new Date(Date.now() + 3600000), userID: user.userID });
-        }
+        const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });
         return { status: 0, message: '登录成功', userID: user.userID, token: token };
     } catch (error) {
         console.error('Error in loginUser:', error);
-        return { status: -9, message: '失败' };
+        return { status: -9, message: '错误' };
     }
 }
