@@ -88,12 +88,12 @@
             Role Play:
             <span v-html="raw1c3x"></span>
           </span>
-          <span class="role-play-detail-text04">Front Desk</span>
+          <span class="role-play-detail-text04"> {{ role }}</span>
         </h1>
       </div>
     </div>
     <div class="role-play-detail-container4">
-      <router-link to="/role-play-list" class="role-play-detail-navlink button">
+      <router-link :to="{ path: '/role-play-list', query: { role: this.role } }" class="role-play-detail-navlink button">
         Choose Job
       </router-link>
       <router-link to="/role-play-menu" class="role-play-detail-navlink1 button">
@@ -105,12 +105,12 @@
     </div>
     <div class="role-play-detail-hero1 heroContainer">
       <h1 class="role-play-detail-hero-heading1">
-        <span class="heading1">Job 1</span>
+        <span class="heading1"> {{ this.job }} </span>
         <br />
       </h1>
       <div class="role-play-detail-container5">
         <span class="role-play-detail-text21 bodyLarge">
-          准备药物，选择注射部位，进行注射操作。
+          {{ this.jobDetail }}
         </span>
       </div>
     </div>
@@ -133,6 +133,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'RolePlayDetail',
   props: {},
@@ -147,7 +149,30 @@ export default {
       rawrfsl: ' ',
       rawybr1: ' ',
       rawuxqk: ' ',
+      role: ' ',
+      job: ' ',
+      jobDetail: ' ',
     }
+  },
+  created() {
+    this.role = this.$route.query.role;
+    this.job = this.$route.query.job;
+    axios
+      .get('/roleplaying/detail?role=${this.role}&job=${this.job}')
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.jobDetail = response.data.jobDetail;
+        } else if (response.data.status === 1) {
+          console.log('No corresponding role');
+        } else if (response.data.status === 2) {
+          console.log('No corresponding job');
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   metaInfo: {
     title: 'RolePlayDetail - Roasted Rusty Swallow',

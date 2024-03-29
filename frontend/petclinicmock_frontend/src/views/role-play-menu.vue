@@ -97,13 +97,13 @@
       <div class="role-play-menu-container4">
         <div class="role-play-menu-container5">
           <router-link
-            to="/role-play-list"
+            :to="{ path: '/role-play-list', query: { role: 'Front Desk' } }"
             class="role-play-menu-navlink1 button"
           >
             <span class="heading3">Front Desk</span>
           </router-link>
           <router-link
-            to="/role-play-list"
+            :to="{path: '/role-play-list', query: { role: 'Medical Assistant' } }"
             class="role-play-menu-navlink2 button"
           >
             <span class="heading3">
@@ -112,7 +112,7 @@
             </span>
           </router-link>
           <router-link
-            to="/role-play-list"
+            :to="{path: '/role-play-list', query: { role: 'Doctor' } }"
             class="role-play-menu-navlink3 button"
           >
             <span class="heading3">Doctor</span>
