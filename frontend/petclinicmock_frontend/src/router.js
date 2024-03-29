@@ -32,7 +32,7 @@ import './style.css'
 
 Vue.use(Router)
 Vue.use(Meta)
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -167,4 +167,19 @@ export default new Router({
       fallback: true,
     },
   ],
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login' || to.path === '/register' || to.path === '/') {
+    next();
+  } else {
+    let token = localStorage.getItem('Token');
+    if (token === null || token === '') {
+      next('/login');
+    } else {
+      next();
+    }
+  }
+});
+
+export default router

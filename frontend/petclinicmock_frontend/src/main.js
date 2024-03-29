@@ -12,5 +12,15 @@ Vue.use(ElementUI)
 Vue.prototype.$axios = axios;
 new Vue({
   render: h => h(App),
-  router
+  router,
 }).$mount('#app')
+
+axios.interceptors.request.use((config) => {
+  if(localStorage.getItem('Token')) {
+    config.headers.Authorization = localStorage.getItem('Token')
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+})
+

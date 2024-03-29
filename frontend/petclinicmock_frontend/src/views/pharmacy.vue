@@ -12,8 +12,9 @@
               <span>
                 Logged in as
               </span>
-              <span class="pharmacy-text02">Allen</span>
+              <span class="pharmacy-text02">{{name}}</span>
             </span>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="pharmacy-burger-menu">
@@ -118,14 +119,13 @@ export default {
   data() {
     return {
       raw0scw: ' ',
-      rawpsza: ' ',
-      rawgxyt: ' ',
-      raw1tdi: ' ',
-      rawvm40: ' ',
-      rawb0v5: ' ',
-      rawyg2k: ' ',
-      raw31u5: ' ',
-      rawmd6g: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {

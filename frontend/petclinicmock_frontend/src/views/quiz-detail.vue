@@ -15,8 +15,9 @@
                 Logged in as
                 <span v-html="rawp27k"></span>
               </span>
-              <span class="quiz-detail-text02">Allen</span>
+              <span class="quiz-detail-text02">{{name}}</span>
             </span>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="quiz-detail-burger-menu">
@@ -187,14 +188,13 @@ export default {
   data() {
     return {
       rawp27k: ' ',
-      raw3v24: ' ',
-      raw386n: ' ',
-      raw5jnn: ' ',
-      rawedpf: ' ',
-      rawur3m: ' ',
-      raw2wmv: ' ',
-      rawz5y6: ' ',
-      raw4npr: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {

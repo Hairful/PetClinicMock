@@ -14,9 +14,10 @@
               Logged in as
               <span v-html="rawiv06"></span>
             </span>
-            <span class="virtual-tour-text02">Allen</span>
+            <span class="virtual-tour-text02">{{name}}</span>
           </span>
         </div>
+        <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
         <div data-thq="thq-burger-menu" class="virtual-tour-burger-menu">
           <svg viewBox="0 0 1024 1024" class="virtual-tour-icon socialIcons">
             <path
@@ -112,13 +113,13 @@ export default {
   data() {
     return {
       rawiv06: ' ',
-      rawwnnj: ' ',
-      rawx28r: ' ',
-      rawylrc: ' ',
-      raw8l2y: ' ',
-      rawq04c: ' ',
-      rawefty: ' ',
-      rawo6yd: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {

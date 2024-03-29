@@ -15,8 +15,9 @@
                 Logged in as
                 <span v-html="rawfj20"></span>
               </span>
-              <span class="case-study-detail-text02">Allen</span>
+              <span class="case-study-detail-text02">{{name}}</span>
             </span>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="case-study-detail-burger-menu">
@@ -288,14 +289,13 @@ export default {
   data() {
     return {
       rawfj20: ' ',
-      rawvn6p: ' ',
-      rawladw: ' ',
-      rawavtc: ' ',
-      rawa98j: ' ',
-      raw1zgt: ' ',
-      raw2v0y: ' ',
-      raw4oma: ' ',
-      rawlrae: ' ',
+      name:localStorage.getItem('username'),
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {
