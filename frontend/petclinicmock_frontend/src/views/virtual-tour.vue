@@ -86,7 +86,10 @@
       </div>
     </div>
     <div class="virtual-tour-hero1 heroContainer">
-      <div class="virtual-tour-container3"></div>
+      <div class="virtual-tour-container3">
+        //3D导览
+        <Threed />
+      </div>
     </div>
     <div class="virtual-tour-footer">
       <footer class="virtual-tour-footer1 footerContainer">
@@ -107,7 +110,12 @@
 </template>
 
 <script>
+import Threed from '../components/Threed.vue';
+
 export default {
+  components: {
+    Threed
+  },
   name: 'VirtualTour',
   props: {},
   data() {
