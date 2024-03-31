@@ -5,10 +5,9 @@ const diseaseRoute = require('./routes/diseaseRoute');
 const quizRoute = require('./routes/quizRoute');
 const caseRoute = require('./routes/caseRoute');
 const roleRoute = require('./routes/roleRoute');
+const medicineRoute = require('./routes/medicineRoute');
+const vtRoute = require('./routes/vtRoute')
 const cors = require('cors');
-const Item = require('./models/Item');
-const Case = require('./models/Case');
-const Medicine = require('./models/Medicine');
 
 const app = express();
 
@@ -23,5 +22,7 @@ app.use('/quiz', quizRoute);
 app.use('/casestudy/case', caseRoute);
 app.use('/roleplaying', roleRoute);
 app.use('/quiz', quizRoute);
+app.use('/medicine', medicineRoute);
+app.use('/3DVirtualTour', vtRoute);
 
 module.exports = app;

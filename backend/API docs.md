@@ -658,6 +658,13 @@ Content-Type: application/json
     ]
 }
 
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无药品数据"
+}
+
 ```
 
 ## `GET /medicine/detail`
@@ -706,7 +713,7 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应medicineID"
-a}
+}
 ```
 
 ## `GET /roleplaying/list`
