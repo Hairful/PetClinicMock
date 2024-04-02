@@ -30,3 +30,22 @@ exports.decrypt = (encryptedText) => {
     decrypted += decipher.final('utf8');
     return decrypted;
 }
+
+/**
+ * hashPassword - 使用PBKDF2和SHA256哈希算法加盐哈希密码
+ * @param password {string} 要哈希的密码
+ * @param salt {string} 盐值
+ * @returns {string} 哈希后的密码，16进制字符串
+ */
+exports.hashPassword = (password, salt) => {
+    const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha256');
+    return hash.toString('hex');
+}
+
+/**
+ * generateSalt - 生成随机盐值
+ * @returns {string} 随机盐值，16进制字符串
+ */
+exports.generateSalt = () => {
+    return crypto.randomBytes(16).toString('hex');
+}

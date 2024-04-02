@@ -5,7 +5,7 @@
  */
 
 const User = require('../models/User');
-const { encrypt, decrypt } = require('../utils/cryptoUtil')
+const { encrypt, decrypt, hashPassword, generateSalt } = require('../utils/cryptoUtil')
 
 /**
  * getAllUser - 获取所有用户
@@ -17,7 +17,6 @@ exports.getAllUsers = async () => {
         const users = usersFromDB.map(user => ({
             userID: user.userID,
             userName: user.userName,
-            password: decrypt(user.password),
             isAdmin: user.isAdmin
         }));
         return { status: 0, message: '成功', users };
@@ -40,8 +39,15 @@ exports.createUser = async (userName, password, isAdmin) => {
         if (existingUser) {
             return { status: 1, message: '重复用户' };
         }
-        const encryptPassword = encrypt(password);
-        const newUser = await User.create({ userName, encryptPassword, isAdmin });
+        const salt = generateSalt();
+        const hashedPassword = hashPassword(password, salt);
+
+        const newUser = await User.create({
+            'userName': userName,
+            'password': hashedPassword,
+            'isAdmin': isAdmin,
+            'salt': salt
+        });
         return { status: 0, message: '成功', usrID: newUser.userID };
     }
     catch (error) {
@@ -65,7 +71,7 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
             return { status: 1, message: '无对应userID' };
         }
         if (userName) user.userName = userName;
-        if (password) user.password = encrypt(password);
+        if (password) user.password = hashPassword(password, user.salt);
         if (isAdmin !== undefined) user.isAdmin = isAdmin;
         await user.save();
         return { status: 0, message: '成功' };

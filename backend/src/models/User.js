@@ -23,6 +23,10 @@ const User = sequelize.define('User', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    salt: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 

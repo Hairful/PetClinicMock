@@ -14,12 +14,14 @@ const paramsInQueryOfDetail = ['role', 'job'];
 const paramsInQueryOfList = ['role'];
 
 //不启用Token认证
+/*
 router.get('/list', isQueryValid(paramsInQueryOfList), getJobList);
 router.get('/detail', isQueryValid(paramsInQueryOfDetail), getJobDetail);
+*/
 
 //启用Token认证
-/* 
-router.get('/list', isTokenValid,isQueryValid(paramsInQueryOfList), getQuizList);
-router.get('/detail', isTokenValid,isQueryValid(paramsInQueryOfDetail), getQuizDetail);
-*/
+
+router.get('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getJobList);
+router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getJobDetail);
+
 module.exports = router;
