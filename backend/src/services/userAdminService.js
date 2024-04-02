@@ -17,7 +17,6 @@ exports.getAllUsers = async () => {
         const users = usersFromDB.map(user => ({
             userID: user.userID,
             userName: user.userName,
-            password: decrypt(user.password),
             isAdmin: user.isAdmin
         }));
         return { status: 0, message: '成功', users };
@@ -41,7 +40,12 @@ exports.createUser = async (userName, password, isAdmin) => {
             return { status: 1, message: '重复用户' };
         }
         const encryptPassword = encrypt(password);
-        const newUser = await User.create({ userName, encryptPassword, isAdmin });
+
+        const newUser = await User.create({
+            'userName': userName,
+            'password': encryptPassword,
+            'isAdmin': isAdmin
+        });
         return { status: 0, message: '成功', usrID: newUser.userID };
     }
     catch (error) {

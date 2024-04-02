@@ -1351,7 +1351,6 @@ Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | -------- | ---- | ------- | ---- | ------------ |
 | userID   | Body | integer | 是   | 用户ID       |
 | userName | Body | string  | 是   | 用户名称     |
-| password | Body | integer | 是   | 密码         |
 | isAdmin  | Body | boolean | 是   | 是否为管理员 |
 
 `Example`
@@ -1425,11 +1424,11 @@ Content-Type: application/json
     "userID":3
 }
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复用户"
+    "message": "重复userName"
 }
 ```
 
