@@ -9,32 +9,27 @@ const { tokenKey } = require('../config/authConfig');
 const User = require('../models/User');
 
 exports.isTokenValid = async (req, res, next) => {
-    try {
-        const token = req.headers.authorization;
-        if (!token) {
-            return res.status(400).json({ status: -3, message: '缺少必选参数(Token in Header)' });
-        }
-        let decoded;
-        try {
-            decoded = jwt.verify(token, tokenKey);
-        } catch (errorInJWT) {
-            console.error('Error in authMiddleware:', error);
-            return res.status(401).json({ status: -1, message: '身份验证失败' });
-        }
-        // 检查用户是否存在
-        const user = await User.findByPk(decoded.userID);
-        if (!user) {
-            console.error('Error in authMiddleware: Token can not correspond to a user');
-            return res.status(401).json({ status: 401, message: '身份验证失败' });
-        }
-        // 将用户信息添加到请求中，以便后续路由处理程序使用
-        req.userIDInToken = decoded.userID;
-        req.isAdminIDInToken = decoded.isAdmin;
-        next();
-    } catch (error) {
-        console.error('Error in isTokenValid:', error);
-        return res.status(500).json({ status: 500, message: '服务器错误' });
+    const token = req.headers.authorization;
+    if (!token) {
+        return res.status(400).json({ status: -3, message: '缺少必选参数(Token in Header)' });
     }
+    let decoded;
+    try {
+        decoded = jwt.verify(token, tokenKey);
+    } catch (errorInJWT) {
+        console.error('Error in authMiddleware:', errorInJWT);
+        return res.status(401).json({ status: 401, message: '身份验证失败' });
+    }
+    // 检查用户是否存在
+    const user = await User.findByPk(decoded.userID);
+    if (!user) {
+        console.error('Error in authMiddleware: Token can not correspond to a user');
+        return res.status(401).json({ status: 401, message: '身份验证失败' });
+    }
+    // 将用户信息添加到请求中，以便后续路由处理程序使用
+    req.userIDInToken = decoded.userID;
+    req.isAdminIDInToken = decoded.isAdmin;
+    next();
 };
 
 exports.isTokenAdmin = async (req, res, next) => {

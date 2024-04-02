@@ -1,5 +1,5 @@
 /**
- * 文件: /backend/src/controllers/caseController.js
+ * 文件: /backend/src/controllers/userAdminController.js
  * 描述: 用户管理接口的控制器
  * 作者: {YYZ}
  */

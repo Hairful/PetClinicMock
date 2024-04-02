@@ -8,7 +8,6 @@ const express = require('express');
 const router = express.Router();
 const userAuthController = require('../controllers/userAuthController');
 const { isBodyValid } = require('../middlewares/formatCheck');
-const { isTokenValid } = require('../middlewares/authMiddleware');
 
 const paramsInBody = ['userName', 'password'];
 

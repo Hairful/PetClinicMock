@@ -15,14 +15,16 @@ const paramsInQueryOfList = ['userID'];
 const paramsInQueryOfDetail = ['quizID', 'userID'];
 
 //不启用Token认证
+/*
 router.get('/list', isQueryValid(paramsInQueryOfList), getQuizList);
 router.get('/detail', isQueryValid(paramsInQueryOfDetail), getQuizDetail);
 router.post('/result', isBodyValid(paramsInBodyOfResult), recordExamEntry);
+*/
 
 //启用Token认证
-/* 
-router.post('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getQuizList);
-router.post('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getQuizDetail);
+
+router.get('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getQuizList);
+router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getQuizDetail);
 router.post('/result', isTokenValid, isBodyValid(paramsInBodyOfResult), recordExamEntry);
-*/
+
 module.exports = router;

@@ -6,7 +6,7 @@
 
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const { encrypt, decrypt } = require('../utils/cryptoUtil');
+const { encrypt, decrypt, hashPassword, generateSalt } = require('../utils/cryptoUtil');
 const { tokenKey } = require('../config/authConfig')
 
 /**
@@ -21,8 +21,9 @@ exports.registerUser = async (userName, password) => {
         if (userExist) {
             return { status: 1, message: '重复userName' };
         }
-        const encryptedPassword = encrypt(password);
-        const newUser = await User.create({ userName, password: encryptedPassword });
+        const salt = generateSalt();
+        const hashedPassword = hashPassword(password, salt);
+        const newUser = await User.create({ userName: userName, password: hashedPassword, salt: salt });
         return { status: 0, message: '注册成功', userID: newUser.userID };
     } catch (error) {
         console.error('Error in registerUser:', error);
@@ -42,8 +43,8 @@ exports.loginUser = async (userName, password) => {
         if (!userExist) {
             return { status: 2, message: '无对应userName' };
         }
-        const decryptedPassword = decrypt(userExist.password);
-        if (password !== decryptedPassword) {
+        const hashedPassword = hashPassword(password, userExist.salt);
+        if (userExist.password !== hashedPassword) {
             return { status: 1, message: 'userName或password错误' };
         }
         const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });

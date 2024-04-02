@@ -14,12 +14,14 @@ const paramsInQueryOfList = [];
 const paramsInQueryOfDetail = ['medicineID'];
 
 //不启用Token认证
+/*
 router.get('/list', isQueryValid(paramsInQueryOfList), getMedicineList);
 router.get('/detail', isQueryValid(paramsInQueryOfDetail), getMedicineDetail);
+*/
 
 //启用Token认证
-/* 
-router.post('/list',  getMedicineList);
-router.post('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getMedicineDetail);
-*/
+
+router.get('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getMedicineList);
+router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getMedicineDetail);
+
 module.exports = router;

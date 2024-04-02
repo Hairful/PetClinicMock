@@ -160,7 +160,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/disease/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -199,7 +199,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/disease/list?diseaseType="寄生虫病"
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -261,7 +261,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/disease/detail?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -315,7 +315,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/case/list?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -372,7 +372,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/case/detail?caseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -469,7 +469,7 @@ Content-Type: application/json
 
 ```json
 GET /disease/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -511,7 +511,7 @@ Content-Type: application/json
 
 ```json
 GET /disease/list?page=1&pageSize=10&diseaseType="寄生虫病"
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -568,7 +568,7 @@ Content-Type: application/json
 
 ```json
 GET /disease/detail?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -624,7 +624,7 @@ Content-Type: application/json
 
 ```json
 GET /medicine/list?page=1&pageSize=10&diseaseType="寄生虫病"
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -682,7 +682,7 @@ Content-Type: application/json
 
 ```json
 GET /medicine/detail?medicineID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -730,7 +730,7 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/list?role=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -776,11 +776,11 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/detail?role=2&job=注射
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 
 GET /roleplaying/list?role=1
-Authorization: Bearer fakeToken
+Authorization: fakeToken
 ```
 
 ### 返回响应
@@ -834,7 +834,7 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/list?role=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -880,11 +880,11 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/detail?role=2&job=注射
-: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 
 GET /roleplaying/list?role=1
-Authorization: Bearer fakeToken
+Authorization: fakeToken
 ```
 
 ### 返回响应
@@ -939,7 +939,7 @@ Content-Type: application/json
 
 ```json
 GET /quiz/list?userID=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1009,7 +1009,7 @@ Content-Type: application/json
 
 ```javascript
 GET /quiz/detail?quizID=1&userID=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1105,7 +1105,7 @@ TODO: 个人觉得probNumber应换成probID，试卷中题目题号前端自行�
 
 ```json
 POST /quiz/result
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "quizID": 1,
@@ -1187,7 +1187,7 @@ Content-Type: application/json
 
 ```json
 GET /3DVirtualTour/item/detail?itemID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1235,7 +1235,7 @@ Content-Type: application/json
 
 ```json
 GET /3DVirtualTour/department/list
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1290,7 +1290,7 @@ Content-Type: application/json
 
 ```json
 GET /3DVirtualTour/department/detail?departmentID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1334,7 +1334,7 @@ Content-Type: application/json
 
 ```json
 GET /admin/users
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1396,7 +1396,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/user
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "userName": "Allen Yung",
@@ -1450,7 +1450,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/user
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "userID":3,
@@ -1499,7 +1499,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/user?userID=3
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1562,7 +1562,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "diseaseName": "狂犬病",
@@ -1618,7 +1618,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "diseaseID":3,
@@ -1667,7 +1667,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/disease?diseaseID=3
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1712,7 +1712,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/medicine
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "medicineName": "肾上腺素",
@@ -1766,7 +1766,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/medicine
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "medicineID":2,
@@ -1815,7 +1815,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/medicine?medicineID=2
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1863,7 +1863,7 @@ Content-Type: application/json
 
 ```json
 GET /admin/case?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1942,7 +1942,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/case
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "diseaseID": 1,
@@ -2025,7 +2025,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/case
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "caseID": 1,
@@ -2090,7 +2090,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/case?caseID=1
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -2141,7 +2141,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/roleplaying
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "role":1,
@@ -2203,7 +2203,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/roleplaying
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "role":1,
@@ -2265,7 +2265,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/roleplaying?role=1&job="注射"
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -2328,7 +2328,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/quiz
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "quizName":"测试1",
@@ -2408,7 +2408,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/quiz
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "quizID":1,
@@ -2473,7 +2473,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/quiz?quizID=1
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -2519,7 +2519,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "itemID":1,
@@ -2570,7 +2570,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "departmentID":1,
