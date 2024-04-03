@@ -23,7 +23,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": -3,
-    "message": "缺少必选参数/多余参数"
+    "message": "缺少必选参数/多余参数/格式错误"
 }
 
 HTTP/1.1 500
