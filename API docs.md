@@ -1,106 +1,720 @@
+# 0. 说明
+
+## 常用status
+
+```json
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+{
+    "status": -1,
+    "message": "身份验证失败"
+    //一般来说，可能是token过期，或者是瞎填了个Token
+}
+
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+{
+    "status": -2,
+    "message": "无对应权限"
+    //一般来说，是指非管理员Authorization Token的情况
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": -3,
+    "message": "缺少必选参数/多余参数"
+}
+
+HTTP/1.1 500
+Content-Type: application/json
+{
+    "status": -9,
+    "message": "错误"
+    //其他错误
+}
+```
+
 # 1. 身份认证
 
-## `GET /register`
+## `POST /register`
 
 新用户注册
 
 ### 请求参数
 
-| 参数名称 | 类型   | 是否必须 | 实例          | 备注           |
-| -------- | ------ | -------- | ------------- | -------------- |
-| userName | String | 是       | “Allen Yung”  | 用户名         |
-| password | String | 是       | “foejwoghwoi” | 用户设定的密码 |
+| 名称     | 位置 | 类型   | 必选 | 备注     |
+| -------- | ---- | ------ | ---- | -------- |
+| userName | Body | string | 是   | 用户名   |
+| password | Body | string | 是   | 设定密码 |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "status": true	// 状态，Boolean，true代表成功、false代表失败
-    }
-]
+POST /register
+Content-Type: application/json
+{
+  "userName": "Truman",
+  "password": "TheTrumanShow"
+}
 ```
 
-## `GET /login`
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注     |
+| ------- | ---- | ------- | ---- | -------- |
+| status  | Body | integer | 是   | 注册状态 |
+| message | Body | string  | 是   | 信息     |
+| userID  | Body | integer | 否   | 用户ID   |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "status": 0,
+  "message": "注册成功",
+  "userID":2
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+  "status": 1,
+  "message": "重复userName"
+}
+```
+
+## `POST /login`
 
 用户登录
 
 ### 请求参数
 
-| 参数名称 | 类型   | 是否必须 | 实例          | 备注   |
-| -------- | ------ | -------- | ------------- | ------ |
-| userName | String | 是       | “Allen Yung”  | 用户名 |
-| password | String | 是       | “foejwoghwoi” | 密码   |
+| 名称     | 位置 | 类型   | 必选 | 备注   |
+| -------- | ---- | ------ | ---- | ------ |
+| userName | Body | string | 是   | 用户名 |
+| password | Body | string | 是   | 密码   |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "status": 0	// 状态，Integer，0代表成功、1代表密码错误、2代表没有找到该用户
-    }
-]
+POST /login
+Content-Type: application/json
+{
+  "userName": "Truman",
+  "password": "TheTrumanShow"
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注                 |
+| ------- | ---- | ------- | ---- | -------------------- |
+| status  | Body | integer | 是   | 状态                 |
+| message | Body | string  | 是   | 信息                 |
+| userID  | Body | integer | 是   | 用户ID               |
+| token   | Body | string  | 否   | 登录成功后返回的 JWT |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "status": 0,
+  "message": "登录成功",
+  "userID":2,
+  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+}
+
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+{
+  "status": 1,
+  "message": "userName或password错误"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+  "status": 2,
+  "message": "无对应userName"
+}
 ```
 
 # 2. 病例学习
 
-## `GET /casestudy/list`
+## `GET /casestudy/disease/type`
 
-返回能够学习的病例类型
+返回病例中存在的疾病大类
 
 ### 请求参数
 
-| 参数名称 | 类型 | 是否必须 | 实例 | 备注 |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+
+`Example`
+
+```json
+GET /casestudy/disease/type
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称         | 位置 | 类型     | 必选 | 备注     |
+| ------------ | ---- | -------- | ---- | -------- |
+| status       | Body | integer  | 是   | 状态     |
+| message      | Body | string   | 是   | 信息     |
+| diseaseTypes | Body | string[] | 否   | 疾病大类 |
+
+`Example`
+
+```json
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "diseaseTypes": ["寄生虫病","内科病","外科病"]
+}
+```
+
+## `GET /casestudy/disease/list`
+
+返回给定疾病大类对应疾病（存在于病例中）
+
+### 请求参数
+
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+| diseaseType   | Body   | string | 是   | 疾病大类      |
+
+`Example`
+
+```json
+GET /casestudy/disease/list?diseaseType="寄生虫病"
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称     | 位置 | 类型     | 必选 | 备注                 |
+| -------- | ---- | -------- | ---- | -------------------- |
+| status   | Body | integer  | 是   | 状态                 |
+| message  | Body | string   | 是   | 信息                 |
+| diseases | Body | object[] | 否   | 给定疾病大类对应疾病 |
+
+对于diseases的元素
+
+| 名称        | 位置 | 类型    | 必选 | 备注     |
+| ----------- | ---- | ------- | ---- | -------- |
+| diseaseID   | Body | integer | 是   | 疾病ID   |
+| diseaseName | Body | string  | 是   | 疾病名称 |
+
+`Example`
+
+```json
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "成功",
+    "diseases": [
+        {
+            "diseaseID":1,
+            "diseaseName":"蛔虫病"
+        }
+        {
+            "diseaseID":2,
+            "diseaseName":"精神分裂"
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseType"
+}
+```
+
+## `GET /casestudy/disease/detail`
+
+返回疾病的详情
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| diseaseID     | Param  | integer | 是   | 疾病ID        |
+
+`Example`
+
+```json
+GET /casestudy/disease/detail?diseaseID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称         | 位置 | 类型    | 必选 | 备注     |
+| ------------ | ---- | ------- | ---- | -------- |
+| status       | Body | integer | 是   | 状态     |
+| message      | Body | string  | 是   | 信息     |
+| diseaseID    | Body | integer | 是   | 疾病ID   |
+| diseaseName  | Body | string  | 是   | 疾病名称 |
+| diseaseType  | Body | string  | 是   | 疾病大类 |
+| diseaseIntro | Body | string  | 是   | 疾病简介 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "diseaseDetail": {
+        "diseaseID":1,
+        "diseaseName":"犬蛔虫病",
+        "diseaseType": "寄生虫病",
+        "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
+    }
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseID"
+}
+```
+
+## `GET /casestudy/case/list`
+
+返回病例列表，有筛选处理
+若未制定任何非必选参数，则返回所有病例
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| diseaseID     | Param  | integer | 是   | 疾病名称      |
+
+`Example`
+
+```json
+GET /casestudy/case/list?diseaseID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注 |
+| ------- | ---- | -------- | ---- | ---- |
+| status  | Body | integer  | 是   | 状态 |
+| message | Body | string   | 是   | 信息 |
+| cases   | Body | object[] | 否   | 病例 |
+
+对于cases的元素
+
+| 名称    | 位置 | 类型    | 必选 | 备注         |
+| ------- | ---- | ------- | ---- | ------------ |
+| caseID  | Body | integer | 是   | 病例ID       |
+| summary | Body | string  | 是   | 病例基本情况 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "cases": [
+        {
+            "caseID": 1,
+            "summary": "狗狗，腹痛多日……" 
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseID"
+}
+```
+
+## `GET /casestudy/case/detail`
+
+返回某病例的具体信息
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| caseID        | Param  | integer | 是   | 病例ID        |
+
+`Example`
+
+```json
+GET /casestudy/case/detail?caseID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称              | 位置 | 类型     | 必选 | 备注                          |
+| ----------------- | ---- | -------- | ---- | ----------------------------- |
+| status            | Body | integer  | 是   | 状态                          |
+| message           | Body | string   | 是   | 消息                          |
+| caseID            | Body | integer  | 否   | 病例ID                        |
+| diseaseType       | Body | string   | 否   | 疾病大类                      |
+| diseaseID         | Body | integer  | 是   | 疾病ID                        |
+| diseaseName       | Body | string   | 否   | 疾病名称                      |
+| summary           | Body | string   | 否   | 病例的基本情况                |
+| summaryPictures   | Body | string[] | 否   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body | string[] | 否   | 能表现典型临床症状的视频的URL |
+| examine           | Body | string   | 否   | 检查项目及结果                |
+| examinePictures   | Body | string[] | 否   | 检查结果单的URL               |
+| examineVideos     | Body | string[] | 否   | 检查结果视频的URL             |
+| diagnose          | Body | string   | 否   | 临床诊断结果                  |
+| diagnosePictures  | Body | string[] | 否   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body | string[] | 否   | 临床诊断结果视频的URL         |
+| treatment         | Body | string   | 否   | 治疗方案                      |
+| treatmentPictures | Body | string[] | 否   | 治疗图片的URL                 |
+| treatmentVideos   | Body | string[] | 否   | 手术视频的URL                 |
+| medicines         | Body | object[] | 否   | 用药信息                      |
+
+对于medicines的元素
+
+| 名称          | 位置 | 类型    | 必选 | 备注     |
+| ------------- | ---- | ------- | ---- | -------- |
+| medicineID    | Body | integer | 是   | 药品ID   |
+| medicineName  | Body | string  | 是   | 药品名字 |
+| medicineIntro | Body | string  | 是   | 药品简介 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "caseID": 1,
+    "diseaseType": "寄生虫病",
+    "diseaseID":1,
+    "diseaseName": "蛔虫病",
+    "summary": "狗狗，腹痛多日……",
+    "summaryPictures": ["url/to/pic0"],
+    "summaryVideos": ["url/to/vid0"],
+    "examine": "经B超检查，发现……",
+    "examinePictures": ["url/to/pic1", "url/to/pic2"],
+    "examineVideos": ["url/to/vid1"],
+    "diagnose": "膀胱结石",
+    "diagnosePictures": ["url/to/pic1", "url/to/pic2"],
+    "diagnoseVideos": ["url/to/vid1"],
+    "treatment": "阿司匹林100000mg",
+    "treatmentPictures": ["url/to/pic1", "url/to/pic2"],
+    "treatmentVideos": ["url/to/vid0"],
+    "medicines":[
+        {
+            "medicineID":1,
+            "medicineName":"阿司匹林",
+            "medicineIntro":"好药"
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应caseID"
+}
+
+```
+
+# 3. 疾病信息
+
+简单来说，这部分接口返回的内容会比2里面更全
+如果做单独浏览疾病信息的页面，可调用这边的接口
+然后==管理页面==也可复用这边的接口获取列表
+
+## `GET /disease/type`
+
+返回数据库中存在的疾病大类
+
+### 请求参数
+
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+
+`Example`
+
+```json
+GET /disease/type
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称         | 位置 | 类型     | 必选 | 备注     |
+| ------------ | ---- | -------- | ---- | -------- |
+| status       | Body | integer  | 是   | 状态     |
+| message      | Body | string   | 是   | 信息     |
+| diseaseTypes | Body | string[] | 否   | 疾病大类 |
+
+`Example`
+
+```json
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "diseaseTypes": ["寄生虫病","内科病","外科病"]
+}
+
+```
+
+## `GET /disease/list`
+
+返回数据库中的疾病列表，有分页筛选处理
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注                                        |
+| ------------- | ------ | ------- | ---- | ------------------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                               |
+| diseaseType   | Param  | string  | 否   | 疾病大类                                    |
+| page          | Param  | integer | 否   | 页数 默认为1                                |
+| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+
+`Example`
+
+```json
+GET /disease/list?page=1&pageSize=10&diseaseType="寄生虫病"
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称     | 位置 | 类型     | 必选 | 备注 |
 | -------- | ---- | -------- | ---- | ---- |
-|          |      |          |      |      |
+| status   | Body | integer  | 是   | 状态 |
+| message  | Body | string   | 是   | 信息 |
+| diseases | Body | object[] | 否   | 疾病 |
 
-### 返回参数
+对于diseases的元素
+
+| 名称        | 位置 | 类型    | 必选 | 备注     |
+| ----------- | ---- | ------- | ---- | -------- |
+| diseaseID   | Body | integer | 是   | 疾病ID   |
+| diseaseName | Body | string  | 是   | 疾病名称 |
+
+`Example`
 
 ```json
-Data:[
-    {
-        "type": "寄生虫病",	// 大类，String
-        "diseases": ["蛔虫病", "钩虫病"]	// 具体疾病类型，List<String>
-    }, 
-    {
-        "type": "内科病例",	// 大类，String
-        "diseases": ["口炎", "肠炎"]	// 具体疾病类型，List<String>
-    }
-]
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "diseases": [
+        {
+            "diseaseID":1,
+            "diseaseName":"蛔虫病", 
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseType"
+}
 ```
 
-## `GET /casestudy/casedetail`
+## `GET /disease/detail`
 
-返回能够学习的病例类型
+返回疾病的详情
 
 ### 请求参数
 
-| 参数名称 | 类型   | 是否必须 | 实例       | 备注         |
-| -------- | ------ | -------- | ---------- | ------------ |
-| disease  | String | 是       | “膀胱结石” | 具体疾病类型 |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| diseaseID     | Param  | integer | 是   | 疾病名称      |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "summary": "狗狗，腹痛多日……",	// 病例的基本情况，String
-        "summaryPictures": ["url/to/pic0"],	// 能表现典型临床症状的照片，String
-        "summaryVideos": ["url/to/vid0"],	// 能表现典型临床症状的视频，String
-        "examine": "经B超检查，发现……",	// 检查项目及结果，String
-        "examinePictures": ["url/to/pic1", "url/to/pic2"],	// 检查结果单，String
-        "examineVideos": ["url/to/vid1"],	// 检查结果视频，String
-        "diagnose": "膀胱结石",	// 临床诊断结果，String
-        "diagnosePictures": ["url/to/pic1", "url/to/pic2"],	// 临床诊断结果，String
-        "diagnoseVideos": ["url/to/vid1"],	// 临床诊断结果视频，String
-        "treatment": "肾上腺素100000mg",	// 治疗方案，String
-        "treatmentPictures": ["url/to/pic1", "url/to/pic2"],	// 治疗图片，String
-        "treatmentVideos": ["url/to/vid0"]	// 手术视频，String
-    }
-]
+GET /disease/detail?diseaseID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
-# 3. 角色扮演
+### 返回响应
+
+| 名称         | 位置 | 类型    | 必选 | 备注     |
+| ------------ | ---- | ------- | ---- | -------- |
+| status       | Body | integer | 是   | 状态     |
+| message      | Body | string  | 是   | 信息     |
+| diseaseID    | Body | integer | 否   | 疾病ID   |
+| diseaseName  | Body | string  | 否   | 疾病名称 |
+| diseaseType  | Body | string  | 否   | 疾病大类 |
+| diseaseIntro | Body | string  | 否   | 疾病简介 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "diseaseDetail": {
+        "diseaseID":1,
+        "diseaseName":"犬蛔虫病",
+        "diseaseType": "寄生虫病",
+        "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
+    }
+}
+
+HTTP/1.1 
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseID"
+}
+```
+
+# 4. 药品信息
+
+## `GET /medicine/list`
+
+返回数据库中的药品列表，有分页
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注                                        |
+| ------------- | ------ | ------- | ---- | ------------------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                               |
+| page          | Param  | integer | 否   | 页数 默认为1                                |
+| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+
+`Example`
+
+```json
+GET /medicine/list?page=1&pageSize=10&diseaseType="寄生虫病"
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称      | 位置 | 类型     | 必选 | 备注 |
+| --------- | ---- | -------- | ---- | ---- |
+| status    | Body | integer  | 是   | 状态 |
+| message   | Body | string   | 是   | 信息 |
+| medicines | Body | object[] | 否   | 药品 |
+
+对于medicines的元素
+
+| 名称         | 位置 | 类型    | 必选 | 备注     |
+| ------------ | ---- | ------- | ---- | -------- |
+| medicineID   | Body | integer | 是   | 药品ID   |
+| medicineName | Body | string  | 是   | 药品名称 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "medicines": [
+        {
+            "medicineID":1,
+            "medicineName":"阿司匹林"
+        }
+    ]
+}
+
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无药品数据"
+}
+
+```
+
+## `GET /medicine/detail`
+
+返回药品的详情
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| medicineID    | Param  | integer | 是   | 药品ID        |
+
+`Example`
+
+```json
+GET /medicine/detail?medicineID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称          | 位置 | 类型    | 必选 | 备注     |
+| ------------- | ---- | ------- | ---- | -------- |
+| status        | Body | integer | 是   | 状态     |
+| message       | Body | string  | 是   | 信息     |
+| medicineID    | Body | integer | 否   | 药品ID   |
+| medicineName  | Body | string  | 否   | 药品名称 |
+| medicineIntro | Body | string  | 否   | 药物简介 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "medicineID":1,
+    "medicineName":"阿司匹林",
+    "medicineIntro":"好药"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应medicineID"
+}
+```
 
 ## `GET /roleplaying/list`
 
@@ -108,18 +722,43 @@ Data:[
 
 ### 请求参数
 
-| 参数名称 | 类型    | 是否必须 | 实例 | 备注                              |
-| -------- | ------- | -------- | ---- | --------------------------------- |
-| role     | Integer | 是       | 1    | 0代表前台、1代表医助、2代表兽医师 |
+| 名称 | 位置  | 类型    | 必选 | 备注                              |
+| ---- | ----- | ------- | ---- | --------------------------------- |
+| role | Param | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "jobs": ["注射", "术前准备"]	// 工作内容选择，List<String>
-    }
-]
+GET /roleplaying/list?role=0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注         |
+| ------- | ---- | -------- | ---- | ------------ |
+| status  | Body | integer  | 是   | 状态         |
+| message | Body | string   | 是   | 消息         |
+| jobs    | Body | string[] | 否   | 工作内容选择 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "jobs": ["注射", "术前准备"]
+}
+
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role"
+}
 ```
 
 ## `GET /roleplaying/detail`
@@ -128,27 +767,162 @@ Data:[
 
 ### 请求参数
 
-| 参数名称 | 类型    | 是否必须 | 实例   | 备注                              |
-| -------- | ------- | -------- | ------ | --------------------------------- |
-| role     | Integer | 是       | 1      | 0代表前台、1代表医助、2代表兽医师 |
-| job      | String  | 是       | “注射” | 工作内容选择                      |
+| 名称 | 位置  | 类型    | 必选 | 备注                                    |
+| ---- | ----- | ------- | ---- | --------------------------------------- |
+| role | Param | integer | 是   | 角色，0代表前台、1代表医助、2代表兽医师 |
+| job  | Param | string  | 是   | 工作内容选择                            |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "title": "静脉注射",	// 名称，String
-        "detail": "1. 备皮，..."	// 具体信息，String
-    },
-    {
-        "title": "皮下注射",	// 名称，String
-        "detail": "1. 备皮，..."	// 具体信息，String
-    }
-]
+GET /roleplaying/detail?role=2&job=注射
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+
+GET /roleplaying/list?role=1
+Authorization: fakeToken
 ```
 
-# 4. 在线测试
+### 返回响应
+
+| 名称      | 位置 | 类型    | 必选 | 备注 |
+| --------- | ---- | ------- | ---- | ---- |
+| status    | Body | integer | 是   | 状态 |
+| message   | Body | string  | 是   | 消息 |
+| jobDetail | Body | string  | 否   | 任务 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "tasks": "注射成功"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应job",
+}
+
+```
+
+# 5. 角色扮演
+
+## `GET /roleplaying/list`
+
+选择该角色工作职责
+
+### 请求参数
+
+| 名称 | 位置  | 类型    | 必选 | 备注                              |
+| ---- | ----- | ------- | ---- | --------------------------------- |
+| role | Param | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+
+`Example`
+
+```json
+GET /roleplaying/list?role=0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注         |
+| ------- | ---- | -------- | ---- | ------------ |
+| status  | Body | integer  | 是   | 状态         |
+| message | Body | string   | 是   | 消息         |
+| jobs    | Body | string[] | 否   | 工作内容选择 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "jobs": ["注射", "术前准备"]
+}
+
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role"
+}
+```
+
+## `GET /roleplaying/detail`
+
+具体工作流程
+
+### 请求参数
+
+| 名称 | 位置  | 类型    | 必选 | 备注                                    |
+| ---- | ----- | ------- | ---- | --------------------------------------- |
+| role | Param | integer | 是   | 角色，0代表前台、1代表医助、2代表兽医师 |
+| job  | Param | string  | 是   | 工作内容选择                            |
+
+`Example`
+
+```json
+GET /roleplaying/detail?role=2&job=注射
+: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+
+GET /roleplaying/list?role=1
+Authorization: fakeToken
+```
+
+### 返回响应
+
+| 名称      | 位置 | 类型    | 必选 | 备注 |
+| --------- | ---- | ------- | ---- | ---- |
+| status    | Body | integer | 是   | 状态 |
+| message   | Body | string  | 是   | 消息 |
+| jobDetail | Body | string  | 否   | 任务 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "jobDetail": "注射成功"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应job",
+}
+
+```
+
+# 6. 在线测试
 
 ## `GET /quiz/list`
 
@@ -156,21 +930,67 @@ Data:[
 
 ### 请求参数
 
-| 参数名称 | 类型 | 是否必须 | 实例 | 备注 |
-| -------- | ---- | -------- | ---- | ---- |
-|          |      |          |      |      |
+| 名称          | 位置   | 类型    | 必选 | 备注                 |
+| ------------- | ------ | ------- | ---- | -------------------- |
+| Authorization | Header | string  | 是   | 身份验证token        |
+| userID        | Param  | integer | 是   | 请求该用户的考试数据 |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "quizName": "测试1",		// 测试名称，String
-        "totalCredits": 100,	// 总分，Integer
-        "lastTry": 30,		// 上次得分，Integer
-        "lastTryTime": "2024年11月20日 11:59PM",	// 上次时间，String
-    }
-]
+GET /quiz/list?userID=2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称          | 位置   | 类型     | 必选 | 备注          |
+| ------------- | ------ | -------- | ---- | ------------- |
+| status        | Body   | integer  | 是   | 状态          |
+| message       | Body   | string   | 是   | 消息          |
+| quizzes       | Body   | object[] | 否   | quiz          |
+| Authorization | Header | string   | 是   | 身份验证token |
+
+对于quizzes的元素
+
+| 名称         | 位置 | 类型    | 必选 | 备注     |
+| ------------ | ---- | ------- | ---- | -------- |
+| quizID       | Body | integer | 是   | 测试ID   |
+| quizName     | Body | string  | 是   | 测试名称 |
+| totalCredits | Body | integer | 是   | 总分     |
+| lastTry      | Body | integer | 否   | 上次得分 |
+| lastTryTime  | Body | string  | 否   | 上次时间 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "quizzes": [
+        {
+            "quizID":1,
+            "quizName": "测试1",
+            "totalCredits": 100,
+            "lastTry": 30,
+            "lastTryTime": "2024年11月20日 11:59PM"
+        },
+        {
+            "quizID":2,
+            "quizName": "测试2",
+            "totalCredits": 50,
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应userID",
+}
 ```
 
 ## `GET /quiz/detail`
@@ -179,301 +999,1383 @@ Data:[
 
 ### 请求参数
 
-| 参数名称 | 类型   | 是否必须 | 实例    | 备注     |
-| -------- | ------ | -------- | ------- | -------- |
-| quizName | String | 是       | “测试1” | 试卷名称 |
+| 名称          | 位置   | 类型    | 必选 | 备注                 |
+| ------------- | ------ | ------- | ---- | -------------------- |
+| quizID        | Param  | string  | 是   | quizID               |
+| userID        | Param  | integer | 是   | 请求该用户的考试数据 |
+| Authorization | Header | string  | 是   | 身份验证token        |
 
-### 返回参数
+`Example`
+
+```javascript
+GET /quiz/detail?quizID=1&userID=2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称         | 位置 | 类型     | 必选 | 备注     |
+| ------------ | ---- | -------- | ---- | -------- |
+| status       | Body | integer  | 是   | 状态     |
+| message      | Body | string   | 是   | 消息     |
+| quizName     | Body | string   | 否   | 测试名称 |
+| totalCredits | Body | integer  | 否   | 总分     |
+| lastTry      | Body | integer  | 否   | 上次得分 |
+| lastTryTime  | Body | string   | 否   | 上次时间 |
+| probs        | Body | object[] | 否   | 题目     |
+
+对于probs的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| probNumber | Body | integer | 是   | 题号     |
+| probCredit | Body | integer | 是   | 题目分数 |
+| probText   | Body | string  | 是   | 题目     |
+| probImg    | Body | string  | 否   | 图片路径 |
+| probAns    | Body | integer | 是   | 答案     |
+| lastAns    | Body | integer | 否   | 上次选项 |
+
+`Example`
 
 ```json
-Data:[
-    {
-        "quizName": "测试1",	// 测试名称，String
-        "totalCredits": 100		// 总分，Integer
-    },
-    {
-        "probNumber": 1,	// 题号，Integer
-        "probText": "。。。",	// 题目，String
-        "probImg": "url",	// 图片路径，String
-        "probAns": 1,	// 答案，Integer，0123代表ABCD
-    },
-    {
-        "probNumber": 2,	// 题号，Integer
-        "probText": "。。。",	// 题目，String
-        "probImg": "url",	// 图片路径，String
-        "probAns": 1,	// 答案，Integer，0123代表ABCD
-    },
-]
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "quizName": "测试1",
+    "totalCredits": 20,
+    "lastTry": 30,
+    "lastTryTime": "2024年11月20日 11:59PM",
+    "probs":[
+        {
+            "probNumber": 1,
+            "probCredit": 10,
+            "probText": "我是谁",
+            "probImg": "url",
+            "probAns": 1,
+            "lastAns": 1
+        },
+        {
+            "probNumber": 2,
+            "probCredit": 10,
+            "probText": "你是谁",
+            "probAns": 2
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应quizID",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应userID",
+}
 ```
 
 ## `POST /quiz/result`
 
 考试结果录入
+TODO: 个人觉得probNumber应换成probID，试卷中题目题号前端自行给定就行
 
 ### 请求参数
 
-| 参数名称 | 类型                        | 是否必须 | 实例    | 备注             |
-| -------- | --------------------------- | -------- | ------- | ---------------- |
-| quizName | String                      | 是       | “测试1” | 试卷名称         |
-| credit   | Integer                     | 是       | 10      | 成绩             |
-| wrongAns | Key<Integer>,Value<Integer> | 是       | 1:2     | 做错的题目及选项 |
+| 名称    | 位置 | 类型     | 必选 | 备注       |
+| ------- | ---- | -------- | ---- | ---------- |
+| quizID  | Body | string   | 是   | 试卷ID     |
+| userID  | Body | string   | 是   | 考生ID     |
+| credit  | Body | integer  | 是   | 成绩       |
+| answers | Body | object[] | 是   | 题目及选项 |
 
-### 返回参数
+对于answers的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| probNumber | Body | integer | 是   | 题号     |
+| ans        | Body | integer | 是   | 考生选择 |
+
+`Example`
 
 ```json
-Data:[
-    
-]
+POST /quiz/result
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "quizID": 1,
+    "userID": 2,
+    "credit": 100,
+    "answers": [
+        {
+            "probNumber":1,
+            "ans": 1
+        }
+        {
+            "probNumber":2,
+            "ans": 2
+        }
+    ]
+}
 ```
 
-# 5. 后台管理
+### 返回响应
 
-## `GET /admin/users`
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应quizID",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应userID",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 3,
+    "message": "无对应probNumber",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 4,
+    "message": "无对应probAns",
+}
+```
+
+# 7. 3D导览
+
+## `GET /3DVirtualTour/item/detail`
+
+获取3D虚拟导览中物品详情
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| itemID        | Param  | integer | 是   | 物品ID        |
+
+`Example`
+
+```json
+GET /3DVirtualTour/item/detail?itemID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称      | 位置 | 类型    | 必选 | 备注     |
+| --------- | ---- | ------- | ---- | -------- |
+| status    | Body | integer | 是   | 状态     |
+| message   | Body | string  | 是   | 消息     |
+| itemName  | Body | string  | 否   | 物品名   |
+| itemIntro | Body | string  | 否   | 物品简介 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "itemName":"手术刀",
+    "itemIntro":"手术刀很大也很小"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应itemID"
+}
+
+```
+
+## `GET /3DVirtualTour/department/list`
+
+获取3D虚拟导览中科室列表
+列表中展示科室的ID和科室名
+
+### 请求参数
+
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+
+`Example`
+
+```json
+GET /3DVirtualTour/department/list
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称        | 位置 | 类型     | 必选 | 备注   |
+| ----------- | ---- | -------- | ---- | ------ |
+| status      | Body | integer  | 是   | 状态   |
+| message     | Body | string   | 是   | 消息   |
+| departments | Body | object[] | 否   | 各科室 |
+
+对于departments的元素
+
+| 名称           | 位置 | 类型    | 必选 | 备注     |
+| -------------- | ---- | ------- | ---- | -------- |
+| departmentID   | Body | integer | 是   | 科室ID   |
+| departmentName | Body | string  | 是   | 科室名称 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "departments":[
+        {
+            "departmentID":1,
+            "departmentName":"手术室"
+        },
+        {
+            "departmentID":2,
+            "departmentName":"手术室"
+        }
+    ]
+}
+
+```
+
+## `GET /3DVirtualTour/department/detail`
+
+获取3D虚拟导览中科室详情
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| departmentID  | Param  | integer | 是   | 科室ID        |
+
+`Example`
+
+```json
+GET /3DVirtualTour/department/detail?departmentID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称            | 位置 | 类型      | 必选 | 备注     |
+| --------------- | ---- | --------- | ---- | -------- |
+| status          | Body | integer   | 是   | 状态     |
+| message         | Body | string    | 是   | 消息     |
+| departmentName  | Body | string    | 否   | 科室名   |
+| departmentIntro | Body | string    | 否   | 科室信息 |
+| departmentItems | Body | integer[] | 否   | ItemID   |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "departmentName":"手术室",
+    "departmentIntro":"手术室很大也很小",
+    "departmentItems":[1,2,3]
+}
+
+```
+
+# 8. 后台管理
+
+## `GET /admin/user`
 
 获取所有用户
 
 ### 请求参数
 
-| 参数名称 | 类型 | 是否必须 | 实例 | 备注 |
-| -------- | ---- | -------- | ---- | ---- |
-|          |      |          |      |      |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    {
-        "userName": "A", 	// 用户名，String
-        "password":	"g",		// 密码，String
-        "isAdmin": false	// 是否为管理员，Boolean
-    },
-    {
-        "userName": "N", 	// 用户名，String
-        "password":	"a",		// 密码，String
-        "isAdmin": true	// 是否为管理员，Boolean
-    }
-]
+GET /admin/users
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
-## `POST /admin/users`
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注     |
+| ------- | ---- | -------- | ---- | -------- |
+| status  | Body | integer  | 是   | 状态     |
+| message | Body | string   | 是   | 消息     |
+| users   | Body | object[] | 是   | 所有用户 |
+
+对于users的元素
+
+| 名称     | 位置 | 类型    | 必选 | 备注         |
+| -------- | ---- | ------- | ---- | ------------ |
+| userID   | Body | integer | 是   | 用户ID       |
+| userName | Body | string  | 是   | 用户名称     |
+| isAdmin  | Body | boolean | 是   | 是否为管理员 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+    "users": [
+        {
+            "userID":2,
+            "userName": "Truman",
+            "password": "TheTrumanShow",
+            "isAdmin": false
+        },
+        {
+            "userID":1,
+            "userName": "Admin",
+            "password": "admin123456",
+            "isAdmin": true
+        }
+    ]
+}
+
+```
+
+## `POST /admin/user`
 
 添加用户
 
 ### 发送参数
 
-| 参数名称 | 类型    | 是否必须 | 实例          | 备注           |
-| -------- | ------- | -------- | ------------- | -------------- |
-| userName | String  | 是       | “Allen Yung”  | 用户名         |
-| password | String  | 是       | “foejwoghwoi” | 用户设定的密码 |
-| isAdmin  | Boolean | 是       | True          | 是否为管理员   |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| userName      | Body   | sring   | 是   | 用户名        |
+| password      | Body   | string  | 是   | 用户密码      |
+| isAdmin       | Body   | boolean | 是   | 是否为管理员  |
+| Authorization | Header | string  | 是   | 身份验证token |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    
-]
+POST /admin/user
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "userName": "Allen Yung",
+    "password": "foejwoghwoi",
+    "isAdmin": true
+}
 ```
 
-## `PUT /admin/users`
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注     |
+| ------- | ---- | ------- | ---- | -------- |
+| status  | Body | integer | 是   | 状态     |
+| message | Body | string  | 是   | 消息     |
+| userID  | Body | integer | 否   | 新用户ID |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+    "userID":3
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "重复userName"
+}
+```
+
+## `PUT /admin/user`
 
 修改用户信息
 
 ### 发送参数
 
-| 参数名称 | 类型    | 是否必须 | 实例          | 备注           |
-| -------- | ------- | -------- | ------------- | -------------- |
-| userName | String  | 是       | “Allen Yung”  | 用户名         |
-| password | String  | 是       | “foejwoghwoi” | 用户设定的密码 |
-| isAdmin  | Boolean | 是       | True          | 是否为管理员   |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| userID        | Body   | integer | 是   | 用户ID        |
+| userName      | Body   | sring   | 否   | 用户名        |
+| password      | Body   | string  | 否   | 用户密码      |
+| isAdmin       | Body   | boolean | 否   | 是否为管理员  |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    
-]
+PUT /admin/user
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "userID":3,
+    "userName": "Allen Yung",
+    "isAdmin": true
+}
 ```
 
-## `DELETE /admin/users`
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应userID"
+}
+```
+
+## `DELETE /admin/user`
 
 删除用户信息
 
 ### 发送参数
 
-| 参数名称 | 类型   | 是否必须 | 实例         | 备注   |
-| -------- | ------ | -------- | ------------ | ------ |
-| userName | String | 是       | “Allen Yung” | 用户名 |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| userID        | Param  | integer | 是   | 用户名        |
+| Authorization | Header | string  | 是   | 身份验证token |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    
-]
+DELETE /admin/user?userID=3
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
-## POST /admin/casestudy`
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应userID"
+}
+
+```
+
+## `POST /admin/disease`
+
+添加新疾病
+疾病不可重名
+用表格来表示的话
+| diseaseID | diseaseName | diseaseType |
+| --------- | ----------- | ----------- |
+| 1         | Alice       | A           |
+| 2         | Bob         | B           |
+
+此时若插入(,Alice,C) ; (,Charlie,C),则前者不会插入
+| diseaseID | diseaseName | diseaseType |
+| --------- | ----------- | ----------- |
+| 1         | Alice       | A           |
+| 2         | Bob         | B           |
+| 3         | Charlie     | C           |
+
+此时/casestudy/disease/type接口将会返回新加入的C
+这样就可以少一个添加type的接口了（bushi
+此时不能插入新的(,Alice,C)
+
+### 发送参数
+
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+| diseaseType   | Body   | string | 是   | 疾病大类      |
+| diseaseName   | Body   | string | 是   | 疾病名称      |
+| diseaseIntro  | Body   | string | 是   | 疾病简介      |
+
+`Example`
+
+```json
+POST /admin/disease
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "diseaseName": "狂犬病",
+    "diseaseType": "传染病",
+    "diseaseIntro": "狂犬病（rabies）是狂犬病毒所致的人畜共患急性传染病，多见于犬、猫、野生或流浪的哺乳类肉食动物，如狼、狐狸、獾、蝙蝠等"
+}
+
+```
+
+### 返回响应
+
+| 名称      | 位置 | 类型    | 必选 | 备注       |
+| --------- | ---- | ------- | ---- | ---------- |
+| status    | Body | integer | 是   | 状态       |
+| message   | Body | string  | 是   | 消息       |
+| diseaseID | Body | integer | 否   | 新疾病的ID |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+    "diseaseID":3
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "重复的diseaseName"
+}
+
+```
+
+## `PUT /admin/disease`
+
+修改疾病信息
+
+### 发送参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| diseaseID     | Body   | integer | 是   | 疾病ID        |
+| diseaseType   | Body   | string  | 否   | 疾病大类      |
+| diseaseName   | Body   | string  | 否   | 疾病名称      |
+| diseaseIntro  | Body   | string  | 否   | 疾病简介      |
+
+`Example`
+
+```json
+PUT /admin/disease
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "diseaseID":3,
+    "diseaseType": "烈性传染病",
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "重复的diseaseName"
+}
+
+```
+
+## `DELETE /admin/disease`
+
+删除疾病信息
+
+### 发送参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| diseaseID     | Param  | integer | 是   | 用户名        |
+| Authorization | Header | string  | 是   | 身份验证token |
+
+`Example`
+
+```json
+DELETE /admin/disease?diseaseID=3
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseID"
+}
+
+```
+
+## `POST /admin/medicine`
+
+添加新药品
+
+### 发送参数
+
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+| medicineName  | Body   | string | 是   | 药品名称      |
+| medicineIntro | Body   | string | 是   | 药物简介      |
+
+`Example`
+
+```json
+POST /admin/medicine
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "medicineName": "肾上腺素",
+    "medicineIntro": "肾上腺素是一种激素和神经传送体，由肾上腺释放。肾上腺素会使心脏收缩力上升，使心脏、肝、和筋骨的血管扩张和皮肤、粘膜的血管收缩，是拯救濒死的人或动物的必备品"
+}
+
+```
+
+### 返回响应
+
+| 名称       | 位置 | 类型    | 必选 | 备注   |
+| ---------- | ---- | ------- | ---- | ------ |
+| status     | Body | integer | 是   | 状态   |
+| message    | Body | string  | 是   | 消息   |
+| medicineID | Body | integer | 否   | 药品ID |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+    "medicineID":2
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "重复的medicineName"
+}
+
+```
+
+## `PUT /admin/medicine`
+
+修改药品信息
+
+### 发送参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| medicineID    | Body   | integer | 是   | 药品ID        |
+| medicineName  | Body   | string  | 否   | 药品名称      |
+| medicineIntro | Body   | string  | 否   | 药品简介      |
+
+`Example`
+
+```json
+PUT /admin/medicine
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "medicineID":2,
+    "medicineIntro": "本品为(R)-4-(2-(甲氨基)-1-羟基乙基]-1,2-苯二酚，按干燥品计算，含C9H13NO3不得少于98.5%。",
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "重复的medicineName"
+}
+
+```
+
+## `DELETE /admin/medicine`
+
+删除药品信息
+
+### 发送参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| medicineID    | Param  | integer | 是   | 用户名        |
+
+`Example`
+
+```json
+DELETE /admin/medicine?medicineID=2
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应medicineID"
+}
+
+```
+
+## `GET /admin/case`
+
+返回病例列表，有分页筛选处理
+若未制定任何非必选参数，则返回所有病例
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注                                        |
+| ------------- | ------ | ------- | ---- | ------------------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                               |
+| diseaseType   | Param  | string  | 是   | 疾病大类                                    |
+| diseaseID     | Param  | integer | 是   | 疾病ID                                      |
+| page          | Param  | integer | 否   | 页数 默认为1                                |
+| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+
+`Example`
+
+```json
+GET /admin/case?diseaseID=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注 |
+| ------- | ---- | -------- | ---- | ---- |
+| status  | Body | integer  | 是   | 状态 |
+| message | Body | string   | 是   | 信息 |
+| cases   | Body | object[] | 否   | 病例 |
+
+对于cases的元素
+
+| 名称    | 位置 | 类型    | 必选 | 备注         |
+| ------- | ---- | ------- | ---- | ------------ |
+| caseID  | Body | integer | 是   | 病例ID       |
+| summary | Body | string  | 是   | 病例基本情况 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "cases": [
+        {
+            "caseID": 1,
+            "summary": "狗狗，腹痛多日……" 
+        }
+    ]
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseType"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应diseaseID"
+}
+
+```
+
+## `POST /admin/case`
 
 添加病例
+当填写数据库中未有条目时，报错
 
 ### 发送参数
 
-| 参数名称          | 类型         | 是否必须 | 实例            | 备注                       |
-| ----------------- | ------------ | -------- | --------------- | -------------------------- |
-| type              | String       | 是       | “寄生虫病”      | 大类，可能已经存在         |
-| disease           | String       | 是       | “膀胱结石”      | 具体疾病类型，可能已经存在 |
-| summary           | String       | 是       | “Xxx”           | 病例的基本情况             |
-| summaryPictures   | List<String> | 否       | ["url/to/pic0"] | 能表现典型临床症状的照片   |
-| summaryVideos     | List<String> | 否       | ["url/to/vid0"] | 能表现典型临床症状的视频   |
-| examine           | String       | 是       | “Xxx”           | 检查项目及结果             |
-| examinePictures   | List<String> | 否       | ["url/to/pic0"] | 检查结果单                 |
-| examineVideos     | List<String> | 否       | ["url/to/vid0"] | 检查结果视频               |
-| diagonose         | String       | 是       | “Xxx”           | 临床诊断结果               |
-| diagonosePictures | List<String> | 否       | ["url/to/pic0"] | 临床诊断结果图片           |
-| diagonoseVideos   | List<String> | 否       | ["url/to/vid0"] | 临床诊断结果视频           |
-| treatment         | String       | 是       | “Xxx”           | 治疗方案                   |
-| treatmentPictures | List<String> | 否       | ["url/to/pic0"] | 治疗图片                   |
-| treatmentVideos   | List<String> | 否       | ["url/to/vid0"] | 手术视频                   |
+| 名称              | 位置   | 类型      | 必选 | 备注                          |
+| ----------------- | ------ | --------- | ---- | ----------------------------- |
+| diseaseID         | Body   | integer   | 是   | 疾病ID                        |
+| summary           | Body   | string    | 是   | 病例的基本情况                |
+| summaryPictures   | Body   | string[]  | 是   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body   | string[]  | 是   | 能表现典型临床症状的视频的URL |
+| examine           | Body   | string    | 是   | 检查项目及结果                |
+| examinePictures   | Body   | string[]  | 是   | 检查结果单的URL               |
+| examineVideos     | Body   | string[]  | 是   | 检查结果视频的URL             |
+| diagnose          | Body   | string    | 是   | 临床诊断结果                  |
+| diagnosePictures  | Body   | string[]  | 是   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body   | string[]  | 是   | 临床诊断结果视频的URL         |
+| treatment         | Body   | string    | 是   | 治疗方案                      |
+| treatmentPictures | Body   | string[]  | 是   | 治疗图片的URL                 |
+| treatmentVideos   | Body   | string[]  | 是   | 手术视频的URL                 |
+| medicines         | Body   | integer[] | 是   | 药品ID                        |
+| Authorization     | Header | string    | 是   | 身份验证token                 |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-
-]
+POST /admin/case
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "diseaseID": 1,
+    "summaryPictures": ["url/to/pic0"],
+    "summaryVideos": ["url/to/vid0"],
+    "examine": "经B超检查，发现……",
+    "examinePictures": ["url/to/pic1", "url/to/pic2"],
+    "examineVideos": ["url/to/vid1"],
+    "diagnose": "膀胱结石",
+    "diagnosePictures": ["url/to/pic1", "url/to/pic2"],
+    "diagnoseVideos": ["url/to/vid1"],
+    "treatment": "阿司匹林100000mg",
+    "treatmentPictures": ["url/to/pic1", "url/to/pic2"],
+    "treatmentVideos": ["url/to/vid0"],
+    "medicines":[1,2]
+}
 ```
 
-## `PUT /admin/casestudy`
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注   |
+| ------- | ---- | ------- | ---- | ------ |
+| status  | Body | integer | 是   | 状态   |
+| message | Body | string  | 是   | 消息   |
+| caseID  | Body | integer | 否   | 病例ID |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+    "caseID":1
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应diseaseID"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应medicineID"
+}
+
+```
+
+## `PUT /admin/case`
 
 修改病例
 
 ### 发送参数
 
-| 参数名称          | 类型         | 是否必须 | 实例            | 备注                       |
-| ----------------- | ------------ | -------- | --------------- | -------------------------- |
-| type              | String       | 是       | “寄生虫病”      | 大类，可能已经存在         |
-| disease           | String       | 是       | “膀胱结石”      | 具体疾病类型，可能已经存在 |
-| summary           | String       | 是       | “Xxx”           | 病例的基本情况             |
-| summaryPictures   | List<String> | 否       | ["url/to/pic0"] | 能表现典型临床症状的照片   |
-| summaryVideos     | List<String> | 否       | ["url/to/vid0"] | 能表现典型临床症状的视频   |
-| examine           | String       | 是       | “Xxx”           | 检查项目及结果             |
-| examinePictures   | List<String> | 否       | ["url/to/pic0"] | 检查结果单                 |
-| examineVideos     | List<String> | 否       | ["url/to/vid0"] | 检查结果视频               |
-| diagonose         | String       | 是       | “Xxx”           | 临床诊断结果               |
-| diagonosePictures | List<String> | 否       | ["url/to/pic0"] | 临床诊断结果图片           |
-| diagonoseVideos   | List<String> | 否       | ["url/to/vid0"] | 临床诊断结果视频           |
-| treatment         | String       | 是       | “Xxx”           | 治疗方案                   |
-| treatmentPictures | List<String> | 否       | ["url/to/pic0"] | 治疗图片                   |
-| treatmentVideos   | List<String> | 否       | ["url/to/vid0"] | 手术视频                   |
+| 名称              | 位置   | 类型      | 必选 | 备注                          |
+| ----------------- | ------ | --------- | ---- | ----------------------------- |
+| Authorization     | Header | string    | 是   | 身份验证token                 |
+| caseID            | Body   | integer   | 是   | 病例ID                        |
+| diseaseID         | Body   | integer   | 否   | 疾病ID                        |
+| summary           | Body   | string    | 否   | 病例的基本情况                |
+| summaryPictures   | Body   | string[]  | 否   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body   | string[]  | 否   | 能表现典型临床症状的视频的URL |
+| examine           | Body   | string    | 否   | 检查项目及结果                |
+| examinePictures   | Body   | string[]  | 否   | 检查结果单的URL               |
+| examineVideos     | Body   | string[]  | 否   | 检查结果视频的URL             |
+| diagnose          | Body   | string    | 否   | 临床诊断结果                  |
+| diagnosePictures  | Body   | string[]  | 否   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body   | string[]  | 否   | 临床诊断结果视频的URL         |
+| treatment         | Body   | string    | 否   | 治疗方案                      |
+| treatmentPictures | Body   | string[]  | 否   | 治疗图片的URL                 |
+| treatmentVideos   | Body   | string[]  | 否   | 手术视频的URL                 |
+| medicines         | Body   | integer[] | 否   | 药品ID                        |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-
-]
+PUT /admin/case
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "caseID": 1,
+    "summary": "狗狗，浑身痛多日……",
+    "medicines":[1,3]
+}
 ```
 
-## `DELETE /admin/casestudy`
+### 返回响应
 
-修改病例
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应caseID"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应diseaseID"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 3,
+    "message": "无对应medicineID"
+}
+
+
+```
+
+## `DELETE /admin/case`
+
+删除病例
 
 ### 发送参数
 
-| 参数名称 | 类型   | 是否必须 | 实例       | 备注                       |
-| -------- | ------ | -------- | ---------- | -------------------------- |
-| disease  | String | 是       | “膀胱结石” | 具体疾病类型，可能已经存在 |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| caseID        | Param  | integer | 是   | 病例id        |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
+DELETE /admin/case?caseID=1
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
 
-]
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应caseID"
+}
 ```
 
 ## `POST /admin/roleplaying`
 
-添加工作
+添加job和其对应的task
 
 ### 请求参数
 
-| 参数名称 | 类型    | 是否必须 | 实例           | 备注                              |
-| -------- | ------- | -------- | -------------- | --------------------------------- |
-| role     | Integer | 是       | 1              | 0代表前台、1代表医助、2代表兽医师 |
-| job      | String  | 是       | “注射”         | 工作内容选择                      |
-| title    | String  | 是       | "静脉注射"     | 名称                              |
-| detail   | String  | 是       | "1. 备皮，..." | 具体信息                          |
+| 名称          | 位置   | 类型     | 必选 | 备注                              |
+| ------------- | ------ | -------- | ---- | --------------------------------- |
+| Authorization | Header | string   | 是   | 身份验证token                     |
+| role          | Body   | integer  | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string   | 是   | 工作内容选择                      |
+| tasks         | Body   | object[] | 是   | 该job所有任务                     |
 
-### 返回参数
+对于tasks的元素
+| 名称       | 位置   | 类型   | 必选 | 备注     |
+| ---------- | ------ | ------ | ---- | -------- |
+| taskName   | Body   | string | 是   | 任务名称 |
+| taskDetail | String | string | 是   | 具体信息 |
+
+`Example`
 
 ```json
-Data:[
-    
-]
+POST /admin/roleplaying
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "role":1,
+    "job":"注射",
+    "tasks":[
+        {
+            "taskName":"静脉注射",
+            "taskDetail":"拿针开扎"
+        }
+    ]
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role"
+}
 ```
 
 ## `PUT /admin/roleplaying`
 
-修改工作
+修改task
 
 ### 请求参数
 
-| 参数名称 | 类型    | 是否必须 | 实例           | 备注                              |
-| -------- | ------- | -------- | -------------- | --------------------------------- |
-| role     | Integer | 是       | 1              | 0代表前台、1代表医助、2代表兽医师 |
-| job      | String  | 是       | “注射”         | 工作内容选择                      |
-| title    | String  | 是       | "静脉注射"     | 名称                              |
-| detail   | String  | 是       | "1. 备皮，..." | 具体信息                          |
+| 名称          | 位置   | 类型     | 必选 | 备注                              |
+| ------------- | ------ | -------- | ---- | --------------------------------- |
+| Authorization | Header | string   | 是   | 身份验证token                     |
+| role          | Body   | integer  | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string   | 是   | 工作内容选择                      |
+| tasks         | Body   | object[] | 是   | 该job所有任务                     |
 
-### 返回参数
+对于tasks的元素
+| 名称       | 位置   | 类型   | 必选 | 备注     |
+| ---------- | ------ | ------ | ---- | -------- |
+| taskName   | Body   | string | 是   | 任务名称 |
+| taskDetail | String | string | 是   | 具体信息 |
+
+`Example`
 
 ```json
-Data:[
-    
-]
+PUT /admin/roleplaying
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "role":1,
+    "job":"注射",
+    "tasks":[
+        {
+            "taskName":"动脉注射",
+            "taskDetail":"拿针开扎"
+        }
+    ]
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应job"
+}
 ```
 
 ## `DELETE /admin/roleplaying`
 
-添加工作
+删除job
 
 ### 请求参数
 
-| 参数名称 | 类型    | 是否必须 | 实例   | 备注                              |
-| -------- | ------- | -------- | ------ | --------------------------------- |
-| role     | Integer | 是       | 1      | 0代表前台、1代表医助、2代表兽医师 |
-| job      | String  | 是       | “注射” | 工作内容选择                      |
+| 名称          | 位置   | 类型    | 必选 | 备注                              |
+| ------------- | ------ | ------- | ---- | --------------------------------- |
+| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string  | 是   | 工作内容选择                      |
+| Authorization | Header | string  | 是   | 身份验证token                     |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-    
-]
+DELETE /admin/roleplaying?role=1&job="注射"
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应role"
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "无对应job"
+}
 ```
 
 ## `POST /admin/quiz`
 
-添加试题
+添加试卷
 
 ### 请求参数
 
-| 参数名称     | 类型          | 是否必须 | 实例            | 备注     |
-| ------------ | ------------- | -------- | --------------- | -------- |
-| quizName     | String        | 是       | “测试1”         | 试卷名称 |
-| totalCredits | Integer       | 是       | 100             | 总分     |
-| probTexts    | List<String>  | 是       | ["。。。", “…”] | 题目     |
-| probImgs     | List<Strings> | 是       | ["url", None]   | 图片路径 |
-| probAns      | List<Integer> | 是       | [1, 2]          | 答案     |
+| 名称          | 位置   | 类型     | 必选 | 备注          |
+| ------------- | ------ | -------- | ---- | ------------- |
+| Authorization | Header | string   | 是   | 身份验证token |
+| quizName      | Body   | string   | 是   | 测试名称      |
+| totalCredits  | Body   | integer  | 是   | 总分          |
+| probs         | Body   | object[] | 是   | 题目          |
 
-### 返回参数
+对于probs的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| probCredit | Body | integer | 是   | 题目分数 |
+| probText   | Body | string  | 是   | 题目     |
+| probImg    | Body | string  | 否   | 图片路径 |
+| probAns    | Body | integer | 是   | 答案     |
+| lastAns    | Body | integer | 否   | 上次选项 |
+
+`Example`
 
 ```json
-Data:[
+POST /admin/quiz
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "quizName":"测试1",
+    "totalCredits":20,
+    "probs":[
+        {
+            "probNumber": 1,
+            "probCredit": 10,
+            "probText": "我是谁",
+            "probImg": "url",
+            "probAns": 1,
+        },
+        {
+            "probNumber": 2,
+            "probCredit": 10,
+            "probText": "你是谁",
+            "probAns": 2
+        }
+    ]
+}
+```
 
-]
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注     |
+| ------- | ---- | ------- | ---- | -------- |
+| status  | Body | integer | 是   | 状态     |
+| message | Body | string  | 是   | 消息     |
+| quizID  | Body | integer | 否   | quiz编号 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+    "quizID":3
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "重复quizName"
+}
+
 ```
 
 ## `PUT /admin/quiz`
@@ -482,20 +2384,76 @@ Data:[
 
 ### 请求参数
 
-| 参数名称     | 类型          | 是否必须 | 实例            | 备注     |
-| ------------ | ------------- | -------- | --------------- | -------- |
-| quizName     | String        | 是       | “测试1”         | 试卷名称 |
-| totalCredits | Integer       | 是       | 100             | 总分     |
-| probTexts    | List<String>  | 是       | ["。。。", “…”] | 题目     |
-| probImgs     | List<Strings> | 是       | ["url", None]   | 图片路径 |
-| probAns      | List<Integer> | 是       | [1, 2]          | 答案     |
+| 名称          | 位置   | 类型     | 必选 | 备注          |
+| ------------- | ------ | -------- | ---- | ------------- |
+| Authorization | Header | string   | 是   | 身份验证token |
+| quizID        | Body   | string   | 是   | 测试名称      |
+| quizName      | Body   | string   | 否   | 测试名称      |
+| totalCredits  | Body   | integer  | 否   | 总分          |
+| probs         | Body   | object[] | 否   | 题目          |
 
-### 返回参数
+对于probs的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| probCredit | Body | integer | 否   | 题目分数 |
+| probText   | Body | string  | 否   | 题目     |
+| probImg    | Body | string  | 否   | 图片路径 |
+| probAns    | Body | integer | 否   | 答案     |
+| lastAns    | Body | integer | 否   | 上次选项 |
+
+`Example`
 
 ```json
-Data:[
+PUT /admin/quiz
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "quizID":1,
+    "quizName":"测试1",
+    "totalCredits":20,
+    "probs":[
+        {
+            "probNumber": 1,
+            "probCredit": 10,
+            "probText": "我是谁",
+            "probImg": "url",
+            "probAns": 1,
+        },
+        {
+            "probNumber": 2,
+            "probCredit": 10,
+            "probText": "你是谁",
+            "probAns": 2
+        }
+    ]
+}
+```
 
-]
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应quizName"
+}
+
 ```
 
 ## `DELETE /admin/quiz`
@@ -504,17 +2462,142 @@ Data:[
 
 ### 请求参数
 
-| 参数名称 | 类型    | 是否必须 | 实例    | 备注     |
-| -------- | ------- | -------- | ------- | -------- |
-| quizName | String  | 是       | “测试1” | 试卷名称 |
-| probNum  | Integer | 是       | 3       | 题目     |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+| quizID        | Body   | String | 是   | quiz编号      |
 
-### 返回参数
+`Example`
 
 ```json
-Data:[
-
-]
+DELETE /admin/quiz?quizID=1
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
-## 
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应quizName"
+}
+
+```
+
+## `PUT /admin/item`
+
+修改物品信息
+
+### 发送参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| itemID        | Body   | integer | 是   | 物品ID        |
+| itemName      | Body   | string  | 否   | 物品名称      |
+| itemIntro     | Body   | string  | 否   | 物品简介      |
+
+`Example`
+
+```json
+PUT /admin/disease
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "itemID":1,
+    "itemIntro": "手术刀不大不小"
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应itemID"
+}
+
+```
+
+## `PUT /admin/department`
+
+修改物品信息
+
+### 发送参数
+
+| 名称            | 位置   | 类型    | 必选 | 备注          |
+| --------------- | ------ | ------- | ---- | ------------- |
+| Authorization   | Header | string  | 是   | 身份验证token |
+| departmentID    | Body   | integer | 是   | 科室ID        |
+| departmentName  | Body   | string  | 否   | 科室名称      |
+| departmentIntro | Body   | string  | 否   | 科室简介      |
+
+`Example`
+
+```json
+PUT /admin/disease
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "departmentID":1,
+    "departmentIntro": "手术室不大不小"
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功",
+}
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无对应departmentID"
+}
+
+```

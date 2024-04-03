@@ -31,6 +31,7 @@ exports.createQuizWithProbs = async (quizData) => {
             totalCredits: totalCredits
         });
         // 遍历并创建问题
+        //记得注释第二行
         for (const prob of probs) {
             await Prob.create({
                 quizID: quiz.quizID,
@@ -48,7 +49,7 @@ exports.createQuizWithProbs = async (quizData) => {
             quizID: quiz.quizID
         };
     } catch (error) {
-        console.error('Error In addQuizWithProbs :', error);
+        console.error('Error In createQuizWithProbs :', error);
         return { status: -9, message: '错误' };
     }
 

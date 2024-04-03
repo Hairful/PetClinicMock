@@ -2317,7 +2317,6 @@ Content-Type: application/json
 
 | 名称       | 位置 | 类型    | 必选 | 备注     |
 | ---------- | ---- | ------- | ---- | -------- |
-| probNumber | Body | integer | 是   | 题号     |
 | probCredit | Body | integer | 是   | 题目分数 |
 | probText   | Body | string  | 是   | 题目     |
 | probImg    | Body | string  | 否   | 图片路径 |
@@ -2397,7 +2396,6 @@ Content-Type: application/json
 
 | 名称       | 位置 | 类型    | 必选 | 备注     |
 | ---------- | ---- | ------- | ---- | -------- |
-| probNumber | Body | integer | 是   | 题号     |
 | probCredit | Body | integer | 否   | 题目分数 |
 | probText   | Body | string  | 否   | 题目     |
 | probImg    | Body | string  | 否   | 图片路径 |
