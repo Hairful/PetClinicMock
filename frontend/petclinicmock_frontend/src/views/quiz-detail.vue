@@ -169,10 +169,6 @@ export default {
       totalCredits:'',
       currentProb:'',
       ans:[],
-      unit:{
-        probNumber:'',
-        Ans:'',
-      },
       answers:[],
     }
   },
@@ -218,9 +214,10 @@ export default {
       console.log(this.ans);
       let credit = 0;
       for(let i=0;i<this.ans.length;i++){
-        this.unit.probNumber = this.probs[i].probID;
-        this.unit.Ans = this.option2ans(this.ans[i]);
-        this.answers.push(this.unit);
+        let unit = {};
+        unit.probNumber = this.probs[i].probID;
+        unit.Ans = this.option2ans(this.ans[i]);
+        this.answers.push(unit);
         if(this.option2ans(this.ans[i]) == this.probs[i].probAns)
         {
           credit+=this.probs[i].probCredit;
