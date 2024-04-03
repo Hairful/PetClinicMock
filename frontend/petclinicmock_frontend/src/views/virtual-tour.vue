@@ -340,6 +340,50 @@ onMounted(() => {
     });
     //moveTag("前台");
   });
+
+
+  // 创建住院室
+  let impPosition = new THREE.Vector3(-5, 10, 18);
+  let impIndex = 10;
+  let impUrl = "./img/impatient/";
+  let impEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const imp = new Room("住院室", impIndex, impUrl, impPosition, impEuler);
+
+    // 创建住院室文字精灵
+  const imptext = new SpriteCanvas(
+    camera,
+    "住院室",
+    new THREE.Vector3(-1, 10, 9)
+  );
+  scene.add(imptext.mesh);
+  imptext.onClick(() => {
+    console.log("住院室");
+    gsap.to(camera.position, {
+      x: impPosition.x,
+      y: impPosition.y,
+      z: impPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+  // 创建住院室回走廊文字精灵
+  const fro7text = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(-5, 10, 16)
+  );
+   scene.add(fro7text.mesh);
+  fro7text.onClick(() => {
+    console.log("走廊");
+    gsap.to(camera.position, {
+      x: kitPosition.x,
+      y: kitPosition.y,
+      z: kitPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
  
     container.value.appendChild(renderer.domElement);
   render();
