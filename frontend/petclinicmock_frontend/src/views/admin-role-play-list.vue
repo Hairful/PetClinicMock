@@ -114,8 +114,9 @@
       </h1>
       <div class="admin-role-play-list-container04">
         <div class="admin-role-play-list-container05">
-          <input type="text" placeholder="placeholder" class="input" />
-          <button type="button" class="button">
+          <input type="text" v-model="newJob" placeholder="placeholder" class="input" />
+          <input type="text" v-model="newJobDetail" placeholder="placeholder" class="input" />
+          <button type="button" class="button" @click="addNewJob()">
             <span>
               <span>Add New Job</span>
               <br />
@@ -198,7 +199,9 @@ export default {
       role: ' ',
       jobs: [],
       prevJobs: [],
-      jobDetails: []
+      jobDetails: [],
+      newJob: ' ',
+      newJobDetail: ' ',
     }
   },
   methods: {
@@ -213,6 +216,44 @@ export default {
         default:
           return -1;
       }
+    },
+    fetchJobs() {
+      this.jobDetails = [];
+      axios
+        .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
+          {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        .then((response) => {
+          if (response.data.status === 0) {
+            this.jobs = response.data.jobs;
+            this.prevJobs = response.data.jobs;
+            // Fetch the details for each job
+            this.jobs.forEach(job => {
+              axios
+                .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
+                  {
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+                })
+                .then((response) => {
+                  if (response.data.status === 0) {
+                    // If the request was successful, add the job details to the list
+                    this.jobDetails.push(response.data.jobDetail);
+                  } else {
+                    console.log(response.data.message);
+                  }
+                })
+                .catch(error => console.log(error));
+            });
+          } else {
+            console.log(response.data.message);
+          }
+        })
+        .catch(error => console.log(error));
     },
     renameJob(index) {
       const job = this.jobs[index];
@@ -241,7 +282,38 @@ export default {
         // handle error
         console.log(error);
       });
+      this.fetchJobs();
     },
+    async addNewJob() {
+      try {
+        const response = await axios.post('/admin/roleplaying', {
+          role: 1,
+          job: this.newJob,
+          jobDetail: this.newJobDetail
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.fetchJobs();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteJob(index) {
+      try {
+        const response = await axios.delete(`/admin/roleplaying?role=1&job=${this.jobs[index]}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.fetchJobs();
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
   created() {
     this.role = this.$route.query.role;
