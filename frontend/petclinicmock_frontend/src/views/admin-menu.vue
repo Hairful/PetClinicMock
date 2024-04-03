@@ -127,7 +127,7 @@
                 <br />
               </span>
             </router-link>
-            <router-link to="/quiz-list" class="admin-menu-navlink3 button">
+            <router-link to="/admin-quiz-list" class="admin-menu-navlink3 button">
               <span class="heading3">Quiz &amp; Exams</span>
             </router-link>
           </div>

@@ -1013,6 +1013,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminCaseStudyDetail',
   props: {},
@@ -1027,7 +1028,64 @@ export default {
       rawym07: ' ',
       rawbprc: ' ',
       rawxc41: ' ',
+      diseaseID: ' ',
+      diseaseName: ' ',
+      diseaseType: ' ',
+      diseaseIntro: ' ',
+      cases: []
     }
+  },
+  created() {
+    this.diseaseType = this.$route.query.diseaseType;
+    this.diseaseID = this.$route.query.diseaseID;
+    this.diseaseName = this.$route.query.diseaseName;
+    // Fetch disease details
+    axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.diseaseIntro = response.data.diseaseIntro;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding diseaseID');
+      }
+    });
+    // Fetch case list
+    axios.get(`/casestudy/case/list?diseaseID=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(async response => {
+      if (response.data.status === 0) {
+        this.cases = response.data.cases;
+        // Fetch details for each case
+        const casePromises = this.cases.map(caseItem => {
+          return axios.get(`/casestudy/case/detail?caseID=${caseItem.caseID}`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('Token')}`
+            }
+          })
+          .then(response => {
+            if (response.data.status === 0) {
+              return response.data;
+            } else if (response.data.status === 1) {
+              console.log('No corresponding caseID');
+              return null;
+            }
+          });
+        });
+
+        const caseDetails = await Promise.all(casePromises);
+        this.cases = this.cases.map((caseItem, index) => {
+          caseItem.details = caseDetails[index];
+          return caseItem;
+        });
+      }
+    });
+
   },
   metaInfo: {
     title: 'AdminCaseStudyDetail - Roasted Rusty Swallow',

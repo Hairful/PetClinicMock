@@ -90,9 +90,9 @@
           <span class="heading1">
             Quiz:
           </span>
-          <span class="quiz-detail-text04">Quiz 1</span>
+          <span class="quiz-detail-text04">{{ this.quizName }}</span>
         </h1>
-        <span class="heading2">Total Credit: 40</span>
+        <span class="heading2">Total Credit: {{ this.totalCredits }}</span>
       </div>
     </div>
     <div class="quiz-detail-container04">
@@ -106,64 +106,34 @@
     <div class="quiz-detail-hero1 heroContainer">
       <div class="quiz-detail-container05">
         <h1 class="quiz-detail-hero-heading1 heading1">
-          <span class="heading1">Question 1</span>
+          <span class="heading1">Question {{ this.currentProb+1 }}</span>
           <br />
         </h1>
         <div class="quiz-detail-container06">
-          <span class="quiz-detail-text22 bodyLarge">xxx</span>
+          <span class="quiz-detail-text22 bodyLarge" >({{ probs[this.currentProb].probCredit }}分)</span>
+          <span class="quiz-detail-text22 bodyLarge" v-html="probs[this.currentProb].probText"></span>
           <div class="quiz-detail-container07">
             <img
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
+              :src="`${probs[this.currentProb].probImg}`"
               class="quiz-detail-image"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-detail-image1"
             />
           </div>
           <div class="quiz-detail-container08">
-            <select class="quiz-detail-select">
-              <option value="Option 1">A</option>
-              <option value="Option 2">B</option>
-              <option value="Option 3">C</option>
-              <option>D</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="quiz-detail-container09">
-        <h1 class="quiz-detail-hero-heading2 heading1">Question 2</h1>
-        <div class="quiz-detail-container10">
-          <span class="quiz-detail-text23 bodyLarge">xxx</span>
-          <div class="quiz-detail-container11">
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-detail-image2"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-detail-image3"
-            />
-          </div>
-          <div class="quiz-detail-container12">
-            <select class="quiz-detail-select1">
-              <option value="Option 1">A</option>
-              <option value="Option 2">B</option>
-              <option value="Option 3">C</option>
-              <option>D</option>
+            <select class="quiz-detail-select" v-model="ans[currentProb]" >
+              <option value=A>A</option>
+              <option value=B>B</option>
+              <option value=C>C</option>
+              <option value=D>D</option>
             </select>
           </div>
         </div>
       </div>
     </div>
-    <div class="quiz-detail-container13">
-      <router-link to="/quiz-result" class="quiz-detail-navlink2 button">
-        Submit
-      </router-link>
+    <div class="quiz-detail-container13"> 
+      <button class="quiz-detail-navlink2 button" @click="lastProb">Last Question</button>
+      <button class="quiz-detail-navlink2 button" @click="nextProb">Next Question</button>
+      <button class="quiz-detail-navlink2 button" @click="submit">Submit</button>
     </div>
     <div class="quiz-detail-footer">
       <footer class="quiz-detail-footer1 footerContainer">
@@ -184,6 +154,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'QuizDetail',
   props: {},
@@ -191,13 +162,95 @@ export default {
     return {
       rawp27k: ' ',
       name:localStorage.getItem('username'),
+      ID:localStorage.getItem('userID'),
+      quizID:'',
+      probs:[],
+      quizName:'',
+      totalCredits:'',
+      currentProb:'',
+      ans:[],
+      unit:{
+        probNumber:'',
+        Ans:'',
+      },
+      answers:[],
     }
   },
   methods:{
+    option2ans(option)
+    {
+      switch(option){
+        case "A":
+          return 1;
+        case "B":
+          return 2;
+        case "C":
+          return 3;
+        case "D":
+          return 4;
+        default:
+            return -1;
+      }
+    },
     logout(){
       localStorage.clear();
       this.$router.push('/');
-    }
+    },
+    lastProb(){
+      if(this.currentProb == 0){
+        this.$message.warning('This is the first question')
+      }
+      else 
+        this.currentProb --;
+
+    },
+    nextProb(){
+      if(this.currentProb>=this.probs.length-1)
+      {
+        this.$message.warning('This is the last question')
+      }
+      else
+        this.currentProb ++;
+    },
+
+    submit(){
+      console.log(this.probs);
+      console.log(this.ans);
+      let credit = 0;
+      for(let i=0;i<this.ans.length;i++){
+        this.unit.probNumber = this.probs[i].probID;
+        this.unit.Ans = this.option2ans(this.ans[i]);
+        this.answers.push(this.unit);
+        if(this.option2ans(this.ans[i]) == this.probs[i].probAns)
+        {
+          credit+=this.probs[i].probCredit;
+        }
+      }
+      console.log(this.answers);
+    },
+  },
+  created() {
+    this.quizID = this.$route.query.quizID;
+    this.currentProb = 0;
+    const authToken = localStorage.getItem('token'); // replace 'authToken' with the key you used to store the token
+    // Fetch disease details
+    axios.get(`/quiz/detail?quizID=${this.quizID}`, 
+    {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.probs = response.data.probs;
+        this.quizName = response.data.quizName;
+        this.totalCredits = response.data.totalCredits;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding quizID');
+      }
+    });
+    
+
   },
   metaInfo: {
     title: 'QuizDetail - Roasted Rusty Swallow',
@@ -542,6 +595,7 @@ export default {
 .quiz-detail-navlink2 {
   color: var(--dl-color-gray-white);
   font-size: 20px;
+  margin-right: 20px;
   align-self: center;
   font-style: normal;
   font-weight: 600;
