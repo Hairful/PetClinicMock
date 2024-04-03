@@ -114,8 +114,8 @@
       </h1>
       <div class="admin-role-play-list-container04">
         <div class="admin-role-play-list-container05">
-          <input type="text" v-model="newJob" placeholder="placeholder" class="input" />
-          <input type="text" v-model="newJobDetail" placeholder="placeholder" class="input" />
+          <input type="text" v-model="newJob" placeholder="添加新的工作" class="input" />
+          <input type="text" v-model="newJobDetail" placeholder="新工作的细节" class="input" />
           <button type="button" class="button" @click="addNewJob()">
             <span>
               <span>Add New Job</span>
@@ -200,8 +200,8 @@ export default {
       jobs: [],
       prevJobs: [],
       jobDetails: [],
-      newJob: ' ',
-      newJobDetail: ' ',
+      newJob: '',
+      newJobDetail: '',
     }
   },
   methods: {
@@ -218,7 +218,9 @@ export default {
       }
     },
     fetchJobs() {
+      this.jobs = [];
       this.jobDetails = [];
+      this.prevJobs = [];
       axios
         .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
           {
@@ -229,37 +231,62 @@ export default {
         .then((response) => {
           if (response.data.status === 0) {
             this.jobs = response.data.jobs;
-            this.prevJobs = response.data.jobs;
+            this.prevJobs = [...this.jobs];
             // Fetch the details for each job
-            this.jobs.forEach(job => {
-              axios
+            const promises = this.jobs.map(job => {
+              return axios
                 .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
                   {
                   headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }
-                })
-                .then((response) => {
-                  if (response.data.status === 0) {
-                    // If the request was successful, add the job details to the list
-                    this.jobDetails.push(response.data.jobDetail);
-                  } else {
-                    console.log(response.data.message);
-                  }
-                })
-                .catch(error => console.log(error));
+                });
             });
+            return Promise.all(promises);
           } else {
             console.log(response.data.message);
           }
         })
+        .then((responses) => {
+          responses.forEach((response, index) => {
+            if (response.data.status === 0) {
+              this.jobDetails.push(response.data.jobDetail);
+            } else {
+              console.log(response.data.message);
+              // Remove the job from jobs array if its details couldn't be fetched
+              this.jobs.splice(index, 1);
+            }
+          });
+        })
         .catch(error => console.log(error));
     },
-    renameJob(index) {
+    async renameJob(index) {
       const job = this.jobs[index];
       const detail = this.jobDetails[index];
-      const role = this.role2number(job.role);
-      const prevJob = this.prevJobs[index];
+      const role = this.role2number(this.role);
+      let prevJob = this.prevJobs[index];
+      if (job === prevJob) {
+        axios({
+          method: 'put',
+          url: '/admin/roleplaying',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            role: role,
+            job: job,
+            jobDetail: detail
+          }
+        })
+        .then(response => {
+          this.fetchJobs();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+      }
       axios({
         method: 'put',
         url: '/admin/roleplaying',
@@ -270,36 +297,41 @@ export default {
         data: {
           role: role,
           prevJob: prevJob,
-          newJob: job,
-          jobDetail: detail // replace 'detail' with the actual property name for job detail
+          job: job,
+          jobDetail: detail
         }
       })
       .then(response => {
-        // handle success
-        console.log(response);
+        this.fetchJobs();
       })
       .catch(error => {
         // handle error
         console.log(error);
       });
-      this.fetchJobs();
     },
     async addNewJob() {
-      try {
-        const response = await axios.post('/admin/roleplaying', {
-          role: 1,
+      axios({
+        method: 'post',
+        url: '/admin/roleplaying',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          role: this.role2number(this.role),
           job: this.newJob,
           jobDetail: this.newJobDetail
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        this.fetchJobs();
-      } catch (error) {
+        }
+      })
+      .then(response => {
+        // handle success
+        console.log(response);
+        this.fetchJobs(); // fetch jobs after the axios request has completed
+      })
+      .catch(error => {
+        // handle error
         console.log(error);
-      }
+      });
     },
     async deleteJob(index) {
       try {
@@ -327,30 +359,32 @@ export default {
       .then((response) => {
         if (response.data.status === 0) {
           this.jobs = response.data.jobs;
-          this.prevJobs = response.data.jobs;
+          this.prevJobs = [...this.jobs];
           // Fetch the details for each job
-          this.jobs.forEach(job => {
-            axios
+          const promises = this.jobs.map(job => {
+            return axios
               .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
                 {
                 headers: {
                   'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
-              })
-              .then((response) => {
-                if (response.data.status === 0) {
-                  // If the request was successful, add the job details to the list
-                  this.jobDetails.push(response.data.jobDetail);
-                } else {
-                  console.log("111");
-                  console.log(response.data.message);
-                }
-              })
-              .catch(error => console.log(error));
+              });
           });
+          return Promise.all(promises);
         } else {
           console.log(response.data.message);
         }
+      })
+      .then((responses) => {
+        responses.forEach((response, index) => {
+          if (response.data.status === 0) {
+            this.jobDetails.push(response.data.jobDetail);
+          } else {
+            console.log(response.data.message);
+            // Remove the job from jobs array if its details couldn't be fetched
+            this.jobs.splice(index, 1);
+          }
+        });
       })
       .catch(error => console.log(error));
   },
