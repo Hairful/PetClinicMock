@@ -18,6 +18,9 @@ exports.createJob = async (req, res) => {
             case 1:
                 httpStatus = 404;
                 break;
+            case 2:
+                httpStatus = 400;
+                break;
             case -9:
                 httpStatus = 500;
                 break;
@@ -31,8 +34,8 @@ exports.createJob = async (req, res) => {
 
 exports.updateJob = async (req, res) => {
     try {
-        const { role, job, jobDetail } = req.body;
-        const result = await updateJob(role, job, jobDetail);
+        const { role, prevJob, job, jobDetail } = req.body;
+        const result = await updateJob(role, prevJob, job, jobDetail);
         let httpStatus;
         switch (result.status) {
             case 0:

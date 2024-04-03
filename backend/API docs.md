@@ -2167,6 +2167,13 @@ Content-Type: application/json
     "status": 1,
     "message": "无对应role"
 }
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 2, 
+    "message": "重复的job",
+}
+
 ```
 
 ## `PUT /admin/roleplaying`
@@ -2190,6 +2197,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "role":1,
+    "prevJob":"要注射",
     "job":"注射",
     "jobDetail":"动脉注射"
 }
