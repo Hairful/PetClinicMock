@@ -15,6 +15,12 @@ const Job = (require('../models/Job'));
  */
 exports.createJob = async (role, job, jobDetail) => {
     try {
+        const jobexist = await Job.findOne({
+            where: { job: job }
+        });
+        if (jobexist) {
+            return { status: 2, message: '重复的job' };
+        }
         const result = await Job.create({ role, job, jobDetail });
         return { status: 0, message: '成功' };
     } catch (error) {
@@ -30,28 +36,65 @@ exports.createJob = async (role, job, jobDetail) => {
  * @param {string} jobDetail - 工作详情
  * @returns {Object} 对象
  */
-exports.updateJob = async (role, job, jobDetail) => {
+exports.updateJob = async (role, prevJob, job, jobDetail) => {
     try {
-        const rolejob = await Job.findOne({
-            where: { role }
-        });
-        if (!rolejob) {
-            return { status: 1, message: '无对应role' };
+
+        if (prevJob == undefined) {
+            const rolejob = await Job.findOne({
+                where: { role }
+            });
+            if (!rolejob) {
+                return { status: 1, message: '无对应role' };
+            }
+            const roleInstance = await Job.findOne({
+                where: { role: role, job: job }
+            });
+            if (!roleInstance) {
+                return { status: 2, message: '无对应job' };
+            }
+            const result = await Job.findOne({
+                where: { role, job }
+            });
+
+            if (jobDetail !== undefined) {
+                result.jobDetail = jobDetail;
+            }
+            await result.save();
+            return { status: 0, message: '成功' };
+
         }
-        const roleInstance = await Job.findOne({
-            where: { role, job }
-        });
-        if (!roleInstance) {
-            return { status: 2, message: '无对应job' };
+        else (prevJob !== undefined)
+        {
+            const jobexist = await Job.findOne({
+                where: { job: job }
+            });
+            if (!jobexist) {
+                return { status: 2, message: '重复的job' };
+            }
+            const rolejob = await Job.findOne({
+                where: { role }
+            });
+            if (!rolejob) {
+                return { status: 1, message: '无对应role' };
+            }
+            const roleInstance = await Job.findOne({
+                where: { role: role, job: prevJob }
+            });
+            if (!roleInstance) {
+                return { status: 2, message: '无对应job' };
+            }
+            const result = await Job.findOne({
+                where: { role: role, job: prevJob }
+            });
+            result.job = job;
+            if (jobDetail !== undefined) {
+                result.jobDetail = jobDetail;
+            }
+            await result.save();
+            return { status: 0, message: '成功' };
         }
-        const result = await Job.findOne({
-            where: { role, job }
-        });
-        if (jobDetail !== undefined) {
-            result.jobDetail = jobDetail;
-        }
-        await result.save();
-        return { status: 0, message: '成功' };
+
+
     } catch (error) {
         console.error('Error In updateJob', error);
         return { status: -9, message: '错误' };
