@@ -142,7 +142,7 @@
               </div>
               <div class="admin-role-play-list-container08">
                 <input type="text" v-model="jobDetails[index]" placeholder="" class="input" />
-                <button type="button" class="button" @click="modifyJobDetail(index)">
+                <button type="button" class="button" @click="renameJob(index)">
                   <span>
                     <span>Modify</span>
                     <br />
