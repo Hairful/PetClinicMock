@@ -4,11 +4,11 @@
  * 作者: {YYZ}
  */
 
-const { getDiseasesByType, getUniqueDiseaseType, getDiseasesByID } = require('../services/diseaseService');
+const { getDiseaseList, getDiseaseTypes, getDiseasesByID } = require('../services/diseaseService');
 
 exports.getDiseaseTypes = async (req, res) => {
     try {
-        const result = await getUniqueDiseaseType();
+        const result = await getDiseaseTypes();
         res.status(200).json(result);
     } catch (error) {
         console.error('Error in getDiseaseTypes:', error);
@@ -19,12 +19,7 @@ exports.getDiseaseTypes = async (req, res) => {
 exports.getDiseaseList = async (req, res) => {
     try {
         const { diseaseType } = req.query;
-        let result;
-        if (!diseaseType) {
-            result = await getUniqueDiseaseType();
-        } else {
-            result = await getDiseasesByType(diseaseType);
-        }
+        const result = await getDiseaseList(diseaseType);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -39,7 +34,7 @@ exports.getDiseaseList = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getDiseaseList:', error);
+        console.error('Error in getDiseaseList: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

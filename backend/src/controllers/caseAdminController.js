@@ -1,14 +1,14 @@
 /**
- * 文件: /backend/src/controllers/quizController.js
- * 描述: 试题信息接口的控制器
+ * 文件: /backend/src/controllers/diseaseAdminController.js
+ * 描述: 病例管理接口的控制器
  * 作者: {YYZ}
  */
 
-const { getQuizDetails, getQuizList, recordExamEntry } = require('../services/quizService')
+const { createCase, updateCase, deleteCase } = require('../services/caseAdminService');
 
-exports.getQuizList = async (req, res) => {
+exports.createCase = async (req, res) => {
     try {
-        const result = await getQuizList(req.userIDInToken);
+        const result = await createCase(req.body);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -26,37 +26,14 @@ exports.getQuizList = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getQuizList:', error);
+        console.error('Error in createCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
-}
+};
 
-exports.getQuizDetail = async (req, res) => {
+exports.updateCase = async (req, res) => {
     try {
-        const { quizID } = req.query;
-        const result = await getQuizDetails(req.userIDInToken, quizID);
-        let httpStatus;
-        switch (result.status) {
-            case 0:
-                httpStatus = 200;
-                break;
-            case 1:
-                httpStatus = 404;
-                break;
-            case -9:
-                httpStatus = 500;
-                break;
-        }
-        res.status(httpStatus).json(result);
-    } catch (error) {
-        console.error('Error in getQuizDetail:', error);
-        res.status(500).json({ status: -9, message: '错误' });
-    }
-}
-
-exports.recordExamEntry = async (req, res) => {
-    try {
-        const result = await recordExamEntry(req.body);
+        const result = await updateCase(req.body);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -77,7 +54,30 @@ exports.recordExamEntry = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in recordExamEntry:', error);
+        console.error('Error in updateCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
-}
+};
+
+exports.deleteCase = async (req, res) => {
+    try {
+        const { caseID } = req.query;
+        const result = await deleteCase(caseID);
+        let httpStatus;
+        switch (result.status) {
+            case 0:
+                httpStatus = 200;
+                break;
+            case 1:
+                httpStatus = 404;
+                break;
+            case -9:
+                httpStatus = 500;
+                break;
+        }
+        res.status(httpStatus).json(result);
+    } catch (error) {
+        console.error('Error in deleteCase:', error);
+        res.status(500).json({ status: -9, message: '错误' });
+    }
+};

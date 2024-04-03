@@ -44,10 +44,8 @@ exports.deleteDiseaseById = async (diseaseId) => {
             where: { diseaseID: diseaseId }
         });
         if (result > 0) {
-            // 找到并删除了记录，返回成功
             return { status: 0, message: "成功" };
         } else {
-            // 没有，返回错误
             return { status: 1, message: "无对应diseaseID" };
         }
     } catch (error) {

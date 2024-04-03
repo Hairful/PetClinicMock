@@ -7,17 +7,24 @@
 const Disease = require('../models/Disease');
 
 /**
- * getAllDiseases - 获取所有疾病列表
+ * getDiseaseList - 获取所有疾病列表
  * @param {string} diseaseType - 疾病类型
  * @returns {Object} 对象
  * TODO: diseaseType为可选参数，若未填则返回所有疾病
  */
-exports.getDiseasesByType = async (diseaseType) => {
+exports.getDiseaseList = async (diseaseType) => {
     try {
-        const diseases = await Disease.findAll({
-            where: { diseaseType: diseaseType },
-            attributes: ['diseaseID', 'diseaseName']
-        });
+        let diseases;
+        if (!diseaseType) {
+            diseases = await Disease.findAll({
+                attributes: ['diseaseID', 'diseaseName']
+            });
+        } else {
+            diseases = await Disease.findAll({
+                where: { diseaseType: diseaseType },
+                attributes: ['diseaseID', 'diseaseName']
+            });
+        }
         if (diseases.length > 0) {
             return {
                 status: 0,
@@ -31,16 +38,16 @@ exports.getDiseasesByType = async (diseaseType) => {
             return { status: 1, message: "无对应diseaseType" };
         }
     } catch (error) {
-        console.error('Error in getDiseasesByType', error);
+        console.error('Error in getDiseaseList: ', error);
         return { status: -9, message: '错误' };
     }
 }
 
 /**
- * getUniqueDiseaseType - 获取所有疾病类型
+ * getDiseaseTypes - 获取所有疾病类型
  * @returns {Object} 对象
  */
-exports.getUniqueDiseaseType = async () => {
+exports.getDiseaseTypes = async () => {
     try {
         const unique_disease_types = await Disease.findAll({
             attributes: ['diseaseType'],

@@ -17,39 +17,51 @@ const UserQuiz = require('../models/UserQuiz');
  */
 exports.getQuizList = async (userID) => {
     try {
+        // 获取用户已完成的测验
         const userQuizzes = await UserQuiz.findAll({
             where: { UserUserID: userID },
             attributes: ['QuizQuizID', 'lastTry', 'lastTryTime']
         });
-        if (!userQuizzes.length) {
-            return { status: 1, message: "无对应userID" };
-        }
-        const quizIDs = userQuizzes.map(uq => uq.QuizQuizID);
+        const userQuizIDs = userQuizzes.map(uq => uq.QuizQuizID);
+
+        // 获取所有测验
+        const allQuizzes = await Quiz.findAll({
+            attributes: ['quizID', 'quizName', 'totalCredits']
+        });
+
         const response = {
             status: 0,
             message: "成功",
             quizzes: []
         };
-        // 使用收集到的 quizID 列表，从 Quiz 表中查询相关的测验信息
-        for (const quizID of quizIDs) {
-            const quiz = await Quiz.findByPk(quizID);
-            if (quiz) {
-                const userQuiz = userQuizzes.find(uq => uq.QuizQuizID === quizID);
-                response.quizzes.push({
-                    quizID: quiz.quizID,
-                    quizName: quiz.quizName,
-                    totalCredits: quiz.totalCredits,
-                    lastTry: userQuiz ? userQuiz.lastTry : null,
-                    lastTryTime: userQuiz && userQuiz.lastTryTime ? userQuiz.lastTryTime.toISOString() : null
-                });
+
+        // 遍历所有测验并构建响应
+        for (const quiz of allQuizzes) {
+            const userQuiz = userQuizzes.find(uq => uq.QuizQuizID === quiz.quizID);
+            const quizResponse = {
+                quizID: quiz.quizID,
+                quizName: quiz.quizName,
+                totalCredits: quiz.totalCredits
+            };
+
+            // 如果用户完成了测验，添加 lastTry 和 lastTryTime
+            if (userQuizIDs.includes(quiz.quizID)) {
+                quizResponse.lastTry = userQuiz.lastTry;
+                quizResponse.lastTryTime = userQuiz.lastTryTime ? userQuiz.lastTryTime.toISOString() : null;
             }
+
+            response.quizzes.push(quizResponse);
         }
+
+        // 按 quizID 排序
+        response.quizzes.sort((a, b) => a.quizID - b.quizID);
+
         return response;
     } catch (error) {
-        console.error('Error In getUserQuizzes :', error);
+        console.error('Error In getQuizList :', error);
         return { status: -9, message: '错误' };
     }
-}
+};
 
 /**
  * getQuizDetails - 获取试卷列表
@@ -63,8 +75,8 @@ exports.getQuizDetails = async (userID, quizID) => {
         message: "成功",
         quizName: "",
         totalCredits: 0,
-        lastTry: 0,
-        lastTryTime: "",
+        lastTry: undefined,
+        lastTryTime: undefined,
         probs: []
     };
     try {

@@ -4,6 +4,7 @@
   <div class="map">
     <div class="tag" ref="tagDiv"></div>
     <!-- <img src="../assets/map.gif" alt="" /> -->
+    <!-- <img src="../assets/map.gif" alt="" /> -->
   </div>
   <div class="loading" v-if="progress != 100"></div>
   <div class="progress" v-if="progress != 100">
@@ -225,6 +226,8 @@ onMounted(() => {
     "诊室",
     new THREE.Vector3(-3, 0, -0.5)
   );
+  scene.add(context.mesh);
+  context.onClick(() => {
   scene.add(context.mesh);
   context.onClick(() => {
     console.log("诊室");

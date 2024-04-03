@@ -23,7 +23,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": -3,
-    "message": "缺少必选参数/多余参数"
+    "message": "缺少必选参数/多余参数/格式错误"
 }
 
 HTTP/1.1 500
@@ -160,7 +160,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/disease/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -199,7 +199,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/disease/list?diseaseType="寄生虫病"
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -261,7 +261,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/disease/detail?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -315,7 +315,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/case/list?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -372,7 +372,7 @@ Content-Type: application/json
 
 ```json
 GET /casestudy/case/detail?caseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -469,7 +469,7 @@ Content-Type: application/json
 
 ```json
 GET /disease/type
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -511,7 +511,7 @@ Content-Type: application/json
 
 ```json
 GET /disease/list?page=1&pageSize=10&diseaseType="寄生虫病"
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -568,7 +568,7 @@ Content-Type: application/json
 
 ```json
 GET /disease/detail?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -624,7 +624,7 @@ Content-Type: application/json
 
 ```json
 GET /medicine/list?page=1&pageSize=10&diseaseType="寄生虫病"
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -658,6 +658,13 @@ Content-Type: application/json
     ]
 }
 
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json
+{
+    "status": 1,
+    "message": "无药品数据"
+}
+
 ```
 
 ## `GET /medicine/detail`
@@ -675,7 +682,7 @@ Content-Type: application/json
 
 ```json
 GET /medicine/detail?medicineID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -706,7 +713,7 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应medicineID"
-a}
+}
 ```
 
 ## `GET /roleplaying/list`
@@ -723,7 +730,7 @@ a}
 
 ```json
 GET /roleplaying/list?role=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -769,11 +776,11 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/detail?role=2&job=注射
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 
 GET /roleplaying/list?role=1
-Authorization: Bearer fakeToken
+Authorization: fakeToken
 ```
 
 ### 返回响应
@@ -827,7 +834,7 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/list?role=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -873,11 +880,11 @@ Content-Type: application/json
 
 ```json
 GET /roleplaying/detail?role=2&job=注射
-: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 
 GET /roleplaying/list?role=1
-Authorization: Bearer fakeToken
+Authorization: fakeToken
 ```
 
 ### 返回响应
@@ -932,7 +939,7 @@ Content-Type: application/json
 
 ```json
 GET /quiz/list?userID=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1002,7 +1009,7 @@ Content-Type: application/json
 
 ```javascript
 GET /quiz/detail?quizID=1&userID=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1098,7 +1105,7 @@ TODO: 个人觉得probNumber应换成probID，试卷中题目题号前端自行�
 
 ```json
 POST /quiz/result
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "quizID": 1,
@@ -1180,7 +1187,7 @@ Content-Type: application/json
 
 ```json
 GET /3DVirtualTour/item/detail?itemID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1228,7 +1235,7 @@ Content-Type: application/json
 
 ```json
 GET /3DVirtualTour/department/list
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1283,7 +1290,7 @@ Content-Type: application/json
 
 ```json
 GET /3DVirtualTour/department/detail?departmentID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1327,7 +1334,7 @@ Content-Type: application/json
 
 ```json
 GET /admin/users
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1344,7 +1351,6 @@ Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | -------- | ---- | ------- | ---- | ------------ |
 | userID   | Body | integer | 是   | 用户ID       |
 | userName | Body | string  | 是   | 用户名称     |
-| password | Body | integer | 是   | 密码         |
 | isAdmin  | Body | boolean | 是   | 是否为管理员 |
 
 `Example`
@@ -1390,7 +1396,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/user
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "userName": "Allen Yung",
@@ -1418,11 +1424,11 @@ Content-Type: application/json
     "userID":3
 }
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复用户"
+    "message": "重复userName"
 }
 ```
 
@@ -1444,7 +1450,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/user
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "userID":3,
@@ -1493,7 +1499,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/user?userID=3
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1556,7 +1562,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "diseaseName": "狂犬病",
@@ -1612,7 +1618,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "diseaseID":3,
@@ -1661,7 +1667,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/disease?diseaseID=3
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1706,7 +1712,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/medicine
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "medicineName": "肾上腺素",
@@ -1760,7 +1766,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/medicine
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "medicineID":2,
@@ -1809,7 +1815,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/medicine?medicineID=2
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1857,7 +1863,7 @@ Content-Type: application/json
 
 ```json
 GET /admin/case?diseaseID=1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -1936,7 +1942,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/case
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "diseaseID": 1,
@@ -2019,7 +2025,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/case
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "caseID": 1,
@@ -2084,7 +2090,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/case?caseID=1
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -2114,38 +2120,27 @@ Content-Type: application/json
 
 ## `POST /admin/roleplaying`
 
-添加job和其对应的task
+添加job
 
 ### 请求参数
 
-| 名称          | 位置   | 类型     | 必选 | 备注                              |
-| ------------- | ------ | -------- | ---- | --------------------------------- |
-| Authorization | Header | string   | 是   | 身份验证token                     |
-| role          | Body   | integer  | 是   | 0代表前台、1代表医助、2代表兽医师 |
-| job           | Body   | string   | 是   | 工作内容选择                      |
-| tasks         | Body   | object[] | 是   | 该job所有任务                     |
-
-对于tasks的元素
-| 名称       | 位置   | 类型   | 必选 | 备注     |
-| ---------- | ------ | ------ | ---- | -------- |
-| taskName   | Body   | string | 是   | 任务名称 |
-| taskDetail | String | string | 是   | 具体信息 |
+| 名称          | 位置   | 类型    | 必选 | 备注                              |
+| ------------- | ------ | ------- | ---- | --------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                     |
+| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string  | 是   | 工作内容选择                      |
+| jobDetail     | Body   | string  | 是   | job详情                           |
 
 `Example`
 
 ```json
 POST /admin/roleplaying
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "role":1,
     "job":"注射",
-    "tasks":[
-        {
-            "taskName":"静脉注射",
-            "taskDetail":"拿针开扎"
-        }
-    ]
+    "jobDetail":"静脉注射"
 }
 ```
 
@@ -2180,34 +2175,23 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型     | 必选 | 备注                              |
-| ------------- | ------ | -------- | ---- | --------------------------------- |
-| Authorization | Header | string   | 是   | 身份验证token                     |
-| role          | Body   | integer  | 是   | 0代表前台、1代表医助、2代表兽医师 |
-| job           | Body   | string   | 是   | 工作内容选择                      |
-| tasks         | Body   | object[] | 是   | 该job所有任务                     |
-
-对于tasks的元素
-| 名称       | 位置   | 类型   | 必选 | 备注     |
-| ---------- | ------ | ------ | ---- | -------- |
-| taskName   | Body   | string | 是   | 任务名称 |
-| taskDetail | String | string | 是   | 具体信息 |
+| 名称          | 位置   | 类型    | 必选 | 备注                              |
+| ------------- | ------ | ------- | ---- | --------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                     |
+| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string  | 是   | 工作内容选择                      |
+| jobDetail     | Body   | string  | 是   | job详情                           |
 
 `Example`
 
 ```json
 PUT /admin/roleplaying
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "role":1,
     "job":"注射",
-    "tasks":[
-        {
-            "taskName":"动脉注射",
-            "taskDetail":"拿针开扎"
-        }
-    ]
+    "jobDetail":"动脉注射"
 }
 ```
 
@@ -2259,7 +2243,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/roleplaying?role=1&job="注射"
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -2311,7 +2295,6 @@ Content-Type: application/json
 
 | 名称       | 位置 | 类型    | 必选 | 备注     |
 | ---------- | ---- | ------- | ---- | -------- |
-| probNumber | Body | integer | 是   | 题号     |
 | probCredit | Body | integer | 是   | 题目分数 |
 | probText   | Body | string  | 是   | 题目     |
 | probImg    | Body | string  | 否   | 图片路径 |
@@ -2322,7 +2305,7 @@ Content-Type: application/json
 
 ```json
 POST /admin/quiz
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "quizName":"测试1",
@@ -2391,7 +2374,6 @@ Content-Type: application/json
 
 | 名称       | 位置 | 类型    | 必选 | 备注     |
 | ---------- | ---- | ------- | ---- | -------- |
-| probNumber | Body | integer | 是   | 题号     |
 | probCredit | Body | integer | 否   | 题目分数 |
 | probText   | Body | string  | 否   | 题目     |
 | probImg    | Body | string  | 否   | 图片路径 |
@@ -2402,7 +2384,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/quiz
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "quizID":1,
@@ -2467,7 +2449,7 @@ Content-Type: application/json
 
 ```json
 DELETE /admin/quiz?quizID=1
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
 ### 返回响应
@@ -2513,7 +2495,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "itemID":1,
@@ -2564,7 +2546,7 @@ Content-Type: application/json
 
 ```json
 PUT /admin/disease
-Authorization: Bearer ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "departmentID":1,
