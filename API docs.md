@@ -23,7 +23,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": -3,
-    "message": "缺少必选参数/多余参数"
+    "message": "缺少必选参数/多余参数/格式错误"
 }
 
 HTTP/1.1 500
@@ -2167,11 +2167,18 @@ Content-Type: application/json
     "status": 1,
     "message": "无对应role"
 }
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 2, 
+    "message": "重复的job",
+}
+
 ```
 
 ## `PUT /admin/roleplaying`
 
-修改task
+修改job、jobDetail
 
 ### 请求参数
 
@@ -2179,7 +2186,8 @@ Content-Type: application/json
 | ------------- | ------ | ------- | ---- | --------------------------------- |
 | Authorization | Header | string  | 是   | 身份验证token                     |
 | role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
-| job           | Body   | string  | 是   | 工作内容选择                      |
+| prevJob       | Body   | string  | 否    | 要修改的工作名
+| job           | Body   | string  | 是   | 修改后的工作名或要修改工作详情的工作名(当prevJob undifined)                     |
 | jobDetail     | Body   | string  | 是   | job详情                           |
 
 `Example`
@@ -2190,6 +2198,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "role":1,
+    "prevJob":"要注射",
     "job":"注射",
     "jobDetail":"动脉注射"
 }
@@ -2224,6 +2233,13 @@ Content-Type: application/json
 {
     "status": 2,
     "message": "无对应job"
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 3,
+    "message": "重复的job"
 }
 ```
 
