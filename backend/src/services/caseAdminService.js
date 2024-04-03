@@ -79,14 +79,12 @@ exports.updateCase = async (caseData) => {
         if (!existingCase) {
             return { status: 1, message: "无对应caseID" };
         }
-        /* 留作issue
         if (caseData.diseaseID !== undefined) {
             const existingDisease = await Disease.findByPk(caseData.diseaseID);
             if (!existingDisease) {
                 return { status: 2, message: "无对应diseaseID" };
             }
         }
-        */
         // 更新Case表中的记录
         await existingCase.update({
             summary: caseData.summary || existingCase.summary,

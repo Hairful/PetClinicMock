@@ -2120,22 +2120,16 @@ Content-Type: application/json
 
 ## `POST /admin/roleplaying`
 
-添加job和其对应的task
+添加job
 
 ### 请求参数
 
-| 名称          | 位置   | 类型     | 必选 | 备注                              |
-| ------------- | ------ | -------- | ---- | --------------------------------- |
-| Authorization | Header | string   | 是   | 身份验证token                     |
-| role          | Body   | integer  | 是   | 0代表前台、1代表医助、2代表兽医师 |
-| job           | Body   | string   | 是   | 工作内容选择                      |
-| tasks         | Body   | object[] | 是   | 该job所有任务                     |
-
-对于tasks的元素
-| 名称       | 位置   | 类型   | 必选 | 备注     |
-| ---------- | ------ | ------ | ---- | -------- |
-| taskName   | Body   | string | 是   | 任务名称 |
-| taskDetail | String | string | 是   | 具体信息 |
+| 名称          | 位置   | 类型    | 必选 | 备注                              |
+| ------------- | ------ | ------- | ---- | --------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                     |
+| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string  | 是   | 工作内容选择                      |
+| jobDetail     | Body   | string  | 是   | job详情                           |
 
 `Example`
 
@@ -2146,12 +2140,7 @@ Content-Type: application/json
 {
     "role":1,
     "job":"注射",
-    "tasks":[
-        {
-            "taskName":"静脉注射",
-            "taskDetail":"拿针开扎"
-        }
-    ]
+    "jobDetail":"静脉注射"
 }
 ```
 
@@ -2186,18 +2175,12 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型     | 必选 | 备注                              |
-| ------------- | ------ | -------- | ---- | --------------------------------- |
-| Authorization | Header | string   | 是   | 身份验证token                     |
-| role          | Body   | integer  | 是   | 0代表前台、1代表医助、2代表兽医师 |
-| job           | Body   | string   | 是   | 工作内容选择                      |
-| tasks         | Body   | object[] | 是   | 该job所有任务                     |
-
-对于tasks的元素
-| 名称       | 位置   | 类型   | 必选 | 备注     |
-| ---------- | ------ | ------ | ---- | -------- |
-| taskName   | Body   | string | 是   | 任务名称 |
-| taskDetail | String | string | 是   | 具体信息 |
+| 名称          | 位置   | 类型    | 必选 | 备注                              |
+| ------------- | ------ | ------- | ---- | --------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                     |
+| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
+| job           | Body   | string  | 是   | 工作内容选择                      |
+| jobDetail     | Body   | string  | 是   | job详情                           |
 
 `Example`
 
@@ -2208,12 +2191,7 @@ Content-Type: application/json
 {
     "role":1,
     "job":"注射",
-    "tasks":[
-        {
-            "taskName":"动脉注射",
-            "taskDetail":"拿针开扎"
-        }
-    ]
+    "jobDetail":"动脉注射"
 }
 ```
 

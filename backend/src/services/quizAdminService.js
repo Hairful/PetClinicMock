@@ -35,7 +35,6 @@ exports.createQuizWithProbs = async (quizData) => {
         for (const prob of probs) {
             await Prob.create({
                 quizID: quiz.quizID,
-                probNumber: prob.probID,
                 probCredit: prob.probCredit,
                 probText: prob.probText,
                 probImg: prob.probImg,

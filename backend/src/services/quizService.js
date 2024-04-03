@@ -63,8 +63,8 @@ exports.getQuizDetails = async (userID, quizID) => {
         message: "成功",
         quizName: "",
         totalCredits: 0,
-        lastTry: 0,
-        lastTryTime: "",
+        lastTry: undefined,
+        lastTryTime: undefined,
         probs: []
     };
     try {
