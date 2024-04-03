@@ -7,7 +7,7 @@
 const express = require('express');
 const router = express.Router();
 const { getMedicineDetail, getMedicineList } = require('../controllers/medicineController');
-const { isQueryValid, isBodyValid } = require('../middlewares/formatCheck');
+const { isQueryValid } = require('../middlewares/formatCheck');
 const { isTokenValid } = require('../middlewares/authMiddleware');
 
 const paramsInQueryOfList = [];

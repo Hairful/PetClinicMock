@@ -1,14 +1,14 @@
 /**
- * 文件: /backend/src/controllers/diseaseAdminController.js
- * 描述: 疾病管理接口的控制器
+ * 文件: /backend/src/controllers/quizAdminController.js
+ * 描述: 试题管理接口的控制器
  * 作者: {YYZ}
  */
 
-const { createDisease, updateDisease, deleteDiseaseById } = require('../services/diseaseAdminService');
+const { createQuizWithProbs, updateQuiz, deleteQuiz } = require('../services/quizAdminService');
 
-exports.createDisease = async (req, res) => {
+exports.createQuiz = async (req, res) => {
     try {
-        const result = await createDisease(req.body);
+        const result = await createQuizWithProbs(req.body);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -23,23 +23,21 @@ exports.createDisease = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createDisease:', error);
+        console.error('Error in createQuiz:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
 
-exports.updateDisease = async (req, res) => {
+exports.updateQuiz = async (req, res) => {
     try {
-        const { diseaseID } = req.body;
-        delete req.body.diseaseID;
-        const result = await updateDisease(diseaseID, req.body);
+        const result = await updateQuiz(req.body);
         let httpStatus;
         switch (result.status) {
             case 0:
                 httpStatus = 200;
                 break;
             case 1:
-                httpStatus = 400;
+                httpStatus = 404;
                 break;
             case -9:
                 httpStatus = 500;
@@ -47,22 +45,22 @@ exports.updateDisease = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateDisease:', error);
+        console.error('Error in updateQuiz:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
 
-exports.deleteDisease = async (req, res) => {
+exports.deleteQuiz = async (req, res) => {
     try {
-        const { diseaseID } = req.query;
-        const result = await deleteDiseaseById(diseaseID);
+        const { quizID } = req.query;
+        const result = await deleteQuiz(quizID);
         let httpStatus;
         switch (result.status) {
             case 0:
                 httpStatus = 200;
                 break;
             case 1:
-                httpStatus = 400;
+                httpStatus = 404;
                 break;
             case -9:
                 httpStatus = 500;
@@ -70,7 +68,7 @@ exports.deleteDisease = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteDisease:', error);
+        console.error('Error in deleteCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

@@ -50,8 +50,8 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
-        const { userID, userName, password, isAdmin } = req.body;
-        const result = await updateUser(userID, userName, password, isAdmin);
+        const { userName, password, isAdmin } = req.body;
+        const result = await updateUser(req.userIDInToken, userName, password, isAdmin);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -73,8 +73,7 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     try {
-        const { userID } = req.query;
-        const result = await deleteUser(userID);
+        const result = await deleteUser(req.userIDInToken);
         let httpStatus;
         switch (result.status) {
             case 0:

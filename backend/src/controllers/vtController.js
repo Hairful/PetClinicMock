@@ -1,6 +1,6 @@
 /**
  * 文件: /backend/src/controllers/vtController.js
- * 描述: 药品信息接口的控制器
+ * 描述: 3D虚拟导览接口的控制器
  * 作者: {YYZ}
  */
 

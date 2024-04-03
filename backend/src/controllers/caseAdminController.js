@@ -1,21 +1,24 @@
 /**
  * 文件: /backend/src/controllers/diseaseAdminController.js
- * 描述: 疾病管理接口的控制器
+ * 描述: 病例管理接口的控制器
  * 作者: {YYZ}
  */
 
-const { createDisease, updateDisease, deleteDiseaseById } = require('../services/diseaseAdminService');
+const { createCase, updateCase, deleteCase } = require('../services/caseAdminService');
 
-exports.createDisease = async (req, res) => {
+exports.createCase = async (req, res) => {
     try {
-        const result = await createDisease(req.body);
+        const result = await createCase(req.body);
         let httpStatus;
         switch (result.status) {
             case 0:
                 httpStatus = 200;
                 break;
             case 1:
-                httpStatus = 400;
+                httpStatus = 404;
+                break;
+            case 2:
+                httpStatus = 404;
                 break;
             case -9:
                 httpStatus = 500;
@@ -23,23 +26,27 @@ exports.createDisease = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createDisease:', error);
+        console.error('Error in createCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
 
-exports.updateDisease = async (req, res) => {
+exports.updateCase = async (req, res) => {
     try {
-        const { diseaseID } = req.body;
-        delete req.body.diseaseID;
-        const result = await updateDisease(diseaseID, req.body);
+        const result = await updateCase(req.body);
         let httpStatus;
         switch (result.status) {
             case 0:
                 httpStatus = 200;
                 break;
             case 1:
-                httpStatus = 400;
+                httpStatus = 404;
+                break;
+            case 2:
+                httpStatus = 404;
+                break;
+            case 3:
+                httpStatus = 404;
                 break;
             case -9:
                 httpStatus = 500;
@@ -47,22 +54,22 @@ exports.updateDisease = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateDisease:', error);
+        console.error('Error in updateCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
 
-exports.deleteDisease = async (req, res) => {
+exports.deleteCase = async (req, res) => {
     try {
-        const { diseaseID } = req.query;
-        const result = await deleteDiseaseById(diseaseID);
+        const { caseID } = req.query;
+        const result = await deleteCase(caseID);
         let httpStatus;
         switch (result.status) {
             case 0:
                 httpStatus = 200;
                 break;
             case 1:
-                httpStatus = 400;
+                httpStatus = 404;
                 break;
             case -9:
                 httpStatus = 500;
@@ -70,7 +77,7 @@ exports.deleteDisease = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteDisease:', error);
+        console.error('Error in deleteCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

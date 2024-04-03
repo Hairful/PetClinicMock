@@ -17,7 +17,7 @@ const Prob = sequelize.define('Prob', {
     },
     probImg: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     probAns: {
         type: DataTypes.INTEGER,
