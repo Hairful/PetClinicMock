@@ -94,6 +94,15 @@
               class="admin-menu-navlink button"
             >
               <span class="heading3">
+                <span>Admin User</span>
+                <br />
+              </span>
+            </router-link>
+            <router-link
+              to="/admin-virtual-tour"
+              class="admin-menu-navlink button"
+            >
+              <span class="heading3">
                 <span>3D Virtual Tour</span>
                 <br />
               </span>
