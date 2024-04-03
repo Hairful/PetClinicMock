@@ -8,8 +8,7 @@ const { getQuizDetails, getQuizList, recordExamEntry } = require('../services/qu
 
 exports.getQuizList = async (req, res) => {
     try {
-        const { userID } = req.query;
-        const result = await getQuizList(userID);
+        const result = await getQuizList(req.userIDInToken);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -34,8 +33,8 @@ exports.getQuizList = async (req, res) => {
 
 exports.getQuizDetail = async (req, res) => {
     try {
-        const { userID, quizID } = req.query;
-        const result = await getQuizDetails(userID, quizID);
+        const { quizID } = req.query;
+        const result = await getQuizDetails(req.userIDInToken, quizID);
         let httpStatus;
         switch (result.status) {
             case 0:

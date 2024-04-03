@@ -9,9 +9,18 @@ const { tokenKey } = require('../config/authConfig');
 const User = require('../models/User');
 
 exports.isTokenValid = async (req, res, next) => {
-    const token = req.headers.authorization;
-    if (!token) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
         return res.status(400).json({ status: -3, message: '缺少必选参数(Token in Header)' });
+    }
+    const parts = authHeader.split(' ');
+    let token;
+    if (parts.length === 2 && parts[0] === 'Bearer') {
+        token = parts[1];
+    } else if (parts.length === 1) {
+        token = parts[0];
+    } else {
+        return res.status(400).json({ status: -3, message: '缺少必选参数/多余参数/格式错误' });
     }
     let decoded;
     try {
@@ -40,7 +49,7 @@ exports.isTokenAdmin = async (req, res, next) => {
         const userIDInToken = req.userIDInToken;
         const user = await User.findByPk(userIDInToken);
         if (!user || !user.isAdmin) {
-            return res.status(403).json({ status: -2, message: '无管理员权限' });
+            return res.status(403).json({ status: -2, message: '无对应权限' });
         }
         next();
     } catch (error) {
