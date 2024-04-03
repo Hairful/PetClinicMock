@@ -30,7 +30,7 @@ exports.createJob = async (role, job, jobDetail) => {
  * @param {string} jobDetail - 工作详情
  * @returns {Object} 对象
  */
-exports.updateJob = async (role, job, jobDetail) => {
+exports.updateJob = async (role, prevJob, job, jobDetail) => {
     try {
         const rolejob = await Job.findOne({
             where: { role }
