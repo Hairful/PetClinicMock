@@ -1,6 +1,6 @@
 /**
- * 文件: /backend/src/controllers/adminMedicineController.js
- * 描述: 疾病管理接口的控制器
+ * 文件: /backend/src/controllers/medicineAdminController.js
+ * 描述: 药品管理接口的控制器
  * 作者: {YYZ}
  */
 
