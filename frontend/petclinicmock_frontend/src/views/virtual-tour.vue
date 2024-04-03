@@ -4,6 +4,7 @@
   <div class="map">
     <div class="tag" ref="tagDiv"></div>
     <!-- <img src="../assets/map.gif" alt="" /> -->
+    <!-- <img src="../assets/map.gif" alt="" /> -->
   </div>
   <div class="loading" v-if="progress != 100"></div>
   <div class="progress" v-if="progress != 100">
@@ -60,23 +61,23 @@ geometry.scale(1, 1, -1);
 
 // 挂载完毕之后获取dom
 onMounted(() => {
-  function moveTag(name) {
-    let positions = {
-      前台: [100, 110],
-      厨房: [180, 190],
-      阳台: [50, 50],
-      化验室: [160, 40],
-      走廊: [150, 90],
-    };
-    if (positions[name]) {
-      gsap.to(tagDiv.value, {
-        duration: 1,
-        x: positions[name][0],
-        y: positions[name][1],
-        ease: "power3.inOut",
-      });
-    }
-  }
+  // function moveTag(name) {
+  //   let positions = {
+  //     前台: [100, 110],
+  //     厨房: [180, 190],
+  //     阳台: [50, 50],
+  //     化验室: [160, 40],
+  //     走廊: [150, 90],
+  //   };
+  //   if (positions[name]) {
+  //     gsap.to(tagDiv.value, {
+  //       duration: 1,
+  //       x: positions[name][0],
+  //       y: positions[name][1],
+  //       ease: "power3.inOut",
+  //     });
+  //   }
+  // }
   tagDiv.value.style.cssText = `
     transform: translate(100px,110px);
   `;
@@ -227,6 +228,8 @@ onMounted(() => {
   );
   scene.add(context.mesh);
   context.onClick(() => {
+  scene.add(context.mesh);
+  context.onClick(() => {
     console.log("诊室");
     gsap.to(camera.position, {
       x: conPosition.x,
@@ -299,11 +302,11 @@ onMounted(() => {
   });
 
   // 创建手术准备室
-  let psurPosition = new THREE.Vector3(15, 11, 15);
+  let psurPosition = new THREE.Vector3(15, 15, 15);
   let psurIndex = 7;
   let psurUrl = "./img/presur/";
   let psurEuler = new THREE.Euler(0, -Math.PI / 2, 0);
-  const psur = new Room("免疫室", psurIndex, psurUrl, psurPosition, psurEuler);
+  const psur = new Room("手术准备室", psurIndex, psurUrl, psurPosition, psurEuler);
 
     // 创建免疫室室文字精灵
   const psurtext = new SpriteCanvas(
@@ -326,11 +329,54 @@ onMounted(() => {
   // 创建免疫室回前台文字精灵
   const fro5text = new SpriteCanvas(
     camera,
-    "前台",
-    new THREE.Vector3(3, 10, -2)
+    "走廊",
+    new THREE.Vector3(16, 15, 15)
   );
   scene.add(fro5text.mesh);
-  fro4text.onClick(() => {
+  fro5text.onClick(() => {
+    console.log("走廊");
+    gsap.to(camera.position, {
+      x: kitPosition.x,
+      y: kitPosition.y,
+      z: kitPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+    // 创建手术室
+  let surPosition = new THREE.Vector3(20, 20, 20);
+  let surIndex = 15;
+  let surUrl = "./img/sur/";
+  let surEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const sur = new Room("手术室", surIndex, surUrl, surPosition, surEuler);
+
+    // 创建免疫室室文字精灵
+  const surtext = new SpriteCanvas(
+    camera,
+    "手术室",
+    new THREE.Vector3(15, 15, 13)
+  );
+  scene.add(surtext.mesh);
+  surtext.onClick(() => {
+    console.log("手术室");
+    gsap.to(camera.position, {
+      x: surPosition.x,
+      y: surPosition.y,
+      z: surPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+  // 创建免疫室回前台文字精灵
+  const fro6text = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(20, 20, 18)
+  );
+  scene.add(fro6text.mesh);
+  fro6text.onClick(() => {
     console.log("走廊");
     gsap.to(camera.position, {
       x: kitPosition.x,
