@@ -17,7 +17,7 @@ const paramsInQueryOfDetail = ['medicineID'];
 /*
 router.get('/list', isQueryValid(paramsInQueryOfList), getMedicineList);
 router.get('/detail', isQueryValid(paramsInQueryOfDetail), getMedicineDetail);
-*/
+*/w
 
 //启用Token认证
 
