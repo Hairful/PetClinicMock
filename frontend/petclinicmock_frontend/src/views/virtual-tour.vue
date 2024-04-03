@@ -53,6 +53,7 @@ const render = () => {
 
 // 添加立方体
 const geometry = new THREE.BoxGeometry(50, 50, 50);
+const geometry = new THREE.BoxGeometry(50, 50, 50);
 geometry.scale(1, 1, -1);
 // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 // const cube = new THREE.Mesh(geometry, material);
@@ -82,22 +83,32 @@ onMounted(() => {
   `;
 
   // 创建前台
+  // 创建前台
   let livingIndex = 0;
   let livingUrl = "./img/frontdesk/";
+  let livingUrl = "./img/frontdesk/";
   let livingPosition = new THREE.Vector3(0, 0, 0);
+  const living = new Room("前台", livingIndex, livingUrl, livingPosition);
   const living = new Room("前台", livingIndex, livingUrl, livingPosition);
 
   // 创建走廊
   let kitPosition = new THREE.Vector3(3, 10, 5);
   let kitIndex = 4;
   let textureUrl = "./img/corridor/";
+  // 创建走廊
+  let kitPosition = new THREE.Vector3(3, 10, 5);
+  let kitIndex = 4;
+  let textureUrl = "./img/corridor/";
   let kitEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const room = new Room("走廊", kitIndex, textureUrl, kitPosition, kitEuler);
+  const room = new Room("走廊", kitIndex, textureUrl, kitPosition, kitEuler);
   // 创建文字精灵
+  const text = new SpriteCanvas(camera, "走廊", new THREE.Vector3(3, 0, 0.5));
   const text = new SpriteCanvas(camera, "走廊", new THREE.Vector3(3, 0, 0.5));
   // text.mesh.rotation.y = Math.PI / 3;
   scene.add(text.mesh);
   text.onClick(() => {
+    console.log("走廊");
     console.log("走廊");
     gsap.to(camera.position, {
       x: kitPosition.x,
@@ -106,16 +117,21 @@ onMounted(() => {
       duration: 1,
     });
     //moveTag("走廊");
+    //moveTag("走廊");
   });
 
+  // 创建前台文字精灵
   // 创建前台文字精灵
   const textLiving = new SpriteCanvas(
     camera,
     "前台",
     new THREE.Vector3(4, 8, 1)
+    "前台",
+    new THREE.Vector3(4, 8, 1)
   );
   scene.add(textLiving.mesh);
   textLiving.onClick(() => {
+    console.log("前台");
     console.log("前台");
     gsap.to(camera.position, {
       x: livingPosition.x,
@@ -123,6 +139,7 @@ onMounted(() => {
       z: livingPosition.z,
       duration: 1,
     });
+    //moveTag("前台");
     //moveTag("前台");
   });
 
@@ -135,10 +152,24 @@ onMounted(() => {
 
     // 创建化验室文字精灵
   const labtext = new SpriteCanvas(
+// 创建化验室
+  let labPosition = new THREE.Vector3(3, 0, 12);
+  let labIndex = 9;
+  let labUrl = "./img/lab/";
+  let labEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const lab = new Room("化验室", labIndex, labUrl, labPosition, labEuler);
+
+    // 创建化验室文字精灵
+  const labtext = new SpriteCanvas(
     camera,
     "化验室",
     new THREE.Vector3(1, 0, 4.5)
+    "化验室",
+    new THREE.Vector3(1, 0, 4.5)
   );
+  scene.add(labtext.mesh);
+  labtext.onClick(() => {
+    console.log("化验室");
   scene.add(labtext.mesh);
   labtext.onClick(() => {
     console.log("化验室");
@@ -146,17 +177,28 @@ onMounted(() => {
       x: labPosition.x,
       y: labPosition.y,
       z: labPosition.z,
+      x: labPosition.x,
+      y: labPosition.y,
+      z: labPosition.z,
       duration: 1,
     });
+    //moveTag("前台");
     //moveTag("前台");
   });
 
    // 创建化验室回前台文字精灵
    const fro1text = new SpriteCanvas(
+   // 创建化验室回前台文字精灵
+   const fro1text = new SpriteCanvas(
     camera,
     "前台",
     new THREE.Vector3(3, 0, 11)
+    "前台",
+    new THREE.Vector3(3, 0, 11)
   );
+  scene.add(fro1text.mesh);
+  fro1text.onClick(() => {
+    console.log("前台");
   scene.add(fro1text.mesh);
   fro1text.onClick(() => {
     console.log("前台");
@@ -166,6 +208,7 @@ onMounted(() => {
       z: livingPosition.z,
       duration: 1,
     });
+    //moveTag("前台");
     //moveTag("前台");
   });
 
@@ -178,10 +221,24 @@ onMounted(() => {
 
     // 创建病理室室文字精灵
   const pathtext = new SpriteCanvas(
+  // 创建病理室
+  let pathPosition = new THREE.Vector3(-8, 0, 5);
+  let pathIndex = 12;
+  let pathUrl = "./img/pathology/";
+  let pathEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const path = new Room("病理室", pathIndex, pathUrl, pathPosition, pathEuler);
+
+    // 创建病理室室文字精灵
+  const pathtext = new SpriteCanvas(
     camera,
     "病理室",
     new THREE.Vector3(-4, 0, 1.3)
+    "病理室",
+    new THREE.Vector3(-4, 0, 1.3)
   );
+  scene.add(pathtext.mesh);
+  pathtext.onClick(() => {
+    console.log("病理室");
   scene.add(pathtext.mesh);
   pathtext.onClick(() => {
     console.log("病理室");
@@ -189,17 +246,28 @@ onMounted(() => {
       x: pathPosition.x,
       y: pathPosition.y,
       z: pathPosition.z,
+      x: pathPosition.x,
+      y: pathPosition.y,
+      z: pathPosition.z,
       duration: 1,
     });
+    //moveTag("前台");
     //moveTag("前台");
   });
 
   // 创建病理室回前台文字精灵
   const fro2text = new SpriteCanvas(
+  // 创建病理室回前台文字精灵
+  const fro2text = new SpriteCanvas(
     camera,
     "前台",
     new THREE.Vector3(-6, 0, 4)
+    "前台",
+    new THREE.Vector3(-6, 0, 4)
   );
+  scene.add(fro2text.mesh);
+  fro2text.onClick(() => {
+    console.log("前台");
   scene.add(fro2text.mesh);
   fro2text.onClick(() => {
     console.log("前台");
@@ -209,6 +277,7 @@ onMounted(() => {
       z: livingPosition.z,
       duration: 1,
     });
+    //moveTag("前台");
     //moveTag("前台");
   });
 
@@ -221,8 +290,18 @@ onMounted(() => {
 
     // 创建免疫室室文字精灵
   const context = new SpriteCanvas(
+  // 创建诊室
+  let conPosition = new THREE.Vector3(-15, -1, -5);
+  let conIndex = 6;
+  let conUrl = "./img/consultroom/";
+  let conEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const con = new Room("诊室", conIndex, conUrl, conPosition, conEuler);
+
+    // 创建免疫室室文字精灵
+  const context = new SpriteCanvas(
     camera,
     "诊室",
+    new THREE.Vector3(-3, 0, -0.5)
     new THREE.Vector3(-3, 0, -0.5)
   );
   scene.add(context.mesh);
@@ -404,6 +483,7 @@ onMounted(() => {
       duration: 1,
     });
     //moveTag("前台");
+    //moveTag("前台");
   });
 
 <<<<<<< HEAD
@@ -430,8 +510,14 @@ onMounted(() => {
       x: kitPosition.x,
       y: kitPosition.y,
       z: kitPosition.z,
+      x: kitPosition.x,
+      y: kitPosition.y,
+      z: kitPosition.z,
       duration: 1,
     });
+    //moveTag("前台");
+  });
+ 
     //moveTag("前台");
   });
  
@@ -467,7 +553,8 @@ onMounted(() => {
     },
     false
   );
-});
+  });
+  
 
 class Room {
   constructor(
@@ -520,6 +607,7 @@ class Room {
     };
   }
 }
+
 </script>
 
 <style>
