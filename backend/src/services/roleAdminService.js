@@ -47,7 +47,9 @@ exports.updateJob = async (role, job, jobDetail) => {
         const result = await Job.findOne({
             where: { role, job }
         });
-        result.jobDetail = jobDetail;
+        if (jobDetail !== undefined) {
+            result.jobDetail = jobDetail;
+        }
         await result.save();
         return { status: 0, message: '成功' };
     } catch (error) {
