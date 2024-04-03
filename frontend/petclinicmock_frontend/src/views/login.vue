@@ -160,7 +160,8 @@ export default {
           { pattern:"^\\w{6,18}$", message: '密码长度在 6~18 位不含特殊字符', trigger: 'blur',  }
       ]
       },
-      identifyCodes: "1234567890abcdefjhijklinpqrsduvwxyz", //随机串内容,从这里随机抽几个显示验证码
+
+      identifyCodes: "234567890abcdefjhijkinpqrsduvwxyz", //随机串内容,从这里随机抽几个显示验证码
       identifyCode: "", //验证码图片内容
     }
   },
@@ -184,6 +185,7 @@ export default {
           this.token = response.data.token;
           localStorage.setItem('Token',this.token);//将token存在localstorage中
           localStorage.setItem('username',this.formLogin.name);
+          localStorage.setItem('userID',response.data.userID);
           console.log('Login successful');
           this.$router.push('/menu'); // Navigate to menu page
         } else if (response.data.status === 1) {

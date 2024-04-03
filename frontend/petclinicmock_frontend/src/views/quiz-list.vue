@@ -93,33 +93,20 @@
       </h1>
       <div class="quiz-list-container4">
         <ul class="quiz-list-ul list">
-          <li class="quiz-list-li list-item Content">
+          <li class="quiz-list-li list-item Content"
+            v-for="(quiz,index) in quizzes"
+            :key="quiz.quizID">
             <router-link
-              to="/quiz-detail"
-              class="quiz-list-navlink1 button bodyLarge"
+              :to="`/quiz-detail?quizID=${quiz.quizID}`"
+              :class="`quiz-list-navlink1 button bodyLarge`"
             >
-              Quiz 1
+              Quiz {{ index+1 }}
             </router-link>
-            <span class="quiz-list-text19 bodyLarge">Total Credits: 40</span>
-            <span class="quiz-list-text20 bodyLarge">Last Try: 40</span>
-            <span>
-              <span class="bodyLarge">Last Try Time: </span>
-              <span>2024年11月20日 11:59PM</span>
-            </span>
-          </li>
-          <li class="quiz-list-li1 list-item Content">
-            <router-link
-              to="/quiz-detail"
-              class="quiz-list-navlink2 button bodyLarge"
-            >
-              Quiz 2
-            </router-link>
-            <span class="quiz-list-text24 bodyLarge">Total Credits: 40</span>
-            <span class="quiz-list-text25 bodyLarge">Last Try: 40</span>
-            <span>
-              <span class="bodyLarge">Last Try Time: </span>
-              <span>2024年11月20日 11:59PM</span>
-            </span>
+            <span class="quiz-list-text19 bodyLarge">Quiz name:  {{ quiz.quizName }}</span>
+            <div></div>
+            <span class="quiz-list-text19 bodyLarge">Total Credits: {{ quiz.totalCredits }}</span>
+            <span class="quiz-list-text20 bodyLarge">Last Try: {{ quiz.lastTry}}</span>
+            <span class="quiz-list-text19 bodyLarge">Last Try Time:  {{ quiz.lastTryTime }}</span>
           </li>
         </ul>
       </div>
@@ -143,6 +130,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'QuizList',
   props: {},
@@ -150,6 +138,8 @@ export default {
     return {
       rawqwc5: ' ',
       name:localStorage.getItem('username'),
+      ID:localStorage.getItem('userID'),
+      quizzes:[],
     }
   },
   methods:{
@@ -158,6 +148,25 @@ export default {
       this.$router.push('/');
     }
   },
+  created() {
+    axios
+      .get(`/quiz/list`, 
+        {
+          headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.quizzes=response.data.quizzes;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
   metaInfo: {
     title: 'QuizList - Roasted Rusty Swallow',
     meta: [
@@ -366,7 +375,8 @@ export default {
 }
 .quiz-list-navlink1 {
   color: var(--dl-color-gray-white);
-  width: 148px;
+  width: 100px;
+  margin-right: 20px;
   text-align: left;
   border-color: var(--dl-color-gray-white);
   border-width: 0px;
