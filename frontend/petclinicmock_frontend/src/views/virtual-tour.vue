@@ -60,23 +60,23 @@ geometry.scale(1, 1, -1);
 
 // 挂载完毕之后获取dom
 onMounted(() => {
-  function moveTag(name) {
-    let positions = {
-      前台: [100, 110],
-      厨房: [180, 190],
-      阳台: [50, 50],
-      化验室: [160, 40],
-      走廊: [150, 90],
-    };
-    if (positions[name]) {
-      gsap.to(tagDiv.value, {
-        duration: 1,
-        x: positions[name][0],
-        y: positions[name][1],
-        ease: "power3.inOut",
-      });
-    }
-  }
+  // function moveTag(name) {
+  //   let positions = {
+  //     前台: [100, 110],
+  //     厨房: [180, 190],
+  //     阳台: [50, 50],
+  //     化验室: [160, 40],
+  //     走廊: [150, 90],
+  //   };
+  //   if (positions[name]) {
+  //     gsap.to(tagDiv.value, {
+  //       duration: 1,
+  //       x: positions[name][0],
+  //       y: positions[name][1],
+  //       ease: "power3.inOut",
+  //     });
+  //   }
+  // }
   tagDiv.value.style.cssText = `
     transform: translate(100px,110px);
   `;
@@ -299,11 +299,19 @@ onMounted(() => {
   });
 
   // 创建手术准备室
+<<<<<<< HEAD
   let psurPosition = new THREE.Vector3(15, 11, 15);
   let psurIndex = 7;
   let psurUrl = "./img/presur/";
   let psurEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const psur = new Room("免疫室", psurIndex, psurUrl, psurPosition, psurEuler);
+=======
+  let psurPosition = new THREE.Vector3(15, 15, 15);
+  let psurIndex = 7;
+  let psurUrl = "./img/presur/";
+  let psurEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const psur = new Room("手术准备室", psurIndex, psurUrl, psurPosition, psurEuler);
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
 
     // 创建免疫室室文字精灵
   const psurtext = new SpriteCanvas(
@@ -326,11 +334,19 @@ onMounted(() => {
   // 创建免疫室回前台文字精灵
   const fro5text = new SpriteCanvas(
     camera,
+<<<<<<< HEAD
     "前台",
     new THREE.Vector3(3, 10, -2)
   );
   scene.add(fro5text.mesh);
   fro4text.onClick(() => {
+=======
+    "走廊",
+    new THREE.Vector3(16, 15, 15)
+  );
+  scene.add(fro5text.mesh);
+  fro5text.onClick(() => {
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
     console.log("走廊");
     gsap.to(camera.position, {
       x: kitPosition.x,
@@ -341,6 +357,7 @@ onMounted(() => {
     //moveTag("前台");
   });
 
+<<<<<<< HEAD
 
   // 创建住院室
   let impPosition = new THREE.Vector3(-5, 10, 18);
@@ -362,11 +379,34 @@ onMounted(() => {
       x: impPosition.x,
       y: impPosition.y,
       z: impPosition.z,
+=======
+    // 创建手术室
+  let surPosition = new THREE.Vector3(20, 20, 20);
+  let surIndex = 15;
+  let surUrl = "./img/sur/";
+  let surEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const sur = new Room("手术室", surIndex, surUrl, surPosition, surEuler);
+
+    // 创建免疫室室文字精灵
+  const surtext = new SpriteCanvas(
+    camera,
+    "手术室",
+    new THREE.Vector3(15, 15, 13)
+  );
+  scene.add(surtext.mesh);
+  surtext.onClick(() => {
+    console.log("手术室");
+    gsap.to(camera.position, {
+      x: surPosition.x,
+      y: surPosition.y,
+      z: surPosition.z,
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
       duration: 1,
     });
     //moveTag("前台");
   });
 
+<<<<<<< HEAD
   // 创建住院室回走廊文字精灵
   const fro7text = new SpriteCanvas(
     camera,
@@ -375,6 +415,16 @@ onMounted(() => {
   );
    scene.add(fro7text.mesh);
   fro7text.onClick(() => {
+=======
+  // 创建免疫室回前台文字精灵
+  const fro6text = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(20, 20, 18)
+  );
+  scene.add(fro6text.mesh);
+  fro6text.onClick(() => {
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
     console.log("走廊");
     gsap.to(camera.position, {
       x: kitPosition.x,
