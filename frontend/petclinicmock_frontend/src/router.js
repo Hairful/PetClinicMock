@@ -11,7 +11,6 @@ import Home from './views/home'
 import LoginAdmin from './views/login-admin'
 import RolePlayMenu from './views/role-play-menu'
 import Menu from './views/menu'
-import AdminRolePlayDetail from './views/admin-role-play-detail'
 import AdminQuizDetail from './views/admin-quiz-detail'
 import VirtualTour from './views/virtual-tour'
 import AdminRolePlayMenu from './views/admin-role-play-menu'
@@ -84,11 +83,6 @@ const router = new Router({
       name: 'Menu',
       path: '/menu',
       component: Menu,
-    },
-    {
-      name: 'AdminRolePlayDetail',
-      path: '/admin-role-play-detail',
-      component: AdminRolePlayDetail,
     },
     {
       name: 'AdminQuizDetail',
@@ -169,17 +163,17 @@ const router = new Router({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/login' || to.path === '/register' || to.path === '/') {
-    next();
-  } else {
-    let token = localStorage.getItem('Token');
-    if (token === null || token === '') {
-      next('/login');
-    } else {
-      next();
-    }
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/login' || to.path === '/register' || to.path === '/') {
+//     next();
+//   } else {
+//     let token = localStorage.getItem('Token');
+//     if (token === null || token === '') {
+//       next('/login');
+//     } else {
+//       next();
+//     }
+//   }
+// });
 
 export default router

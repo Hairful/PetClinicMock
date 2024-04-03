@@ -108,14 +108,29 @@
         </button>
       </div>
       <div class="admin-case-study-list-container07">
+          <button
+            v-for="(diseaseType, index) in diseaseTypes"
+            :key="index"
+            :class="`case-study-menu-navlink1 button`"
+            @click="chooseType(diseaseType)"
+          >
+            <span class="heading3">{{ diseaseType }}</span>
+        </button>
+      </div>
+      <div class="admin-case-study-list-container07">
         <ul class="admin-case-study-list-ul list">
-          <li class="admin-case-study-list-li list-item Content">
+          <li v-if="this.currentType!=''" class="admin-case-study-list-li list-item Content" >
+            <div
+            v-for="(disease, index) in diseases"
+            :key="disease.diseaseID"
+            :class="`case-study-list-li Content list-item`"
+          >
             <div class="admin-case-study-list-container08">
               <div class="admin-case-study-list-container09">
                 <span class="admin-case-study-list-text17 heading3">
-                  Disease 1
+                  Disease {{disease.diseaseName}}
                 </span>
-                <span class="heading3">Type 1</span>
+                <span class="heading3">Type {{currentType}}</span>
               </div>
               <div class="admin-case-study-list-container10">
                 <button
@@ -125,14 +140,14 @@
                   Delete Disease
                 </button>
                 <router-link
-                  to="/admin-case-study-detail"
+                  :to="`/admin-case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${currentType}`"
                   class="admin-case-study-list-navlink1 button"
                 >
                   Manage Cases
                 </router-link>
               </div>
               <div class="admin-case-study-list-container11">
-                <input type="text" placeholder="Disease Name" class="input" />
+                <input type="text" :placeholder="`${disease.diseaseName}`" class="input" />
                 <button
                   type="button"
                   class="admin-case-study-list-button2 button"
@@ -144,7 +159,7 @@
                 </button>
               </div>
               <div class="admin-case-study-list-container12">
-                <input type="text" placeholder="Disease Type" class="input" />
+                <input type="text" :placeholder="`${currentType}`" class="input" />
                 <button
                   type="button"
                   class="admin-case-study-list-button3 button"
@@ -155,54 +170,9 @@
                 </button>
               </div>
             </div>
+          </div>
           </li>
-          <li class="admin-case-study-list-li1 list-item Content">
-            <div class="admin-case-study-list-container13">
-              <div class="admin-case-study-list-container14">
-                <span class="admin-case-study-list-text23 heading3">
-                  Disease 2
-                </span>
-                <span class="heading3">Type 2</span>
-              </div>
-              <div class="admin-case-study-list-container15">
-                <button
-                  type="button"
-                  class="admin-case-study-list-button4 button"
-                >
-                  Delete Disease
-                </button>
-                <router-link
-                  to="/admin-case-study-detail"
-                  class="admin-case-study-list-navlink2 button"
-                >
-                  Manage Cases
-                </router-link>
-              </div>
-              <div class="admin-case-study-list-container16">
-                <input type="text" placeholder="Disease Name" class="input" />
-                <button
-                  type="button"
-                  class="admin-case-study-list-button5 button"
-                >
-                  <span class="admin-case-study-list-text25 bodyLarge">
-                    <span>Rename Disease</span>
-                    <br />
-                  </span>
-                </button>
-              </div>
-              <div class="admin-case-study-list-container17">
-                <input type="text" placeholder="Disease Type" class="input" />
-                <button
-                  type="button"
-                  class="admin-case-study-list-button6 button"
-                >
-                  <span class="admin-case-study-list-text28 bodyLarge">
-                    Change Type
-                  </span>
-                </button>
-              </div>
-            </div>
-          </li>
+          <li v-else="this.currentType==''" class="admin-case-study-list-li list-item Content" ></li>
         </ul>
       </div>
     </div>
@@ -225,6 +195,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminCaseStudyList',
   props: {},
@@ -238,7 +209,52 @@ export default {
       rawx3jj: ' ',
       raw96j1: ' ',
       rawbwjf: ' ',
+      currentType:'',
+      diseaseTypes: [],
+      diseases: [],
     }
+  },
+  methods:{
+    chooseType(type){
+      this.currentType=type;
+      console.log(this.currentType)
+      axios
+      .get(`/disease/list?diseaseType=${this.currentType}`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.diseases = response.data.diseases;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+  },
+  created() {
+    axios
+      .get(`/disease/type`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.diseaseTypes = response.data.diseaseTypes;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   metaInfo: {
     title: 'AdminCaseStudyList - Roasted Rusty Swallow',

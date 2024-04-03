@@ -94,6 +94,15 @@
               class="admin-menu-navlink button"
             >
               <span class="heading3">
+                <span>Admin User</span>
+                <br />
+              </span>
+            </router-link>
+            <router-link
+              to="/admin-virtual-tour"
+              class="admin-menu-navlink button"
+            >
+              <span class="heading3">
                 <span>3D Virtual Tour</span>
                 <br />
               </span>
@@ -118,7 +127,7 @@
                 <br />
               </span>
             </router-link>
-            <router-link to="/quiz-list" class="admin-menu-navlink3 button">
+            <router-link to="/admin-quiz-list" class="admin-menu-navlink3 button">
               <span class="heading3">Quiz &amp; Exams</span>
             </router-link>
           </div>
