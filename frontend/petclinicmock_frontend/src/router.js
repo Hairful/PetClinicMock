@@ -11,7 +11,6 @@ import Home from './views/home'
 import LoginAdmin from './views/login-admin'
 import RolePlayMenu from './views/role-play-menu'
 import Menu from './views/menu'
-import AdminRolePlayDetail from './views/admin-role-play-detail'
 import AdminQuizDetail from './views/admin-quiz-detail'
 import VirtualTour from './views/virtual-tour'
 import AdminRolePlayMenu from './views/admin-role-play-menu'
@@ -84,11 +83,6 @@ const router = new Router({
       name: 'Menu',
       path: '/menu',
       component: Menu,
-    },
-    {
-      name: 'AdminRolePlayDetail',
-      path: '/admin-role-play-detail',
-      component: AdminRolePlayDetail,
     },
     {
       name: 'AdminQuizDetail',
