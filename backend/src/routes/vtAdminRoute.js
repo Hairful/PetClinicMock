@@ -10,10 +10,7 @@ const { updateItem, updateDepartment } = require('../controllers/vtAdminControll
 const { isBodyValid } = require('../middlewares/formatCheck');
 const { isTokenValid, isTokenAdmin } = require('../middlewares/authMiddleware');
 
-const paramsInBodyOfPutOfQuiz = ["itemID", "itemName", "itemIntro"];
-const paramsInBodyOfPutOfDepartment = ["departmentID", "departmentName", "departmentIntro"];
-
-router.put('/item', isTokenValid, isTokenAdmin, isBodyValid(paramsInBodyOfPutOfQuiz), updateItem);
-router.put('/department', isTokenValid, isTokenAdmin, isBodyValid(paramsInBodyOfPutOfDepartment), updateDepartment);
+router.put('/item', isTokenValid, isTokenAdmin, updateItem);
+router.put('/department', isTokenValid, isTokenAdmin, updateDepartment);
 
 module.exports = router;

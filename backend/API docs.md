@@ -1860,18 +1860,16 @@ Content-Type: application/json
 
 ## `GET /admin/case`
 
-返回病例列表，有分页筛选处理
+返回病例列表
 若未制定任何非必选参数，则返回所有病例
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                                        |
-| ------------- | ------ | ------- | ---- | ------------------------------------------- |
-| Authorization | Header | string  | 是   | 身份验证token                               |
-| diseaseType   | Param  | string  | 是   | 疾病大类                                    |
-| diseaseID     | Param  | integer | 是   | 疾病ID                                      |
-| page          | Param  | integer | 否   | 页数 默认为1                                |
-| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| diseaseType   | Param  | string  | 是   | 疾病大类      |
+| diseaseID     | Param  | integer | 是   | 疾病ID        |
 
 `Example`
 
@@ -2342,14 +2340,12 @@ Content-Type: application/json
     "totalCredits":20,
     "probs":[
         {
-            "probNumber": 1,
             "probCredit": 10,
             "probText": "我是谁",
             "probImg": "url",
             "probAns": 1,
         },
         {
-            "probNumber": 2,
             "probCredit": 10,
             "probText": "你是谁",
             "probAns": 2
@@ -2422,14 +2418,12 @@ Content-Type: application/json
     "totalCredits":20,
     "probs":[
         {
-            "probNumber": 1,
             "probCredit": 10,
             "probText": "我是谁",
             "probImg": "url",
             "probAns": 1,
         },
         {
-            "probNumber": 2,
             "probCredit": 10,
             "probText": "你是谁",
             "probAns": 2

@@ -610,15 +610,13 @@ Content-Type: application/json
 
 ## `GET /medicine/list`
 
-返回数据库中的药品列表，有分页
+返回数据库中的药品列表
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                                        |
-| ------------- | ------ | ------- | ---- | ------------------------------------------- |
-| Authorization | Header | string  | 是   | 身份验证token                               |
-| page          | Param  | integer | 否   | 页数 默认为1                                |
-| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
 
 `Example`
 
@@ -933,7 +931,6 @@ Content-Type: application/json
 | 名称          | 位置   | 类型   | 必选 | 备注          |
 | ------------- | ------ | ------ | ---- | ------------- |
 | Authorization | Header | string | 是   | 身份验证token |
-
 
 `Example`
 
@@ -1647,10 +1644,17 @@ Content-Type: application/json
     "message": "成功",
 }
 
-HTTP/1.1 400 Bad Request
+HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
+    "message": "无对应diseaseID"
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 2,
     "message": "重复的diseaseName"
 }
 
@@ -1802,6 +1806,12 @@ Content-Type: application/json
     "message": "重复的medicineName"
 }
 
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 404,
+    "message": "无对应medicineID"
+}
 ```
 
 ## `DELETE /admin/medicine`
@@ -1850,18 +1860,16 @@ Content-Type: application/json
 
 ## `GET /admin/case`
 
-返回病例列表，有分页筛选处理
+返回病例列表
 若未制定任何非必选参数，则返回所有病例
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                                        |
-| ------------- | ------ | ------- | ---- | ------------------------------------------- |
-| Authorization | Header | string  | 是   | 身份验证token                               |
-| diseaseType   | Param  | string  | 是   | 疾病大类                                    |
-| diseaseID     | Param  | integer | 是   | 疾病ID                                      |
-| page          | Param  | integer | 否   | 页数 默认为1                                |
-| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| diseaseType   | Param  | string  | 是   | 疾病大类      |
+| diseaseID     | Param  | integer | 是   | 疾病ID        |
 
 `Example`
 
@@ -2332,14 +2340,12 @@ Content-Type: application/json
     "totalCredits":20,
     "probs":[
         {
-            "probNumber": 1,
             "probCredit": 10,
             "probText": "我是谁",
             "probImg": "url",
             "probAns": 1,
         },
         {
-            "probNumber": 2,
             "probCredit": 10,
             "probText": "你是谁",
             "probAns": 2
@@ -2412,14 +2418,12 @@ Content-Type: application/json
     "totalCredits":20,
     "probs":[
         {
-            "probNumber": 1,
             "probCredit": 10,
             "probText": "我是谁",
             "probImg": "url",
             "probAns": 1,
         },
         {
-            "probNumber": 2,
             "probCredit": 10,
             "probText": "你是谁",
             "probAns": 2
