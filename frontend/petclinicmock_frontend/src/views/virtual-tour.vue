@@ -1,17 +1,18 @@
 <template>
-<div>
-<div class="container" ref="container"></div>
-<div class="map">
-<div class="tag" ref="tagDiv"></div>
-<!-- <img src="../assets/map.gif" alt="" /> -->
-</div>
-<div class="loading" v-if="progress != 100"></div>
-<div class="progress" v-if="progress != 100">
-<img src="../assets/loading.gif" alt="" />
-<span>医院加载中：{{ progress }}%</span>
-</div>
-<div class="title">3D导览</div>
-</div>
+    <div class="container" ref="container">
+    <div class="map">
+      <div class="tag" ref="tagDiv">
+        <img src="../assets/location.png" alt=""/>
+      </div>
+      <img src="../assets/map.gif" alt="" />
+    </div>
+    <div class="loading" v-if="progress != 100"></div>
+    <div class="progress" v-if="progress != 100">
+      <img src="../assets/loading.gif" alt="" />
+      <span>医院加载中：{{ progress }}%</span>
+    </div>
+    <div class="title">3D导览</div>
+    </div>
 </template>
 
 <script setup>
@@ -22,8 +23,10 @@ import { ref, onMounted } from "vue";
 import gsap from "gsap";
 import SpriteCanvas from "../three/SpriteCanvas";
 
+
 let tagDiv = ref(null);
 let progress = ref(0);
+
 // 初始化场景
 const scene = new THREE.Scene();
 
@@ -52,7 +55,7 @@ requestAnimationFrame(render);
 // scene.add(axes);
 
 // 添加立方体
-const geometry = new THREE.BoxGeometry(50, 50, 50);
+const geometry = new THREE.BoxGeometry(10, 10, 10);
 geometry.scale(1, 1, -1);
 // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 // const cube = new THREE.Mesh(geometry, material);
@@ -78,6 +81,24 @@ geometry.scale(1, 1, -1);
 // }
 // }
 onMounted(() => {
+    
+    function moveTag(name) {
+    let positions = {
+      前台: [100, 110],
+      诊室: [180, 190],
+      免疫室: [50, 50],
+      病理室: [160, 40],
+      走廊: [150, 90],
+    };
+    if (positions[name]) {
+      gsap.to(tagDiv.value, {
+        duration: 1,
+        x: positions[name][0],
+        y: positions[name][1],
+        ease: "power3.inOut",
+      });
+    }
+  }
 tagDiv.value.style.cssText = `
 transform: translate(100px,110px);
 `;
@@ -106,7 +127,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-//moveTag("走廊");
+moveTag("走廊");
 });
 
 // 创建前台文字精灵
@@ -124,7 +145,7 @@ y: livingPosition.y,
 z: livingPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建化验室
@@ -149,7 +170,7 @@ y: labPosition.y,
 z: labPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建化验室回前台文字精灵
@@ -192,7 +213,7 @@ y: pathPosition.y,
 z: pathPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建病理室回前台文字精灵
@@ -210,7 +231,7 @@ y: livingPosition.y,
 z: livingPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建诊室
@@ -237,7 +258,7 @@ y: conPosition.y,
 z: conPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 });
 
@@ -256,7 +277,7 @@ y: livingPosition.y,
 z: livingPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建免疫室
@@ -281,7 +302,7 @@ y: immPosition.y,
 z: immPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建免疫室回前台文字精灵
@@ -299,7 +320,7 @@ y: livingPosition.y,
 z: livingPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建手术准备室
@@ -324,7 +345,7 @@ y: psurPosition.y,
 z: psurPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建手术准备室回走廊文字精灵
@@ -342,7 +363,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建处理室
@@ -367,7 +388,7 @@ y: disPosition.y,
 z: disPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建处理室回手术准备室文字精灵
@@ -385,7 +406,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建住院室
@@ -410,7 +431,7 @@ y: impPosition.y,
 z: impPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建住院室回走廊文字精灵
@@ -428,7 +449,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建手术室
@@ -453,7 +474,7 @@ y: surPosition.y,
 z: surPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建手术室回住院室文字精灵
@@ -471,7 +492,7 @@ y: impPosition.y,
 z: impPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建药房
@@ -496,7 +517,7 @@ y: pharPosition.y,
 z: pharPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建药房回手术室文字精灵
@@ -514,7 +535,7 @@ y: surPosition.y,
 z: surPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建专科诊室
@@ -539,7 +560,7 @@ y: specPosition.y,
 z: specPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建专科诊室回药房文字精灵
@@ -557,7 +578,7 @@ y: pharPosition.y,
 z: pharPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建影像室
@@ -582,7 +603,7 @@ y: imaPosition.y,
 z: imaPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建影像室回化验室文字精灵
@@ -600,7 +621,7 @@ y: labPosition.y,
 z: labPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建影像室回化验室文字精灵
@@ -618,7 +639,7 @@ y: livingPosition.y,
 z: livingPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建影像室
@@ -643,7 +664,7 @@ y: arcPosition.y,
 z: arcPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建影像室回化验室文字精灵
@@ -661,7 +682,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 container.value.appendChild(renderer.domElement);
@@ -754,82 +775,90 @@ progress.value = new Number((loaded / total) * 100).toFixed(2);
 
 <style>
 * {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .container {
-height: 100vh;
-width: 100vw;
-background-color: #f0f0f0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f0f0;
 }
 
 .map {
-width: 300px;
-height: 260px;
-position: absolute;
-left: 0;
-bottom: 0;
-overflow: hidden;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  height: 260px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .map > img {
-width: 100%;
-height: 100%;
-position: absolute;
-left: 0;
-top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
-.map > .tag {
-position: absolute;
-top: 0;
-left: 0;
-width: 30px;
-height: 30px;
-background-image: url(./assets/location.png);
-background-size: cover;
-z-index: 1;
+.tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url('../assets/location.png');
+  background-size: cover;
+  z-index: 1000;
+}
+
+.tag > img {
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .loading {
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-background-image: url(./assets/loading.png);
-background-size: cover;
-filter: blur(50px);
-z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./assets/loading.png');
+  background-size: cover;
+  filter: blur(50px);
+  z-index: 100;
 }
 .progress {
-position: absolute;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-z-index: 101;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 20px;
-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #fff;
 }
 .progress > img {
-padding: 0 15px;
+  padding: 0 15px;
 }
 
 .title {
-width: 180px;
-height: 40px;
-position: fixed;
-right: 100px;
-top: 50px;
-background-color: rgba(0, 0, 0, 0.5);
-line-height: 40px;
-text-align: center;
-color: #fff;
-border-radius: 5px;
-z-index: 110;
+  width: 180px;
+  height: 40px;
+  position: fixed;
+  right: 100px;
+  top: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  z-index: 110;
 }
 </style>
 
