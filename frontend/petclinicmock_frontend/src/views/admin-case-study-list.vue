@@ -96,17 +96,23 @@
       </router-link>
     </div>
     <div class="admin-case-study-list-hero1 heroContainer">
+      <div class="admin-case-study-list-title" >新增疾病</div>
       <div class="admin-case-study-list-container04">
         <div class="admin-case-study-list-container05">
-          <input type="text" placeholder="Disease Name" class="input" />
+          <input type="text" v-model="newName" placeholder="Disease Name" class="input" />
         </div>
         <div class="admin-case-study-list-container06">
-          <input type="text" placeholder="Disease Type" class="input" />
+          <input type="text" v-model="newType" placeholder="Disease Type" class="input" />
         </div>
-        <button type="button" class="admin-case-study-list-button button">
+        <div class="admin-case-study-list-container06">
+          <input type="text" v-model="newIntro" placeholder="Disease Introduction" class="input" />
+        </div>
+        <button type="button" class="admin-case-study-list-button button" @click="addDisease">
           Add Disease
         </button>
       </div>
+
+      <div class="admin-case-study-list-title">修改现有疾病</div>
       <div class="admin-case-study-list-container07">
           <button
             v-for="(diseaseType, index) in diseaseTypes"
@@ -123,7 +129,7 @@
             <div
             v-for="(disease, index) in diseases"
             :key="disease.diseaseID"
-            :class="`case-study-list-li Content list-item`"
+            :class="` Content list-item`"
           >
             <div class="admin-case-study-list-container08">
               <div class="admin-case-study-list-container09">
@@ -136,6 +142,7 @@
                 <button
                   type="button"
                   class="admin-case-study-list-button1 button"
+                  @click = deleteDisease(index)
                 >
                   Delete Disease
                 </button>
@@ -147,10 +154,11 @@
                 </router-link>
               </div>
               <div class="admin-case-study-list-container11">
-                <input type="text" :placeholder="`${disease.diseaseName}`" class="input" />
+                <input type="text" v-model="inputName[index]" :placeholder="`${disease.diseaseName}`" class="input" />
                 <button
                   type="button"
                   class="admin-case-study-list-button2 button"
+                  @click = renameDisease(index)
                 >
                   <span class="admin-case-study-list-text19 bodyLarge">
                     <span>Rename Disease</span>
@@ -159,10 +167,11 @@
                 </button>
               </div>
               <div class="admin-case-study-list-container12">
-                <input type="text" :placeholder="`${currentType}`" class="input" />
+                <input type="text" v-model="inputType[index]" :placeholder="`${currentType}`" class="input" />
                 <button
                   type="button"
                   class="admin-case-study-list-button3 button"
+                  @click = renameDisease(index)
                 >
                   <span class="admin-case-study-list-text22 bodyLarge">
                     Change Type
@@ -172,7 +181,6 @@
             </div>
           </div>
           </li>
-          <li v-else="this.currentType==''" class="admin-case-study-list-li list-item Content" ></li>
         </ul>
       </div>
     </div>
@@ -212,12 +220,84 @@ export default {
       currentType:'',
       diseaseTypes: [],
       diseases: [],
+      inputName:[],
+      inputType:[],
+      newName:'',
+      newType:'',
+      newIntro:'',
     }
   },
   methods:{
+    renameDisease(index){
+      const diseaseName = this.inputName[index];
+      const diseaseID = this.diseases[index].diseaseID;
+      const diseaseType = this.inputType[index];
+      axios({
+          method: 'put',
+          url: '/admin/disease',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            diseaseID : diseaseID,
+            diseaseName : diseaseName,
+            diseaseType : diseaseType,
+          }
+        })
+        .then(response => {
+          this.refresh();
+          this.chooseType(this.inputType[index]);
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+     },
+    async deleteDisease(index){
+      try {
+        const response = await axios.delete(`/admin/disease?diseaseID=${this.diseases[index].diseaseID}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.refresh();
+        if(this.diseases.length<=1){
+          this.chooseType('');
+        }
+        else{
+          this.chooseType(this.currentType);
+          }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addDisease(){
+      axios({
+          method: 'post',
+          url: '/admin/disease',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            diseaseIntro : this.newIntro,
+            diseaseName : this.newName,
+            diseaseType : this.newType,
+          }
+        })
+        .then(response => {
+          this.refresh();
+          this.chooseType(this.newType);
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
     chooseType(type){
       this.currentType=type;
-      console.log(this.currentType)
       axios
       .get(`/disease/list?diseaseType=${this.currentType}`, 
         {
@@ -236,6 +316,25 @@ export default {
         console.log(error);
       });
     },
+    refresh(){
+    axios
+      .get(`/disease/type`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.diseaseTypes = response.data.diseaseTypes;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   },
   created() {
     axios
@@ -425,6 +524,14 @@ export default {
   border-radius: var(--dl-radius-radius-radius8);
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
+}
+.admin-case-study-list-title {
+  color: var(--dl-color-gray-white);
+  font-size: 20px;
+  align-self: center;
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: none;
 }
 .admin-case-study-list-hero1 {
   padding-top: 0px;

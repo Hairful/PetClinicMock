@@ -13,7 +13,6 @@
             <span>
               <span>
                 Logged in as
-                <span v-html="raw2fy2"></span>
               </span>
               <span class="quiz-result-text02">{{name}}</span>
             </span>
@@ -89,17 +88,15 @@
         <h1 class="quiz-result-hero-heading">
           <span class="heading1">
             Quiz Result:
-            <span v-html="rawx2al"></span>
-          </span>
-          <span class="quiz-result-text04">Quiz 1</span>
+          </span> 
+          <span class="quiz-result-text04">Quiz {{ this.quizName }}</span>
         </h1>
-        <span class="heading2">Total Credit: 40</span>
+        <span class="heading2">Total Credit: {{ this.totalCredits }}</span>
         <span class="heading2">
           <span class="heading2">
             Your Score:
-            <span v-html="raw0y10"></span>
           </span>
-          <span class="quiz-result-text08">30</span>
+          <span class="quiz-result-text08">{{ this.yourCredit }}</span>
         </span>
       </div>
     </div>
@@ -115,53 +112,31 @@
       </router-link>
     </div>
     <div class="quiz-result-hero1 heroContainer">
-      <div class="quiz-result-container05">
+      <div v-for="(prob,index) in probs" class="quiz-result-container05">
         <h1 class="quiz-result-hero-heading1 heading1">
-          <span class="heading1">Question 1</span>
+          <span class="heading1">Question {{ prob.probID }}</span>
           <br />
         </h1>
         <div class="quiz-result-container06">
-          <span class="quiz-result-text25 bodyLarge">xxx</span>
+          <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
           <div class="quiz-result-container07">
             <img
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-result-image"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-result-image1"
+              :src="`${prob.probImg}`"
+              class="quiz-detail-image"
             />
           </div>
           <div class="quiz-result-container08">
-            <span class="quiz-result-text26 heading3">Correct Answer: A</span>
-            <span class="quiz-result-text27 heading3">Your Answer: B</span>
-          </div>
-        </div>
-      </div>
-      <div class="quiz-result-container09">
-        <h1 class="quiz-result-hero-heading2 heading1">
-          <span class="heading1">Question 2</span>
-          <br />
-        </h1>
-        <div class="quiz-result-container10">
-          <span class="quiz-result-text30 bodyLarge">xxx</span>
-          <div class="quiz-result-container11">
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-result-image2"
-            />
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="quiz-result-image3"
-            />
-          </div>
-          <div class="quiz-result-container12">
-            <span class="quiz-result-text31 heading3">Correct Answer: A</span>
-            <span class="quiz-result-text32 heading3">Your Answer: A</span>
+            <span class="quiz-result-text26 heading3">Correct Answer:</span>
+            <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
+          <span  v-if="prob.lastAns==prob.probAns">
+            <span class="quiz-result-text26 heading3">Your Answer:</span>
+            <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
+          </span>
+          <span  v-else="prob.lastAns!=prob.probAns">
+            <span class="quiz-result-text27 heading3">Your Answer:</span>
+            <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
+          </span>
           </div>
         </div>
       </div>
@@ -185,6 +160,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'QuizResult',
   props: {},
@@ -192,14 +168,63 @@ export default {
     return {
       raw2fy2: ' ',
       name:localStorage.getItem('username'),
+      quizID:'',
+      probs:[],
+      quizName:'',
+      totalCredits:'',
+      yourCredit:0,
     }
   },
   methods:{
+    ans2option(ans)
+    {
+      switch(ans){
+        case 1:
+          return 'A';
+        case 2:
+          return 'B';
+        case 3:
+          return 'C';
+        case 4:
+          return 'D';
+        default:
+            return '';
+      }
+    },
     logout(){
       localStorage.clear();
       this.$router.push('/');
-    }
+    },
+    caculateCredit(){
+      this.probs.forEach(prob => {
+        if(prob.lastAns == prob.probAns)
+        {
+          this.yourCredit+=prob.probCredit;
+        }
+      });
+    },
   },
+  created() {
+    this.quizID = this.$route.query.quizID;
+    const authToken = localStorage.getItem('token'); // replace 'authToken' with the key you used to store the token
+    // Fetch disease details
+    axios.get(`/quiz/detail?quizID=${this.quizID}`, 
+    {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.probs = response.data.probs;
+        this.quizName = response.data.quizName;
+        this.totalCredits = response.data.totalCredits;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding quizID');
+      }
+    });
+    caculateCredit();
+    },
   metaInfo: {
     title: 'QuizResult - Roasted Rusty Swallow',
     meta: [
