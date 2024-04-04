@@ -3,7 +3,7 @@
   <div class="container" ref="container"></div>
   <div class="map">
     <div class="tag" ref="tagDiv"></div>
-    <img src="../assets/map.gif" alt="" />
+    <!-- <img src="../assets/map.gif" alt="" /> -->
   </div>
   <div class="loading" v-if="progress != 100"></div>
   <div class="progress" v-if="progress != 100">
@@ -52,7 +52,7 @@ const render = () => {
 // scene.add(axes);
 
 // 添加立方体
-const geometry = new THREE.BoxGeometry(10, 10, 10);
+const geometry = new THREE.BoxGeometry(50, 50, 50);
 geometry.scale(1, 1, -1);
 // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 // const cube = new THREE.Mesh(geometry, material);
@@ -60,216 +60,381 @@ geometry.scale(1, 1, -1);
 
 // 挂载完毕之后获取dom
 onMounted(() => {
-  function moveTag(name) {
-    let positions = {
-      客厅: [100, 110],
-      厨房: [180, 190],
-      阳台: [50, 50],
-      卧室: [160, 40],
-      走廊: [150, 90],
-    };
-    if (positions[name]) {
-      gsap.to(tagDiv.value, {
-        duration: 1,
-        x: positions[name][0],
-        y: positions[name][1],
-        ease: "power3.inOut",
-      });
-    }
-  }
+  // function moveTag(name) {
+  //   let positions = {
+  //     前台: [100, 110],
+  //     厨房: [180, 190],
+  //     阳台: [50, 50],
+  //     化验室: [160, 40],
+  //     走廊: [150, 90],
+  //   };
+  //   if (positions[name]) {
+  //     gsap.to(tagDiv.value, {
+  //       duration: 1,
+  //       x: positions[name][0],
+  //       y: positions[name][1],
+  //       ease: "power3.inOut",
+  //     });
+  //   }
+  // }
   tagDiv.value.style.cssText = `
     transform: translate(100px,110px);
   `;
 
-  // 创建客厅
+  // 创建前台
   let livingIndex = 0;
-  let livingUrl = "./img/surgery/";
+  let livingUrl = "./img/frontdesk/";
   let livingPosition = new THREE.Vector3(0, 0, 0);
-  const living = new Room("手术室", livingIndex, livingUrl, livingPosition);
+  const living = new Room("前台", livingIndex, livingUrl, livingPosition);
 
-  // 创建厨房
-  let kitPosition = new THREE.Vector3(-5, 0, -10);
-  let kitIndex = 2;
-  let textureUrl = "./img/clinic1";
+  // 创建走廊
+  let kitPosition = new THREE.Vector3(3, 10, 5);
+  let kitIndex = 4;
+  let textureUrl = "./img/corridor/";
   let kitEuler = new THREE.Euler(0, -Math.PI / 2, 0);
-  const room = new Room("病房", kitIndex, textureUrl, kitPosition, kitEuler);
+  const room = new Room("走廊", kitIndex, textureUrl, kitPosition, kitEuler);
   // 创建文字精灵
-  const text = new SpriteCanvas(camera, "病房", new THREE.Vector3(-1, 0, -3));
+  const text = new SpriteCanvas(camera, "走廊", new THREE.Vector3(3, 0, 0.5));
   // text.mesh.rotation.y = Math.PI / 3;
   scene.add(text.mesh);
   text.onClick(() => {
-    console.log("病房");
+    console.log("走廊");
     gsap.to(camera.position, {
       x: kitPosition.x,
       y: kitPosition.y,
       z: kitPosition.z,
       duration: 1,
     });
-    moveTag("病房");
+    //moveTag("走廊");
   });
 
-  // 创建客厅文字精灵
+  // 创建前台文字精灵
   const textLiving = new SpriteCanvas(
     camera,
-    "手术室",
-    new THREE.Vector3(-4, 0, -6)
+    "前台",
+    new THREE.Vector3(4, 8, 1)
   );
   scene.add(textLiving.mesh);
   textLiving.onClick(() => {
-    console.log("手术室");
+    console.log("前台");
     gsap.to(camera.position, {
       x: livingPosition.x,
       y: livingPosition.y,
       z: livingPosition.z,
       duration: 1,
     });
-    moveTag("手术室");
+    //moveTag("前台");
   });
 
-  // 创建阳台
-  let balconyPosition = new THREE.Vector3(0, 0, 15);
-  let balconyIndex = 8;
-  let balconyUrl = "./img/balcony";
-  let balconyEuler = new THREE.Euler(0, Math.PI / 16, 0);
-  const balcony = new Room(
-    "阳台",
-    balconyIndex,
-    balconyUrl,
-    balconyPosition,
-    balconyEuler
-  );
+// 创建化验室
+  let labPosition = new THREE.Vector3(3, 0, 12);
+  let labIndex = 9;
+  let labUrl = "./img/lab/";
+  let labEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const lab = new Room("化验室", labIndex, labUrl, labPosition, labEuler);
 
-  // 创建阳台文字精灵
-  const textBalcony = new SpriteCanvas(
+    // 创建化验室文字精灵
+  const labtext = new SpriteCanvas(
     camera,
-    "阳台",
-    new THREE.Vector3(0, 0, 3)
+    "化验室",
+    new THREE.Vector3(1, 0, 4.5)
   );
-  scene.add(textBalcony.mesh);
-  textBalcony.onClick(() => {
-    console.log("阳台");
+  scene.add(labtext.mesh);
+  labtext.onClick(() => {
+    console.log("化验室");
     gsap.to(camera.position, {
-      x: balconyPosition.x,
-      y: balconyPosition.y,
-      z: balconyPosition.z,
+      x: labPosition.x,
+      y: labPosition.y,
+      z: labPosition.z,
       duration: 1,
     });
-    moveTag("阳台");
+    //moveTag("前台");
   });
 
-  // 创建阳台回客厅文字精灵
-  const textBalconyToLiving = new SpriteCanvas(
+   // 创建化验室回前台文字精灵
+   const fro1text = new SpriteCanvas(
     camera,
-    "手术室",
-    new THREE.Vector3(-1, 0, 11)
+    "前台",
+    new THREE.Vector3(3, 0, 11)
   );
-  scene.add(textBalconyToLiving.mesh);
-  textBalconyToLiving.onClick(() => {
-    console.log("手术室");
+  scene.add(fro1text.mesh);
+  fro1text.onClick(() => {
+    console.log("前台");
     gsap.to(camera.position, {
       x: livingPosition.x,
       y: livingPosition.y,
       z: livingPosition.z,
       duration: 1,
     });
-    moveTag("手术室");
+    //moveTag("前台");
   });
 
-  // 创建走廊
-  let hallwayPosition = new THREE.Vector3(-15, 0, 0);
-  let hallwayIndex = 9;
-  let hallwayUrl = "./img/corridor";
-  let hallwayEuler = new THREE.Euler(0, -Math.PI + Math.PI / 16, 0);
-  const hallway = new Room(
-    "走廊",
-    hallwayIndex,
-    hallwayUrl,
-    hallwayPosition,
-    hallwayEuler
-  );
+  // 创建病理室
+  let pathPosition = new THREE.Vector3(-8, 0, 5);
+  let pathIndex = 12;
+  let pathUrl = "./img/pathology/";
+  let pathEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const path = new Room("病理室", pathIndex, pathUrl, pathPosition, pathEuler);
 
-  // 走廊文字精灵
-  const textCorridor = new SpriteCanvas(
+    // 创建病理室室文字精灵
+  const pathtext = new SpriteCanvas(
     camera,
-    "走廊",
-    new THREE.Vector3(-4, 0, 0.5)
+    "病理室",
+    new THREE.Vector3(-4, 0, 1.3)
   );
-  scene.add(textCorridor.mesh);
-  textCorridor.onClick(() => {
-    console.log("走廊");
+  scene.add(pathtext.mesh);
+  pathtext.onClick(() => {
+    console.log("病理室");
     gsap.to(camera.position, {
-      x: hallwayPosition.x,
-      y: hallwayPosition.y,
-      z: hallwayPosition.z,
+      x: pathPosition.x,
+      y: pathPosition.y,
+      z: pathPosition.z,
       duration: 1,
     });
-    moveTag("走廊");
+    //moveTag("前台");
   });
 
-  // 创建走廊回客厅文字精灵
-  const textCorridorToLiving = new SpriteCanvas(
+  // 创建病理室回前台文字精灵
+  const fro2text = new SpriteCanvas(
     camera,
-    "手术室",
-    new THREE.Vector3(-11, 0, 0)
+    "前台",
+    new THREE.Vector3(-6, 0, 4)
   );
-  scene.add(textCorridorToLiving.mesh);
-  textCorridorToLiving.onClick(() => {
-    console.log("手术室");
+  scene.add(fro2text.mesh);
+  fro2text.onClick(() => {
+    console.log("前台");
     gsap.to(camera.position, {
       x: livingPosition.x,
       y: livingPosition.y,
       z: livingPosition.z,
       duration: 1,
     });
-    moveTag("手术室");
+    //moveTag("前台");
   });
 
-  // 创建主卧
-  let mainPosition = new THREE.Vector3(-25, 0, 2);
-  let mainIndex = 1;
-  let mainUrl = "./img/clinic1";
-  //let mainEuler = new THREE.Euler(0, -Math.PI / 2, 0);
-  const main = new Room(
-    "诊室",
-    mainIndex,
-    mainUrl,
-    mainPosition
-    //mainEuler
-  );
-  // 主卧文字精灵
-  const textMain = new SpriteCanvas(
+  // 创建诊室
+  let conPosition = new THREE.Vector3(-15, -1, -5);
+  let conIndex = 6;
+  let conUrl = "./img/consultroom/";
+  let conEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const con = new Room("诊室", conIndex, conUrl, conPosition, conEuler);
+
+    // 创建免疫室室文字精灵
+  const context = new SpriteCanvas(
     camera,
     "诊室",
-    new THREE.Vector3(-19, 0, 2)
+    new THREE.Vector3(-3, 0, -0.5)
   );
-  scene.add(textMain.mesh);
-  textMain.onClick(() => {
+  scene.add(context.mesh);
+  context.onClick(() => {
     console.log("诊室");
     gsap.to(camera.position, {
-      x: mainPosition.x,
-      y: mainPosition.y,
-      z: mainPosition.z,
+      x: conPosition.x,
+      y: conPosition.y,
+      z: conPosition.z,
       duration: 1,
     });
-    moveTag("诊室");
+    //moveTag("前台");
   });
-  // 创建主卧回走廊文字精灵
-  const textMainToCorridor = new SpriteCanvas(
+
+  // 创建诊室回前台文字精灵
+  const fro3text = new SpriteCanvas(
     camera,
-    "走廊",
-    new THREE.Vector3(-23, 0, -2)
+    "前台",
+    new THREE.Vector3(-15, -1, -5)
   );
-  scene.add(textMainToCorridor.mesh);
-  textMainToCorridor.onClick(() => {
+  scene.add(fro3text.mesh);
+  fro3text.onClick(() => {
+    console.log("前台");
+    gsap.to(camera.position, {
+      x: livingPosition.x,
+      y: livingPosition.y,
+      z: livingPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+  // 创建免疫室
+  let immPosition = new THREE.Vector3(8, -1, -6);
+  let immIndex = 11;
+  let immUrl = "./img/imm/";
+  let immEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const imm = new Room("免疫室", immIndex, immUrl, immPosition, immEuler);
+
+    // 创建免疫室室文字精灵
+  const immtext = new SpriteCanvas(
+    camera,
+    "免疫室",
+    new THREE.Vector3(3, 0, -1.5)
+  );
+  scene.add(immtext.mesh);
+  immtext.onClick(() => {
+    console.log("免疫室");
+    gsap.to(camera.position, {
+      x: immPosition.x,
+      y: immPosition.y,
+      z: immPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+  // 创建免疫室回前台文字精灵
+  const fro4text = new SpriteCanvas(
+    camera,
+    "前台",
+    new THREE.Vector3(8, -1, -5)
+  );
+  scene.add(fro4text.mesh);
+  fro4text.onClick(() => {
+    console.log("前台");
+    gsap.to(camera.position, {
+      x: livingPosition.x,
+      y: livingPosition.y,
+      z: livingPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+  // 创建手术准备室
+<<<<<<< HEAD
+  let psurPosition = new THREE.Vector3(15, 11, 15);
+  let psurIndex = 7;
+  let psurUrl = "./img/presur/";
+  let psurEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const psur = new Room("免疫室", psurIndex, psurUrl, psurPosition, psurEuler);
+=======
+  let psurPosition = new THREE.Vector3(15, 15, 15);
+  let psurIndex = 7;
+  let psurUrl = "./img/presur/";
+  let psurEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const psur = new Room("手术准备室", psurIndex, psurUrl, psurPosition, psurEuler);
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
+
+    // 创建免疫室室文字精灵
+  const psurtext = new SpriteCanvas(
+    camera,
+    "手术准备室",
+    new THREE.Vector3(4, 10, 9)
+  );
+  scene.add(psurtext.mesh);
+  psurtext.onClick(() => {
+    console.log("手术准备室");
+    gsap.to(camera.position, {
+      x: psurPosition.x,
+      y: psurPosition.y,
+      z: psurPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+  // 创建免疫室回前台文字精灵
+  const fro5text = new SpriteCanvas(
+    camera,
+<<<<<<< HEAD
+    "前台",
+    new THREE.Vector3(3, 10, -2)
+  );
+  scene.add(fro5text.mesh);
+  fro4text.onClick(() => {
+=======
+    "走廊",
+    new THREE.Vector3(16, 15, 15)
+  );
+  scene.add(fro5text.mesh);
+  fro5text.onClick(() => {
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
     console.log("走廊");
     gsap.to(camera.position, {
-      x: hallwayPosition.x,
-      y: hallwayPosition.y,
-      z: hallwayPosition.z,
+      x: kitPosition.x,
+      y: kitPosition.y,
+      z: kitPosition.z,
       duration: 1,
     });
-    moveTag("走廊");
-  }),
+    //moveTag("前台");
+  });
+
+<<<<<<< HEAD
+
+  // 创建住院室
+  let impPosition = new THREE.Vector3(-5, 10, 18);
+  let impIndex = 10;
+  let impUrl = "./img/impatient/";
+  let impEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const imp = new Room("住院室", impIndex, impUrl, impPosition, impEuler);
+
+    // 创建住院室文字精灵
+  const imptext = new SpriteCanvas(
+    camera,
+    "住院室",
+    new THREE.Vector3(-1, 10, 9)
+  );
+  scene.add(imptext.mesh);
+  imptext.onClick(() => {
+    console.log("住院室");
+    gsap.to(camera.position, {
+      x: impPosition.x,
+      y: impPosition.y,
+      z: impPosition.z,
+=======
+    // 创建手术室
+  let surPosition = new THREE.Vector3(20, 20, 20);
+  let surIndex = 15;
+  let surUrl = "./img/sur/";
+  let surEuler = new THREE.Euler(0, -Math.PI / 2, 0);
+  const sur = new Room("手术室", surIndex, surUrl, surPosition, surEuler);
+
+    // 创建免疫室室文字精灵
+  const surtext = new SpriteCanvas(
+    camera,
+    "手术室",
+    new THREE.Vector3(15, 15, 13)
+  );
+  scene.add(surtext.mesh);
+  surtext.onClick(() => {
+    console.log("手术室");
+    gsap.to(camera.position, {
+      x: surPosition.x,
+      y: surPosition.y,
+      z: surPosition.z,
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+
+<<<<<<< HEAD
+  // 创建住院室回走廊文字精灵
+  const fro7text = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(-5, 10, 16)
+  );
+   scene.add(fro7text.mesh);
+  fro7text.onClick(() => {
+=======
+  // 创建免疫室回前台文字精灵
+  const fro6text = new SpriteCanvas(
+    camera,
+    "走廊",
+    new THREE.Vector3(20, 20, 18)
+  );
+  scene.add(fro6text.mesh);
+  fro6text.onClick(() => {
+>>>>>>> parent of e124f35f ([feat] devise virtualtour)
+    console.log("走廊");
+    gsap.to(camera.position, {
+      x: kitPosition.x,
+      y: kitPosition.y,
+      z: kitPosition.z,
+      duration: 1,
+    });
+    //moveTag("前台");
+  });
+ 
     container.value.appendChild(renderer.domElement);
   render();
 

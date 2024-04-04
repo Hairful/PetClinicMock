@@ -92,7 +92,7 @@
             Modify Role Play:
             <span v-html="raw6ohr"></span>
           </span>
-          <span class="admin-role-play-list-text04">Front Desk</span>
+          <span class="admin-role-play-list-text04"> {{ role }} </span>
         </h1>
       </div>
     </div>
@@ -114,8 +114,9 @@
       </h1>
       <div class="admin-role-play-list-container04">
         <div class="admin-role-play-list-container05">
-          <input type="text" placeholder="placeholder" class="input" />
-          <button type="button" class="button">
+          <input type="text" v-model="newJob" placeholder="placeholder" class="input" />
+          <input type="text" v-model="newJobDetail" placeholder="placeholder" class="input" />
+          <button type="button" class="button" @click="addNewJob()">
             <span>
               <span>Add New Job</span>
               <br />
@@ -125,61 +126,35 @@
       </div>
       <div class="admin-role-play-list-container06">
         <ul class="admin-role-play-list-ul list">
-          <li class="admin-role-play-list-li list-item Content">
-            <span class="heading3">Job 1</span>
+          <li 
+            v-for="(job, index) in jobs" 
+            :key="index" 
+            class="admin-role-play-list-li list-item Content"
+          >
             <div class="admin-role-play-list-container07">
               <div class="admin-role-play-list-container08">
-                <input type="text" placeholder="placeholder" class="input" />
-                <button type="button" class="button">
+                <input type="text" v-model="jobs[index]" placeholder="" class="input" />
+                <button type="button" class="button" @click="renameJob(index)">
                   <span>
                     <span>Rename</span>
                     <br />
                   </span>
                 </button>
               </div>
-              <button type="button" class="admin-role-play-list-button2 button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-              <router-link
-                to="/admin-role-play-detail"
-                class="admin-role-play-list-navlink2 button"
-              >
-                <span>
-                  <span>Manage Job Detail</span>
-                  <br />
-                </span>
-              </router-link>
-            </div>
-          </li>
-          <li class="admin-role-play-list-li1 list-item Content">
-            <span class="heading3">Job 1</span>
-            <div class="admin-role-play-list-container09">
-              <div class="admin-role-play-list-container10">
-                <input type="text" placeholder="placeholder" class="input" />
-                <button type="button" class="button">
+              <div class="admin-role-play-list-container08">
+                <input type="text" v-model="jobDetails[index]" placeholder="" class="input" />
+                <button type="button" class="button" @click="renameJob(index)">
                   <span>
-                    <span>Rename</span>
+                    <span>Modify</span>
                     <br />
                   </span>
                 </button>
               </div>
-              <button type="button" class="admin-role-play-list-button4 button">
+              <button type="button" class="admin-role-play-list-button2 button" @click="deleteJob(index)">
                 <span>
                   <span>Delete</span>
                   <br />
                 </span>
-              </button>
-              <button type="button" class="admin-role-play-list-button5 button">
-                <router-link
-                  to="/admin-role-play-detail"
-                  class="admin-role-play-list-navlink3"
-                >
-                  <span>Manage Job Detail</span>
-                  <br />
-                </router-link>
               </button>
             </div>
           </li>
@@ -205,6 +180,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'AdminRolePlayList',
   props: {},
@@ -219,7 +196,163 @@ export default {
       raw8de5: ' ',
       raw450q: ' ',
       raweqk6: ' ',
+      role: ' ',
+      jobs: [],
+      prevJobs: [],
+      jobDetails: [],
+      newJob: ' ',
+      newJobDetail: ' ',
     }
+  },
+  methods: {
+    role2number(role) {
+      switch (role) {
+        case 'Front Desk':
+          return 0;
+        case 'Medical Assistant':
+          return 1;
+        case 'Doctor':
+          return 2;
+        default:
+          return -1;
+      }
+    },
+    fetchJobs() {
+      this.jobDetails = [];
+      axios
+        .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
+          {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        .then((response) => {
+          if (response.data.status === 0) {
+            this.jobs = response.data.jobs;
+            this.prevJobs = response.data.jobs;
+            // Fetch the details for each job
+            this.jobs.forEach(job => {
+              axios
+                .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
+                  {
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  }
+                })
+                .then((response) => {
+                  if (response.data.status === 0) {
+                    // If the request was successful, add the job details to the list
+                    this.jobDetails.push(response.data.jobDetail);
+                  } else {
+                    console.log(response.data.message);
+                  }
+                })
+                .catch(error => console.log(error));
+            });
+          } else {
+            console.log(response.data.message);
+          }
+        })
+        .catch(error => console.log(error));
+    },
+    renameJob(index) {
+      const job = this.jobs[index];
+      const detail = this.jobDetails[index];
+      const role = this.role2number(job.role);
+      const prevJob = this.prevJobs[index];
+      axios({
+        method: 'put',
+        url: '/admin/roleplaying',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          role: role,
+          prevJob: prevJob,
+          newJob: job,
+          jobDetail: detail // replace 'detail' with the actual property name for job detail
+        }
+      })
+      .then(response => {
+        // handle success
+        console.log(response);
+      })
+      .catch(error => {
+        // handle error
+        console.log(error);
+      });
+      this.fetchJobs();
+    },
+    async addNewJob() {
+      try {
+        const response = await axios.post('/admin/roleplaying', {
+          role: 1,
+          job: this.newJob,
+          jobDetail: this.newJobDetail
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.fetchJobs();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteJob(index) {
+      try {
+        const response = await axios.delete(`/admin/roleplaying?role=1&job=${this.jobs[index]}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.fetchJobs();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+  created() {
+    this.role = this.$route.query.role;
+    axios
+      .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.jobs = response.data.jobs;
+          this.prevJobs = response.data.jobs;
+          // Fetch the details for each job
+          this.jobs.forEach(job => {
+            axios
+              .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
+                {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+              })
+              .then((response) => {
+                if (response.data.status === 0) {
+                  // If the request was successful, add the job details to the list
+                  this.jobDetails.push(response.data.jobDetail);
+                } else {
+                  console.log("111");
+                  console.log(response.data.message);
+                }
+              })
+              .catch(error => console.log(error));
+          });
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(error => console.log(error));
   },
   metaInfo: {
     title: 'AdminRolePlayList - Roasted Rusty Swallow',
@@ -478,7 +611,7 @@ export default {
   height: 36px;
 }
 .admin-role-play-list-navlink2 {
-  width: 211px;
+  width: 180px;
   height: 35px;
   text-decoration: none;
 }
