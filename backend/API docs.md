@@ -933,7 +933,7 @@ Content-Type: application/json
 | 名称          | 位置   | 类型    | 必选 | 备注                 |
 | ------------- | ------ | ------- | ---- | -------------------- |
 | Authorization | Header | string  | 是   | 身份验证token        |
-| userID        | Param  | integer | 是   | 请求该用户的考试数据 |
+
 
 `Example`
 
@@ -1002,7 +1002,6 @@ Content-Type: application/json
 | 名称          | 位置   | 类型    | 必选 | 备注                 |
 | ------------- | ------ | ------- | ---- | -------------------- |
 | quizID        | Param  | string  | 是   | quizID               |
-| userID        | Param  | integer | 是   | 请求该用户的考试数据 |
 | Authorization | Header | string  | 是   | 身份验证token        |
 
 `Example`

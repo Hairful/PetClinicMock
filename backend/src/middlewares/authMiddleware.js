@@ -27,7 +27,7 @@ exports.isTokenValid = async (req, res, next) => {
         decoded = jwt.verify(token, tokenKey);
     } catch (errorInJWT) {
         console.error('Error in authMiddleware:', errorInJWT);
-        return res.status(401).json({ status: 401, message: '身份验证失败' });
+        return res.status(401).json({ status: -1, message: '身份验证失败' });
     }
     // 检查用户是否存在
     const user = await User.findByPk(decoded.userID);
