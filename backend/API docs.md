@@ -610,15 +610,13 @@ Content-Type: application/json
 
 ## `GET /medicine/list`
 
-返回数据库中的药品列表，有分页
+返回数据库中的药品列表
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                                        |
-| ------------- | ------ | ------- | ---- | ------------------------------------------- |
-| Authorization | Header | string  | 是   | 身份验证token                               |
-| page          | Param  | integer | 否   | 页数 默认为1                                |
-| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
 
 `Example`
 
@@ -933,7 +931,6 @@ Content-Type: application/json
 | 名称          | 位置   | 类型   | 必选 | 备注          |
 | ------------- | ------ | ------ | ---- | ------------- |
 | Authorization | Header | string | 是   | 身份验证token |
-
 
 `Example`
 
@@ -1809,6 +1806,12 @@ Content-Type: application/json
     "message": "重复的medicineName"
 }
 
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 404,
+    "message": "无对应medicineID"
+}
 ```
 
 ## `DELETE /admin/medicine`
