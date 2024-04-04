@@ -71,7 +71,12 @@ exports.updateMedicine = async (medicineID, updates) => {
         if (!medicine) {
             return { status: 1, message: "无对应medicineID" };
         }
-        await medicine.update(updates);
+        for (const key in updates) {
+            if (medicine[key] !== undefined && updates.hasOwnProperty(key)) {
+                medicine[key] = updates[key];
+            }
+        }
+        await medicine.save();
         return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error in updateMedicine', error);

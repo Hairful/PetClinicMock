@@ -67,19 +67,17 @@ exports.updateDisease = async (diseaseID, updates) => {
         if (!disease) {
             return { status: 1, message: "无对应diseaseID" };
         }
-        const diseaseExistByName = await Disease.findOne({
-            where: { diseaseName: updates.diseaseName }
-        });
-        if (diseaseExistByName) {
-            return { status: 2, message: "重复的diseaseName" };
+        for (const key in updates) {
+            if (disease[key] !== undefined && updates.hasOwnProperty(key)) {
+                disease[key] = updates[key];
+            }
         }
-        // 更新疾病记录
-        await disease.update(updates);
+        await disease.save();
         return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error in updateDisease', error);
         return { status: -9, message: '错误' };
     }
-}
+};
 
 
