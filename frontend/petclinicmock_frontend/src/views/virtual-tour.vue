@@ -4,7 +4,7 @@
       <div class="tag" ref="tagDiv">
         <img src="../assets/location.png" alt=""/>
       </div>
-      <img src="../assets/map.gif" alt="" />
+      <img src="../assets/map1.jpg" alt="" />
     </div>
     <div class="loading" v-if="progress != 100"></div>
     <div class="progress" v-if="progress != 100">
@@ -84,11 +84,21 @@ onMounted(() => {
     
     function moveTag(name) {
     let positions = {
-      前台: [100, 110],
-      诊室: [180, 190],
-      免疫室: [50, 50],
-      病理室: [160, 40],
-      走廊: [150, 90],
+      前台: [45, 120],
+      免疫室: [53, 45],
+      病理室: [70, 190],
+      诊室: [38, 190],
+      走廊: [140, 150],
+      化验室: [105, 110],
+      手术准备室: [140, 45],
+      处理室: [180, 45],
+      住院室: [165, 150],
+      手术室: [185, 170],
+      影像室:[105,42],
+      药房: [210, 190],
+      注射室: [251, 70],
+      专科诊室: [235, 200],
+      档案室: [240, 70],
     };
     if (positions[name]) {
       gsap.to(tagDiv.value, {
@@ -170,7 +180,7 @@ y: labPosition.y,
 z: labPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("化验室");
 });
 
 // 创建化验室回前台文字精灵
@@ -188,7 +198,7 @@ y: livingPosition.y,
 z: livingPosition.z,
 duration: 1,
 });
-//moveTag("前台");
+moveTag("前台");
 });
 
 // 创建病理室
@@ -213,7 +223,7 @@ y: pathPosition.y,
 z: pathPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("病理室");
 });
 
 // 创建病理室回前台文字精灵
@@ -258,7 +268,7 @@ y: conPosition.y,
 z: conPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("诊室");
 });
 });
 
@@ -302,7 +312,7 @@ y: immPosition.y,
 z: immPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("免疫室");
 });
 
 // 创建免疫室回前台文字精灵
@@ -345,7 +355,7 @@ y: psurPosition.y,
 z: psurPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("手术准备室");
 });
 
 // 创建手术准备室回走廊文字精灵
@@ -388,7 +398,7 @@ y: disPosition.y,
 z: disPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("处理室");
 });
 
 // 创建处理室回手术准备室文字精灵
@@ -406,7 +416,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("走廊");
 });
 
 // 创建住院室
@@ -431,7 +441,7 @@ y: impPosition.y,
 z: impPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("住院室");
 });
 
 // 创建住院室回走廊文字精灵
@@ -449,7 +459,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("走廊");
 });
 
 // 创建手术室
@@ -474,7 +484,7 @@ y: surPosition.y,
 z: surPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("手术室");
 });
 
 // 创建手术室回住院室文字精灵
@@ -492,7 +502,7 @@ y: impPosition.y,
 z: impPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("住院室");
 });
 
 // 创建药房
@@ -517,7 +527,7 @@ y: pharPosition.y,
 z: pharPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("药房");
 });
 
 // 创建药房回手术室文字精灵
@@ -535,7 +545,7 @@ y: surPosition.y,
 z: surPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("手术室");
 });
 
 // 创建专科诊室
@@ -560,7 +570,7 @@ y: specPosition.y,
 z: specPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("专科诊室");
 });
 
 // 创建专科诊室回药房文字精灵
@@ -578,7 +588,7 @@ y: pharPosition.y,
 z: pharPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("药房");
 });
 
 // 创建影像室
@@ -603,7 +613,7 @@ y: imaPosition.y,
 z: imaPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("影像室");
 });
 
 // 创建影像室回化验室文字精灵
@@ -621,7 +631,7 @@ y: labPosition.y,
 z: labPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("化验室");
 });
 
 // 创建影像室回化验室文字精灵
@@ -664,7 +674,7 @@ y: arcPosition.y,
 z: arcPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("档案室");
 });
 
 // 创建影像室回化验室文字精灵
@@ -682,7 +692,7 @@ y: kitPosition.y,
 z: kitPosition.z,
 duration: 1,
 });
-moveTag("前台");
+moveTag("走廊");
 });
 
 container.value.appendChild(renderer.domElement);
@@ -803,8 +813,8 @@ progress.value = new Number((loaded / total) * 100).toFixed(2);
 }
 .tag {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 120;
+  left: 40;
   width: 30px;
   height: 30px;
   background-image: url('../assets/location.png');
