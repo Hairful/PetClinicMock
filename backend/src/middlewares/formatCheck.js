@@ -55,7 +55,7 @@ exports.isBodyValid = (requiredParams) => {
             });
             let errorMessage = '';
             if (missingParams.length > 0) {
-                errorMessage += `缺少必选参数: ${missingParams.join(', ')}. `;
+                errorMessage += `缺少必选参数: ${missingParams.join(', ')}.`;
             }
             if (unexpectedParams.length > 0) {
                 errorMessage += `多余参数: ${unexpectedParams.join(', ')}.`;

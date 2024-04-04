@@ -37,7 +37,7 @@ exports.createUser = async (userName, password, isAdmin) => {
     try {
         const existingUser = await User.findOne({ where: { userName: userName } });
         if (existingUser) {
-            return { status: 1, message: '重复用户' };
+            return { status: 1, message: '重复的userName' };
         }
         const salt = generateSalt();
         const hashedPassword = hashPassword(password, salt);
@@ -48,7 +48,7 @@ exports.createUser = async (userName, password, isAdmin) => {
             'isAdmin': isAdmin,
             'salt': salt
         });
-        return { status: 0, message: '成功', usrID: newUser.userID };
+        return { status: 0, message: '成功', userID: newUser.userID };
     }
     catch (error) {
         console.error('Error in createUser:', error);
@@ -70,7 +70,13 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
         if (!user) {
             return { status: 1, message: '无对应userID' };
         }
-        if (userName) user.userName = userName;
+        if (userName) {
+            const userExist = await User.findOne({ where: { userName: userName } });
+            if (userExist) {
+                return { status: 2, message: '重复的userName' };
+            }
+            user.userName = userName;
+        }
         if (password) user.password = hashPassword(password, user.salt);
         if (isAdmin !== undefined) user.isAdmin = isAdmin;
         await user.save();

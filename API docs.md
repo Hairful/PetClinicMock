@@ -82,7 +82,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
   "status": 1,
-  "message": "重复userName"
+  "message": "重复的userName"
 }
 ```
 
@@ -930,10 +930,10 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                 |
-| ------------- | ------ | ------- | ---- | -------------------- |
-| Authorization | Header | string  | 是   | 身份验证token        |
-| userID        | Param  | integer | 是   | 请求该用户的考试数据 |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+
 
 `Example`
 
@@ -999,11 +999,10 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                 |
-| ------------- | ------ | ------- | ---- | -------------------- |
-| quizID        | Param  | string  | 是   | quizID               |
-| userID        | Param  | integer | 是   | 请求该用户的考试数据 |
-| Authorization | Header | string  | 是   | 身份验证token        |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| quizID        | Param  | string | 是   | quizID        |
+| Authorization | Header | string | 是   | 身份验证token |
 
 `Example`
 
@@ -1365,13 +1364,11 @@ Content-Type: application/json
         {
             "userID":2,
             "userName": "Truman",
-            "password": "TheTrumanShow",
             "isAdmin": false
         },
         {
             "userID":1,
             "userName": "Admin",
-            "password": "admin123456",
             "isAdmin": true
         }
     ]
@@ -1428,7 +1425,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复userName"
+    "message": "重复的userName"
 }
 ```
 
@@ -1481,6 +1478,13 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应userID"
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "重复的userName"
 }
 ```
 
@@ -2182,13 +2186,13 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                              |
-| ------------- | ------ | ------- | ---- | --------------------------------- |
-| Authorization | Header | string  | 是   | 身份验证token                     |
-| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
-| prevJob       | Body   | string  | 否    | 要修改的工作名
-| job           | Body   | string  | 是   | 修改后的工作名或要修改工作详情的工作名(当prevJob undifined)                     |
-| jobDetail     | Body   | string  | 是   | job详情                           |
+| 名称          | 位置   | 类型    | 必选 | 备注                                                        |
+| ------------- | ------ | ------- | ---- | ----------------------------------------------------------- |
+| Authorization | Header | string  | 是   | 身份验证token                                               |
+| role          | Body   | integer | 是   | 0代表前台、1代表医助、2代表兽医师                           |
+| prevJob       | Body   | string  | 否   | 要修改的工作名                                              |
+| job           | Body   | string  | 是   | 修改后的工作名或要修改工作详情的工作名(当prevJob undifined) |
+| jobDetail     | Body   | string  | 是   | job详情                                                     |
 
 `Example`
 
@@ -2367,7 +2371,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复quizName"
+    "message": "重复的quizName"
 }
 
 ```

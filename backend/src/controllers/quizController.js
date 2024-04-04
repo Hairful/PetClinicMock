@@ -56,6 +56,7 @@ exports.getQuizDetail = async (req, res) => {
 
 exports.recordExamEntry = async (req, res) => {
     try {
+        req.body.userID = req.userIDInToken;
         const result = await recordExamEntry(req.body);
         let httpStatus;
         switch (result.status) {

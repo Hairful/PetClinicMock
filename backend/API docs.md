@@ -82,7 +82,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
   "status": 1,
-  "message": "重复userName"
+  "message": "重复的userName"
 }
 ```
 
@@ -930,9 +930,9 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                 |
-| ------------- | ------ | ------- | ---- | -------------------- |
-| Authorization | Header | string  | 是   | 身份验证token        |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
 
 
 `Example`
@@ -999,10 +999,10 @@ Content-Type: application/json
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                 |
-| ------------- | ------ | ------- | ---- | -------------------- |
-| quizID        | Param  | string  | 是   | quizID               |
-| Authorization | Header | string  | 是   | 身份验证token        |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| quizID        | Param  | string | 是   | quizID        |
+| Authorization | Header | string | 是   | 身份验证token |
 
 `Example`
 
@@ -1425,7 +1425,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复userName"
+    "message": "重复的userName"
 }
 ```
 
@@ -1478,6 +1478,13 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应userID"
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 2,
+    "message": "重复的userName"
 }
 ```
 
@@ -2364,7 +2371,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复quizName"
+    "message": "重复的quizName"
 }
 
 ```
