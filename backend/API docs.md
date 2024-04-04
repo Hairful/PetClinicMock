@@ -1647,10 +1647,17 @@ Content-Type: application/json
     "message": "成功",
 }
 
-HTTP/1.1 400 Bad Request
+HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
+    "message": "无对应diseaseID"
+}
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "status": 2,
     "message": "重复的diseaseName"
 }
 

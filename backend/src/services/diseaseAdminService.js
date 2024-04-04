@@ -59,13 +59,19 @@ exports.deleteDiseaseById = async (diseaseId) => {
  * @param {integer} diseaseID - 疾病ID
  * @param {Object} updates - 更新数据
  * @returns {Object} 对象
- * 注意: medicineID需要从前端JSON中拆解出来
+ * 注意: diseaseID需要从前端JSON中拆解出来
  */
 exports.updateDisease = async (diseaseID, updates) => {
     try {
         const disease = await Disease.findByPk(diseaseID);
         if (!disease) {
             return { status: 1, message: "无对应diseaseID" };
+        }
+        const diseaseExistByName = await Disease.findOne({
+            where: { diseaseName: updates.diseaseName }
+        });
+        if (diseaseExistByName) {
+            return { status: 2, message: "重复的diseaseName" };
         }
         // 更新疾病记录
         await disease.update(updates);
