@@ -69,7 +69,7 @@ exports.updateJob = async (role, prevJob, job, jobDetail) => {
                 where: { job: job }
             });
             if (jobexist) {
-                return { status: 2, message: '重复的job' };
+                return { status: 3, message: '重复的job' };
             }
             const rolejob = await Job.findOne({
                 where: { role }

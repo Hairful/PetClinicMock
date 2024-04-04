@@ -170,9 +170,35 @@ export default {
       currentProb:'',
       ans:[],
       answers:[],
+      credit:0,
     }
   },
   methods:{
+    async pushResult() {
+      try {
+        const response = await axios.post('/quiz/result', {
+          quizID:this.quizID,
+          userID:this.userID,
+          credit:this.credit,
+          answers:this.answers,
+        });
+        
+        console.log(response.data);
+        if (response.data.status === 0) {
+          // Login successful
+          this.$router.push(`/quiz-result?quizID=${this.quizID}`);; // Navigate to menu page
+        } else if (response.data.status === 1) {
+          // Login failed
+          // Show error message
+          this.$message.warning('Wrong username or password.');
+        } else {
+          // Handle other status
+          this.$message.warning('Username not found.');
+        }
+      } catch (error) {
+        // Handle error
+      }
+    },
     option2ans(option)
     {
       switch(option){
@@ -210,20 +236,17 @@ export default {
     },
 
     submit(){
-      console.log(this.probs);
-      console.log(this.ans);
-      let credit = 0;
       for(let i=0;i<this.ans.length;i++){
         let unit = {};
         unit.probNumber = this.probs[i].probID;
-        unit.Ans = this.option2ans(this.ans[i]);
+        unit.ans = this.option2ans(this.ans[i]);
         this.answers.push(unit);
         if(this.option2ans(this.ans[i]) == this.probs[i].probAns)
         {
-          credit+=this.probs[i].probCredit;
+          this.credit+=this.probs[i].probCredit;
         }
       }
-      console.log(this.answers);
+      this.pushResult();
     },
   },
   created() {
