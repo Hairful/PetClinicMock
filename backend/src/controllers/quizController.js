@@ -72,6 +72,9 @@ exports.recordExamEntry = async (req, res) => {
             case 3:
                 httpStatus = 404;
                 break;
+            case 4:
+                httpStatus = 404;
+                break;
             case -9:
                 httpStatus = 500;
                 break;
