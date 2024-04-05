@@ -102,11 +102,18 @@
         <h1 class="admin-case-study-detail-hero-heading">
           <span class="heading1">
             Manage Cases:
-            <span v-html="raw06q6"></span>
           </span>
-          <span class="admin-case-study-detail-text004">Disease 1</span>
+          <span class="admin-case-study-detail-text004">{{ this.diseaseName }}</span>
         </h1>
       </div>
+    </div>
+    <div class="admin-case-study-detail-container04">
+      <router-link :to="{path:'/admin-case-study-list'}" class="admin-case-study-detail-navlink button">
+        Choose Disease
+      </router-link>
+      <router-link to="/admin-menu" class="admin-case-study-detail-navlink button">
+        Menu
+      </router-link>
     </div>
     <div class="admin-case-study-detail-container04"></div>
     <div class="admin-case-study-detail-hero1 heroContainer">
@@ -118,479 +125,243 @@
         <div class="admin-case-study-detail-container06">
           <div class="admin-case-study-detail-container07">
             <textarea
-              placeholder="placeholder"
+              v-model="newIntro"
+              :placeholder="`${this.diseaseIntro}`"
               class="admin-case-study-detail-textarea textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button button">
+            <button type="button" class="admin-case-study-detail-button button" @click="modifyDiseaseIntro">
               Modify
             </button>
-          </div>
-          <div class="admin-case-study-detail-container08">
-            <button type="button" class="admin-case-study-detail-button01 button">
-              <span>
-                <span>Upload Picture</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container09">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container10">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image01"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container11">
-            <button type="button" class="admin-case-study-detail-button04 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container12">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button05 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container13">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video01"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button06 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
           </div>
         </div>
       </div>
-      <div class="admin-case-study-detail-container14">
-        <div class="admin-case-study-detail-container15">
-          <h1 class="admin-case-study-detail-hero-heading2 heading1">
-            <span class="heading1">Case 1</span>
-            <br />
-          </h1>
-          <button type="button" class="button">Delete Case</button>
-        </div>
-        <div class="admin-case-study-detail-container16">
-          <span class="admin-case-study-detail-text041 heading2">Summary</span>
-          <div class="admin-case-study-detail-container17">
+
+      <div class="admin-case-study-detail-container05" v-for="(caseItem, index) in cases" :key="index">
+        <h1 class="admin-case-study-detail-hero-heading2 heading1">
+          <span class="heading1">Case {{ caseItem.caseID }}</span>
+          <br />
+        </h1>
+        <div class="admin-case-study-detail-container10">
+          <span class="admin-case-study-detail-text142 heading2">Summary</span>
+          <div class="admin-case-study-detail-container57">
             <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea1 textarea"
+              v-model="intros[0]"
+              :placeholder="`${ caseItem.details.summary }`"
+              class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button08 button">
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
               Modify
             </button>
           </div>
-          <div class="admin-case-study-detail-container18">
-            <button type="button" class="admin-case-study-detail-button09 button">
-              <span>
+          <div class="admin-case-study-detail-text142">images:
+              <button type="button" class="admin-case-study-detail-button41 button">
                 <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container19">
+              </button>
+            <div v-for="(pic, picIndex) in caseItem.details.summaryPictures"
+                :key="`summary-pic-${picIndex}`"
+                class="admin-case-study-detail-container11">
               <img
                 alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
+                :src="pic"
                 class="admin-case-study-detail-image02"
               />
               <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container20">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image03"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+                <span>Delete</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-container21">
-            <button type="button" class="admin-case-study-detail-button12 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container22">
+          <div class="admin-case-study-detail-text142">videos:
+            <button type="button" class="admin-case-study-detail-button41 button">
+                <span>Upload</span>
+              </button>
+            <div v-for="(vid, vidIndex) in caseItem.details.summaryVideos"
+                :key="`summary-vid-${vidIndex}`"
+                class="admin-case-study-detail-container12">
               <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
+                :src="vid"
                 class="admin-case-study-detail-video02"
+                controls
               ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button13 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container23">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video03"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button14 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+              <button type="button" class="button">
+                <span>Delete</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="admin-case-study-detail-container24">
-          <span class="admin-case-study-detail-text060 heading2">Examine</span>
-          <div class="admin-case-study-detail-container25">
+        <div class="admin-case-study-detail-container10">
+          <span class="admin-case-study-detail-text142 heading2">examine</span>
+          <div class="admin-case-study-detail-container57">
             <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea2 textarea"
+              v-model="intros[1]"
+              :placeholder="`${ caseItem.details.examine }`"
+              class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button15 button">
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
               Modify
             </button>
           </div>
-          <div class="admin-case-study-detail-container26">
-            <button type="button" class="admin-case-study-detail-button16 button">
-              <span>
+          <div class="admin-case-study-detail-text142">images:
+              <button type="button" class="admin-case-study-detail-button41 button">
                 <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container27">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image04"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
               </button>
-            </div>
-            <div class="admin-case-study-detail-container28">
+            <div v-for="(pic, picIndex) in caseItem.details.examinePictures"
+                :key="`examine-pic-${picIndex}`"
+                class="admin-case-study-detail-container11">
               <img
                 alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image05"
+                :src="pic"
+                class="admin-case-study-detail-image02"
               />
               <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+                <span>Delete</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-container29">
-            <button type="button" class="admin-case-study-detail-button19 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container30">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video04"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button20 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+          <div class="admin-case-study-detail-text142">videos:
+            <button type="button" class="admin-case-study-detail-button41 button">
+                <span>Upload</span>
               </button>
-            </div>
-            <div class="admin-case-study-detail-container31">
+            <div v-for="(vid, vidIndex) in caseItem.details.examineVideos"
+                :key="`examine-vid-${vidIndex}`"
+                class="admin-case-study-detail-container12">
               <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video05"
+                :src="vid"
+                class="admin-case-study-detail-video02"
+                controls
               ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button21 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+              <button type="button" class="button">
+                <span>Delete</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="admin-case-study-detail-container32">
-          <span class="admin-case-study-detail-text079 heading2">Diagnose</span>
-          <div class="admin-case-study-detail-container33">
+        <div class="admin-case-study-detail-container10">
+          <span class="admin-case-study-detail-text142 heading2">diagnose</span>
+          <div class="admin-case-study-detail-container57">
             <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea3 textarea"
+              v-model="intros[2]"
+              :placeholder="`${ caseItem.details.diagnose }`"
+              class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button22 button">
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
               Modify
             </button>
           </div>
-          <div class="admin-case-study-detail-container34">
-            <button type="button" class="admin-case-study-detail-button23 button">
-              <span>
+          <div class="admin-case-study-detail-text142">images:
+              <button type="button" class="admin-case-study-detail-button41 button">
                 <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container35">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image06"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
               </button>
-            </div>
-            <div class="admin-case-study-detail-container36">
+            <div v-for="(pic, picIndex) in caseItem.details.diagnosePictures"
+                :key="`diagnose-pic-${picIndex}`"
+                class="admin-case-study-detail-container11">
               <img
                 alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image07"
+                :src="pic"
+                class="admin-case-study-detail-image02"
               />
               <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+                <span>Delete</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-container37">
-            <button type="button" class="admin-case-study-detail-button26 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container38">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video06"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button27 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+          <div class="admin-case-study-detail-text142">videos:
+            <button type="button" class="admin-case-study-detail-button41 button">
+                <span>Upload</span>
               </button>
-            </div>
-            <div class="admin-case-study-detail-container39">
+            <div v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos"
+                :key="`diagnose-vid-${vidIndex}`"
+                class="admin-case-study-detail-container12">
               <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video07"
+                :src="vid"
+                class="admin-case-study-detail-video02"
+                controls
               ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button28 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+              <button type="button" class="button">
+                <span>Delete</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="admin-case-study-detail-container40">
-          <span class="admin-case-study-detail-text098 heading2">Treatment</span>
-          <div class="admin-case-study-detail-container41">
+        <div class="admin-case-study-detail-container10">
+          <span class="admin-case-study-detail-text142 heading2">treatment</span>
+          <div class="admin-case-study-detail-container57">
             <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea4 textarea"
+              v-model="intros[3]"
+              :placeholder="`${ caseItem.details.treatment }`"
+              class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button29 button">
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
               Modify
             </button>
           </div>
-          <div class="admin-case-study-detail-container42">
-            <button type="button" class="admin-case-study-detail-button30 button">
-              <span>
+          <div class="admin-case-study-detail-text142">images:
+              <button type="button" class="admin-case-study-detail-button41 button">
                 <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container43">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image08"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
               </button>
-            </div>
-            <div class="admin-case-study-detail-container44">
+            <div v-for="(pic, picIndex) in caseItem.details.treatmentPictures"
+                :key="`treatment-pic-${picIndex}`"
+                class="admin-case-study-detail-container11">
               <img
                 alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image09"
-              />
+                :src="pic"
+                class="admin-case-study-detail-image02"
+              ></img>
               <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+                <span>Delete</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-container45">
-            <button type="button" class="admin-case-study-detail-button33 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container46">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video08"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button34 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+          <div class="admin-case-study-detail-text142">videos:
+            <button type="button" class="admin-case-study-detail-button41 button">
+                <span>Upload</span>
               </button>
-            </div>
-            <div class="admin-case-study-detail-container47">
+            <div v-for="(vid, vidIndex) in caseItem.details.treatmentVideos"
+                :key="`treatment-vid-${vidIndex}`"
+                class="admin-case-study-detail-container12">
               <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video09"
+                :src="vid"
+                class="admin-case-study-detail-video02"
+                controls
               ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button35 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
+              <button type="button" class="button">
+                <span>Delete</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="admin-case-study-detail-container48">
-          <span class="admin-case-study-detail-text117 heading2">Pharmacy</span>
-          <div class="admin-case-study-detail-container49">
-            <button type="button" class="button">
-              <span>
-                <span>Add</span>
-                <br />
-              </span>
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container50">
-            <select name="fff">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <input type="text" placeholder="Dosage" class="input" />
-            <div class="admin-case-study-detail-container51">
-              <button type="button" class="button">Add</button>
+        <div class="admin-case-study-detail-container88">
+          <span class="admin-case-study-detail-text142 heading2">Pharmacy</span>
+          <div class="admin-case-study-detail-container57">
+            <div class="admin-case-study-detail-text142">current medicines:</div>
+            <router-link 
+              v-for="(medicine, medIndex) in caseItem.details.medicines" 
+              :key="`medicine-${medIndex}`" 
+              to="/pharmacy" 
+              class="admin-case-study-detail-navlink3"
+            >
+              <span class="bodyLarge"> {{ medicine.medicineName }}, {{ medicine.medicineIntro }}</span>
+              <br />
+            </router-link>
+
+            <div class="admin-case-study-detail-container90">
+              <div class="admin-case-study-detail-text142">add new medicine</div>
+              <select name="fff">
+                <option 
+                v-for="(medicine, medIndex) in medicines" 
+                :key="`${medIndex}`" 
+                :value=medIndex>
+                {{ medicine.medicineName }}
+                </option>
+              </select>
+              <input type="text" placeholder="Dosage" class="input" />
+              <div class="admin-case-study-detail-container91">
+                <button type="button" class="button">Add</button>
+              </div>
             </div>
           </div>
-          <div class="admin-case-study-detail-container52">
-            <select name="fff">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <input type="text" placeholder="Dosage" class="input" />
-            <div class="admin-case-study-detail-container53">
-              <button type="button" class="button">Modify</button>
-              <button type="button" class="button">Delete</button>
-            </div>
-          </div>
-        </div>
       </div>
+      </div>
+
       <div class="admin-case-study-detail-container54">
         <div class="admin-case-study-detail-container55">
           <h1 class="admin-case-study-detail-hero-heading3 heading1">
@@ -599,7 +370,7 @@
           </h1>
         </div>
         <div class="admin-case-study-detail-container56">
-          <span class="admin-case-study-detail-text123 heading2">Summary</span>
+          <span class="admin-case-study-detail-text142 heading2">Summary</span>
           <div class="admin-case-study-detail-container57">
             <textarea
               placeholder="placeholder"
@@ -611,10 +382,7 @@
           </div>
           <div class="admin-case-study-detail-container58">
             <button type="button" class="admin-case-study-detail-button41 button">
-              <span>
                 <span>Upload</span>
-                <br />
-              </span>
             </button>
             <div class="admin-case-study-detail-container59">
               <img
@@ -623,10 +391,7 @@
                 class="admin-case-study-detail-image10"
               />
               <button type="button" class="button">
-                <span>
                   <span>Delete</span>
-                  <br />
-                </span>
               </button>
             </div>
             <div class="admin-case-study-detail-container60">
@@ -783,10 +548,7 @@
           </div>
           <div class="admin-case-study-detail-container74">
             <button type="button" class="admin-case-study-detail-button55 button">
-              <span>
                 <span>Upload</span>
-                <br />
-              </span>
             </button>
             <div class="admin-case-study-detail-container75">
               <img
@@ -795,10 +557,7 @@
                 class="admin-case-study-detail-image14"
               />
               <button type="button" class="button">
-                <span>
                   <span>Delete</span>
-                  <br />
-                </span>
               </button>
             </div>
             <div class="admin-case-study-detail-container76">
@@ -808,10 +567,7 @@
                 class="admin-case-study-detail-image15"
               />
               <button type="button" class="button">
-                <span>
                   <span>Delete</span>
-                  <br />
-                </span>
               </button>
             </div>
           </div>
@@ -1032,8 +788,140 @@ export default {
       diseaseName: ' ',
       diseaseType: ' ',
       diseaseIntro: ' ',
-      cases: []
+      newIntro:'',
+      cases: [],
+      medicines:[],
+      intros:[],
+      pictures:[],
+      videos:[],
     }
+  },
+  methods:{
+    fetchDisease(){
+      this.diseaseIntro = '';
+      axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.diseaseIntro = response.data.diseaseIntro;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding diseaseID');
+      }
+    });
+    },
+    fetchCases(){
+      this.cases = [];
+    // Fetch case list
+    axios.get(`/casestudy/case/list?diseaseID=${this.diseaseID}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(async response => {
+      if (response.data.status === 0) {
+        this.cases = response.data.cases;
+        // Fetch details for each case
+        const casePromises = this.cases.map(caseItem => {
+          return axios.get(`/casestudy/case/detail?caseID=${caseItem.caseID}`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('Token')}`
+            }
+          })
+          .then(response => {
+            if (response.data.status === 0) {
+              return response.data;
+            } else if (response.data.status === 1) {
+              console.log('No corresponding caseID');
+              return null;
+            }
+          });
+        });
+
+        const caseDetails = await Promise.all(casePromises);
+        this.cases = this.cases.map((caseItem, index) => {
+          caseItem.details = caseDetails[index];
+          return caseItem;
+        });
+      }
+    });
+    },
+    fetchMedicine(){
+      this.medicines = [];
+      // Fetch medicine list
+    axios.get(`/medicine/list`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.medicines = response.data.medicines;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding medicine');
+      }
+    });
+    },
+    modifyDiseaseIntro(){
+      axios({
+          method: 'put',
+          url: '/admin/disease',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            diseaseID : this.diseaseID,
+            diseaseIntro : this.newIntro,
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.fetchDisease();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    modifyIntros(index){
+      axios({
+          method: 'put',
+          url: '/admin/case',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            caseID : this.cases[index].caseID,
+            // summary : this.intros[0],
+            // examine : this.intros[1],
+            // diagnose : this.intros[2],
+            // treatment : this.intros[3],
+          }
+        })
+        .then(response => {
+          this.fetchCases();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    uploadImage(kind){
+
+    },
+    uploadImage(kind){
+
+    },
+    uploadVideo(kind){
+
+    },
+    uploadImage(kind){
+
+    },
   },
   created() {
     this.diseaseType = this.$route.query.diseaseType;
@@ -1083,6 +971,19 @@ export default {
           caseItem.details = caseDetails[index];
           return caseItem;
         });
+      }
+    });
+    // Fetch medicine list
+    axios.get(`/medicine/list`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.medicines = response.data.medicines;
+      } else if (response.data.status === 1) {
+        console.log('No corresponding medicine');
       }
     });
 
@@ -1261,6 +1162,15 @@ export default {
   justify-content: center;
   background-color: var(--dl-color-gray-black);
 }
+.admin-case-study-detail-container04 {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: var(--dl-color-gray-black);
+}
 .admin-case-study-detail-hero1 {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
@@ -1318,11 +1228,12 @@ export default {
   align-self: center;
 }
 .admin-case-study-detail-container09 {
+  align-items: flex-start;
   flex: 0 0 auto;
   width: 200px;
   height: auto;
   display: flex;
-  margin-left: var(--dl-space-space-twounits);
+
   margin-right: var(--dl-space-space-twounits);
   flex-direction: column;
 }
@@ -2525,7 +2436,7 @@ export default {
   font-style: normal;
   font-weight: 600;
   border-width: 0px;
-  margin-right: 0px;
+  margin-right: 20px;
   border-radius: var(--dl-radius-radius-radius8);
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);

@@ -17,6 +17,9 @@
               <span class="admin-menu-text02">Allen</span>
             </span>
           </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+          </div>
         </div>
         <div data-thq="thq-burger-menu" class="admin-menu-burger-menu">
           <svg viewBox="0 0 1024 1024" class="admin-menu-icon socialIcons">
@@ -166,6 +169,12 @@ export default {
       raw7b52: ' ',
       rawi76z: ' ',
       rawufkj: ' ',
+    }
+  },
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
     }
   },
   metaInfo: {

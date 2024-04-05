@@ -88,7 +88,7 @@
             Manage Quiz:
             <span v-html="raw2umb"></span>
           </span>
-          <span class="admin-quiz-detail-text04">Quiz 1</span>
+          <span class="admin-quiz-detail-text04">Quiz {{quizID}}</span>
         </h1>
       </div>
     </div>
@@ -107,20 +107,36 @@
       </router-link>
     </div>
     <div class="admin-quiz-detail-hero1 heroContainer">
-      <div class="admin-quiz-detail-container05">
+      <div v-for="(prob,index) in probs" class="admin-quiz-detail-container05">
         <h1 class="admin-quiz-detail-hero-heading1 heading1">
-          <span class="heading1">Question 1</span>
+          <span class="heading1">Question {{index+1}}</span>
           <br />
         </h1>
-        <button type="button" class="admin-quiz-detail-button button">
+        <button type="button" class="admin-quiz-detail-button button" @click="deleteProb(index)">
           Delete
         </button>
         <div class="admin-quiz-detail-container06">
           <textarea
-            placeholder="placeholder"
+            v-model="newText[index]"
+            :placeholder="`${prob.probText}`"
             class="admin-quiz-detail-textarea textarea"
           ></textarea>
-          <button type="button" class="button">Modify</button>
+          <div class="admin-quiz-detail-container10">
+            <span class="admin-quiz-detail-text33 bodyLarge">
+              Correcrt Answer: 
+            </span>
+            <select v-model="options[index]" class="admin-quiz-detail-select">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+          <div class="admin-quiz-detail-container11">
+            <span class="admin-quiz-detail-text34 bodyLarge">Points:</span>
+            <input type="text" v-model="prob.probCredit" placeholder="placeholder" class="input" />
+          </div>
+          <button type="button" class="button" @click="modifyProb(index)">Modify</button>
           <div class="admin-quiz-detail-container07">
             <button type="button" class="admin-quiz-detail-button02 button">
               <span>
@@ -128,118 +144,20 @@
                 <br />
               </span>
             </button>
-            <div class="admin-quiz-detail-container08">
-              <img
+              <div class="admin-quiz-detail-container09">
+                <img
                 alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-quiz-detail-image"
+                :src="`${prob.probImg}`"
+                class="quiz-detail-image"
               />
-              <button type="button" class="button">
-                <span>
+              <button type="button" class="button" @click="modifyImage(index)">
                   <span>Delete</span>
-                  <br />
-                </span>
               </button>
             </div>
-            <div class="admin-quiz-detail-container09">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-quiz-detail-image1"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-quiz-detail-container10">
-            <span class="admin-quiz-detail-text33 bodyLarge">
-              Correcrt Answer: 
-            </span>
-            <select class="admin-quiz-detail-select">
-              <option value="Option 1">A</option>
-              <option value="Option 2">B</option>
-              <option value="Option 3">C</option>
-              <option>D</option>
-            </select>
-          </div>
-          <div class="admin-quiz-detail-container11">
-            <span class="admin-quiz-detail-text34 bodyLarge">Points: </span>
-            <input type="text" placeholder="placeholder" class="input" />
           </div>
         </div>
       </div>
-      <div class="admin-quiz-detail-container12">
-        <h1 class="admin-quiz-detail-hero-heading2 heading1">
-          <span class="heading1">Question 2</span>
-          <br />
-        </h1>
-        <button type="button" class="admin-quiz-detail-button05 button">
-          Delete
-        </button>
-        <div class="admin-quiz-detail-container13">
-          <textarea
-            placeholder="placeholder"
-            class="admin-quiz-detail-textarea1 textarea"
-          ></textarea>
-          <button type="button" class="button">Modify</button>
-          <div class="admin-quiz-detail-container14">
-            <button type="button" class="admin-quiz-detail-button07 button">
-              <span>
-                <span>Upload Picture</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-quiz-detail-container15">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-quiz-detail-image2"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-quiz-detail-container16">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-quiz-detail-image3"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-quiz-detail-container17">
-            <span class="admin-quiz-detail-text46 bodyLarge">
-              Correcrt Answer: 
-            </span>
-            <select class="admin-quiz-detail-select1">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">A</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">B</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">C</option>
-              <option>D</option>
-            </select>
-          </div>
-          <div class="admin-quiz-detail-container18">
-            <span class="admin-quiz-detail-text47 bodyLarge">Points: </span>
-            <input type="text" placeholder="placeholder" class="input" />
-          </div>
-        </div>
-      </div>
+      
       <div class="admin-quiz-detail-container19">
         <h1 class="admin-quiz-detail-hero-heading3 heading1">
           <span class="heading1">Add Question</span>
@@ -247,78 +165,45 @@
         </h1>
         <div class="admin-quiz-detail-container20">
           <textarea
+            v-model="addedProb.probText"
             placeholder="placeholder"
             class="admin-quiz-detail-textarea2 textarea"
           ></textarea>
           <button type="button" class="button">Modify</button>
           <div class="admin-quiz-detail-container21">
             <button type="button" class="admin-quiz-detail-button11 button">
-              <span>
                 <span>Upload Picture</span>
-                <br />
-              </span>
             </button>
-            <div class="admin-quiz-detail-container22">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-quiz-detail-image4"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-quiz-detail-container23">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-quiz-detail-image5"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
           </div>
           <div class="admin-quiz-detail-container24">
             <span class="admin-quiz-detail-text59 bodyLarge">
-              Correcrt Answer: 
+              Correcrt Answer: 
             </span>
-            <select class="admin-quiz-detail-select2">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">A</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">B</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">C</option>
-              <option value="Option 3">Option 3</option>
-              <option>D</option>
+            <select  v-model="addedOption" class="admin-quiz-detail-select2">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
             </select>
           </div>
           <div class="admin-quiz-detail-container25">
-            <span class="admin-quiz-detail-text60 bodyLarge">Points: </span>
-            <input type="text" placeholder="placeholder" class="input" />
+            <span class="admin-quiz-detail-text60 bodyLarge">Points: </span>
+            <input type="text" v-model="addedProb.probCredit" class="input" />
           </div>
-          <button type="button" class="admin-quiz-detail-button14 button">
+          <button type="button" class="admin-quiz-detail-button14 button" @click="addProb">
             Add
           </button>
         </div>
       </div>
     </div>
     <div class="admin-quiz-detail-container26">
-      <router-link
+      <button
         to="/admin-quiz-list"
         class="admin-quiz-detail-navlink2 button"
+        @click="save"
       >
         Save
-      </router-link>
+    </button>
     </div>
     <div class="admin-quiz-detail-footer">
       <footer class="admin-quiz-detail-footer1 footerContainer">
@@ -339,6 +224,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminQuizDetail',
   props: {},
@@ -354,7 +240,144 @@ export default {
       rawh40r: ' ',
       rawonyf: ' ',
       raw370h: ' ',
+      quizID:'',
+      probs:[],
+      quizName:'',
+      totalCredits:'',
+      options:[],
+      newText:[],
+      addedOption:'',
+      addedProb:{
+        probNumber:'',
+        probCredit:'',
+        probText:'',
+        probImg:'',
+        probAns:'',
+        lastAns:'',
+      },
     }
+  },
+  methods:{
+    deleteProb(index){
+      this.probs.splice(index,1);
+      this.save();
+    },
+    addProb(){
+      this.addedProb.probAns = this.option2ans(this.addedOption);
+      this.addedProb.probNumber = this.probs.length+1;
+      this.probs.push(this.addedProb);
+      this.save();
+    },
+    save(){
+      let totalcredit = 0;
+      this.probs.forEach(prob => {
+        totalcredit+=prob.probCredit;
+      });
+      axios({
+          method: 'put',
+          url: '/admin/quiz',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            quizName : this.quizName,
+            quizID : this.quizID,
+            totalCredits : totalcredit,
+            probs : this.probs,
+          }
+        })
+        .then(response => {
+          this.fetchProb();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    fetchProb(){
+    this.options=[];
+    this.newText=[];  
+    axios.get(`/quiz/detail?quizID=${this.quizID}`, 
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.probs = response.data.probs;
+        this.quizName = response.data.quizName;
+        this.totalCredits = response.data.totalCredits;
+        this.probs.forEach(prob => {
+          this.options.push(this.ans2option(prob.probAns));
+          this.newText.push(prob.probText);
+        });
+      } else if (response.data.status === 1) {
+        console.log('No corresponding quizID');
+      }
+    }); 
+    },
+    modifyProb(index){
+      this.probs[index].probText = this.newText[index];
+      this.probs[index].probAns = this.option2ans(this.options[index]);
+    },
+    modifyImage(index){
+
+    },
+    ans2option(ans)
+    {
+      switch(ans){
+        case 1:
+          return 'A';
+        case 2:
+          return 'B';
+        case 3:
+          return 'C';
+        case 4:
+          return 'D';
+        default:
+            return '';
+      }
+    },
+    option2ans(option)
+    {
+      switch(option){
+        case "A":
+          return 1;
+        case "B":
+          return 2;
+        case "C":
+          return 3;
+        case "D":
+          return 4;
+        default:
+            return -1;
+      }
+    },
+  },
+  created() {
+    this.quizID = this.$route.query.quizID;
+    axios.get(`/quiz/detail?quizID=${this.quizID}`, 
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(response => {
+      if (response.data.status === 0) {
+        this.probs = response.data.probs;
+        this.quizName = response.data.quizName;
+        this.totalCredits = response.data.totalCredits;
+        this.probs.forEach(prob => {
+          this.options.push(this.ans2option(prob.probAns));
+          this.newText.push(prob.probText);
+        });
+      } else if (response.data.status === 1) {
+        console.log('No corresponding quizID');
+      }
+    }); 
+
   },
   metaInfo: {
     title: 'AdminQuizDetail - Roasted Rusty Swallow',
