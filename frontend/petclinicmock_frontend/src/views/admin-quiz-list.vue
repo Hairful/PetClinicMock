@@ -102,42 +102,30 @@
       </h1>
       <div class="admin-quiz-list-container04">
         <div class="admin-quiz-list-container05">
-          <input type="text" placeholder="placeholder" class="input" />
-          <button type="button" class="button">Add</button>
+          <input type="text" v-model="newQuizName" placeholder="enter quiz name" class="input" />
+          <button type="button" class="button" @click="addQuiz">Add</button>
         </div>
       </div>
-      <div class="admin-quiz-list-container06">
+      <div 
+        v-for="(quiz,index) in quizzes" 
+        :key="quiz.quizID"
+        class="admin-quiz-list-container06"
+        >
         <ul class="admin-quiz-list-ul list">
           <li class="admin-quiz-list-li list-item Content">
-            <span class="heading3">Quiz 1</span>
+            <span class="heading3">Quiz {{ quiz.quizID }}</span>
             <div class="admin-quiz-list-container07">
               <div class="admin-quiz-list-container08">
-                <input type="text" placeholder="placeholder" class="input" />
-                <button type="button" class="button">Rename</button>
+                <input type="text" v-model="inputName[index]" :placeholder="`${quiz.quizName}`" class="input" />
+                <button type="button" class="button" @click="renameQuiz(index)">Rename</button>
               </div>
               <router-link
-                to="/admin-quiz-detail"
+                :to="`/admin-quiz-detail?quizID=${quiz.quizID}`"
                 class="admin-quiz-list-navlink1 button"
               >
                 Manage Questions
               </router-link>
-              <button type="button" class="button">Delete</button>
-            </div>
-          </li>
-          <li class="admin-quiz-list-li1 list-item Content">
-            <span class="heading3">Quiz 2</span>
-            <div class="admin-quiz-list-container09">
-              <div class="admin-quiz-list-container10">
-                <input type="text" placeholder="placeholder" class="input" />
-                <button type="button" class="button">Rename</button>
-              </div>
-              <router-link
-                to="/admin-quiz-detail"
-                class="admin-quiz-list-navlink2 button"
-              >
-                Manage Questions
-              </router-link>
-              <button type="button" class="button">Delete</button>
+              <button type="button" class="button" @click="deleteQuiz(index)">Delete</button>
             </div>
           </li>
         </ul>
@@ -162,6 +150,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminQuizList',
   props: {},
@@ -176,8 +165,113 @@ export default {
       rawp1jv: ' ',
       rawxjgq: ' ',
       rawagmc: ' ',
+      newQuizName:'',
+      quizzes:[],
+      inputName:[],
     }
   },
+  methods:{
+    refresh(){
+      axios
+      .get(`/quiz/list`, 
+        {
+          headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.quizzes=response.data.quizzes;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    addQuiz(){
+      axios({
+          method: 'post',
+          url: '/admin/quiz',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            quizName: this.newQuizName,
+            totalCredits: 1,
+            probs:[],
+          }
+        })
+        .then(response => {
+          this.refresh();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    renameQuiz(index){
+      const quizName = this.inputName[index];
+      const quizID = this.quizzes[index].quizID;
+      axios({
+          method: 'put',
+          url: '/admin/quiz',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            quizID: quizID,
+            quizName: quizName,
+            totalCredits: this.quizzes[index].totalCredits,
+            probs: this.quizzes[index].probs,
+          }
+        })
+        .then(response => {
+          this.refresh();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+
+    async deleteQuiz(index){
+      try {
+        const response = await axios.delete(`/admin/quiz?quizID=${this.quizzes[index].quizID}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log(response.data);
+        this.refresh();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  created() {
+    axios
+      .get(`/quiz/list`, 
+        {
+          headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.quizzes=response.data.quizzes;
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
   metaInfo: {
     title: 'AdminQuizList - Roasted Rusty Swallow',
     meta: [

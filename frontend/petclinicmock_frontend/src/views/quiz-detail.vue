@@ -178,7 +178,6 @@ export default {
       try {
         const response = await axios.post('/quiz/result', {
           quizID:this.quizID,
-          userID:this.userID,
           credit:this.credit,
           answers:this.answers,
         });
@@ -186,7 +185,7 @@ export default {
         console.log(response.data);
         if (response.data.status === 0) {
           // Login successful
-          this.$router.push(`/quiz-result?quizID=${this.quizID}`);; // Navigate to menu page
+          this.$router.push(`/quiz-result?quizID=${this.quizID}`); // Navigate to menu page
         } else if (response.data.status === 1) {
           // Login failed
           // Show error message
