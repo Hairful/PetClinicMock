@@ -39,6 +39,9 @@ exports.updateDisease = async (req, res) => {
                 httpStatus = 200;
                 break;
             case 1:
+                httpStatus = 404;
+                break;
+            case 2:
                 httpStatus = 400;
                 break;
             case -9:
@@ -62,7 +65,7 @@ exports.deleteDisease = async (req, res) => {
                 httpStatus = 200;
                 break;
             case 1:
-                httpStatus = 400;
+                httpStatus = 404;
                 break;
             case -9:
                 httpStatus = 500;

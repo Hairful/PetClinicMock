@@ -67,11 +67,22 @@ exports.deleteMedicineById = async (medicineId) => {
  */
 exports.updateMedicine = async (medicineID, updates) => {
     try {
+        const medicineExistByName = await Medicine.findOne({
+            where: { medicineName: updates.medicineName }
+        });
+        if (medicineExistByName) {
+            return { status: 1, message: "重复的medicineName" };
+        }
         const medicine = await Medicine.findByPk(medicineID);
         if (!medicine) {
-            return { status: 1, message: "无对应medicineID" };
+            return { status: 2, message: "无对应medicineID" };
         }
-        await medicine.update(updates);
+        for (const key in updates) {
+            if (medicine[key] !== undefined && updates.hasOwnProperty(key)) {
+                medicine[key] = updates[key];
+            }
+        }
+        await medicine.save();
         return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error in updateMedicine', error);

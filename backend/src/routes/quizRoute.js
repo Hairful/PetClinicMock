@@ -10,6 +10,7 @@ const { getQuizDetail, getQuizList, recordExamEntry } = require('../controllers/
 const { isQueryValid, isBodyValid } = require('../middlewares/formatCheck');
 const { isTokenValid } = require('../middlewares/authMiddleware');
 
+const paramsInQueryOfList = [];
 const paramsInBodyOfResult = ['quizID', 'credit', 'answers'];
 const paramsInQueryOfDetail = ['quizID'];
 
@@ -22,7 +23,7 @@ router.post('/result', isBodyValid(paramsInBodyOfResult), recordExamEntry);
 
 //启用Token认证
 
-router.get('/list', isTokenValid, getQuizList);
+router.get('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getQuizList);
 router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getQuizDetail);
 router.post('/result', isTokenValid, isBodyValid(paramsInBodyOfResult), recordExamEntry);
 

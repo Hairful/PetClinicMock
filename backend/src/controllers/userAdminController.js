@@ -34,7 +34,7 @@ exports.createUser = async (req, res) => {
             case 0:
                 httpStatus = 200;
                 break;
-            case 0:
+            case 1:
                 httpStatus = 400;
                 break;
             case -9:
@@ -59,6 +59,9 @@ exports.updateUser = async (req, res) => {
                 break;
             case 1:
                 httpStatus = 404;
+                break;
+            case 2:
+                httpStatus = 400;
                 break;
             case -9:
                 httpStatus = 500;
