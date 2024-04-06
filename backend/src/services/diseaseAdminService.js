@@ -59,7 +59,7 @@ exports.deleteDiseaseById = async (diseaseId) => {
  * @param {integer} diseaseID - 疾病ID
  * @param {Object} updates - 更新数据
  * @returns {Object} 对象
- * 注意: medicineID需要从前端JSON中拆解出来
+ * 注意: diseaseID需要从前端JSON中拆解出来
  */
 exports.updateDisease = async (diseaseID, updates) => {
     try {
@@ -67,13 +67,17 @@ exports.updateDisease = async (diseaseID, updates) => {
         if (!disease) {
             return { status: 1, message: "无对应diseaseID" };
         }
-        // 更新疾病记录
-        await disease.update(updates);
+        for (const key in updates) {
+            if (disease[key] !== undefined && updates.hasOwnProperty(key)) {
+                disease[key] = updates[key];
+            }
+        }
+        await disease.save();
         return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error in updateDisease', error);
         return { status: -9, message: '错误' };
     }
-}
+};
 
 

@@ -23,7 +23,7 @@ exports.createQuizWithProbs = async (quizData) => {
         const { quizName, totalCredits, probs } = quizData;
         const existingQuiz = await Quiz.findOne({ where: { quizName } });
         if (existingQuiz) {
-            return { status: 1, message: "重复quizName" };
+            return { status: 1, message: "重复的quizName" };
         }
         // 创建新的测验
         const quiz = await Quiz.create({
@@ -63,9 +63,9 @@ exports.deleteQuiz = async (quizID) => {
     try {
         const existingQuiz = await Quiz.findByPk(quizID);
         if (!existingQuiz) {
-            return { status: 1, message: "无对应quizName" };
+            return { status: 1, message: "无对应quizID" };
         }
-        await quiz.destroy()
+        await existingQuiz.destroy()
         return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error In deleteQuiz :', error);

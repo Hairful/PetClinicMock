@@ -56,6 +56,7 @@ exports.getQuizDetail = async (req, res) => {
 
 exports.recordExamEntry = async (req, res) => {
     try {
+        req.body.userID = req.userIDInToken;
         const result = await recordExamEntry(req.body);
         let httpStatus;
         switch (result.status) {
@@ -69,6 +70,9 @@ exports.recordExamEntry = async (req, res) => {
                 httpStatus = 404;
                 break;
             case 3:
+                httpStatus = 404;
+                break;
+            case 4:
                 httpStatus = 404;
                 break;
             case -9:
