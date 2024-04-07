@@ -5,7 +5,7 @@
         data-thq="thq-navbar"
         class="navbarContainer register-navbar-interactive"
       >
-        <router-link to="/" class="register-logo logo">PETCLINICMock</router-link>
+        <router-link to="/menu" class="register-logo logo">PETCLINICMock</router-link>
         <div data-thq="thq-burger-menu" class="register-burger-menu">
           <svg viewBox="0 0 1024 1024" class="register-icon socialIcons">
             <path
@@ -79,7 +79,7 @@
     <div class="register-footer">
       <footer class="register-footer1 footerContainer">
         <div class="register-container2">
-          <router-link to="/" class="register-logo2 logo">
+          <router-link to="/menu" class="register-logo2 logo">
             PETCLINICMOCK
           </router-link>
         </div>

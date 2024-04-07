@@ -5,7 +5,7 @@
         data-thq="thq-navbar"
         class="navbarContainer login-admin-navbar-interactive"
       >
-        <router-link to="/" class="login-admin-logo logo">
+        <router-link to="/menu" class="login-admin-logo logo">
           PETCLINICMock
         </router-link>
         <div data-thq="thq-navbar-nav" class="login-admin-desktop-menu">
@@ -69,7 +69,7 @@
     <div class="login-admin-footer">
       <footer class="login-admin-footer1 footerContainer">
         <div class="login-admin-container2">
-          <router-link to="/" class="login-admin-logo2 logo">
+          <router-link to="/menu" class="login-admin-logo2 logo">
             PETCLINICMOCK
           </router-link>
         </div>

@@ -24,3 +24,28 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error);
 })
 
+axios.interceptors.response.use(
+  response => {
+      return response;
+  },
+  error => {
+      if (error.response) {
+          switch (error.response.status) {
+              case 401:
+                  // 返回 401 清除token信息并跳转到登录页面
+                  localStorage.clear();
+                  router.replace({
+                      path: 'login',
+                      query: {redirect: router.currentRoute.fullPath}
+                  })
+              case 403:
+                window.alert("无对应权限");
+                router.replace({
+                  path: 'menu',
+                  query: {redirect: router.currentRoute.fullPath}
+              })
+              
+          }
+      }
+      return Promise.reject(error.response.data)   // 返回接口返回的错误信息
+  });
