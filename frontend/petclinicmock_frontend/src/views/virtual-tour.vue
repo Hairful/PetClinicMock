@@ -745,56 +745,6 @@ desk.onClick(() => {
   videoElement.play(); // 播放视频
 });
 
-const desk = new SpriteCanvas(
-  camera,
-  "桌子",
-  new THREE.Vector3(-1, 0, 4)
-);
-scene.add(desk.mesh);
-
-// 创建一个视频元素
-const videoElement = document.createElement('video');
-videoElement.src = './videos/video1.mp4';
-videoElement.controls = true; // 显示视频控制条
-videoElement.style.width = '100%'; // 设置视频框的宽度
-videoElement.style.height = '100%'; // 设置视频框的高度
-
-// 创建一个包含视频元素的div
-const videoContainer = document.createElement('div');
-videoContainer.style.position = 'absolute'; // 绝对定位
-videoContainer.style.top = '50%'; // 垂直居中
-videoContainer.style.left = '50%'; // 水平居中
-videoContainer.style.transform = 'translate(-50%, -50%)'; // 居中
-videoContainer.style.width = '400px'; // 设置视频框的宽度
-videoContainer.style.height = '300px'; // 设置视频框的高度
-videoContainer.style.backgroundColor = 'black'; // 设置背景颜色为黑色
-videoContainer.appendChild(videoElement);
-
-// 创建关闭按钮
-const closeButton = document.createElement('button');
-closeButton.innerText = '关闭';
-closeButton.style.position = 'absolute';
-closeButton.style.top = '10px';
-closeButton.style.right = '10px';
-closeButton.style.color = 'white'; // 设置文字颜色为白色
-closeButton.style.backgroundColor = 'red'; // 设置背景颜色为红色
-closeButton.style.border = 'none'; // 移除边框
-closeButton.style.padding = '5px 10px'; // 设置内边距
-closeButton.style.borderRadius = '5px'; // 设置圆角
-closeButton.addEventListener('click', () => {
-  document.body.removeChild(videoContainer); // 移除视频框
-  videoElement.pause(); // 暂停视频播放
-});
-
-videoContainer.appendChild(closeButton);
-
-
-// 点击桌子时弹出视频框
-desk.onClick(() => {
-  document.body.appendChild(videoContainer); // 将视频框添加到文档中
-  videoElement.play(); // 播放视频
-});
-
 
 
 container.value.appendChild(renderer.domElement);
