@@ -17,15 +17,14 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawv2p0"></span>
               </span>
               <span class="admin-case-study-detail-text002">{{ name }}</span>
             </span>
           </div>
         </div>
-        <div>
+          <div>
           <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
-        </div>
+          </div>
         </div>
       </header>
     </div>
@@ -73,24 +72,34 @@
         <h1 class="admin-case-study-detail-hero-heading2 heading1">
           <span class="heading1">Case {{ caseItem.caseID }}</span>
           <br />
+            
         </h1>
+        <button type="button" class="button" style="align-self: center;" @click="deleteCase(index)">    
+          <span>Delete</span>
+        </button>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">Summary</span>
           <div class="admin-case-study-detail-container57">
             <textarea
-              v-model="intros[0]"
-              :placeholder="`${ caseItem.details.summary }`"
+              v-model="summarys[index]"
+              :placeholder="`${ caseItem.summary }`"
               class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifySummary(index)">
               Modify
             </button>
           </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(pic, picIndex) in caseItem.details.summaryPictures"
+            <input  @change="img($event,index,0)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,0)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(pic, picIndex) in summaryPictures[index]"
                 :key="`summary-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -98,16 +107,22 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               />
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,0)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(vid, vidIndex) in caseItem.details.summaryVideos"
+            <input  @change="img($event,index,1)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,1)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将视频文件拖拽到这里</span >
+                </span>
+            <div v-for="(vid, vidIndex) in summaryVideos[index]"
                 :key="`summary-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -115,7 +130,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,vidIndex,1)">
                 <span>Delete</span>
               </button>
             </div>
@@ -123,21 +138,17 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">examine</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              v-model="intros[1]"
-              :placeholder="`${ caseItem.details.examine }`"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
-              Modify
-            </button>
-          </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(pic, picIndex) in caseItem.details.examinePictures"
+            <input  @change="img($event,index,2)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,2)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(pic, picIndex) in examinePictures[index]"
                 :key="`examine-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -145,16 +156,22 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               />
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,2)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(vid, vidIndex) in caseItem.details.examineVideos"
+            <input  @change="img($event,index,3)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,3)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(vid, vidIndex) in examineVideos[index]"
                 :key="`examine-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -162,7 +179,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,vidIndex,3)">
                 <span>Delete</span>
               </button>
             </div>
@@ -170,20 +187,16 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">diagnose</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              v-model="intros[2]"
-              :placeholder="`${ caseItem.details.diagnose }`"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
-              Modify
-            </button>
-          </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
+            <input  @change="img($event,index,4)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,4)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
             <div v-for="(pic, picIndex) in caseItem.details.diagnosePictures"
                 :key="`diagnose-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
@@ -192,15 +205,21 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               />
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,4)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
+            <input  @change="img($event,index,5)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,5)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
             <div v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos"
                 :key="`diagnose-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
@@ -209,7 +228,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,vidIndex,5)">
                 <span>Delete</span>
               </button>
             </div>
@@ -217,20 +236,16 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">treatment</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              v-model="intros[3]"
-              :placeholder="`${ caseItem.details.treatment }`"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
-              Modify
-            </button>
-          </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
+            <input  @change="img($event,index,6)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,6)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
             <div v-for="(pic, picIndex) in caseItem.details.treatmentPictures"
                 :key="`treatment-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
@@ -239,15 +254,21 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               ></img>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,6)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
+            <input  @change="img($event,index,7)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,7)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
             <div v-for="(vid, vidIndex) in caseItem.details.treatmentVideos"
                 :key="`treatment-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
@@ -256,7 +277,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index, vidIndex,7)">
                 <span>Delete</span>
               </button>
             </div>
@@ -294,7 +315,7 @@
           </div>
       </div>
       </div>
-
+      <!-- add case -->
       <div class="admin-case-study-detail-container54">
         <div class="admin-case-study-detail-container55">
           <h1 class="admin-case-study-detail-hero-heading3 heading1">
@@ -703,20 +724,12 @@
 
 <script>
 import axios from 'axios';
+import client from '../oss.js';
 export default {
   name: 'AdminCaseStudyDetail',
   props: {},
   data() {
     return {
-      rawv2p0: ' ',
-      raw06q6: ' ',
-      rawv73j: ' ',
-      rawu3bc: ' ',
-      rawb03w: ' ',
-      rawpcyx: ' ',
-      rawym07: ' ',
-      rawbprc: ' ',
-      rawxc41: ' ',
       diseaseID: ' ',
       diseaseName: ' ',
       diseaseType: ' ',
@@ -724,16 +737,148 @@ export default {
       newIntro:'',
       cases: [],
       medicines:[],
-      intros:[],
-      pictures:[],
-      videos:[],
+      summarys:[],
+      summaryPictures:[],
+      summaryVideos:[],
+      examinePictures:[],
+      examineVideos:[],
+      diagnosePictures:[],
+      diagnoseVideos:[],
+      treatmentPictures:[],
+      treatmentVideos:[],
       name: localStorage.getItem('username'),
     }
   },
   methods:{
+    modifyPV(index){
+      axios({
+          method: 'put',
+          url: '/admin/case',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            caseID : this.cases[index].caseID,
+            summaryPictures: this.summaryPictures[index],
+            summaryVideos: this.summaryVideos[index],
+            examinePictures: this.examinePictures[index],
+            examineVideos: this.examineVideos[index],
+            diagnosePictures: this.diagnosePictures[index],
+            diagnoseVideos: this.diagnoseVideos[index],
+            treatmentPictures: this.treatmentPictures[index],
+            treatmentVideos: this.treatmentVideos[index],
+          }
+        })
+        .then(response => {
+          this.fetchCases();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    async deleteImage(index,pvIndex,kind){
+      const Result = await client.delete(this.switchKind(kind)[index][pvIndex]);
+        console.log('删除成功:', Result);
+      this.switchKind(kind)[index].splice(pvIndex,1); 
+      this.modifyPV(index);
+    },
+    handleDrop(e,index,kind) {
+      e.preventDefault();
+      let files = e.dataTransfer.files;
+      if (!files.length) return;
+      let file = files[0];
+      this.saveImage(file,index,kind);
+      
+    },
+    
+    async img(e,index,kind) {
+      try {
+        //let that = this;//改变this指向
+        let file = e.target.files[0];
+        this.saveImage(file,index,kind);
+        //上传至阿里云
+         
+      } catch (error) {
+        // 在此处添加错误处理逻辑。
+          console.error('发生错误:', error);
+      }
+    },
+    async saveImage(file,index,kind){
+      let that = this;//改变this指向
+      if (!window.FileReader) return; // 看是否支持FileReader
+        let reader = new FileReader();
+        reader.readAsDataURL(file); // 关键一步，在这里转换的
+        reader.onloadend = function () {
+          //that.switchKind(kind)[index].push(this.result); 
+        }
+        const uploadResult = await client.put('case/' + kind + "/" + file.name, file);
+        this.switchKind(kind)[index].push(uploadResult.url); 
+        console.log('上传成功:', uploadResult);
+        this.modifyPV(index);
+    },
+    switchKind(kind){
+      switch (kind)
+          {
+            case 0:
+              return this.summaryPictures;
+            case 1:
+              return this.summaryVideos;
+            case 2:
+              return this.examinePictures;
+            case 3:
+              return this.examineVideos;
+            case 4:
+              return this.diagnosePictures;
+            case 5:
+              return this.diagnoseVideos;
+            case 6:
+              return this.treatmentPictures;
+            case 7:
+              return this.that.treatmentVideos;
+            default: 
+              return null;
+          }
+    },
     logout(){
       localStorage.clear();
       this.$router.push('/');
+    },
+    updatePV(){
+      this.summaryPictures=[];
+        this.summaryVideos=[];
+        this.examinePictures=[];
+        this.examineVideos=[];
+        this.diagnosePictures=[];
+        this.diagnoseVideos=[];
+        this.treatmentPictures=[];
+        this.treatmentVideos=[];
+      this.cases.forEach(caseItem => {
+        this.summaryPictures.push(caseItem.details.summaryPictures?caseItem.details.summaryPictures:[]);
+        this.summaryVideos.push(caseItem.details.summaryVideos?caseItem.details.summaryVideos:[]);
+        this.examinePictures.push(caseItem.details.examinePictures?caseItem.details.examinePictures:[]);
+        this.examineVideos.push(caseItem.details.examineVideos?caseItem.details.examineVideos:[]);
+        this.diagnosePictures.push(caseItem.details.diagnosePictures?caseItem.details.diagnosePictures:[]);
+        this.diagnoseVideos.push(caseItem.details.diagnoseVideos?caseItem.details.diagnoseVideos:[]);
+        this.treatmentPictures.push(caseItem.details.treatmentPictures?caseItem.details.treatmentPictures:[]);
+        this.treatmentVideos.push(caseItem.details.treatmentVideos?caseItem.details.treatmentVideos:[]);
+      })
+      console.log(this.summaryPictures);
+      
+    },
+    async deleteCase(index){
+      try {
+        const response = await axios.delete(`/admin/case?caseID=${this.cases[index].caseID}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.fetchCases();
+      } catch (error) {
+        console.log(error);
+      }
     },
     fetchDisease(){
       this.diseaseIntro = '';
@@ -783,6 +928,7 @@ export default {
           caseItem.details = caseDetails[index];
           return caseItem;
         });
+        this.updatePV();
       }
     });
     },
@@ -824,7 +970,7 @@ export default {
           console.log(error);
         });
     },
-    modifyIntros(index){
+    modifySummary(index){
       axios({
           method: 'put',
           url: '/admin/case',
@@ -834,10 +980,7 @@ export default {
           },
           data: {
             caseID : this.cases[index].caseID,
-            summary : this.intros[0],
-            examine : this.intros[1],
-            diagnose : this.intros[2],
-            treatment : this.intros[3],
+            summary : this.summarys[index],
           }
         })
         .then(response => {
@@ -848,18 +991,7 @@ export default {
           console.log(error);
         });
     },
-    uploadImage(kind){
 
-    },
-    uploadImage(kind){
-
-    },
-    uploadVideo(kind){
-
-    },
-    uploadImage(kind){
-
-    },
   },
   created() {
     this.diseaseType = this.$route.query.diseaseType;
@@ -910,6 +1042,7 @@ export default {
           caseItem.details = caseDetails[index];
           return caseItem;
         });
+        this.updatePV();
       }
     });
     // Fetch medicine list
@@ -925,7 +1058,6 @@ export default {
         console.log('No corresponding medicine');
       }
     });
-
   },
   metaInfo: {
     title: 'AdminCaseStudyDetail - Roasted Rusty Swallow',
@@ -940,6 +1072,19 @@ export default {
 </script>
 
 <style scoped>
+.bigImg-div {
+		width: 200px;
+		height: 200px;
+		border: 100%;
+		overflow: hidden;
+		border: 1px solid #ddd;
+    background-color:var(--dl-color-gray-900);
+	}
+.bigImg {
+		display: block;
+		width: 200px;
+		height: 200px;
+	}
 .admin-case-study-detail-container {
   width: 100%;
   display: flex;
