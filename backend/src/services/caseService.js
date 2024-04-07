@@ -73,7 +73,7 @@ exports.getCaseDetail = async (caseID) => {
       return { status: 1, message: "无对应caseID" };
     }
     const caseMedicines = await sequelize.query(
-      'SELECT `MedicineMedicineID` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
+      'SELECT `MedicineMedicineID` ,`dosage` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
       {
         replacements: { caseID: caseID },
         type: sequelize.QueryTypes.SELECT
@@ -101,11 +101,15 @@ exports.getCaseDetail = async (caseID) => {
       status: 0,
       message: "成功",
       diseases: caseInfo.Disease,
-      medicines: medicines.map(med => ({
-        medicineID: med.medicineID,
-        medicineName: med.medicineName,
-        medicineIntro: med.medicineIntro
-      })),
+      medicines: medicines.map(med => {
+        const caseMedicine = caseMedicines.find(cm => cm.MedicineMedicineID === med.medicineID);
+        return {
+          medicineID: med.medicineID,
+          medicineName: med.medicineName,
+          medicineIntro: med.medicineIntro,
+          dosage: caseMedicine ? caseMedicine.dosage : null
+        };
+      }),
       ...groupedMedia
     };
   } catch (error) {
