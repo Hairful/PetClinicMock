@@ -5,7 +5,7 @@
         data-thq="thq-navbar"
         class="navbarContainer case-study-detail-navbar-interactive"
       >
-        <router-link to="/" class="case-study-detail-logo logo">
+        <router-link to="/menu" class="case-study-detail-logo logo">
           PETCLINICMock
         </router-link>
         <div class="case-study-detail-container01">
@@ -168,7 +168,7 @@
     <div class="case-study-detail-footer">
       <footer class="case-study-detail-footer1 footerContainer">
         <div class="case-study-detail-container23">
-          <router-link to="/" class="case-study-detail-logo2 logo">
+          <router-link to="/menu" class="case-study-detail-logo2 logo">
             PETCLINICMOCK
           </router-link>
         </div>

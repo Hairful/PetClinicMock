@@ -5,7 +5,7 @@
         data-thq="thq-navbar"
         class="navbarContainer menu-navbar-interactive"
       >
-        <router-link to="/" class="menu-logo logo">PETCLINICMock</router-link>
+        <router-link to="/menu" class="menu-logo logo">PETCLINICMock</router-link>
         <div class="menu-container1">
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
             <span>
@@ -61,7 +61,7 @@
     <div class="menu-footer">
       <footer class="menu-footer1 footerContainer">
         <div class="menu-container6">
-          <router-link to="/" class="menu-logo2 logo">PETCLINICMOCK</router-link>
+          <router-link to="/menu" class="menu-logo2 logo">PETCLINICMOCK</router-link>
         </div>
         <div class="menu-separator"></div>
         <div class="menu-container7">

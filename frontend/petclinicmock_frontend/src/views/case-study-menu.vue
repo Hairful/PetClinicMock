@@ -54,7 +54,7 @@
     <div class="case-study-menu-footer">
       <footer class="case-study-menu-footer1 footerContainer">
         <div class="case-study-menu-container6">
-          <router-link to="/" class="case-study-menu-logo2 logo">
+          <router-link to="/menu" class="case-study-menu-logo2 logo">
             PETCLINICMOCK
           </router-link>
         </div>

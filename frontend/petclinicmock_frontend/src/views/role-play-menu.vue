@@ -5,7 +5,7 @@
         data-thq="thq-navbar"
         class="navbarContainer role-play-menu-navbar-interactive"
       >
-        <router-link to="/" class="role-play-menu-logo logo">
+        <router-link to="/menu" class="role-play-menu-logo logo">
           PETCLINICMock
         </router-link>
         <div>
@@ -69,7 +69,7 @@
     <div class="role-play-menu-footer">
       <footer class="role-play-menu-footer1 footerContainer">
         <div class="role-play-menu-container6">
-          <router-link to="/" class="role-play-menu-logo2 logo">
+          <router-link to="/menu" class="role-play-menu-logo2 logo">
             PETCLINICMOCK
           </router-link>
         </div>
