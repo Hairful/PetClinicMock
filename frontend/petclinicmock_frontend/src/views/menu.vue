@@ -110,6 +110,7 @@ export default {
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
+  background-color: var(--dl-color-custom-secondary1);
 }
 .menu-header {
   width: 100%;
