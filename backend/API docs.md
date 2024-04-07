@@ -496,16 +496,14 @@ Content-Type: application/json
 
 ## `GET /disease/list`
 
-返回数据库中的疾病列表，有分页筛选处理
+返回数据库中的疾病列表
 
 ### 请求参数
 
-| 名称          | 位置   | 类型    | 必选 | 备注                                        |
-| ------------- | ------ | ------- | ---- | ------------------------------------------- |
-| Authorization | Header | string  | 是   | 身份验证token                               |
-| diseaseType   | Param  | string  | 否   | 疾病大类                                    |
-| page          | Param  | integer | 否   | 页数 默认为1                                |
-| pageSize      | Param  | integer | 否   | 每页条目数 默认为10，若为-1，则不做分页返回 |
+| 名称          | 位置   | 类型   | 必选 | 备注          |
+| ------------- | ------ | ------ | ---- | ------------- |
+| Authorization | Header | string | 是   | 身份验证token |
+| diseaseType   | Param  | string | 否   | 疾病大类      |
 
 `Example`
 
@@ -590,12 +588,10 @@ Content-Type: application/json
 {
     "status": 0,
     "message": "成功",
-    "diseaseDetail": {
-        "diseaseID":1,
-        "diseaseName":"犬蛔虫病",
-        "diseaseType": "寄生虫病",
-        "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
-    }
+    "diseaseID":1,
+    "diseaseName":"犬蛔虫病",
+    "diseaseType": "寄生虫病",
+    "diseaseIntro": "犬蛔虫病是幼犬最常见的一种寄生虫病。主要危害3周-5月龄的幼犬，重者可导致死亡。蛔虫病是幼犬肠套迭的主要因素之一。" 
 }
 
 HTTP/1.1 
@@ -712,108 +708,6 @@ Content-Type: application/json
     "status": 1,
     "message": "无对应medicineID"
 }
-```
-
-## `GET /roleplaying/list`
-
-选择该角色工作职责
-
-### 请求参数
-
-| 名称 | 位置  | 类型    | 必选 | 备注                              |
-| ---- | ----- | ------- | ---- | --------------------------------- |
-| role | Param | integer | 是   | 0代表前台、1代表医助、2代表兽医师 |
-
-`Example`
-
-```json
-GET /roleplaying/list?role=0
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-```
-
-### 返回响应
-
-| 名称    | 位置 | 类型     | 必选 | 备注         |
-| ------- | ---- | -------- | ---- | ------------ |
-| status  | Body | integer  | 是   | 状态         |
-| message | Body | string   | 是   | 消息         |
-| jobs    | Body | string[] | 否   | 工作内容选择 |
-
-`Example`
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/json
-{
-    "status": 0,
-    "message": "成功",
-    "jobs": ["注射", "术前准备"]
-}
-
-
-HTTP/1.1 404 Not Found
-Content-Type: application/json
-{
-    "status": 1,
-    "message": "无对应role"
-}
-```
-
-## `GET /roleplaying/detail`
-
-具体工作流程
-
-### 请求参数
-
-| 名称 | 位置  | 类型    | 必选 | 备注                                    |
-| ---- | ----- | ------- | ---- | --------------------------------------- |
-| role | Param | integer | 是   | 角色，0代表前台、1代表医助、2代表兽医师 |
-| job  | Param | string  | 是   | 工作内容选择                            |
-
-`Example`
-
-```json
-GET /roleplaying/detail?role=2&job=注射
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-
-
-GET /roleplaying/list?role=1
-Authorization: fakeToken
-```
-
-### 返回响应
-
-| 名称      | 位置 | 类型    | 必选 | 备注 |
-| --------- | ---- | ------- | ---- | ---- |
-| status    | Body | integer | 是   | 状态 |
-| message   | Body | string  | 是   | 消息 |
-| jobDetail | Body | string  | 否   | 任务 |
-
-`Example`
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/json
-{
-    "status": 0,
-    "message": "成功",
-    "tasks": "注射成功"
-}
-
-HTTP/1.1 404 Not Found
-Content-Type: application/json
-{
-    "status": 1,
-    "message": "无对应role",
-}
-
-HTTP/1.1 404 Not Found
-Content-Type: application/json
-{
-    "status": 2,
-    "message": "无对应job",
-}
-
 ```
 
 # 5. 角色扮演
@@ -1024,7 +918,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 | 名称       | 位置 | 类型    | 必选 | 备注     |
 | ---------- | ---- | ------- | ---- | -------- |
-| probNumber | Body | integer | 是   | 题号     |
 | probCredit | Body | integer | 是   | 题目分数 |
 | probText   | Body | string  | 是   | 题目     |
 | probImg    | Body | string  | 否   | 图片路径 |
@@ -1533,22 +1426,6 @@ Content-Type: application/json
 
 添加新疾病
 疾病不可重名
-用表格来表示的话
-| diseaseID | diseaseName | diseaseType |
-| --------- | ----------- | ----------- |
-| 1         | Alice       | A           |
-| 2         | Bob         | B           |
-
-此时若插入(,Alice,C) ; (,Charlie,C),则前者不会插入
-| diseaseID | diseaseName | diseaseType |
-| --------- | ----------- | ----------- |
-| 1         | Alice       | A           |
-| 2         | Bob         | B           |
-| 3         | Charlie     | C           |
-
-此时/casestudy/disease/type接口将会返回新加入的C
-这样就可以少一个添加type的接口了（bushi
-此时不能插入新的(,Alice,C)
 
 ### 发送参数
 
