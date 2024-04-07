@@ -745,6 +745,8 @@ desk.onClick(() => {
   videoElement.play(); // 播放视频
 });
 
+
+
 container.value.appendChild(renderer.domElement);
 render();
 
