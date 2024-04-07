@@ -32,7 +32,7 @@
             病例学习：
             <span v-html="rawvn6p"></span>
           </span>
-          <span class="case-study-detail-text04"> {{ this.diseaseName }} </span>
+          <span class="case-study-detail-text04"> {{ diseaseName }} </span>
         </h1>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <br />
         </h1>
         <div class="case-study-detail-container06">
-          <span class="case-study-detail-text21 bodyLarge"> {{ this.diseaseIntro }} </span>
+          <span class="case-study-detail-text21 bodyLarge"> {{ diseaseIntro }} </span>
         </div>
       </div>
       <div class="case-study-detail-container09" v-for="(caseItem, index) in cases" :key="index">
@@ -202,7 +202,7 @@ export default {
       rawlrae: ' ',
       diseaseID: ' ',
       diseaseName: ' ',
-      diseaseType: ' ',
+      diseaseType: ' fwfwfwef',
       name:localStorage.getItem('username'),
       diseaseIntro: ' ',
       cases: []
@@ -229,7 +229,7 @@ export default {
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.diseaseIntro = response.data.diseaseIntro;
+        this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
       } else if (response.data.status === 1) {
         console.log('No corresponding diseaseID');
       }

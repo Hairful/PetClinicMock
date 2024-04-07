@@ -44,7 +44,7 @@
         返回菜单
       </router-link>
     </div>
-    <div class="quiz-detail-hero1 heroContainer">
+    <div class="quiz-detail-hero1 heroContainer" v-if="probs && probs.length > 0">
       <div class="quiz-detail-container05">
         <h1 class="quiz-detail-hero-heading1 heading1">
           <span class="heading1">问题 {{ this.currentProb+1 }}</span>

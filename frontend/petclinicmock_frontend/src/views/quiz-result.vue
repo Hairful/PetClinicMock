@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="quiz-result-container04">
-      <router-link to="/quiz-detail" class="quiz-result-navlink button">
+      <router-link :to="{path:'/quiz-detail', query:{ quizID: this.quizID } }" class="quiz-result-navlink button">
         重新测试
       </router-link>
       <router-link to="/quiz-list" class="quiz-result-navlink1 button">
@@ -61,23 +61,23 @@
         <div class="quiz-result-container06">
           <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
           <div class="quiz-result-container07">
-            <img
-              alt="image"
-              :src="`${prob.probImg}`"
-              class="quiz-detail-image"
-            />
+            <img v-if="prob.probImg" :src="prob.probImg" alt="quiz image" />
           </div>
-          <div class="quiz-result-container08">
-            <span class="quiz-result-text26 heading3">正确答案：</span>
-            <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
-          <span  v-if="prob.lastAns==prob.probAns">
-            <span class="quiz-result-text26 heading3">你的答案：</span>
-            <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
-          </span>
-          <span  v-else="prob.lastAns!=prob.probAns">
-            <span class="quiz-result-text27 heading3">你的答案：</span>
-            <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
-          </span>
+          <div class="quiz-result-container09">
+            <div class="quiz-result-container08">
+              <span class="quiz-result-text26 heading3">正确答案：</span>
+              <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
+            </div>
+            <div class="quiz-result-container08">
+            <span  v-if="prob.lastAns==prob.probAns">
+              <span class="quiz-result-text26 heading3">你的答案：</span>
+              <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
+            </span>
+            <span  v-else="prob.lastAns!=prob.probAns">
+              <span class="quiz-result-text27 heading3">你的答案：</span>
+              <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
+            </span>
+            </div>
           </div>
         </div>
       </div>
@@ -428,6 +428,15 @@ export default {
   margin-bottom: var(--dl-space-space-twounits);
 }
 .quiz-result-container08 {
+  flex: 1;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.quiz-result-container09 {
   flex: 1;
   width: 100%;
   height: auto;
