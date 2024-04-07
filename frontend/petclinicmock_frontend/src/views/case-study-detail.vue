@@ -62,7 +62,7 @@
           <span class="heading1">病例 {{ caseItem.caseID }}</span>
           <br />
         </h1>
-        <div class="case-study-detail-container10">
+        <div v-if="caseItem.details.summary" class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">介绍</span>
           <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.summary }} </span>
           <div class="case-study-detail-container11">
@@ -152,16 +152,14 @@
         </div>
         <div class="case-study-detail-container22">
           <span class="case-study-detail-text32 heading2">药物使用</span>
-          // todo link to pharmacy
-          <router-link 
+          <li
             v-for="(medicine, medIndex) in caseItem.details.medicines" 
             :key="`medicine-${medIndex}`" 
-            to="/pharmacy" 
-            class="case-study-detail-navlink3"
+            class="case-study-detail-text25 bodyLarge"
           >
-            <span class="bodyLarge"> {{ medicine.medicineName }}, {{ medicine.medicineIntro }}</span>
+            <span class="bodyLarge"> {{ medIndex }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{ medicine.medicineIntro }}<br /> &emsp; 使用剂量：{{ medicine.dosage }}</span>
             <br />
-          </router-link>
+        </li>
         </div>
       </div>
     </div>
@@ -219,7 +217,7 @@ export default {
     this.diseaseID = this.$route.query.diseaseID;
     this.diseaseName = this.$route.query.diseaseName;
 
-    const authToken = localStorage.getItem('authToken'); // replace 'authToken' with the key you used to store the token
+    const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
 
     // Fetch disease details
     axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
