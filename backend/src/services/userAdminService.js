@@ -72,12 +72,15 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
         }
         if (userName) {
             const userExist = await User.findOne({ where: { userName: userName } });
-            if (userExist) {
+            if (userExist !== null) {
                 if (userExist.userID !== userID)
-                    return { status: 2, message: '重复的userName' };
+                    return { status: 2, message: '重复的的userName' };
                 else {
                     user.userName = userName;
                 }
+            }
+            else {
+                user.userName = userName;
             }
             if (password) user.password = hashPassword(password, user.salt);
             if (isAdmin !== undefined) user.isAdmin = isAdmin;

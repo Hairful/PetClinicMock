@@ -86,7 +86,7 @@
       <div class="admin-menu-hero1 heroContainer">
         <div class="admin-menu-container2">
           <h1 class="admin-menu-hero-heading">
-            <span class="heading1">ADMIN MENU</span>
+            <span class="heading1">管理员菜单</span>
             <br />
           </h1>
         </div>
@@ -94,28 +94,19 @@
           <div class="admin-menu-container4">
             <router-link
               to="/admin-user"
-              class="admin-menu-navlink button"
+              class="admin-menu-navlink3 button"
             >
               <span class="heading3">
-                <span>Admin User</span>
+                <span>用户</span>
                 <br />
               </span>
             </router-link>
             <router-link
               to="/admin-virtual-tour"
-              class="admin-menu-navlink button"
+              class="admin-menu-navlink3 button"
             >
               <span class="heading3">
-                <span>3D Virtual Tour</span>
-                <br />
-              </span>
-            </router-link>
-            <router-link
-              to="/admin-role-play-menu"
-              class="admin-menu-navlink1 button"
-            >
-              <span class="heading3">
-                <span>Role Play</span>
+                <span>3D虚拟导览</span>
                 <br />
               </span>
             </router-link>
@@ -123,15 +114,26 @@
           <div class="admin-menu-container5">
             <router-link
               to="/admin-case-study-list"
-              class="admin-menu-navlink2 button"
+              class="admin-menu-navlink3 button"
             >
               <span class="heading3">
-                <span>Case Study</span>
+                <span>病例学习</span>
                 <br />
               </span>
             </router-link>
             <router-link to="/admin-quiz-list" class="admin-menu-navlink3 button">
-              <span class="heading3">Quiz &amp; Exams</span>
+              <span class="heading3">测试</span>
+            </router-link>
+          </div>
+          <div class="admin-menu-container5">
+            <router-link
+              to="/admin-role-play-menu"
+              class="admin-menu-navlink3 button"
+            >
+              <span class="heading3">
+                <span>角色扮演</span>
+                <br />
+              </span>
             </router-link>
           </div>
         </div>
@@ -380,7 +382,7 @@ export default {
 }
 .admin-menu-container5 {
   flex: 0 0 auto;
-  width: 515px;
+  width: auto;
   height: auto;
   display: flex;
   align-items: center;
@@ -398,14 +400,17 @@ export default {
   text-decoration: none;
 }
 .admin-menu-navlink3 {
-  width: 515px;
-  height: 91px;
+  width: 120px;
+  height: 120px;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-left: var(--dl-space-space-oneandhalfunits);
   margin-right: var(--dl-space-space-oneandhalfunits);
   border-radius: var(--dl-radius-radius-radius8);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 .admin-menu-footer {
   flex: 0 0 auto;
