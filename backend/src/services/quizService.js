@@ -47,9 +47,12 @@ exports.getQuizList = async (userID) => {
             // 如果用户完成了测验，添加 lastTry 和 lastTryTime
             if (userQuizIDs.includes(quiz.quizID)) {
                 quizResponse.lastTry = userQuiz.lastTry;
-                quizResponse.lastTryTime = userQuiz.lastTryTime ? userQuiz.lastTryTime.toISOString() : null;
+                let date = userQuiz.lastTryTime;
+                if (date !== null) {
+                    let formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+                    quizResponse.lastTryTime = formattedDate;
+                }
             }
-
             response.quizzes.push(quizResponse);
         }
 
