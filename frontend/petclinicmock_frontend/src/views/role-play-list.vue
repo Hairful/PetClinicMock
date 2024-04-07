@@ -266,7 +266,6 @@ export default {
 }
 .role-play-list-container1 {
   width: 200px;
-  border: 2px dashed rgba(120, 120, 120, 0.4);
   height: 92px;
   display: flex;
   align-items: flex-start;

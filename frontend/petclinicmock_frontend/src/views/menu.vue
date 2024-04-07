@@ -10,13 +10,13 @@
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
             <span>
               <span>
-                Logged in as 
+                登录用户:
             </span>
               <span class="menu-text02">{{name}}</span>
             </span>
           </div>
           <div>
-            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
           </div>
         </div>
       </header>
