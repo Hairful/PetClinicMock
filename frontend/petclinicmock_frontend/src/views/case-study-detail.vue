@@ -243,31 +243,36 @@ export default {
     .then(async response => {
       if (response.data.status === 0) {
         this.cases = response.data.cases;
-        // Fetch details for each case
-        const casePromises = this.cases.map(caseItem => {
-          return axios.get(`/casestudy/case/detail?caseID=${caseItem.caseID}`, {
-            headers: {
-              'Authorization': `Bearer ${authToken}`
-            }
-          })
-          .then(response => {
-            if (response.data.status === 0) {
-              return response.data;
-            } else if (response.data.status === 1) {
-              console.log('No corresponding caseID');
-              return null;
-            }
+        // Check if cases is not empty
+        if (this.cases && this.cases.length > 0) {
+          // Fetch details for each case
+          const casePromises = this.cases.map(caseItem => {
+            return axios.get(`/casestudy/case/detail?caseID=${caseItem.caseID}`, {
+              headers: {
+                'Authorization': `Bearer ${authToken}`
+              }
+            })
+            .then(response => {
+              if (response.data.status === 0) {
+                return response.data;
+              } else if (response.data.status === 1) {
+                console.log('No corresponding caseID');
+                return null;
+              }
+            });
           });
-        });
 
-        const caseDetails = await Promise.all(casePromises);
-        this.cases = this.cases.map((caseItem, index) => {
-          caseItem.details = caseDetails[index];
-          return caseItem;
-        });
+          const caseDetails = await Promise.all(casePromises);
+          this.cases = this.cases.map((caseItem, index) => {
+            caseItem.details = caseDetails[index];
+            return caseItem;
+          });
+        }
       }
+    })
+    .catch(error => {
+      console.error(error);
     });
-
   },
   metaInfo: {
     title: 'CaseStudyDetail - Roasted Rusty Swallow',
