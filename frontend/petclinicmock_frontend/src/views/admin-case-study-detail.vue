@@ -755,7 +755,7 @@ export default {
           method: 'put',
           url: '/admin/case',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -871,7 +871,7 @@ export default {
       try {
         const response = await axios.delete(`/admin/case?caseID=${this.cases[index].caseID}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           }
         });
@@ -953,7 +953,7 @@ export default {
           method: 'put',
           url: '/admin/disease',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -975,7 +975,7 @@ export default {
           method: 'put',
           url: '/admin/case',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {

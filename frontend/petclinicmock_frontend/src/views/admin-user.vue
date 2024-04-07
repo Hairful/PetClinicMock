@@ -106,7 +106,7 @@ export default {
     async fetchUsers() { 
       axios.get('/admin/user', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
           'Content-Type': 'application/json'
         } 
       })
@@ -126,7 +126,7 @@ export default {
         method: 'delete',
         url: `/admin/user?userID=${user.userID}`,
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
           'Content-Type': 'application/json'
         }
       })
@@ -152,7 +152,7 @@ export default {
         method: 'put',
         url: '/admin/user',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
           'Content-Type': 'application/json'
         },
         data: {

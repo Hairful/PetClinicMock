@@ -139,7 +139,7 @@ export default {
   },
   created() {
     this.quizID = this.$route.query.quizID;
-    const authToken = localStorage.getItem('token'); // replace 'authToken' with the key you used to store the token
+    const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
     // Fetch disease details
     axios.get(`/quiz/detail?quizID=${this.quizID}`, 
     {

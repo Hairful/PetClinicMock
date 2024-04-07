@@ -127,7 +127,7 @@ export default {
       .get(`/quiz/list`, 
         {
           headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {
@@ -146,7 +146,7 @@ export default {
           method: 'post',
           url: '/admin/quiz',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -170,7 +170,7 @@ export default {
           method: 'put',
           url: '/admin/quiz',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -193,7 +193,7 @@ export default {
       try {
         const response = await axios.delete(`/admin/quiz?quizID=${this.quizzes[index].quizID}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           }
         });
@@ -209,7 +209,7 @@ export default {
       .get(`/quiz/list`, 
         {
           headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {
