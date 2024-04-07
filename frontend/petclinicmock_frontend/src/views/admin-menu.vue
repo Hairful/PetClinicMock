@@ -400,8 +400,8 @@ export default {
   text-decoration: none;
 }
 .admin-menu-navlink3 {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 100px;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-left: var(--dl-space-space-oneandhalfunits);
   margin-right: var(--dl-space-space-oneandhalfunits);
