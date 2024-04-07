@@ -169,6 +169,10 @@ export default {
     }
   },
   methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
+    },
     renameDisease(index){
       const diseaseName = this.inputName[index];
       const diseaseID = this.diseases[index].diseaseID;

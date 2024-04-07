@@ -146,6 +146,10 @@ export default {
     }
   },
   methods: {
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
+    },
     role2number(role) {
       switch (role) {
         case 'Front Desk':

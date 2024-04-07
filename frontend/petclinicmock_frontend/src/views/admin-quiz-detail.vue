@@ -203,6 +203,10 @@ export default {
     }
   },
   methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
+    },
     handleDrop(e,index) {
       e.preventDefault();
       let files = e.dataTransfer.files;

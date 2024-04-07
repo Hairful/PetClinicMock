@@ -731,6 +731,10 @@ export default {
     }
   },
   methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
+    },
     fetchDisease(){
       this.diseaseIntro = '';
       axios.get(`/casestudy/disease/detail?diseaseID=${this.diseaseID}`, {

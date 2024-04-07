@@ -107,6 +107,12 @@ export default {
       name:localStorage.getItem('username'),
     }
   },
+  methods: {
+    logout() {
+      localStorage.removeItem('username');
+      this.$router.push('/login');
+    },
+  },
   metaInfo: {
     title: 'AdminVirtualTour - Roasted Rusty Swallow',
     meta: [

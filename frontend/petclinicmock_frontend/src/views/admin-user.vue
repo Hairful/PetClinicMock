@@ -91,6 +91,10 @@ export default {
     }
   },
   methods: {
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
+    },
     validateInput(index) {
       const pattern = /^[\u4e00-\u9fa5\w]{2,20}$/;
       if (!pattern.test(this.users[index].userName)) {
