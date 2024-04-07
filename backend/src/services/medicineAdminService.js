@@ -63,14 +63,14 @@ exports.deleteMedicineById = async (medicineId) => {
  * @param {integer} medicineID - 药品ID
  * @param {Object} updates - 更新数据
  * @returns {Object} 对象
- * 注意: medicineID需要从前端JSON中拆解出来，（YYZ：我不细看都没发现这事）
+ * 注意: medicineID需要从前端JSON中拆解出来
  */
 exports.updateMedicine = async (medicineID, updates) => {
     try {
         const medicineExistByName = await Medicine.findOne({
             where: { medicineName: updates.medicineName }
         });
-        if (medicineExistByName) {
+        if (medicineExistByName && medicineExistByName.medicineID !== medicineID) {
             return { status: 1, message: "重复的medicineName" };
         }
         const medicine = await Medicine.findByPk(medicineID);

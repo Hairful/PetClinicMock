@@ -96,7 +96,9 @@ exports.getQuizDetails = async (userID, quizID) => {
         });
         if (userQuiz) {
             response.lastTry = userQuiz.lastTry;
-            response.lastTryTime = userQuiz.lastTryTime;
+            let date = userQuiz.lastTryTime;
+            let formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+            response.lastTryTime = formattedDate;
         }
         // 查找与测验关联的所有题目
         const probs = await Prob.findAll({
