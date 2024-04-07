@@ -12,14 +12,14 @@
         <div data-thq="thq-navbar-nav" class="quiz-list-desktop-menu">
             <span>
               <span>
-                Logged in as
+                登录用户：
                 <span v-html="rawqwc5"></span>
               </span>
               <span class="quiz-list-text02">{{name}}</span>
             </span>
           </div>
           <div>
-            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
           </div>
         </div>
       </header>
@@ -27,15 +27,15 @@
     <div class="quiz-list-container1"></div>
     <div class="heroContainer quiz-list-hero">
       <div class="quiz-list-container2">
-        <h1 class="quiz-list-hero-heading">Quiz</h1>
+        <h1 class="quiz-list-hero-heading">测试</h1>
       </div>
     </div>
     <div class="quiz-list-container3">
-      <router-link to="/menu" class="quiz-list-navlink button">Menu</router-link>
+      <router-link to="/menu" class="quiz-list-navlink button">返回菜单</router-link>
     </div>
     <div class="quiz-list-hero1 heroContainer">
       <h1 class="quiz-list-hero-heading1">
-        <span class="heading1">Choose a Quiz</span>
+        <span class="heading1">测试</span>
         <br />
       </h1>
       <div class="quiz-list-container4">
@@ -44,16 +44,16 @@
             v-for="(quiz,index) in quizzes"
             :key="quiz.quizID">
             <router-link
-              :to="`/quiz-detail?quizID=${quiz.quizID}`"
+              :to="getQuizLink(quiz)"
               :class="`quiz-list-navlink1 button bodyLarge`"
             >
-              Quiz {{ index+1 }}
+              测试 {{ index+1 }}
             </router-link>
-            <span class="quiz-list-text19 bodyLarge">Quiz name:  {{ quiz.quizName }}</span>
+            <span class="quiz-list-text19 bodyLarge">测试名称：  {{ quiz.quizName }}</span>
             <div></div>
-            <span class="quiz-list-text19 bodyLarge">Total Credits: {{ quiz.totalCredits }}</span>
-            <span class="quiz-list-text20 bodyLarge">Last Try: {{ quiz.lastTry}}</span>
-            <span class="quiz-list-text19 bodyLarge">Last Try Time:  {{ quiz.lastTryTime }}</span>
+            <span class="quiz-list-text19 bodyLarge">总分： {{ quiz.totalCredits }}</span>
+            <span class="quiz-list-text20 bodyLarge">最后尝试分数： {{ quiz.lastTry}}</span>
+            <span class="quiz-list-text19 bodyLarge">最后尝试时间：  {{ quiz.lastTryTime }}</span>
           </li>
         </ul>
       </div>
@@ -93,7 +93,15 @@ export default {
     logout(){
       localStorage.clear();
       this.$router.push('/');
-    }
+    },
+    getQuizLink(quiz) {
+      // Check if there exists a last try
+      if (quiz.lastTry) {
+        return `/quiz-result?quizID=${quiz.quizID}`;
+      } else {
+        return `/quiz-detail?quizID=${quiz.quizID}`;
+      }
+    },
   },
   created() {
     axios

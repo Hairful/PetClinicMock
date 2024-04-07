@@ -12,13 +12,13 @@
           <div data-thq="thq-navbar-nav" class="quiz-result-desktop-menu">
             <span>
               <span>
-                Logged in as
+                登录用户：
               </span>
               <span class="quiz-result-text02">{{name}}</span>
             </span>
           </div>
           <div>
-            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
           </div>
         </div>
       </header>
@@ -28,14 +28,14 @@
       <div class="quiz-result-container03">
         <h1 class="quiz-result-hero-heading">
           <span class="heading1">
-            Quiz Result:
+            测试结果：
           </span> 
           <span class="quiz-result-text04">Quiz {{ this.quizName }}</span>
         </h1>
-        <span class="heading2">Total Credit: {{ this.totalCredits }}</span>
+        <span class="heading2">总分： {{ this.totalCredits }}</span>
         <span class="heading2">
           <span class="heading2">
-            Your Score:
+            你的得分：
           </span>
           <span class="quiz-result-text08">{{ this.yourCredit }}</span>
         </span>
@@ -43,19 +43,19 @@
     </div>
     <div class="quiz-result-container04">
       <router-link to="/quiz-detail" class="quiz-result-navlink button">
-        Start New
+        重新测试
       </router-link>
       <router-link to="/quiz-list" class="quiz-result-navlink1 button">
-        Choose Quiz
+        选择测试
       </router-link>
       <router-link to="/menu" class="quiz-result-navlink2 button">
-        Menu
+        返回菜单
       </router-link>
     </div>
     <div class="quiz-result-hero1 heroContainer">
       <div v-for="(prob,index) in probs" class="quiz-result-container05">
         <h1 class="quiz-result-hero-heading1 heading1">
-          <span class="heading1">Question {{ prob.probID }}</span>
+          <span class="heading1">问题 {{ prob.probID }}</span>
           <br />
         </h1>
         <div class="quiz-result-container06">
@@ -68,14 +68,14 @@
             />
           </div>
           <div class="quiz-result-container08">
-            <span class="quiz-result-text26 heading3">Correct Answer:</span>
+            <span class="quiz-result-text26 heading3">正确答案：</span>
             <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
           <span  v-if="prob.lastAns==prob.probAns">
-            <span class="quiz-result-text26 heading3">Your Answer:</span>
+            <span class="quiz-result-text26 heading3">你的答案：</span>
             <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
           </span>
           <span  v-else="prob.lastAns!=prob.probAns">
-            <span class="quiz-result-text27 heading3">Your Answer:</span>
+            <span class="quiz-result-text27 heading3">你的答案：</span>
             <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
           </span>
           </div>
@@ -136,14 +136,6 @@ export default {
       localStorage.clear();
       this.$router.push('/');
     },
-    caculateCredit(){
-      this.probs.forEach(prob => {
-        if(prob.lastAns == prob.probAns)
-        {
-          this.yourCredit+=prob.probCredit;
-        }
-      });
-    },
   },
   created() {
     this.quizID = this.$route.query.quizID;
@@ -160,11 +152,11 @@ export default {
         this.probs = response.data.probs;
         this.quizName = response.data.quizName;
         this.totalCredits = response.data.totalCredits;
+        this.yourCredit = response.data.lastTry;
       } else if (response.data.status === 1) {
         console.log('No corresponding quizID');
       }
     });
-    caculateCredit();
     },
   metaInfo: {
     title: 'QuizResult - Roasted Rusty Swallow',

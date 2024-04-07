@@ -10,7 +10,7 @@
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
             <span>
               <span>
-                登录用户:
+                登录用户：
             </span>
               <span class="menu-text02">{{name}}</span>
             </span>
