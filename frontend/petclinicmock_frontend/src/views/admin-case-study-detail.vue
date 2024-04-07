@@ -125,7 +125,7 @@
         <div class="admin-case-study-detail-container06">
           <div class="admin-case-study-detail-container07">
             <textarea
-              v-model="newIntro"
+              v-model="this.newIntro"
               :placeholder="`${this.diseaseIntro}`"
               class="admin-case-study-detail-textarea textarea"
             ></textarea>
@@ -799,7 +799,7 @@ export default {
   methods:{
     fetchDisease(){
       this.diseaseIntro = '';
-      axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
+      axios.get(`/casestudy/disease/detail?diseaseID=${this.diseaseID}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }
@@ -896,10 +896,10 @@ export default {
           },
           data: {
             caseID : this.cases[index].caseID,
-            // summary : this.intros[0],
-            // examine : this.intros[1],
-            // diagnose : this.intros[2],
-            // treatment : this.intros[3],
+            summary : this.intros[0],
+            examine : this.intros[1],
+            diagnose : this.intros[2],
+            treatment : this.intros[3],
           }
         })
         .then(response => {
@@ -928,14 +928,15 @@ export default {
     this.diseaseID = this.$route.query.diseaseID;
     this.diseaseName = this.$route.query.diseaseName;
     // Fetch disease details
-    axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
+    axios.get(`casestudy/disease/detail?diseaseID=${this.diseaseID}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.diseaseIntro = response.data.diseaseIntro;
+        this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
+        this.newIntro = this.diseaseIntro;
       } else if (response.data.status === 1) {
         console.log('No corresponding diseaseID');
       }
