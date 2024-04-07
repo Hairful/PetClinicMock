@@ -15,7 +15,6 @@ import AdminQuizDetail from './views/admin-quiz-detail'
 import VirtualTour from './views/virtual-tour'
 import AdminRolePlayMenu from './views/admin-role-play-menu'
 import AdminVirtualTour from './views/admin-virtual-tour'
-import Pharmacy from './views/pharmacy'
 import RolePlayList from './views/role-play-list'
 import QuizDetail from './views/quiz-detail'
 import CaseStudyDetail from './views/case-study-detail'
@@ -105,11 +104,6 @@ const router = new Router({
       name: 'AdminVirtualTour',
       path: '/admin-virtual-tour',
       component: AdminVirtualTour,
-    },
-    {
-      name: 'Pharmacy',
-      path: '/pharmacy',
-      component: Pharmacy,
     },
     {
       name: 'RolePlayList',
