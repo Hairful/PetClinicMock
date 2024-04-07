@@ -553,7 +553,7 @@ let specPosition = new THREE.Vector3(15, 10, 40);
 let specIndex = 8;
 let specUrl = "./img/spec/";
 let specEuler = new THREE.Euler(0, -Math.PI / 2, 0);
-const spec = new Room("药房", specIndex, specUrl, specPosition, specEuler);
+const spec = new Room("专科诊室", specIndex, specUrl, specPosition, specEuler);
 
 // 创建专科室文字精灵
 const spectext = new SpriteCanvas(
@@ -695,6 +695,7 @@ duration: 1,
 moveTag("走廊");
 });
 
+//创建前台流程
 const desk = new SpriteCanvas(
   camera,
   "桌子",
@@ -767,14 +768,8 @@ workflowButton.style.borderRadius = '5px'; // 设置圆角
 workflowButton.addEventListener('click', () => {
   // 添加你的操作流程按钮点击事件处理逻辑
 });
-
 videoContainer.appendChild(workflowButton);
-
-
 videoContainer.appendChild(detailsButton);
-
-
-
 
 // 点击桌子时弹出视频框
 desk.onClick(() => {
@@ -783,6 +778,251 @@ desk.onClick(() => {
 });
 
 
+//创建手术刀流程
+const surgeryknife = new SpriteCanvas(
+  camera,
+  "手术刀",
+  new THREE.Vector3(-5, 9.5, 34)
+);
+scene.add(surgeryknife.mesh);
+
+// 创建一个视频元素
+const video1Element = document.createElement('video');
+video1Element.src = './videos/surgeryknife.mp4';
+video1Element.controls = true; // 显示视频控制条
+video1Element.style.width = '100%'; // 设置视频框的宽度
+video1Element.style.height = '100%'; // 设置视频框的高度
+
+// 创建一个包含视频元素的div
+const video1Container = document.createElement('div');
+video1Container.style.position = 'absolute'; // 绝对定位
+video1Container.style.top = '50%'; // 垂直居中
+video1Container.style.left = '50%'; // 水平居中
+video1Container.style.transform = 'translate(-50%, -50%)'; // 居中
+video1Container.style.width = '400px'; // 设置视频框的宽度
+video1Container.style.height = '300px'; // 设置视频框的高度
+video1Container.style.backgroundColor = 'black'; // 设置背景颜色为黑色
+video1Container.appendChild(video1Element);
+
+// 创建关闭按钮
+const closeButton1 = document.createElement('button');
+closeButton1.innerText = '关闭';
+closeButton1.style.position = 'absolute';
+closeButton1.style.top = '10px';
+closeButton1.style.right = '10px';
+closeButton1.style.color = 'white'; // 设置文字颜色为白色
+closeButton1.style.backgroundColor = 'red'; // 设置背景颜色为红色
+closeButton1.style.border = 'none'; // 移除边框
+closeButton1.style.padding = '5px 10px'; // 设置内边距
+closeButton1.style.borderRadius = '5px'; // 设置圆角
+closeButton1.addEventListener('click', () => {
+  document.body.removeChild(video1Container); // 移除视频框
+  video1Element.pause(); // 暂停视频播放
+});
+
+video1Container.appendChild(closeButton1);
+
+// 创建详情按钮
+const detailsButton1 = document.createElement('button');
+detailsButton1.innerText = '详情';
+detailsButton1.style.position = 'absolute';
+detailsButton1.style.top = '10px';
+detailsButton1.style.left = '10px';
+detailsButton1.style.color = 'white'; // 设置文字颜色为白色
+detailsButton1.style.backgroundColor = 'green'; // 设置背景颜色为绿色
+detailsButton1.style.border = 'none'; // 移除边框
+detailsButton1.style.padding = '5px 10px'; // 设置内边距
+detailsButton1.style.borderRadius = '5px'; // 设置圆角
+detailsButton1.addEventListener('click', () => {
+  // 添加你的详情按钮点击事件处理逻辑
+});
+// 创建操作流程按钮
+const workflowButton1 = document.createElement('button');
+workflowButton1.innerText = '操作流程';
+workflowButton1.style.position = 'absolute';
+workflowButton1.style.top = '10px'; // 垂直居中
+
+workflowButton1.style.left = '80px'; // 水平居中
+workflowButton1.style.color = 'white'; // 设置文字颜色为白色
+workflowButton1.style.backgroundColor = 'blue'; // 设置背景颜色为蓝色
+workflowButton1.style.border = 'none'; // 移除边框
+workflowButton1.style.padding = '5px 10px'; // 设置内边距
+workflowButton1.style.borderRadius = '5px'; // 设置圆角
+workflowButton1.addEventListener('click', () => {
+  // 添加你的操作流程按钮点击事件处理逻辑
+});
+video1Container.appendChild(workflowButton1);
+video1Container.appendChild(detailsButton1);
+
+// 点击桌子时弹出视频框
+surgeryknife.onClick(() => {
+  document.body.appendChild(video1Container); // 将视频框添加到文档中
+  video1Element.play(); // 播放视频
+});
+
+//创建化验台流程
+const labdesk = new SpriteCanvas(
+  camera,
+  "化验台",
+  new THREE.Vector3(1, 0, 12)
+);
+scene.add(labdesk.mesh);
+
+// 创建一个视频元素
+const video2Element = document.createElement('video');
+video2Element.src = './videos/labdesk.mp4';
+video2Element.controls = true; // 显示视频控制条
+video2Element.style.width = '100%'; // 设置视频框的宽度
+video2Element.style.height = '100%'; // 设置视频框的高度
+
+// 创建一个包含视频元素的div
+const video2Container = document.createElement('div');
+video2Container.style.position = 'absolute'; // 绝对定位
+video2Container.style.top = '50%'; // 垂直居中
+video2Container.style.left = '50%'; // 水平居中
+video2Container.style.transform = 'translate(-50%, -50%)'; // 居中
+video2Container.style.width = '400px'; // 设置视频框的宽度
+video2Container.style.height = '300px'; // 设置视频框的高度
+video2Container.style.backgroundColor = 'black'; // 设置背景颜色为黑色
+video2Container.appendChild(video2Element);
+
+// 创建关闭按钮
+const closeButton2 = document.createElement('button');
+closeButton2.innerText = '关闭';
+closeButton2.style.position = 'absolute';
+closeButton2.style.top = '10px';
+closeButton2.style.right = '10px';
+closeButton2.style.color = 'white'; // 设置文字颜色为白色
+closeButton2.style.backgroundColor = 'red'; // 设置背景颜色为红色
+closeButton2.style.border = 'none'; // 移除边框
+closeButton2.style.padding = '5px 10px'; // 设置内边距
+closeButton2.style.borderRadius = '5px'; // 设置圆角
+closeButton2.addEventListener('click', () => {
+  document.body.removeChild(video2Container); // 移除视频框
+  video2Element.pause(); // 暂停视频播放
+});
+
+video2Container.appendChild(closeButton2);
+
+// 创建详情按钮
+const detailsButton2 = document.createElement('button');
+detailsButton2.innerText = '详情';
+detailsButton2.style.position = 'absolute';
+detailsButton2.style.top = '10px';
+detailsButton2.style.left = '10px';
+detailsButton2.style.color = 'white'; // 设置文字颜色为白色
+detailsButton2.style.backgroundColor = 'green'; // 设置背景颜色为绿色
+detailsButton2.style.border = 'none'; // 移除边框
+detailsButton2.style.padding = '5px 10px'; // 设置内边距
+detailsButton2.style.borderRadius = '5px'; // 设置圆角
+detailsButton2.addEventListener('click', () => {
+  // 添加你的详情按钮点击事件处理逻辑
+});
+// 创建操作流程按钮
+const workflowButton2 = document.createElement('button');
+workflowButton2.innerText = '操作流程';
+workflowButton2.style.position = 'absolute';
+workflowButton2.style.top = '10px'; // 垂直居中
+
+workflowButton2.style.left = '80px'; // 水平居中
+workflowButton2.style.color = 'white'; // 设置文字颜色为白色
+workflowButton2.style.backgroundColor = 'blue'; // 设置背景颜色为蓝色
+workflowButton2.style.border = 'none'; // 移除边框
+workflowButton2.style.padding = '5px 10px'; // 设置内边距
+workflowButton2.style.borderRadius = '5px'; // 设置圆角
+workflowButton2.addEventListener('click', () => {
+  // 添加你的操作流程按钮点击事件处理逻辑
+});
+video2Container.appendChild(workflowButton2);
+video2Container.appendChild(detailsButton2);
+
+// 点击桌子时弹出视频框
+labdesk.onClick(() => {
+  document.body.appendChild(video2Container); // 将视频框添加到文档中
+  video2Element.play(); // 播放视频
+});
+
+//创建影像台流程
+const film = new SpriteCanvas(
+  camera,
+  "CT检查",
+  new THREE.Vector3(12, 0, 18)
+);
+scene.add(film.mesh);
+
+// 创建一个视频元素
+const video3Element = document.createElement('video');
+video3Element.src = './videos/film.mp4';
+video3Element.controls = true; // 显示视频控制条
+video3Element.style.width = '100%'; // 设置视频框的宽度
+video3Element.style.height = '100%'; // 设置视频框的高度
+
+// 创建一个包含视频元素的div
+const video3Container = document.createElement('div');
+video3Container.style.position = 'absolute'; // 绝对定位
+video3Container.style.top = '50%'; // 垂直居中
+video3Container.style.left = '50%'; // 水平居中
+video3Container.style.transform = 'translate(-50%, -50%)'; // 居中
+video3Container.style.width = '400px'; // 设置视频框的宽度
+video3Container.style.height = '300px'; // 设置视频框的高度
+video3Container.style.backgroundColor = 'black'; // 设置背景颜色为黑色
+video3Container.appendChild(video3Element);
+
+// 创建关闭按钮
+const closeButton3 = document.createElement('button');
+closeButton3.innerText = '关闭';
+closeButton3.style.position = 'absolute';
+closeButton3.style.top = '10px';
+closeButton3.style.right = '10px';
+closeButton3.style.color = 'white'; // 设置文字颜色为白色
+closeButton3.style.backgroundColor = 'red'; // 设置背景颜色为红色
+closeButton3.style.border = 'none'; // 移除边框
+closeButton3.style.padding = '5px 10px'; // 设置内边距
+closeButton3.style.borderRadius = '5px'; // 设置圆角
+closeButton3.addEventListener('click', () => {
+  document.body.removeChild(video3Container); // 移除视频框
+  video3Element.pause(); // 暂停视频播放
+});
+
+video3Container.appendChild(closeButton3);
+
+// 创建详情按钮
+const detailsButton3 = document.createElement('button');
+detailsButton3.innerText = '详情';
+detailsButton3.style.position = 'absolute';
+detailsButton3.style.top = '10px';
+detailsButton3.style.left = '10px';
+detailsButton3.style.color = 'white'; // 设置文字颜色为白色
+detailsButton3.style.backgroundColor = 'green'; // 设置背景颜色为绿色
+detailsButton3.style.border = 'none'; // 移除边框
+detailsButton3.style.padding = '5px 10px'; // 设置内边距
+detailsButton3.style.borderRadius = '5px'; // 设置圆角
+detailsButton3.addEventListener('click', () => {
+  // 添加你的详情按钮点击事件处理逻辑
+});
+// 创建操作流程按钮
+const workflowButton3 = document.createElement('button');
+workflowButton3.innerText = '操作流程';
+workflowButton3.style.position = 'absolute';
+workflowButton3.style.top = '10px'; // 垂直居中
+
+workflowButton3.style.left = '80px'; // 水平居中
+workflowButton3.style.color = 'white'; // 设置文字颜色为白色
+workflowButton3.style.backgroundColor = 'blue'; // 设置背景颜色为蓝色
+workflowButton3.style.border = 'none'; // 移除边框
+workflowButton3.style.padding = '5px 10px'; // 设置内边距
+workflowButton3.style.borderRadius = '5px'; // 设置圆角
+workflowButton3.addEventListener('click', () => {
+  // 添加你的操作流程按钮点击事件处理逻辑
+});
+video3Container.appendChild(workflowButton3);
+video3Container.appendChild(detailsButton3);
+
+// 点击桌子时弹出视频框
+film.onClick(() => {
+  document.body.appendChild(video3Container); // 将视频框添加到文档中
+  video3Element.play(); // 播放视频
+});
 
 container.value.appendChild(renderer.domElement);
 render();
