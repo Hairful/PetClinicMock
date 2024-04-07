@@ -72,11 +72,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'Roasted Rusty Swallow',
+    title: 'PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'Roasted Rusty Swallow',
+        content: 'PetClinicMock',
       },
     ],
   },

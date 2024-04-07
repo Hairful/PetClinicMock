@@ -68,6 +68,9 @@
           <span class="bodySmall menu-text29">
             © 2024 SWD-G02, All Rights Reserved.
           </span>
+          <router-link to="/admin-menu" class="menu-navlink4 button">
+              管理员菜单
+          </router-link>
         </div>
       </footer>
     </div>
@@ -103,6 +106,12 @@ export default {
 </script>
 
 <style scoped>
+.menu-navlink4 {
+  color: var(--dl-color-primary-700);
+  border-width: 0px;
+  text-decoration: none;
+  background-color: transparent;
+}
 .menu-container {
   width: 100%;
   display: flex;
