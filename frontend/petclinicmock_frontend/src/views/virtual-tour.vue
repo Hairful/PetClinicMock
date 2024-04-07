@@ -738,6 +738,43 @@ closeButton.addEventListener('click', () => {
 
 videoContainer.appendChild(closeButton);
 
+// 创建详情按钮
+const detailsButton = document.createElement('button');
+detailsButton.innerText = '详情';
+detailsButton.style.position = 'absolute';
+detailsButton.style.top = '10px';
+detailsButton.style.left = '10px';
+detailsButton.style.color = 'white'; // 设置文字颜色为白色
+detailsButton.style.backgroundColor = 'green'; // 设置背景颜色为绿色
+detailsButton.style.border = 'none'; // 移除边框
+detailsButton.style.padding = '5px 10px'; // 设置内边距
+detailsButton.style.borderRadius = '5px'; // 设置圆角
+detailsButton.addEventListener('click', () => {
+  // 添加你的详情按钮点击事件处理逻辑
+});
+// 创建操作流程按钮
+const workflowButton = document.createElement('button');
+workflowButton.innerText = '操作流程';
+workflowButton.style.position = 'absolute';
+workflowButton.style.top = '10px'; // 垂直居中
+
+workflowButton.style.left = '80px'; // 水平居中
+workflowButton.style.color = 'white'; // 设置文字颜色为白色
+workflowButton.style.backgroundColor = 'blue'; // 设置背景颜色为蓝色
+workflowButton.style.border = 'none'; // 移除边框
+workflowButton.style.padding = '5px 10px'; // 设置内边距
+workflowButton.style.borderRadius = '5px'; // 设置圆角
+workflowButton.addEventListener('click', () => {
+  // 添加你的操作流程按钮点击事件处理逻辑
+});
+
+videoContainer.appendChild(workflowButton);
+
+
+videoContainer.appendChild(detailsButton);
+
+
+
 
 // 点击桌子时弹出视频框
 desk.onClick(() => {
