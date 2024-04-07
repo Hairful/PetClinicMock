@@ -13,6 +13,7 @@
             <span>
               <span>
                 Logged in as
+                <span v-html="raw0vgu"></span>
               </span>
               <span class="admin-quiz-detail-text02">Allen</span>
             </span>
@@ -85,6 +86,7 @@
         <h1 class="admin-quiz-detail-hero-heading">
           <span class="heading1">
             Manage Quiz:
+            <span v-html="raw2umb"></span>
           </span>
           <span class="admin-quiz-detail-text04">Quiz {{quizID}}</span>
         </h1>
@@ -98,6 +100,7 @@
         <span>
           <span>
             Admin
+            <span v-html="raw370h"></span>
           </span>
           <span>Menu</span>
         </span>
@@ -134,31 +137,23 @@
             <input type="text" v-model="prob.probCredit" placeholder="placeholder" class="input" />
           </div>
           <button type="button" class="button" @click="modifyProb(index)">Modify</button>
-          <div class="admin-quiz-detail-container06">
-            <input v-if="!images[index]" @change="img($event,index)" type="file">
-              <img 
-                :src="prob.probImg"
-                width="0"
+          <div class="admin-quiz-detail-container07">
+            <button type="button" class="admin-quiz-detail-button02 button">
+              <span>
+                <span>Upload Picture</span>
+                <br />
+              </span>
+            </button>
+              <div class="admin-quiz-detail-container09">
+                <img
+                alt="image"
+                :src="`${prob.probImg}`"
+                class="quiz-detail-image"
               />
-              <div class="admin-case-study-detail-container09">
-                  <div
-                    id="dropzone"
-                    v-on:dragover.prevent
-                    v-on:drop="handleDrop($event,index)"
-                    class="admin-case-study-detail-image"
-                  >
-                  <div class="bigImg-div " v-if="!images[index]">或者将图片拖拽到这里</div >
-                    <div v-else="images[index]">
-                      <img 
-                        :src="prob.probImg"
-                        class="bigImg"/>
-                      <button type="button" class="button" @click="clearImage(index)">
-                        <span>Delete</span>
-                      </button>
-                    </div>
-                  </div>
-              </div>
-            
+              <button type="button" class="button" @click="modifyImage(index)">
+                  <span>Delete</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -230,22 +225,27 @@
 
 <script>
 import axios from 'axios';
-import client from '../oss.js';
 export default {
   name: 'AdminQuizDetail',
   props: {},
   data() {
     return {
-      image: null,
-      thumbnail: null,
+      raw0vgu: ' ',
+      raw2umb: ' ',
+      rawtn2b: ' ',
+      rawq5g5: ' ',
+      rawnmbx: ' ',
+      rawnlsb: ' ',
+      rawu7w0: ' ',
+      rawh40r: ' ',
+      rawonyf: ' ',
+      raw370h: ' ',
       quizID:'',
       probs:[],
       quizName:'',
       totalCredits:'',
       options:[],
       newText:[],
-      images:[],
-      urls:[],
       addedOption:'',
       addedProb:{
         probNumber:'',
@@ -258,47 +258,6 @@ export default {
     }
   },
   methods:{
-    handleDrop(e,index) {
-      e.preventDefault();
-      let files = e.dataTransfer.files;
-
-      if (!files.length) return;
-
-      let file = files[0];
-      let reader = new FileReader();
-
-      reader.onload = (e) => {
-        this.image = e.target.result[0];
-      };
-      this.saveImage(file,index);
-      
-    },
-    
-    async img(e,index) {
-      try {
-        //let that = this;//改变this指向
-        let file = e.target.files[0];
-        this.saveImage(file,index);
-        //上传至阿里云
-         
-      } catch (error) {
-        // 在此处添加错误处理逻辑。
-          console.error('发生错误:', error);
-      }
-    },
-    async saveImage(file,index){
-      let that = this;//改变this指向
-      if (!window.FileReader) return; // 看是否支持FileReader
-        let reader = new FileReader();
-        reader.readAsDataURL(file); // 关键一步，在这里转换的
-        reader.onloadend = function () {
-          that.images[index] = this.result;//赋值
-          that.probs[index].probImg = that.images[index];
-        }
-        const uploadResult = await client.put('quiz/' + file.name, file);
-        this.urls[index] = uploadResult.url;
-        console.log('上传成功:', uploadResult);
-    },
     deleteProb(index){
       this.probs.splice(index,1);
       this.save();
@@ -311,13 +270,8 @@ export default {
     },
     save(){
       let totalcredit = 0;
-      let index = 0;
       this.probs.forEach(prob => {
         totalcredit+=prob.probCredit;
-        prob.probImg = this.urls[index];
-        prob.probText = this.newText[index];
-        prob.probAns = this.option2ans(this.options[index]);
-        index++;
       });
       axios({
           method: 'put',
@@ -335,7 +289,6 @@ export default {
         })
         .then(response => {
           this.fetchProb();
-          this.$message("修改成功");
         })
         .catch(error => {
           // handle error
@@ -345,7 +298,6 @@ export default {
     fetchProb(){
     this.options=[];
     this.newText=[];  
-    this.images=[];
     axios.get(`/quiz/detail?quizID=${this.quizID}`, 
     {
       headers: {
@@ -360,7 +312,6 @@ export default {
         this.probs.forEach(prob => {
           this.options.push(this.ans2option(prob.probAns));
           this.newText.push(prob.probText);
-          this.images.push(prob.probImg);
         });
       } else if (response.data.status === 1) {
         console.log('No corresponding quizID');
@@ -370,14 +321,9 @@ export default {
     modifyProb(index){
       this.probs[index].probText = this.newText[index];
       this.probs[index].probAns = this.option2ans(this.options[index]);
-
     },
-    async clearImage(index){
-      this.images[index] = '';//赋值
-      const Result = await client.delete(this.urls[index]);
-        console.log('删除成功:', Result);
-      this.urls[index] = '';
-      this.probs[index].probImg = this.images[index];
+    modifyImage(index){
+
     },
     ans2option(ans)
     {
@@ -426,8 +372,6 @@ export default {
         this.probs.forEach(prob => {
           this.options.push(this.ans2option(prob.probAns));
           this.newText.push(prob.probText);
-          this.images.push(prob.probImg);
-          this.urls.push(prob.probImg);
         });
       } else if (response.data.status === 1) {
         console.log('No corresponding quizID');
@@ -740,19 +684,6 @@ export default {
 .admin-quiz-detail-text34 {
   color: var(--dl-color-gray-white);
 }
-.bigImg-div {
-		width: 200px;
-		height: 200px;
-		border: 100%;
-		overflow: hidden;
-		border: 1px solid #ddd;
-    background-color:var(--dl-color-gray-900);
-	}
-.bigImg {
-		display: block;
-		width: 200px;
-		height: 200px;
-	}
 .admin-quiz-detail-container12 {
   flex: 0 0 auto;
   width: 1021px;
@@ -975,7 +906,6 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
-
 .admin-quiz-detail-footer {
   flex: 0 0 auto;
   width: 100%;
