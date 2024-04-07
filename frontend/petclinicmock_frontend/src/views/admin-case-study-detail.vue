@@ -197,7 +197,7 @@
                   >
                   <span class="bigImg-div " >或者将图片拖拽到这里</span >
                 </span>
-            <div v-for="(pic, picIndex) in caseItem.details.diagnosePictures"
+            <div v-for="(pic, picIndex) in diagnosePictures[index]"
                 :key="`diagnose-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -220,7 +220,7 @@
                   >
                   <span class="bigImg-div " >或者将图片拖拽到这里</span >
                 </span>
-            <div v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos"
+            <div v-for="(vid, vidIndex) in diagnoseVideos[index]"
                 :key="`diagnose-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -246,7 +246,7 @@
                   >
                   <span class="bigImg-div " >或者将图片拖拽到这里</span >
                 </span>
-            <div v-for="(pic, picIndex) in caseItem.details.treatmentPictures"
+            <div v-for="(pic, picIndex) in treatmentPictures[index]"
                 :key="`treatment-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -269,7 +269,7 @@
                   >
                   <span class="bigImg-div " >或者将图片拖拽到这里</span >
                 </span>
-            <div v-for="(vid, vidIndex) in caseItem.details.treatmentVideos"
+            <div v-for="(vid, vidIndex) in treatmentVideos[index]"
                 :key="`treatment-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -288,7 +288,7 @@
           <div class="admin-case-study-detail-container57">
             <div class="admin-case-study-detail-text142">current medicines:</div>
             <router-link 
-              v-for="(medicine, medIndex) in caseItem.details.medicines" 
+              v-for="(medicine, medIndex) in medicines[index]" 
               :key="`medicine-${medIndex}`" 
               to="/pharmacy" 
               class="admin-case-study-detail-navlink3"
@@ -301,7 +301,7 @@
               <div class="admin-case-study-detail-text142">add new medicine</div>
               <select name="fff">
                 <option 
-                v-for="(medicine, medIndex) in medicines" 
+                v-for="(medicine, medIndex) in Allmedicines" 
                 :key="`${medIndex}`" 
                 :value=medIndex>
                 {{ medicine.medicineName }}
@@ -317,378 +317,11 @@
       </div>
       <!-- add case -->
       <div class="admin-case-study-detail-container54">
-        <div class="admin-case-study-detail-container55">
-          <h1 class="admin-case-study-detail-hero-heading3 heading1">
-            <span class="heading1">Add Case</span>
-            <br />
-          </h1>
-        </div>
-        <div class="admin-case-study-detail-container56">
-          <span class="admin-case-study-detail-text142 heading2">Summary</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container58">
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-            </button>
-            <div class="admin-case-study-detail-container59">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image10"
-              />
-              <button type="button" class="button">
-                  <span>Delete</span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container60">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image11"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container61">
-            <button type="button" class="admin-case-study-detail-button44 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container62">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video10"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button45 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container63">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video11"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button46 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container64">
-          <span class="admin-case-study-detail-text142 heading2">Examine</span>
-          <div class="admin-case-study-detail-container65">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea6 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button47 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container66">
-            <button type="button" class="admin-case-study-detail-button48 button">
-              <span>
-                <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container67">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image12"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container68">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image13"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container69">
-            <button type="button" class="admin-case-study-detail-button51 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container70">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video12"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button52 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container71">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video13"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button53 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container72">
-          <span class="admin-case-study-detail-text161 heading2">Diagnose</span>
-          <div class="admin-case-study-detail-container73">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea7 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button54 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container74">
-            <button type="button" class="admin-case-study-detail-button55 button">
-                <span>Upload</span>
-            </button>
-            <div class="admin-case-study-detail-container75">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image14"
-              />
-              <button type="button" class="button">
-                  <span>Delete</span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container76">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image15"
-              />
-              <button type="button" class="button">
-                  <span>Delete</span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container77">
-            <button type="button" class="admin-case-study-detail-button58 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container78">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video14"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button59 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container79">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video15"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button60 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container80">
-          <span class="admin-case-study-detail-text180 heading2">Treatment</span>
-          <div class="admin-case-study-detail-container81">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea8 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button61 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container82">
-            <button type="button" class="admin-case-study-detail-button62 button">
-              <span>
-                <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container83">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image16"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container84">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image17"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container85">
-            <button type="button" class="admin-case-study-detail-button65 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container86">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video16"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button66 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container87">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video17"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button67 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container88">
-          <span class="admin-case-study-detail-text199 heading2">Pharmacy</span>
-          <div class="admin-case-study-detail-container89"></div>
-          <div class="admin-case-study-detail-container90">
-            <select name="fff">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <input type="text" placeholder="Dosage" class="input" />
-            <div class="admin-case-study-detail-container91">
-              <button type="button" class="button">Add</button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container92">
-            <select name="fff">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <input type="text" placeholder="Dosage" class="input" />
-            <div class="admin-case-study-detail-container93">
-              <button type="button" class="button">Modify</button>
-              <button type="button" class="button">Delete</button>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="admin-case-study-detail-button71 button">
+        <h1 class="admin-case-study-detail-hero-heading1 heading1">
+          <span class="heading1">Add Case</span>
+          <br />
+        </h1>
+        <button type="button" class="admin-case-study-detail-button71 button" @click = addCase>
           Add Case
         </button>
       </div>
@@ -736,6 +369,7 @@ export default {
       diseaseIntro: ' ',
       newIntro:'',
       cases: [],
+      Allmedicines:[],
       medicines:[],
       summarys:[],
       summaryPictures:[],
@@ -747,9 +381,42 @@ export default {
       treatmentPictures:[],
       treatmentVideos:[],
       name: localStorage.getItem('username'),
+      
     }
   },
   methods:{
+    addCase(){
+      axios({
+          method: 'post',
+          url: '/admin/case',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            diseaseID : this.diseaseID,
+            summaryPictures: null,
+            summaryVideos: null,
+            examine: null,
+            examinePictures: null,
+            examineVideos: null,
+            diagnose: null,
+            diagnosePictures: null,
+            diagnoseVideos: null,
+            treatment: null,
+            treatmentPictures: null,
+            treatmentVideos:null,
+            medicines:null,
+          }
+        })
+        .then(response => {
+          this.fetchCases();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
     modifyPV(index){
       axios({
           method: 'put',
@@ -854,6 +521,7 @@ export default {
         this.diagnoseVideos=[];
         this.treatmentPictures=[];
         this.treatmentVideos=[];
+        this.medicines=[];
       this.cases.forEach(caseItem => {
         this.summaryPictures.push(caseItem.details.summaryPictures?caseItem.details.summaryPictures:[]);
         this.summaryVideos.push(caseItem.details.summaryVideos?caseItem.details.summaryVideos:[]);
@@ -863,8 +531,8 @@ export default {
         this.diagnoseVideos.push(caseItem.details.diagnoseVideos?caseItem.details.diagnoseVideos:[]);
         this.treatmentPictures.push(caseItem.details.treatmentPictures?caseItem.details.treatmentPictures:[]);
         this.treatmentVideos.push(caseItem.details.treatmentVideos?caseItem.details.treatmentVideos:[]);
+        this.medicines.push(caseItem.details.medicines?caseItem.details.medicines:[]);
       })
-      console.log(this.summaryPictures);
       
     },
     async deleteCase(index){
@@ -933,7 +601,7 @@ export default {
     });
     },
     fetchMedicine(){
-      this.medicines = [];
+      this.Allmedicines = [];
       // Fetch medicine list
     axios.get(`/medicine/list`, {
       headers: {
@@ -942,7 +610,7 @@ export default {
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.medicines = response.data.medicines;
+        this.Allmedicines = response.data.medicines;
       } else if (response.data.status === 1) {
         console.log('No corresponding medicine');
       }
@@ -1053,7 +721,7 @@ export default {
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.medicines = response.data.medicines;
+        this.Allmedicines = response.data.medicines;
       } else if (response.data.status === 1) {
         console.log('No corresponding medicine');
       }
