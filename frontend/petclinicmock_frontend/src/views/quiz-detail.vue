@@ -12,14 +12,14 @@
           <div data-thq="thq-navbar-nav" class="quiz-detail-desktop-menu">
             <span>
               <span>
-                Logged in as
+                登录用户：
                 <span v-html="rawp27k"></span>
               </span>
               <span class="quiz-detail-text02">{{name}}</span>
             </span>
           </div>
           <div>
-            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
           </div>
         </div>
       </header>
@@ -29,25 +29,25 @@
       <div class="quiz-detail-container03">
         <h1 class="quiz-detail-hero-heading">
           <span class="heading1">
-            Quiz:
+            测试：
           </span>
           <span class="quiz-detail-text04">{{ this.quizName }}</span>
         </h1>
-        <span class="heading2">Total Credit: {{ this.totalCredits }}</span>
+        <span class="heading2">总分： {{ this.totalCredits }}</span>
       </div>
     </div>
     <div class="quiz-detail-container04">
       <router-link to="/quiz-list" class="quiz-detail-navlink button">
-        Choose Quiz
+        重选测试
       </router-link>
       <router-link to="/menu" class="quiz-detail-navlink1 button">
-        Menu
+        返回菜单
       </router-link>
     </div>
     <div class="quiz-detail-hero1 heroContainer">
       <div class="quiz-detail-container05">
         <h1 class="quiz-detail-hero-heading1 heading1">
-          <span class="heading1">Question {{ this.currentProb+1 }}</span>
+          <span class="heading1">问题 {{ this.currentProb+1 }}</span>
           <br />
         </h1>
         <div class="quiz-detail-container06">
@@ -72,9 +72,9 @@
       </div>
     </div>
     <div class="quiz-detail-container13"> 
-      <button class="quiz-detail-navlink2 button" @click="lastProb">Last Question</button>
-      <button class="quiz-detail-navlink2 button" @click="nextProb">Next Question</button>
-      <button class="quiz-detail-navlink2 button" @click="submit">Submit</button>
+      <button class="quiz-detail-navlink2 button" @click="lastProb">上一题</button>
+      <button class="quiz-detail-navlink2 button" @click="nextProb">下一题</button>
+      <button class="quiz-detail-navlink2 button" @click="submit">提交测试</button>
     </div>
     <div class="quiz-detail-footer">
       <footer class="quiz-detail-footer1 footerContainer">
