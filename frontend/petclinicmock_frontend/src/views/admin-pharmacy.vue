@@ -94,7 +94,7 @@
           medicineIntro: '',
         },
         medicines: [],
-        authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIxLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTIxMjE1NTcsImV4cCI6MTc0MzY1NzU1N30.8qCcZTS0y9lH7xc6a5jJSkqF7grBoS7d97SY4sG7bmI",
+        authToken: localStorage.getItem('Token'),
       }
     },
     methods:{
