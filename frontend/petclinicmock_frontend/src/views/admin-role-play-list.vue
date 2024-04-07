@@ -280,34 +280,63 @@ export default {
           }
         })
         .then(response => {
-          this.fetchJobs();
+          if (response.status === 200) {
+            console.log(response.data.message); // "成功"
+            this.fetchJobs(); // fetch jobs after the axios request has completed
+          }
         })
         .catch(error => {
-          // handle error
-          console.log(error);
+          if (error.response) {
+            if (error.response.status === 404) {
+              if (error.response.data.status === 1) {
+                this.$message.warning(error.response.data.message); // "无对应role"
+              } else if (error.response.data.status === 2) {
+                this.$message.warning(error.response.data.message); // "无对应job"
+              }
+            } else if (error.response.status === 400) {
+              this.$message.warning(error.response.data.message); // "重复的job"
+            }
+          } else {
+            console.log(error);
+          }
+        });
+      } else {
+        axios({
+          method: 'put',
+          url: '/admin/roleplaying',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            role: role,
+            prevJob: prevJob,
+            job: job,
+            jobDetail: detail
+          }
+        })
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response.data.message); // "成功"
+            this.fetchJobs(); // fetch jobs after the axios request has completed
+          }
+        })
+        .catch(error => {
+          if (error.response) {
+            if (error.response.status === 404) {
+              if (error.response.data.status === 1) {
+                this.$message.warning(error.response.data.message); // "无对应role"
+              } else if (error.response.data.status === 2) {
+                this.$message.warning(error.response.data.message); // "无对应job"
+              }
+            } else if (error.response.status === 400) {
+              this.$message.warning(error.response.data.message); // "重复的job"
+            }
+          } else {
+            console.log(error);
+          }
         });
       }
-      axios({
-        method: 'put',
-        url: '/admin/roleplaying',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        },
-        data: {
-          role: role,
-          prevJob: prevJob,
-          job: job,
-          jobDetail: detail
-        }
-      })
-      .then(response => {
-        this.fetchJobs();
-      })
-      .catch(error => {
-        // handle error
-        console.log(error);
-      });
     },
     async addNewJob() {
       axios({
@@ -324,13 +353,21 @@ export default {
         }
       })
       .then(response => {
-        // handle success
-        console.log(response);
-        this.fetchJobs(); // fetch jobs after the axios request has completed
+        if (response.status === 200) {
+          console.log(response.data.message); // "成功"
+          this.fetchJobs(); // fetch jobs after the axios request has completed
+        }
       })
       .catch(error => {
-        // handle error
-        console.log(error);
+        if (error.response) {
+          if (error.response.status === 404) {
+            this.$message.warning(error.response.data.message); // "无对应role"
+          } else if (error.response.status === 400) {
+            this.$message.warning(error.response.data.message); // "重复的job"
+          }
+        } else {
+          console.log(error);
+        }
       });
     },
     async deleteJob(index) {
@@ -341,9 +378,23 @@ export default {
             'Content-Type': 'application/json'
           }
         });
-        this.fetchJobs();
+
+        if (response.status === 200) {
+          console.log(response.data.message); // "成功"
+          this.fetchJobs(); // fetch jobs after the axios request has completed
+        }
       } catch (error) {
-        console.log(error);
+        if (error.response) {
+          if (error.response.status === 404) {
+            if (error.response.data.status === 1) {
+              this.$message.warning(error.response.data.message);   // "无对应role"
+            } else if (error.response.data.status === 2) {
+              this.$message.warning(error.response.data.message); // "无对应job"
+            }
+          }
+        } else {
+          console.log(error);
+        }
       }
     }
   },
