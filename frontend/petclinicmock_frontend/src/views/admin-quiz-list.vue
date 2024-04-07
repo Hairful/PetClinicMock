@@ -8,14 +8,19 @@
         <router-link to="/menu" class="admin-quiz-list-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="admin-quiz-list-desktop-menu">
           <span>
             <span>
-              Logged in as
+              登录用户：
               <span v-html="raw82w2"></span>
             </span>
-            <span class="admin-quiz-list-text02">Allen</span>
+            <span class="admin-quiz-list-text02">{{ data }}</span>
           </span>
+        </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
         </div>
       </header>
     </div>
@@ -109,6 +114,7 @@ export default {
       newQuizName:'',
       quizzes:[],
       inputName:[],
+      name:localStorage.getItem('username'),
     }
   },
   methods:{

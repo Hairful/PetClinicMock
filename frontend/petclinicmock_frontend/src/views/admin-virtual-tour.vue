@@ -8,15 +8,20 @@
         <router-link to="/menu" class="admin-virtual-tour-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="admin-virtual-tour-desktop-menu">
           <span>
             <span>
-              Logged in as
+              登录用户：
               <span v-html="rawtoap"></span>
             </span>
-            <span class="admin-virtual-tour-text02">Allen</span>
+            <span class="admin-virtual-tour-text02">{{ name }}</span>
           </span>
         </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
+      </div>
       </header>
     </div>
     <div class="admin-virtual-tour-container01"></div>
@@ -99,6 +104,7 @@ export default {
       rawitix: ' ',
       rawua14: ' ',
       raw7n6i: ' ',
+      name:localStorage.getItem('username'),
     }
   },
   metaInfo: {

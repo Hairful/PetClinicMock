@@ -8,14 +8,19 @@
         <router-link to="/menu" class="admin-role-play-list-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="admin-role-play-list-desktop-menu">
           <span>
             <span>
-              Logged in as
+              登录用户：
               <span v-html="raw0x8n"></span>
             </span>
-            <span class="admin-role-play-list-text02">Allen</span>
+            <span class="admin-role-play-list-text02">{{ data }}</span>
           </span>
+        </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
         </div>
       </header>
     </div>
@@ -137,6 +142,7 @@ export default {
       jobDetails: [],
       newJob: '',
       newJobDetail: '',
+      name:localStorage.getItem('username'),
     }
   },
   methods: {

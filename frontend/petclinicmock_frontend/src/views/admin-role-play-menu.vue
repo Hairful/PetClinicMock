@@ -8,14 +8,19 @@
         <router-link to="/menu" class="admin-role-play-menu-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="admin-role-play-menu-desktop-menu">
           <span>
             <span>
-              Logged in as
+              登录用户：
               <span v-html="rawl4zz"></span>
             </span>
-            <span class="admin-role-play-menu-text02">Allen</span>
+            <span class="admin-role-play-menu-text02">{{ name }}</span>
           </span>
+        </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
         </div>
       </header>
     </div>
@@ -95,6 +100,7 @@ export default {
       rawupn0: ' ',
       rawbggx: ' ',
       raw4mlw: ' ',
+      name:localStorage.getItem('username'),
     }
   },
   metaInfo: {

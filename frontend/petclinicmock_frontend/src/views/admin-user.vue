@@ -6,12 +6,17 @@
         class="navbarContainer admin-user-navbar-interactive"
       >
         <router-link to="/menu" class="admin-user-logo logo">PETCLINICMock</router-link>
+        <div>
         <div data-thq="thq-navbar-nav" class="admin-user-desktop-menu">
           <span
-            ><span>Logged in as <span v-html="rawbedh"></span></span
-            ><span class="admin-user-text02">Allen</span></span
+            ><span>登录用户： <span v-html="rawbedh"></span></span
+            ><span class="admin-user-text02">{{ name }}</span></span
           ></div
-        ></header></div
+        ><div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
+        </div>
+      </header></div
     ><div class="admin-user-container01"></div
     ><div class="heroContainer admin-user-hero"
       ><div class="admin-user-container02"
@@ -82,6 +87,7 @@ export default {
       rawp93p: ' ',
       raw1rdy: ' ',
       users: [],
+      name:localStorage.getItem('username'),
     }
   },
   methods: {

@@ -8,18 +8,23 @@
         <router-link to="/menu" class="admin-menu-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div class="admin-menu-container1">
           <div data-thq="thq-navbar-nav" class="admin-menu-desktop-menu">
             <span>
               <span>
-                Logged in as
+                登录用户：
               </span>
-              <span class="admin-menu-text02">Allen</span>
+              <span class="admin-menu-text02">{{ name }}</span>
             </span>
           </div>
           <div>
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
+        </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
         </div>
       </header>
     </div>
@@ -112,6 +117,7 @@ export default {
       raw7b52: ' ',
       rawi76z: ' ',
       rawufkj: ' ',
+      name:localStorage.getItem('username'),
     }
   },
   methods:{

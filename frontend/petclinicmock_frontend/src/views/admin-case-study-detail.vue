@@ -8,6 +8,7 @@
         <router-link to="/menu" class="admin-case-study-detail-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div class="admin-case-study-detail-container01">
           <div
             data-thq="thq-navbar-nav"
@@ -15,12 +16,16 @@
           >
             <span>
               <span>
-                Logged in as
+                登录用户：
                 <span v-html="rawv2p0"></span>
               </span>
-              <span class="admin-case-study-detail-text002">Allen</span>
+              <span class="admin-case-study-detail-text002">{{ name }}</span>
             </span>
           </div>
+        </div>
+        <div>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
         </div>
       </header>
     </div>
@@ -722,6 +727,7 @@ export default {
       intros:[],
       pictures:[],
       videos:[],
+      name: localStorage.getItem('username'),
     }
   },
   methods:{
