@@ -95,6 +95,7 @@ exports.updateQuiz = async (quizData) => {
         await quiz.save();
         // 删除所有与 quizID 关联的问题
         await Prob.destroy({ where: { quizID } });
+        await UserQuiz.destroy({ where: { QuizQuizID: quizID } });
         // 遍历并创建问题
         for (const prob of probs) {
             await Prob.create({
