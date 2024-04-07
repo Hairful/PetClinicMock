@@ -5,7 +5,7 @@
         data-thq="thq-navbar"
         class="navbarContainer case-study-list-navbar-interactive"
       >
-        <router-link to="/" class="case-study-list-logo logo">
+        <router-link to="/menu" class="case-study-list-logo logo">
           PETCLINICMock
         </router-link>
         <div>
@@ -29,7 +29,7 @@
       <div class="case-study-list-container2">
         <h1 class="case-study-list-hero-heading">
           <span class="heading1">
-            Case Study:
+            病例学习：
             <span v-html="rawndcw"></span>
           </span>
           <span class="case-study-list-text04"> {{ this.diseaseType }} </span>
@@ -69,7 +69,7 @@
     <div class="case-study-list-footer">
       <footer class="case-study-list-footer1 footerContainer">
         <div class="case-study-list-container5">
-          <router-link to="/" class="case-study-list-logo2 logo">
+          <router-link to="/menu" class="case-study-list-logo2 logo">
             PETCLINICMOCK
           </router-link>
         </div>
