@@ -170,7 +170,7 @@ export default {
         .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
           {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`
           }
         })
         .then((response) => {
@@ -183,7 +183,7 @@ export default {
                 .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
                   {
                   headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${localStorage.getItem('Token')}`
                   }
                 });
             });
@@ -215,7 +215,7 @@ export default {
           method: 'put',
           url: '/admin/roleplaying',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -250,7 +250,7 @@ export default {
           method: 'put',
           url: '/admin/roleplaying',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -288,7 +288,7 @@ export default {
         method: 'post',
         url: '/admin/roleplaying',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
           'Content-Type': 'application/json'
         },
         data: {
@@ -319,7 +319,7 @@ export default {
       try {
         const response = await axios.delete(`/admin/roleplaying?role=1&job=${this.jobs[index]}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           }
         });
@@ -349,7 +349,7 @@ export default {
       .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
         {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {
@@ -362,7 +362,7 @@ export default {
               .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
                 {
                 headers: {
-                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                  'Authorization': `Bearer ${localStorage.getItem('Token')}`
                 }
               });
           });

@@ -135,7 +135,7 @@ export default {
       .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
         {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {

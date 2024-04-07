@@ -108,7 +108,7 @@ export default {
       .get(`/quiz/list`, 
         {
           headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {

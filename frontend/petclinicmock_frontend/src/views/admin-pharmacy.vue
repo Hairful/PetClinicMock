@@ -193,7 +193,7 @@
         },
     },
     created() {
-      const authToken = localStorage.getItem('token');
+      const authToken = localStorage.getItem('Token');
       this.fetchMedicines();
     },
     metaInfo: {

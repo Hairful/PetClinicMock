@@ -181,7 +181,7 @@ export default {
           method: 'put',
           url: '/admin/disease',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -203,7 +203,7 @@ export default {
       try {
         const response = await axios.delete(`/admin/disease?diseaseID=${this.diseases[index].diseaseID}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           }
         });
@@ -223,7 +223,7 @@ export default {
           method: 'post',
           url: '/admin/disease',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -247,7 +247,7 @@ export default {
       .get(`/disease/list?diseaseType=${this.currentType}`, 
         {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {
@@ -266,7 +266,7 @@ export default {
       .get(`/disease/type`, 
         {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {
@@ -286,7 +286,7 @@ export default {
       .get(`/disease/type`, 
         {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {

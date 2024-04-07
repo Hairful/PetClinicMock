@@ -118,7 +118,7 @@ export default {
       .get(`/casestudy/disease/list?diseaseType=${this.diseaseType}`, 
         {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         }
       })
       .then((response) => {

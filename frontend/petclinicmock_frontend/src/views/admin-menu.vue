@@ -22,9 +22,6 @@
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
           </div>
         </div>
-        <div>
-          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
-        </div>
         </div>
       </header>
     </div>

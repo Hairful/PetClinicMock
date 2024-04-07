@@ -273,7 +273,7 @@ export default {
           method: 'put',
           url: '/admin/quiz',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -299,7 +299,7 @@ export default {
     axios.get(`/quiz/detail?quizID=${this.quizID}`, 
     {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }
     })
     .then(response => {
@@ -365,7 +365,7 @@ export default {
     axios.get(`/quiz/detail?quizID=${this.quizID}`, 
     {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }
     })
     .then(response => {
