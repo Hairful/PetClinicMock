@@ -180,15 +180,20 @@ export default {
           password: this.formLogin.password,
         });
         console.log(response.data);
-        if (response.data.status === 0) {
-          // Login successful
-          this.token = response.data.token;
-          localStorage.setItem('Token',this.token);//将token存在localstorage中
-          localStorage.setItem('username',this.formLogin.name);
-          localStorage.setItem('userID',response.data.userID);
-          console.log('Login successful');
-          this.$router.push('/menu'); // Navigate to menu page
-        } else if (response.data.status === 1) {
+        if (response.status === 200) {
+          if (response.data.status === 0) {
+            // Login successful
+            this.token = response.data.token;
+            localStorage.setItem('Token',this.token);//将token存在localstorage中
+            localStorage.setItem('username',this.formLogin.name);
+            localStorage.setItem('userID',response.data.userID);
+            console.log('Login successful');
+            this.$router.push('/menu'); // Navigate to menu page
+          }
+        }
+      } catch (error) {
+        // Handle error
+        if (error.response.status === 401) {
           // Login failed
           // Show error message
           this.$message.warning('Wrong username or password.');
@@ -196,8 +201,6 @@ export default {
           // Handle other status
           this.$message.warning('Username not found.');
         }
-      } catch (error) {
-        // Handle error
       }
     },
     // 重置验证码
