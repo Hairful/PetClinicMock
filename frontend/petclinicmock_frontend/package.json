@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@lottiefiles/vue-lottie-player": "1.0.4",
+    "ali-oss": "^6.20.0",
     "axios": "^1.6.8",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",
@@ -22,6 +23,7 @@
     "vue-router": "^3.0.2"
   },
   "devDependencies": {
+    "@types/ali-oss": "^6.16.11",
     "@vue/babel-preset-app": "^5.0.8",
     "@vue/cli-plugin-babel": "^5.0.4",
     "@vue/cli-plugin-unit-jest": "~5.0.0",
