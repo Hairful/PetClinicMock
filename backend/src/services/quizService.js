@@ -146,6 +146,12 @@ exports.recordExamEntry = async (input) => {
         if (!userExist) {
             return { "status": 2, "message": "无对应userID" };
         }
+        let time
+        if (!lastTryTime) {
+            time = new Date()
+        } else {
+            time = lastTryTime
+        }
         // 检查 UserQuiz 表中是否存在相同的 userID 和 quizID 的记录，（不）存在则更新（创建）
         const userQuizEntry = await UserQuiz.findOne({
             where: { "UserUserID": userID, "QuizQuizID": quizID }
@@ -153,14 +159,14 @@ exports.recordExamEntry = async (input) => {
         if (userQuizEntry) {
             await userQuizEntry.update({
                 "lastTry": credit,
-                "lastTryTime": lastTryTime
+                "lastTryTime": time
             });
         } else {
             await UserQuiz.create({
                 "QuizQuizID": quizID,
                 "UserUserID": userID,
                 "lastTry": credit,
-                "lastTryTime": lastTryTime
+                "lastTryTime": time
             });
         }
         // 遍历答案数组，处理每个答案
