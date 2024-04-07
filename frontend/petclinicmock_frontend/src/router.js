@@ -27,6 +27,7 @@ import AdminMenu from './views/admin-menu'
 import AdminCaseStudyDetail from './views/admin-case-study-detail'
 import CaseStudyMenu from './views/case-study-menu'
 import Login from './views/login'
+import AdminUser from './views/admin-user'
 import './style.css'
 
 Vue.use(Router)
@@ -153,6 +154,11 @@ const router = new Router({
       name: 'CaseStudyMenu',
       path: '/case-study-menu',
       component: CaseStudyMenu,
+    },
+    {
+      name: 'AdminUser',
+      path: '/admin-user',
+      component: AdminUser,
     },
     {
       name: 'Page',

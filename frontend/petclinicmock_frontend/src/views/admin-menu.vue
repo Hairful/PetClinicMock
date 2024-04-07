@@ -93,7 +93,7 @@
         <div class="admin-menu-container3">
           <div class="admin-menu-container4">
             <router-link
-              to="/admin-virtual-tour"
+              to="/admin-user"
               class="admin-menu-navlink button"
             >
               <span class="heading3">
