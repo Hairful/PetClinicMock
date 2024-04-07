@@ -196,10 +196,10 @@ export default {
         if (error.response.status === 401) {
           // Login failed
           // Show error message
-          this.$message.warning('Wrong username or password.');
+          this.$message.warning('用户名或密码错误！');
         } else {
           // Handle other status
-          this.$message.warning('Username not found.');
+          this.$message.warning('用户名没有注册！');
         }
       }
     },
