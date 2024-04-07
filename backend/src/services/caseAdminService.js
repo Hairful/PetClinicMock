@@ -115,18 +115,22 @@ exports.updateCase = async (caseData) => {
         const existingMedicines = await existingCase.getMedicines();
         await existingCase.removeMedicines(existingMedicines);
         // 添加新的Medicine关联
-        for (let medicineId of caseData.medicines) {
-            const medicine = await Medicine.findByPk(medicineId);
-            if (medicine) {
-                await existingCase.addMedicine(medicine);
-            } else {
-                return {
-                    status: 3,
-                    message: "无对应medicineID"
-                };
+        if (caseData.medicines) {
+            for (let medicineId of caseData.medicines) {
+                const medicine = await Medicine.findByPk(medicineId);
+                if (medicine) {
+                    await existingCase.addMedicine(medicine);
+                } else {
+                    return {
+                        status: 3,
+                        message: "无对应medicineID"
+                    };
+                }
             }
+            return { status: 0, message: "成功" };
+        } else {
+            return { status: 0, message: "成功" };
         }
-        return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error in updateCase', error);
         return { status: -9, message: "失败" };
