@@ -9,6 +9,12 @@ const User = require('../models/User');
 const { encrypt, decrypt, hashPassword, generateSalt } = require('../utils/cryptoUtil');
 const { tokenKey } = require('../config/authConfig')
 
+const loggerConfigurations = [
+    { name: 'auth', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * registerUser - 用户登录函数
  * @param {string} userName - 用户名
@@ -26,7 +32,7 @@ exports.registerUser = async (userName, password) => {
         const newUser = await User.create({ userName: userName, password: hashedPassword, salt: salt });
         return { status: 0, message: '注册成功', userID: newUser.userID };
     } catch (error) {
-        console.error('Error in registerUser:', error);
+        logger.error('Error in /userAuthService.js/registerUser :', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -50,7 +56,7 @@ exports.loginUser = async (userName, password) => {
         const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });
         return { status: 0, message: '登录成功', userID: userExist.userID, token: token };
     } catch (error) {
-        console.error('Error in loginUser:', error);
+        logger.error('Error in /userAuthService.js/loginUser :', error);
         return { status: -9, message: '错误' };
     }
 }
