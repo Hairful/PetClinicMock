@@ -1065,7 +1065,7 @@ Content-Type: application/json
 
 ## `GET /3DVirtualTour/item`
 
-获取3D虚拟导览中物品详情
+获取3D虚拟导览中物品列表
 
 ### 请求参数
 
@@ -1103,9 +1103,21 @@ Content-Type: application/json
 {
     "status": 0,
     "message": "成功",
-    "itemName":"手术刀",
-    "itemIntro":"手术刀很大也很小",
-    "itemURL":"url"
+    "items":[
+        {
+            "itemID":1,
+            "itemName":"刀",
+            "itemIntro":"刀很大也很小",
+            "itemURL":"url"
+        },
+        {
+            "itemID":2,
+            "itemName":"手术刀",
+            "itemIntro":"手术刀很大也很小",
+            "itemURL":"url"
+        }
+    ]
+    
 }
 
 HTTP/1.1 404 Not Found
