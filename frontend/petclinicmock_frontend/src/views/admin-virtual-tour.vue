@@ -1,5 +1,6 @@
 <template>
   <div class="admin-virtual-tour-container">
+    <Chatbot />
     <div class="admin-virtual-tour-header">
       <header
         data-thq="thq-navbar"
@@ -75,9 +76,13 @@
 
 <script>
 import axios from 'axios';
+import Chatbot from '../components/Chatbot.vue';
 export default {
   name: 'AdminVirtualTour',
   props: {},
+  components: {
+    Chatbot,
+  },
   data() {
     return {
       name:localStorage.getItem('username'),
