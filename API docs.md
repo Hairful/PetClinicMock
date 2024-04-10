@@ -406,6 +406,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | medicineID    | Body | integer | 是   | 药品ID   |
 | medicineName  | Body | string  | 是   | 药品名字 |
 | medicineIntro | Body | string  | 是   | 药品简介 |
+| dosage        | Body | string  | 是   | 药品用量 |
 
 `Example`
 
@@ -435,7 +436,8 @@ Content-Type: application/json
         {
             "medicineID":1,
             "medicineName":"阿司匹林",
-            "medicineIntro":"好药"
+            "medicineIntro":"好药",
+            "dosage":"100ml"
         }
     ]
 }
@@ -1061,21 +1063,20 @@ Content-Type: application/json
 
 # 7. 3D导览
 
-## `GET /3DVirtualTour/item/detail`
+## `GET /3DVirtualTour/item`
 
-获取3D虚拟导览中物品详情
+获取3D虚拟导览中物品列表
 
 ### 请求参数
 
 | 名称          | 位置   | 类型    | 必选 | 备注          |
 | ------------- | ------ | ------- | ---- | ------------- |
 | Authorization | Header | string  | 是   | 身份验证token |
-| itemID        | Param  | integer | 是   | 物品ID        |
 
 `Example`
 
 ```json
-GET /3DVirtualTour/item/detail?itemID=1
+GET /3DVirtualTour/item
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
@@ -1085,8 +1086,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | --------- | ---- | ------- | ---- | -------- |
 | status    | Body | integer | 是   | 状态     |
 | message   | Body | string  | 是   | 消息     |
-| itemName  | Body | string  | 否   | 物品名   |
-| itemIntro | Body | string  | 否   | 物品简介 |
+| items     | Body | object[] | 否  | 物品     |
+
+对于items的元素
+
+| itemID    | Body | integer | 是   | 物品ID   |
+| itemName  | Body | string  | 是   | 物品名   |
+| itemIntro | Body | string  | 是   | 物品简介 |
+| itemURL   |Body  |string   | 是   |物品视频  |
 
 `Example`
 
@@ -1096,8 +1103,21 @@ Content-Type: application/json
 {
     "status": 0,
     "message": "成功",
-    "itemName":"手术刀",
-    "itemIntro":"手术刀很大也很小"
+    "items":[
+        {
+            "itemID":1,
+            "itemName":"刀",
+            "itemIntro":"刀很大也很小",
+            "itemURL":"url"
+        },
+        {
+            "itemID":2,
+            "itemName":"手术刀",
+            "itemIntro":"手术刀很大也很小",
+            "itemURL":"url"
+        }
+    ]
+    
 }
 
 HTTP/1.1 404 Not Found
@@ -1105,104 +1125,6 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应itemID"
-}
-
-```
-
-## `GET /3DVirtualTour/department/list`
-
-获取3D虚拟导览中科室列表
-列表中展示科室的ID和科室名
-
-### 请求参数
-
-| 名称          | 位置   | 类型   | 必选 | 备注          |
-| ------------- | ------ | ------ | ---- | ------------- |
-| Authorization | Header | string | 是   | 身份验证token |
-
-`Example`
-
-```json
-GET /3DVirtualTour/department/list
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-```
-
-### 返回响应
-
-| 名称        | 位置 | 类型     | 必选 | 备注   |
-| ----------- | ---- | -------- | ---- | ------ |
-| status      | Body | integer  | 是   | 状态   |
-| message     | Body | string   | 是   | 消息   |
-| departments | Body | object[] | 否   | 各科室 |
-
-对于departments的元素
-
-| 名称           | 位置 | 类型    | 必选 | 备注     |
-| -------------- | ---- | ------- | ---- | -------- |
-| departmentID   | Body | integer | 是   | 科室ID   |
-| departmentName | Body | string  | 是   | 科室名称 |
-
-`Example`
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/json
-{
-    "status": 0,
-    "message": "成功",
-    "departments":[
-        {
-            "departmentID":1,
-            "departmentName":"手术室"
-        },
-        {
-            "departmentID":2,
-            "departmentName":"手术室"
-        }
-    ]
-}
-
-```
-
-## `GET /3DVirtualTour/department/detail`
-
-获取3D虚拟导览中科室详情
-
-### 请求参数
-
-| 名称          | 位置   | 类型    | 必选 | 备注          |
-| ------------- | ------ | ------- | ---- | ------------- |
-| Authorization | Header | string  | 是   | 身份验证token |
-| departmentID  | Param  | integer | 是   | 科室ID        |
-
-`Example`
-
-```json
-GET /3DVirtualTour/department/detail?departmentID=1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-```
-
-### 返回响应
-
-| 名称            | 位置 | 类型      | 必选 | 备注     |
-| --------------- | ---- | --------- | ---- | -------- |
-| status          | Body | integer   | 是   | 状态     |
-| message         | Body | string    | 是   | 消息     |
-| departmentName  | Body | string    | 否   | 科室名   |
-| departmentIntro | Body | string    | 否   | 科室信息 |
-| departmentItems | Body | integer[] | 否   | ItemID   |
-
-`Example`
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/json
-{
-    "status": 0,
-    "message": "成功",
-    "departmentName":"手术室",
-    "departmentIntro":"手术室很大也很小",
-    "departmentItems":[1,2,3]
 }
 
 ```
@@ -1809,23 +1731,30 @@ Content-Type: application/json
 
 ### 发送参数
 
-| 名称              | 位置   | 类型      | 必选 | 备注                          |
-| ----------------- | ------ | --------- | ---- | ----------------------------- |
-| diseaseID         | Body   | integer   | 是   | 疾病ID                        |
-| summary           | Body   | string    | 是   | 病例的基本情况                |
-| summaryPictures   | Body   | string[]  | 是   | 能表现典型临床症状的照片的URL |
-| summaryVideos     | Body   | string[]  | 是   | 能表现典型临床症状的视频的URL |
-| examine           | Body   | string    | 是   | 检查项目及结果                |
-| examinePictures   | Body   | string[]  | 是   | 检查结果单的URL               |
-| examineVideos     | Body   | string[]  | 是   | 检查结果视频的URL             |
-| diagnose          | Body   | string    | 是   | 临床诊断结果                  |
-| diagnosePictures  | Body   | string[]  | 是   | 临床诊断结果的图片的URL       |
-| diagnoseVideos    | Body   | string[]  | 是   | 临床诊断结果视频的URL         |
-| treatment         | Body   | string    | 是   | 治疗方案                      |
-| treatmentPictures | Body   | string[]  | 是   | 治疗图片的URL                 |
-| treatmentVideos   | Body   | string[]  | 是   | 手术视频的URL                 |
-| medicines         | Body   | integer[] | 是   | 药品ID                        |
-| Authorization     | Header | string    | 是   | 身份验证token                 |
+| 名称              | 位置   | 类型     | 必选 | 备注                          |
+| ----------------- | ------ | -------- | ---- | ----------------------------- |
+| diseaseID         | Body   | integer  | 是   | 疾病ID                        |
+| summary           | Body   | string   | 是   | 病例的基本情况                |
+| summaryPictures   | Body   | string[] | 是   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body   | string[] | 是   | 能表现典型临床症状的视频的URL |
+| examine           | Body   | string   | 是   | 检查项目及结果                |
+| examinePictures   | Body   | string[] | 是   | 检查结果单的URL               |
+| examineVideos     | Body   | string[] | 是   | 检查结果视频的URL             |
+| diagnose          | Body   | string   | 是   | 临床诊断结果                  |
+| diagnosePictures  | Body   | string[] | 是   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body   | string[] | 是   | 临床诊断结果视频的URL         |
+| treatment         | Body   | string   | 是   | 治疗方案                      |
+| treatmentPictures | Body   | string[] | 是   | 治疗图片的URL                 |
+| treatmentVideos   | Body   | string[] | 是   | 手术视频的URL                 |
+| medicines         | Body   | object[] | 是   | 药品                          |
+| Authorization     | Header | string   | 是   | 身份验证token                 |
+
+对于medicines的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| medicineID | Body | integer | 是   | 药品ID   |
+| dosage     | Body | string  | 是   | 药品用量 |
 
 `Example`
 
@@ -1846,7 +1775,16 @@ Content-Type: application/json
     "treatment": "阿司匹林100000mg",
     "treatmentPictures": ["url/to/pic1", "url/to/pic2"],
     "treatmentVideos": ["url/to/vid0"],
-    "medicines":[1,2]
+    "medicines":[
+        {
+            "medicineID":3,
+            "dosage":"1000000000000000ml"
+        },
+        {
+            "medicineID":2,
+            "dosage":"20000000000000000000ml"
+        }
+    ]
 }
 ```
 
@@ -1891,24 +1829,31 @@ Content-Type: application/json
 
 ### 发送参数
 
-| 名称              | 位置   | 类型      | 必选 | 备注                          |
-| ----------------- | ------ | --------- | ---- | ----------------------------- |
-| Authorization     | Header | string    | 是   | 身份验证token                 |
-| caseID            | Body   | integer   | 是   | 病例ID                        |
-| diseaseID         | Body   | integer   | 否   | 疾病ID                        |
-| summary           | Body   | string    | 否   | 病例的基本情况                |
-| summaryPictures   | Body   | string[]  | 否   | 能表现典型临床症状的照片的URL |
-| summaryVideos     | Body   | string[]  | 否   | 能表现典型临床症状的视频的URL |
-| examine           | Body   | string    | 否   | 检查项目及结果                |
-| examinePictures   | Body   | string[]  | 否   | 检查结果单的URL               |
-| examineVideos     | Body   | string[]  | 否   | 检查结果视频的URL             |
-| diagnose          | Body   | string    | 否   | 临床诊断结果                  |
-| diagnosePictures  | Body   | string[]  | 否   | 临床诊断结果的图片的URL       |
-| diagnoseVideos    | Body   | string[]  | 否   | 临床诊断结果视频的URL         |
-| treatment         | Body   | string    | 否   | 治疗方案                      |
-| treatmentPictures | Body   | string[]  | 否   | 治疗图片的URL                 |
-| treatmentVideos   | Body   | string[]  | 否   | 手术视频的URL                 |
-| medicines         | Body   | integer[] | 否   | 药品ID                        |
+| 名称              | 位置   | 类型     | 必选 | 备注                          |
+| ----------------- | ------ | -------- | ---- | ----------------------------- |
+| Authorization     | Header | string   | 是   | 身份验证token                 |
+| caseID            | Body   | integer  | 是   | 病例ID                        |
+| diseaseID         | Body   | integer  | 否   | 疾病ID                        |
+| summary           | Body   | string   | 否   | 病例的基本情况                |
+| summaryPictures   | Body   | string[] | 否   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body   | string[] | 否   | 能表现典型临床症状的视频的URL |
+| examine           | Body   | string   | 否   | 检查项目及结果                |
+| examinePictures   | Body   | string[] | 否   | 检查结果单的URL               |
+| examineVideos     | Body   | string[] | 否   | 检查结果视频的URL             |
+| diagnose          | Body   | string   | 否   | 临床诊断结果                  |
+| diagnosePictures  | Body   | string[] | 否   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body   | string[] | 否   | 临床诊断结果视频的URL         |
+| treatment         | Body   | string   | 否   | 治疗方案                      |
+| treatmentPictures | Body   | string[] | 否   | 治疗图片的URL                 |
+| treatmentVideos   | Body   | string[] | 否   | 手术视频的URL                 |
+| medicines         | Body   | object[] | 否   | 药品                          |
+
+对于medicines的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| medicineID | Body | integer | 是   | 药品ID   |
+| dosage     | Body | string  | 是   | 药品用量 |
 
 `Example`
 
@@ -1919,7 +1864,16 @@ Content-Type: application/json
 {
     "caseID": 1,
     "summary": "狗狗，浑身痛多日……",
-    "medicines":[1,3]
+    "medicines":[
+            {
+                "medicineID":3,
+                "dosage":"1000000000000000ml"
+            },
+            {
+                "medicineID":2,
+                "dosage":"20000000000000000000ml"
+            }
+     ]
 }
 ```
 
@@ -2391,6 +2345,7 @@ Content-Type: application/json
 | itemID        | Body   | integer | 是   | 物品ID        |
 | itemName      | Body   | string  | 否   | 物品名称      |
 | itemIntro     | Body   | string  | 否   | 物品简介      |
+| itemURL     | Body   | string  | 否   | 物品视频      |
 
 `Example`
 
@@ -2400,7 +2355,8 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
 {
     "itemID":1,
-    "itemIntro": "手术刀不大不小"
+    "itemIntro": "手术刀不大不小",
+    "itemURL":"lalala"
 }
 ```
 
@@ -2426,57 +2382,6 @@ Content-Type: application/json
 {
     "status": 1,
     "message": "无对应itemID"
-}
-
-```
-
-## `PUT /admin/department`
-
-修改物品信息
-
-### 发送参数
-
-| 名称            | 位置   | 类型    | 必选 | 备注          |
-| --------------- | ------ | ------- | ---- | ------------- |
-| Authorization   | Header | string  | 是   | 身份验证token |
-| departmentID    | Body   | integer | 是   | 科室ID        |
-| departmentName  | Body   | string  | 否   | 科室名称      |
-| departmentIntro | Body   | string  | 否   | 科室简介      |
-
-`Example`
-
-```json
-PUT /admin/disease
-Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-Content-Type: application/json
-{
-    "departmentID":1,
-    "departmentIntro": "手术室不大不小"
-}
-```
-
-### 返回响应
-
-| 名称    | 位置 | 类型    | 必选 | 备注 |
-| ------- | ---- | ------- | ---- | ---- |
-| status  | Body | integer | 是   | 状态 |
-| message | Body | string  | 是   | 消息 |
-
-`Example`
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/json
-{
-    "status": 0, 
-    "message": "成功",
-}
-
-HTTP/1.1 404 Not Found
-Content-Type: application/json
-{
-    "status": 1,
-    "message": "无对应departmentID"
 }
 
 ```

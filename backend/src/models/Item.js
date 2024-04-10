@@ -15,8 +15,13 @@ const Item = sequelize.define('Item', {
     itemIntro: {
         type: DataTypes.TEXT,
         allowNull: false
-    }
-});
+    },
+    itemURL: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+}
+);
 
 Item.belongsTo(Department, { foreignKey: 'departmentID' });
 

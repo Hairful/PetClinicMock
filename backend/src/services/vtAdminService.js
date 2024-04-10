@@ -14,13 +14,13 @@ const Item = require('../models/Item');
  * @param {string} itemIntro - 物品简介
  * @returns {Object} 包含修改结果的对象
  */
-exports.updateItemInfo = async (itemID, itemName, itemIntro) => {
+exports.updateItemInfo = async (itemID, itemName, itemIntro, itemURL) => {
     try {
         const item = await Item.findByPk(itemID);
         if (!item) {
             return { status: 1, message: '无对应itemID' };
         }
-        await Item.update({ itemName, itemIntro }, { where: { itemID } });
+        await Item.update({ itemName, itemIntro, itemURL }, { where: { itemID } });
         return { status: 0, message: '成功' };
     } catch (error) {
         console.error('Error in updateItemInfo:', error);
@@ -28,26 +28,3 @@ exports.updateItemInfo = async (itemID, itemName, itemIntro) => {
     }
 }
 
-/**
- * updateDepartmentInfo - 修改科室信息
- * @param {integer} departmentID - 科室ID
- * @param {string} departmentName - 科室名称
- * @param {string} departmentIntro - 科室简介
- * @returns {Object} 包含修改结果的对象
- */
-exports.updateDepartmentInfo = async (departmentID, departmentName, departmentIntro) => {
-    try {
-        const department = await Department.findByPk(departmentID);
-        if (!department) {
-            return { status: 1, message: '无对应departmentID' };
-        }
-        await Department.update(
-            { departmentName, departmentIntro },
-            { where: { departmentID } }
-        );
-        return { status: 0, message: '成功' };
-    } catch (error) {
-        console.error('Error in updateDepartmentInfo:', error);
-        return { status: -9, message: '失败' };
-    }
-}
