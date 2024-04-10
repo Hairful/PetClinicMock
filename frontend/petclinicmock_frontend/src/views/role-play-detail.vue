@@ -1,5 +1,6 @@
 <template>
   <div class="role-play-detail-container">
+    <Chatbot />
     <div class="role-play-detail-header">
       <header
         data-thq="thq-navbar"
@@ -78,10 +79,14 @@
 
 <script>
 import axios from 'axios';
+import Chatbot from '../components/Chatbot.vue';
 
 export default {
   name: 'RolePlayDetail',
   props: {},
+  components: {
+    Chatbot,
+  },
   data() {
     return {
       rawks35: ' ',
