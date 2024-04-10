@@ -21,8 +21,8 @@ exports.createCase = async (caseData) => {
             return { status: 1, message: "无对应diseaseID" };
         }
         // 检查medicineIDs是否存在
-        for (let id of caseData.medicines) {
-            const medicine = await Medicine.findByPk(id);
+        for (let medicineData of caseData.medicines) {
+            const medicine = await Medicine.findByPk(medicineData.medicineID);
             if (!medicine) {
                 return { status: 2, message: "无对应medicineID" };
             }
@@ -54,8 +54,8 @@ exports.createCase = async (caseData) => {
             await newCase.addMedia(mediaInstances);
         }
         // 关联Medicine记录
-        for (let id of caseData.medicines) {
-            await newCase.addMedicine(id);
+        for (let medicineData of caseData.medicines) {
+            await newCase.addMedicine(medicineData.medicineID, { through: { dosage: medicineData.dosage } });
         }
         return {
             status: 0,
@@ -115,18 +115,22 @@ exports.updateCase = async (caseData) => {
         const existingMedicines = await existingCase.getMedicines();
         await existingCase.removeMedicines(existingMedicines);
         // 添加新的Medicine关联
-        for (let medicineId of caseData.medicines) {
-            const medicine = await Medicine.findByPk(medicineId);
-            if (medicine) {
-                await existingCase.addMedicine(medicine);
-            } else {
-                return {
-                    status: 3,
-                    message: "无对应medicineID"
-                };
+        if (caseData.medicines) {
+            for (let medicineData of caseData.medicines) {
+                const medicine = await Medicine.findByPk(medicineData.medicineID);
+                if (medicine) {
+                    await existingCase.addMedicine(medicine, { through: { dosage: medicineData.dosage } });
+                } else {
+                    return {
+                        status: 3,
+                        message: "无对应medicineID"
+                    };
+                }
             }
+            return { status: 0, message: "成功" };
+        } else {
+            return { status: 0, message: "成功" };
         }
-        return { status: 0, message: "成功" };
     } catch (error) {
         console.error('Error in updateCase', error);
         return { status: -9, message: "失败" };

@@ -5,9 +5,10 @@
         data-thq="thq-navbar"
         class="navbarContainer admin-case-study-detail-navbar-interactive"
       >
-        <router-link to="/" class="admin-case-study-detail-logo logo">
+        <router-link to="/menu" class="admin-case-study-detail-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
         <div class="admin-case-study-detail-container01">
           <div
             data-thq="thq-navbar-nav"
@@ -15,83 +16,14 @@
           >
             <span>
               <span>
-                Logged in as
-                <span v-html="rawv2p0"></span>
+                登录用户：
               </span>
-              <span class="admin-case-study-detail-text002">Allen</span>
+              <span class="admin-case-study-detail-text002">{{ name }}</span>
             </span>
           </div>
         </div>
-        <div
-          data-thq="thq-burger-menu"
-          class="admin-case-study-detail-burger-menu"
-        >
-          <svg
-            viewBox="0 0 1024 1024"
-            class="admin-case-study-detail-icon socialIcons"
-          >
-            <path
-              d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-            ></path>
-          </svg>
-        </div>
-        <div
-          data-thq="thq-mobile-menu"
-          class="admin-case-study-detail-mobile-menu1 mobileMenu"
-        >
-          <div class="admin-case-study-detail-nav">
-            <div class="admin-case-study-detail-top">
-              <span class="logo">PETSCLINIC</span>
-              <div
-                data-thq="thq-close-menu"
-                class="admin-case-study-detail-close-menu"
-              >
-                <svg
-                  viewBox="0 0 1024 1024"
-                  class="admin-case-study-detail-icon02 socialIcons"
-                >
-                  <path
-                    d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <nav class="admin-case-study-detail-links">
-              <span class="admin-case-study-detail-nav12 bodySmall">Home</span>
-              <span class="admin-case-study-detail-nav22 bodySmall">
-                Services
-              </span>
-              <span class="admin-case-study-detail-nav32 bodySmall">
-                Our Team
-              </span>
-              <span class="admin-case-study-detail-nav42 bodySmall">Contact</span>
-            </nav>
-            <div class="admin-case-study-detail-buttons">
-              <button class="buttonFlat">Login</button>
-              <button class="buttonFilled">Register</button>
-            </div>
-          </div>
           <div>
-            <svg
-              viewBox="0 0 950.8571428571428 1024"
-              class="admin-case-study-detail-icon04 socialIcons"
-            >
-              <path
-                d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
-              ></path></svg><svg
-              viewBox="0 0 877.7142857142857 1024"
-              class="admin-case-study-detail-icon06 socialIcons"
-            >
-              <path
-                d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
-              ></path></svg><svg
-              viewBox="0 0 602.2582857142856 1024"
-              class="admin-case-study-detail-icon08 socialIcons"
-            >
-              <path
-                d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z"
-              ></path>
-            </svg>
+          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
           </div>
         </div>
       </header>
@@ -125,7 +57,7 @@
         <div class="admin-case-study-detail-container06">
           <div class="admin-case-study-detail-container07">
             <textarea
-              v-model="newIntro"
+              v-model="this.newIntro"
               :placeholder="`${this.diseaseIntro}`"
               class="admin-case-study-detail-textarea textarea"
             ></textarea>
@@ -140,24 +72,34 @@
         <h1 class="admin-case-study-detail-hero-heading2 heading1">
           <span class="heading1">Case {{ caseItem.caseID }}</span>
           <br />
+            
         </h1>
+        <button type="button" class="button" style="align-self: center;" @click="deleteCase(index)">    
+          <span>Delete</span>
+        </button>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">Summary</span>
           <div class="admin-case-study-detail-container57">
             <textarea
-              v-model="intros[0]"
-              :placeholder="`${ caseItem.details.summary }`"
+              v-model="summarys[index]"
+              :placeholder="`${ caseItem.summary }`"
               class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifySummary(index)">
               Modify
             </button>
           </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(pic, picIndex) in caseItem.details.summaryPictures"
+            <input  @change="img($event,index,0)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,0)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(pic, picIndex) in summaryPictures[index]"
                 :key="`summary-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -165,16 +107,22 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               />
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,0)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(vid, vidIndex) in caseItem.details.summaryVideos"
+            <input  @change="img($event,index,1)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,1)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将视频文件拖拽到这里</span >
+                </span>
+            <div v-for="(vid, vidIndex) in summaryVideos[index]"
                 :key="`summary-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -182,7 +130,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,vidIndex,1)">
                 <span>Delete</span>
               </button>
             </div>
@@ -190,21 +138,17 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">examine</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              v-model="intros[1]"
-              :placeholder="`${ caseItem.details.examine }`"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
-              Modify
-            </button>
-          </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(pic, picIndex) in caseItem.details.examinePictures"
+            <input  @change="img($event,index,2)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,2)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(pic, picIndex) in examinePictures[index]"
                 :key="`examine-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -212,16 +156,22 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               />
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,2)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(vid, vidIndex) in caseItem.details.examineVideos"
+            <input  @change="img($event,index,3)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,3)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(vid, vidIndex) in examineVideos[index]"
                 :key="`examine-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -229,7 +179,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,vidIndex,3)">
                 <span>Delete</span>
               </button>
             </div>
@@ -237,21 +187,17 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">diagnose</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              v-model="intros[2]"
-              :placeholder="`${ caseItem.details.diagnose }`"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
-              Modify
-            </button>
-          </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(pic, picIndex) in caseItem.details.diagnosePictures"
+            <input  @change="img($event,index,4)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,4)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(pic, picIndex) in diagnosePictures[index]"
                 :key="`diagnose-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -259,16 +205,22 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               />
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,4)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos"
+            <input  @change="img($event,index,5)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,5)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(vid, vidIndex) in diagnoseVideos[index]"
                 :key="`diagnose-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -276,7 +228,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,vidIndex,5)">
                 <span>Delete</span>
               </button>
             </div>
@@ -284,21 +236,17 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">treatment</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              v-model="intros[3]"
-              :placeholder="`${ caseItem.details.treatment }`"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyIntros(index)">
-              Modify
-            </button>
-          </div>
           <div class="admin-case-study-detail-text142">images:
-              <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(pic, picIndex) in caseItem.details.treatmentPictures"
+            <input  @change="img($event,index,6)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,6)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(pic, picIndex) in treatmentPictures[index]"
                 :key="`treatment-pic-${picIndex}`"
                 class="admin-case-study-detail-container11">
               <img
@@ -306,16 +254,22 @@
                 :src="pic"
                 class="admin-case-study-detail-image02"
               ></img>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index,picIndex,6)">
                 <span>Delete</span>
               </button>
             </div>
           </div>
           <div class="admin-case-study-detail-text142">videos:
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-              </button>
-            <div v-for="(vid, vidIndex) in caseItem.details.treatmentVideos"
+            <input  @change="img($event,index,7)" type="file" >
+                <span
+                    id="dropzone"
+                    v-on:dragover.prevent
+                    v-on:drop="handleDrop($event,index,7)"
+                    class="admin-case-study-detail-image"
+                  >
+                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                </span>
+            <div v-for="(vid, vidIndex) in treatmentVideos[index]"
                 :key="`treatment-vid-${vidIndex}`"
                 class="admin-case-study-detail-container12">
               <video
@@ -323,7 +277,7 @@
                 class="admin-case-study-detail-video02"
                 controls
               ></video>
-              <button type="button" class="button">
+              <button type="button" class="button" @click="deleteImage(index, vidIndex,7)">
                 <span>Delete</span>
               </button>
             </div>
@@ -334,7 +288,7 @@
           <div class="admin-case-study-detail-container57">
             <div class="admin-case-study-detail-text142">current medicines:</div>
             <router-link 
-              v-for="(medicine, medIndex) in caseItem.details.medicines" 
+              v-for="(medicine, medIndex) in medicines[index]" 
               :key="`medicine-${medIndex}`" 
               to="/pharmacy" 
               class="admin-case-study-detail-navlink3"
@@ -347,7 +301,7 @@
               <div class="admin-case-study-detail-text142">add new medicine</div>
               <select name="fff">
                 <option 
-                v-for="(medicine, medIndex) in medicines" 
+                v-for="(medicine, medIndex) in Allmedicines" 
                 :key="`${medIndex}`" 
                 :value=medIndex>
                 {{ medicine.medicineName }}
@@ -361,380 +315,13 @@
           </div>
       </div>
       </div>
-
+      <!-- add case -->
       <div class="admin-case-study-detail-container54">
-        <div class="admin-case-study-detail-container55">
-          <h1 class="admin-case-study-detail-hero-heading3 heading1">
-            <span class="heading1">Add Case</span>
-            <br />
-          </h1>
-        </div>
-        <div class="admin-case-study-detail-container56">
-          <span class="admin-case-study-detail-text142 heading2">Summary</span>
-          <div class="admin-case-study-detail-container57">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea5 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button40 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container58">
-            <button type="button" class="admin-case-study-detail-button41 button">
-                <span>Upload</span>
-            </button>
-            <div class="admin-case-study-detail-container59">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image10"
-              />
-              <button type="button" class="button">
-                  <span>Delete</span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container60">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image11"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container61">
-            <button type="button" class="admin-case-study-detail-button44 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container62">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video10"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button45 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container63">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video11"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button46 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container64">
-          <span class="admin-case-study-detail-text142 heading2">Examine</span>
-          <div class="admin-case-study-detail-container65">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea6 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button47 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container66">
-            <button type="button" class="admin-case-study-detail-button48 button">
-              <span>
-                <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container67">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image12"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container68">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image13"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container69">
-            <button type="button" class="admin-case-study-detail-button51 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container70">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video12"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button52 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container71">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video13"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button53 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container72">
-          <span class="admin-case-study-detail-text161 heading2">Diagnose</span>
-          <div class="admin-case-study-detail-container73">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea7 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button54 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container74">
-            <button type="button" class="admin-case-study-detail-button55 button">
-                <span>Upload</span>
-            </button>
-            <div class="admin-case-study-detail-container75">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image14"
-              />
-              <button type="button" class="button">
-                  <span>Delete</span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container76">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image15"
-              />
-              <button type="button" class="button">
-                  <span>Delete</span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container77">
-            <button type="button" class="admin-case-study-detail-button58 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container78">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video14"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button59 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container79">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video15"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button60 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container80">
-          <span class="admin-case-study-detail-text180 heading2">Treatment</span>
-          <div class="admin-case-study-detail-container81">
-            <textarea
-              placeholder="placeholder"
-              class="admin-case-study-detail-textarea8 textarea"
-            ></textarea>
-            <button type="button" class="admin-case-study-detail-button61 button">
-              Modify
-            </button>
-          </div>
-          <div class="admin-case-study-detail-container82">
-            <button type="button" class="admin-case-study-detail-button62 button">
-              <span>
-                <span>Upload</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container83">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image16"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container84">
-              <img
-                alt="image"
-                src="https://play.teleporthq.io/static/svg/default-img.svg"
-                class="admin-case-study-detail-image17"
-              />
-              <button type="button" class="button">
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container85">
-            <button type="button" class="admin-case-study-detail-button65 button">
-              <span>
-                <span>Upload Video</span>
-                <br />
-              </span>
-            </button>
-            <div class="admin-case-study-detail-container86">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video16"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button66 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="admin-case-study-detail-container87">
-              <video
-                src
-                poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-                class="admin-case-study-detail-video17"
-              ></video>
-              <button
-                type="button"
-                class="admin-case-study-detail-button67 button"
-              >
-                <span>
-                  <span>Delete</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="admin-case-study-detail-container88">
-          <span class="admin-case-study-detail-text199 heading2">Pharmacy</span>
-          <div class="admin-case-study-detail-container89"></div>
-          <div class="admin-case-study-detail-container90">
-            <select name="fff">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <input type="text" placeholder="Dosage" class="input" />
-            <div class="admin-case-study-detail-container91">
-              <button type="button" class="button">Add</button>
-            </div>
-          </div>
-          <div class="admin-case-study-detail-container92">
-            <select name="fff">
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-              <option value="Option 3">Option 3</option>
-            </select>
-            <input type="text" placeholder="Dosage" class="input" />
-            <div class="admin-case-study-detail-container93">
-              <button type="button" class="button">Modify</button>
-              <button type="button" class="button">Delete</button>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="admin-case-study-detail-button71 button">
+        <h1 class="admin-case-study-detail-hero-heading1 heading1">
+          <span class="heading1">Add Case</span>
+          <br />
+        </h1>
+        <button type="button" class="admin-case-study-detail-button71 button" @click = addCase>
           Add Case
         </button>
       </div>
@@ -770,36 +357,200 @@
 
 <script>
 import axios from 'axios';
+import client from '../oss.js';
 export default {
   name: 'AdminCaseStudyDetail',
   props: {},
   data() {
     return {
-      rawv2p0: ' ',
-      raw06q6: ' ',
-      rawv73j: ' ',
-      rawu3bc: ' ',
-      rawb03w: ' ',
-      rawpcyx: ' ',
-      rawym07: ' ',
-      rawbprc: ' ',
-      rawxc41: ' ',
       diseaseID: ' ',
       diseaseName: ' ',
       diseaseType: ' ',
       diseaseIntro: ' ',
       newIntro:'',
       cases: [],
+      Allmedicines:[],
       medicines:[],
-      intros:[],
-      pictures:[],
-      videos:[],
+      summarys:[],
+      summaryPictures:[],
+      summaryVideos:[],
+      examinePictures:[],
+      examineVideos:[],
+      diagnosePictures:[],
+      diagnoseVideos:[],
+      treatmentPictures:[],
+      treatmentVideos:[],
+      name: localStorage.getItem('username'),
+      
     }
   },
   methods:{
+    addCase(){
+      axios({
+          method: 'post',
+          url: '/admin/case',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            diseaseID : this.diseaseID,
+            summaryPictures: null,
+            summaryVideos: null,
+            examine: null,
+            examinePictures: null,
+            examineVideos: null,
+            diagnose: null,
+            diagnosePictures: null,
+            diagnoseVideos: null,
+            treatment: null,
+            treatmentPictures: null,
+            treatmentVideos:null,
+            medicines:null,
+          }
+        })
+        .then(response => {
+          this.fetchCases();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    modifyPV(index){
+      axios({
+          method: 'put',
+          url: '/admin/case',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            caseID : this.cases[index].caseID,
+            summaryPictures: this.summaryPictures[index],
+            summaryVideos: this.summaryVideos[index],
+            examinePictures: this.examinePictures[index],
+            examineVideos: this.examineVideos[index],
+            diagnosePictures: this.diagnosePictures[index],
+            diagnoseVideos: this.diagnoseVideos[index],
+            treatmentPictures: this.treatmentPictures[index],
+            treatmentVideos: this.treatmentVideos[index],
+          }
+        })
+        .then(response => {
+          this.fetchCases();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    async deleteImage(index,pvIndex,kind){
+      const Result = await client.delete(this.switchKind(kind)[index][pvIndex]);
+        console.log('删除成功:', Result);
+      this.switchKind(kind)[index].splice(pvIndex,1); 
+      this.modifyPV(index);
+    },
+    handleDrop(e,index,kind) {
+      e.preventDefault();
+      let files = e.dataTransfer.files;
+      if (!files.length) return;
+      let file = files[0];
+      this.saveImage(file,index,kind);
+      
+    },
+    
+    async img(e,index,kind) {
+      try {
+        //let that = this;//改变this指向
+        let file = e.target.files[0];
+        this.saveImage(file,index,kind);
+        //上传至阿里云
+         
+      } catch (error) {
+        // 在此处添加错误处理逻辑。
+          console.error('发生错误:', error);
+      }
+    },
+    async saveImage(file,index,kind){
+      let that = this;//改变this指向
+      if (!window.FileReader) return; // 看是否支持FileReader
+        let reader = new FileReader();
+        reader.readAsDataURL(file); // 关键一步，在这里转换的
+        reader.onloadend = function () {
+          //that.switchKind(kind)[index].push(this.result); 
+        }
+        const uploadResult = await client.put('case/' + kind + "/" + file.name, file);
+        this.switchKind(kind)[index].push(uploadResult.url); 
+        console.log('上传成功:', uploadResult);
+        this.modifyPV(index);
+    },
+    switchKind(kind){
+      switch (kind)
+          {
+            case 0:
+              return this.summaryPictures;
+            case 1:
+              return this.summaryVideos;
+            case 2:
+              return this.examinePictures;
+            case 3:
+              return this.examineVideos;
+            case 4:
+              return this.diagnosePictures;
+            case 5:
+              return this.diagnoseVideos;
+            case 6:
+              return this.treatmentPictures;
+            case 7:
+              return this.that.treatmentVideos;
+            default: 
+              return null;
+          }
+    },
+    logout(){
+      localStorage.clear();
+      this.$router.push('/');
+    },
+    updatePV(){
+      this.summaryPictures=[];
+        this.summaryVideos=[];
+        this.examinePictures=[];
+        this.examineVideos=[];
+        this.diagnosePictures=[];
+        this.diagnoseVideos=[];
+        this.treatmentPictures=[];
+        this.treatmentVideos=[];
+        this.medicines=[];
+      this.cases.forEach(caseItem => {
+        this.summaryPictures.push(caseItem.details.summaryPictures?caseItem.details.summaryPictures:[]);
+        this.summaryVideos.push(caseItem.details.summaryVideos?caseItem.details.summaryVideos:[]);
+        this.examinePictures.push(caseItem.details.examinePictures?caseItem.details.examinePictures:[]);
+        this.examineVideos.push(caseItem.details.examineVideos?caseItem.details.examineVideos:[]);
+        this.diagnosePictures.push(caseItem.details.diagnosePictures?caseItem.details.diagnosePictures:[]);
+        this.diagnoseVideos.push(caseItem.details.diagnoseVideos?caseItem.details.diagnoseVideos:[]);
+        this.treatmentPictures.push(caseItem.details.treatmentPictures?caseItem.details.treatmentPictures:[]);
+        this.treatmentVideos.push(caseItem.details.treatmentVideos?caseItem.details.treatmentVideos:[]);
+        this.medicines.push(caseItem.details.medicines?caseItem.details.medicines:[]);
+      })
+      
+    },
+    async deleteCase(index){
+      try {
+        const response = await axios.delete(`/admin/case?caseID=${this.cases[index].caseID}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        this.fetchCases();
+      } catch (error) {
+        console.log(error);
+      }
+    },
     fetchDisease(){
       this.diseaseIntro = '';
-      axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
+      axios.get(`/casestudy/disease/detail?diseaseID=${this.diseaseID}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }
@@ -845,11 +596,12 @@ export default {
           caseItem.details = caseDetails[index];
           return caseItem;
         });
+        this.updatePV();
       }
     });
     },
     fetchMedicine(){
-      this.medicines = [];
+      this.Allmedicines = [];
       // Fetch medicine list
     axios.get(`/medicine/list`, {
       headers: {
@@ -858,7 +610,7 @@ export default {
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.medicines = response.data.medicines;
+        this.Allmedicines = response.data.medicines;
       } else if (response.data.status === 1) {
         console.log('No corresponding medicine');
       }
@@ -869,7 +621,7 @@ export default {
           method: 'put',
           url: '/admin/disease',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
@@ -886,20 +638,17 @@ export default {
           console.log(error);
         });
     },
-    modifyIntros(index){
+    modifySummary(index){
       axios({
           method: 'put',
           url: '/admin/case',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
           },
           data: {
             caseID : this.cases[index].caseID,
-            // summary : this.intros[0],
-            // examine : this.intros[1],
-            // diagnose : this.intros[2],
-            // treatment : this.intros[3],
+            summary : this.summarys[index],
           }
         })
         .then(response => {
@@ -910,32 +659,22 @@ export default {
           console.log(error);
         });
     },
-    uploadImage(kind){
 
-    },
-    uploadImage(kind){
-
-    },
-    uploadVideo(kind){
-
-    },
-    uploadImage(kind){
-
-    },
   },
   created() {
     this.diseaseType = this.$route.query.diseaseType;
     this.diseaseID = this.$route.query.diseaseID;
     this.diseaseName = this.$route.query.diseaseName;
     // Fetch disease details
-    axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
+    axios.get(`casestudy/disease/detail?diseaseID=${this.diseaseID}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('Token')}`
       }
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.diseaseIntro = response.data.diseaseIntro;
+        this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
+        this.newIntro = this.diseaseIntro;
       } else if (response.data.status === 1) {
         console.log('No corresponding diseaseID');
       }
@@ -971,6 +710,7 @@ export default {
           caseItem.details = caseDetails[index];
           return caseItem;
         });
+        this.updatePV();
       }
     });
     // Fetch medicine list
@@ -981,12 +721,11 @@ export default {
     })
     .then(response => {
       if (response.data.status === 0) {
-        this.medicines = response.data.medicines;
+        this.Allmedicines = response.data.medicines;
       } else if (response.data.status === 1) {
         console.log('No corresponding medicine');
       }
     });
-
   },
   metaInfo: {
     title: 'AdminCaseStudyDetail - Roasted Rusty Swallow',
@@ -1001,6 +740,19 @@ export default {
 </script>
 
 <style scoped>
+.bigImg-div {
+		width: 200px;
+		height: 200px;
+		border: 100%;
+		overflow: hidden;
+		border: 1px solid #ddd;
+    background-color:var(--dl-color-gray-900);
+	}
+.bigImg {
+		display: block;
+		width: 200px;
+		height: 200px;
+	}
 .admin-case-study-detail-container {
   width: 100%;
   display: flex;
@@ -1122,7 +874,6 @@ export default {
 }
 .admin-case-study-detail-container02 {
   width: 200px;
-  border: 2px dashed rgba(120, 120, 120, 0.4);
   height: 92px;
   display: flex;
   align-items: flex-start;

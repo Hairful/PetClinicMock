@@ -47,9 +47,12 @@ exports.getQuizList = async (userID) => {
             // 如果用户完成了测验，添加 lastTry 和 lastTryTime
             if (userQuizIDs.includes(quiz.quizID)) {
                 quizResponse.lastTry = userQuiz.lastTry;
-                quizResponse.lastTryTime = userQuiz.lastTryTime ? userQuiz.lastTryTime.toISOString() : null;
+                let date = userQuiz.lastTryTime;
+                if (date !== null) {
+                    let formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+                    quizResponse.lastTryTime = formattedDate;
+                }
             }
-
             response.quizzes.push(quizResponse);
         }
 
@@ -96,7 +99,9 @@ exports.getQuizDetails = async (userID, quizID) => {
         });
         if (userQuiz) {
             response.lastTry = userQuiz.lastTry;
-            response.lastTryTime = userQuiz.lastTryTime;
+            let date = userQuiz.lastTryTime;
+            let formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+            response.lastTryTime = formattedDate;
         }
         // 查找与测验关联的所有题目
         const probs = await Prob.findAll({
@@ -146,6 +151,12 @@ exports.recordExamEntry = async (input) => {
         if (!userExist) {
             return { "status": 2, "message": "无对应userID" };
         }
+        let time
+        if (!lastTryTime) {
+            time = new Date()
+        } else {
+            time = lastTryTime
+        }
         // 检查 UserQuiz 表中是否存在相同的 userID 和 quizID 的记录，（不）存在则更新（创建）
         const userQuizEntry = await UserQuiz.findOne({
             where: { "UserUserID": userID, "QuizQuizID": quizID }
@@ -153,14 +164,14 @@ exports.recordExamEntry = async (input) => {
         if (userQuizEntry) {
             await userQuizEntry.update({
                 "lastTry": credit,
-                "lastTryTime": lastTryTime
+                "lastTryTime": time
             });
         } else {
             await UserQuiz.create({
                 "QuizQuizID": quizID,
                 "UserUserID": userID,
                 "lastTry": credit,
-                "lastTryTime": lastTryTime
+                "lastTryTime": time
             });
         }
         // 遍历答案数组，处理每个答案

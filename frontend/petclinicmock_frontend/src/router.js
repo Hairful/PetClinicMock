@@ -15,7 +15,6 @@ import AdminQuizDetail from './views/admin-quiz-detail'
 import VirtualTour from './views/virtual-tour'
 import AdminRolePlayMenu from './views/admin-role-play-menu'
 import AdminVirtualTour from './views/admin-virtual-tour'
-import Pharmacy from './views/pharmacy'
 import RolePlayList from './views/role-play-list'
 import QuizDetail from './views/quiz-detail'
 import CaseStudyDetail from './views/case-study-detail'
@@ -28,6 +27,7 @@ import AdminCaseStudyDetail from './views/admin-case-study-detail'
 import CaseStudyMenu from './views/case-study-menu'
 import Login from './views/login'
 import AdminUser from './views/admin-user'
+import AdminPharmacy from './views/admin-pharmacy.vue'
 import './style.css'
 
 Vue.use(Router)
@@ -106,11 +106,6 @@ const router = new Router({
       component: AdminVirtualTour,
     },
     {
-      name: 'Pharmacy',
-      path: '/pharmacy',
-      component: Pharmacy,
-    },
-    {
       name: 'RolePlayList',
       path: '/role-play-list',
       component: RolePlayList,
@@ -159,6 +154,11 @@ const router = new Router({
       name: 'AdminUser',
       path: '/admin-user',
       component: AdminUser,
+    },
+    {
+      name: 'AdminPharmacy',
+      path: '/admin-pharmacy',
+      component: AdminPharmacy,
     },
     {
       name: 'Page',

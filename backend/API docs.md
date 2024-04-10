@@ -406,6 +406,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | medicineID    | Body | integer | 是   | 药品ID   |
 | medicineName  | Body | string  | 是   | 药品名字 |
 | medicineIntro | Body | string  | 是   | 药品简介 |
+| dosage        | Body | string  | 是   | 药品用量 |
 
 `Example`
 
@@ -435,7 +436,8 @@ Content-Type: application/json
         {
             "medicineID":1,
             "medicineName":"阿司匹林",
-            "medicineIntro":"好药"
+            "medicineIntro":"好药",
+            "dosage":"100ml"
         }
     ]
 }
@@ -1809,23 +1811,30 @@ Content-Type: application/json
 
 ### 发送参数
 
-| 名称              | 位置   | 类型      | 必选 | 备注                          |
-| ----------------- | ------ | --------- | ---- | ----------------------------- |
-| diseaseID         | Body   | integer   | 是   | 疾病ID                        |
-| summary           | Body   | string    | 是   | 病例的基本情况                |
-| summaryPictures   | Body   | string[]  | 是   | 能表现典型临床症状的照片的URL |
-| summaryVideos     | Body   | string[]  | 是   | 能表现典型临床症状的视频的URL |
-| examine           | Body   | string    | 是   | 检查项目及结果                |
-| examinePictures   | Body   | string[]  | 是   | 检查结果单的URL               |
-| examineVideos     | Body   | string[]  | 是   | 检查结果视频的URL             |
-| diagnose          | Body   | string    | 是   | 临床诊断结果                  |
-| diagnosePictures  | Body   | string[]  | 是   | 临床诊断结果的图片的URL       |
-| diagnoseVideos    | Body   | string[]  | 是   | 临床诊断结果视频的URL         |
-| treatment         | Body   | string    | 是   | 治疗方案                      |
-| treatmentPictures | Body   | string[]  | 是   | 治疗图片的URL                 |
-| treatmentVideos   | Body   | string[]  | 是   | 手术视频的URL                 |
-| medicines         | Body   | integer[] | 是   | 药品ID                        |
-| Authorization     | Header | string    | 是   | 身份验证token                 |
+| 名称              | 位置   | 类型     | 必选 | 备注                          |
+| ----------------- | ------ | -------- | ---- | ----------------------------- |
+| diseaseID         | Body   | integer  | 是   | 疾病ID                        |
+| summary           | Body   | string   | 是   | 病例的基本情况                |
+| summaryPictures   | Body   | string[] | 是   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body   | string[] | 是   | 能表现典型临床症状的视频的URL |
+| examine           | Body   | string   | 是   | 检查项目及结果                |
+| examinePictures   | Body   | string[] | 是   | 检查结果单的URL               |
+| examineVideos     | Body   | string[] | 是   | 检查结果视频的URL             |
+| diagnose          | Body   | string   | 是   | 临床诊断结果                  |
+| diagnosePictures  | Body   | string[] | 是   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body   | string[] | 是   | 临床诊断结果视频的URL         |
+| treatment         | Body   | string   | 是   | 治疗方案                      |
+| treatmentPictures | Body   | string[] | 是   | 治疗图片的URL                 |
+| treatmentVideos   | Body   | string[] | 是   | 手术视频的URL                 |
+| medicines         | Body   | object[] | 是   | 药品                          |
+| Authorization     | Header | string   | 是   | 身份验证token                 |
+
+对于medicines的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| medicineID | Body | integer | 是   | 药品ID   |
+| dosage     | Body | string  | 是   | 药品用量 |
 
 `Example`
 
@@ -1846,7 +1855,16 @@ Content-Type: application/json
     "treatment": "阿司匹林100000mg",
     "treatmentPictures": ["url/to/pic1", "url/to/pic2"],
     "treatmentVideos": ["url/to/vid0"],
-    "medicines":[1,2]
+    "medicines":[
+        {
+            "medicineID":3,
+            "dosage":"1000000000000000ml"
+        },
+        {
+            "medicineID":2,
+            "dosage":"20000000000000000000ml"
+        }
+    ]
 }
 ```
 
@@ -1891,24 +1909,31 @@ Content-Type: application/json
 
 ### 发送参数
 
-| 名称              | 位置   | 类型      | 必选 | 备注                          |
-| ----------------- | ------ | --------- | ---- | ----------------------------- |
-| Authorization     | Header | string    | 是   | 身份验证token                 |
-| caseID            | Body   | integer   | 是   | 病例ID                        |
-| diseaseID         | Body   | integer   | 否   | 疾病ID                        |
-| summary           | Body   | string    | 否   | 病例的基本情况                |
-| summaryPictures   | Body   | string[]  | 否   | 能表现典型临床症状的照片的URL |
-| summaryVideos     | Body   | string[]  | 否   | 能表现典型临床症状的视频的URL |
-| examine           | Body   | string    | 否   | 检查项目及结果                |
-| examinePictures   | Body   | string[]  | 否   | 检查结果单的URL               |
-| examineVideos     | Body   | string[]  | 否   | 检查结果视频的URL             |
-| diagnose          | Body   | string    | 否   | 临床诊断结果                  |
-| diagnosePictures  | Body   | string[]  | 否   | 临床诊断结果的图片的URL       |
-| diagnoseVideos    | Body   | string[]  | 否   | 临床诊断结果视频的URL         |
-| treatment         | Body   | string    | 否   | 治疗方案                      |
-| treatmentPictures | Body   | string[]  | 否   | 治疗图片的URL                 |
-| treatmentVideos   | Body   | string[]  | 否   | 手术视频的URL                 |
-| medicines         | Body   | integer[] | 否   | 药品ID                        |
+| 名称              | 位置   | 类型     | 必选 | 备注                          |
+| ----------------- | ------ | -------- | ---- | ----------------------------- |
+| Authorization     | Header | string   | 是   | 身份验证token                 |
+| caseID            | Body   | integer  | 是   | 病例ID                        |
+| diseaseID         | Body   | integer  | 否   | 疾病ID                        |
+| summary           | Body   | string   | 否   | 病例的基本情况                |
+| summaryPictures   | Body   | string[] | 否   | 能表现典型临床症状的照片的URL |
+| summaryVideos     | Body   | string[] | 否   | 能表现典型临床症状的视频的URL |
+| examine           | Body   | string   | 否   | 检查项目及结果                |
+| examinePictures   | Body   | string[] | 否   | 检查结果单的URL               |
+| examineVideos     | Body   | string[] | 否   | 检查结果视频的URL             |
+| diagnose          | Body   | string   | 否   | 临床诊断结果                  |
+| diagnosePictures  | Body   | string[] | 否   | 临床诊断结果的图片的URL       |
+| diagnoseVideos    | Body   | string[] | 否   | 临床诊断结果视频的URL         |
+| treatment         | Body   | string   | 否   | 治疗方案                      |
+| treatmentPictures | Body   | string[] | 否   | 治疗图片的URL                 |
+| treatmentVideos   | Body   | string[] | 否   | 手术视频的URL                 |
+| medicines         | Body   | object[] | 否   | 药品                          |
+
+对于medicines的元素
+
+| 名称       | 位置 | 类型    | 必选 | 备注     |
+| ---------- | ---- | ------- | ---- | -------- |
+| medicineID | Body | integer | 是   | 药品ID   |
+| dosage     | Body | string  | 是   | 药品用量 |
 
 `Example`
 
@@ -1919,7 +1944,16 @@ Content-Type: application/json
 {
     "caseID": 1,
     "summary": "狗狗，浑身痛多日……",
-    "medicines":[1,3]
+    "medicines":[
+            {
+                "medicineID":3,
+                "dosage":"1000000000000000ml"
+            },
+            {
+                "medicineID":2,
+                "dosage":"20000000000000000000ml"
+            }
+     ]
 }
 ```
 
