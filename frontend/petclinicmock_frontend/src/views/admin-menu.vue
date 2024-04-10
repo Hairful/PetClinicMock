@@ -78,6 +78,15 @@
                 <br />
               </span>
             </router-link>
+            <router-link
+              to="/admin-pharmacy"
+              class="admin-menu-navlink3 button"
+            >
+              <span class="heading3">
+                <span>药物管理</span>
+                <br />
+              </span>
+            </router-link>
           </div>
         </div>
       </div>
