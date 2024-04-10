@@ -25,17 +25,14 @@
     <div class="heroContainer admin-virtual-tour-hero">
       <div class="admin-virtual-tour-container02">
         <h1 class="admin-virtual-tour-hero-heading">
-          Manage Virtual Tour Descriptions
+          虚拟导览管理
         </h1>
       </div>
     </div>
     <div class="admin-virtual-tour-container03">
       <router-link to="/admin-menu" class="admin-virtual-tour-navlink button">
         <span>
-          <span>
-            Admin
-          </span>
-          <span>Menu</span>
+          <span>返回管理员菜单</span>
         </span>
       </router-link>
     </div>
@@ -52,7 +49,7 @@
                   class="admin-virtual-tour-textarea textarea"
                 ></textarea>
               </div>
-              <button type="button" class="button">Modify</button>
+              <button type="button" class="button">修改</button>
             </div>
           </li>
           <li class="admin-virtual-tour-li1 list-item Content">

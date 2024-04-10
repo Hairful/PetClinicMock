@@ -30,33 +30,30 @@
       <div class="admin-quiz-detail-container03">
         <h1 class="admin-quiz-detail-hero-heading">
           <span class="heading1">
-            Manage Quiz:
+            测试管理：
           </span>
-          <span class="admin-quiz-detail-text04">Quiz {{quizID}}</span>
+          <span class="admin-quiz-detail-text04">测试 {{quizID}}</span>
         </h1>
       </div>
     </div>
     <div class="admin-quiz-detail-container04">
       <router-link to="/admin-quiz-list" class="admin-quiz-detail-navlink button">
-        Choose Quiz
+        重选测试
       </router-link>
       <router-link to="/admin-menu" class="admin-quiz-detail-navlink1 button">
         <span>
-          <span>
-            Admin
-          </span>
-          <span>Menu</span>
+          <span>返回管理员菜单</span>
         </span>
       </router-link>
     </div>
     <div class="admin-quiz-detail-hero1 heroContainer">
       <div v-for="(prob,index) in probs" class="admin-quiz-detail-container05">
         <h1 class="admin-quiz-detail-hero-heading1 heading1">
-          <span class="heading1">Question {{index+1}}</span>
+          <span class="heading1">问题 {{index+1}}</span>
           <br />
         </h1>
         <button type="button" class="admin-quiz-detail-button button" @click="deleteProb(index)">
-          Delete
+          删除
         </button>
         <div class="admin-quiz-detail-container06">
           <textarea
@@ -66,7 +63,7 @@
           ></textarea>
           <div class="admin-quiz-detail-container10">
             <span class="admin-quiz-detail-text33 bodyLarge">
-              Correcrt Answer: 
+              正确答案：
             </span>
             <select v-model="options[index]" class="admin-quiz-detail-select">
               <option value="A">A</option>
@@ -76,10 +73,10 @@
             </select>
           </div>
           <div class="admin-quiz-detail-container11">
-            <span class="admin-quiz-detail-text34 bodyLarge">Points:</span>
+            <span class="admin-quiz-detail-text34 bodyLarge">题目分数：</span>
             <input type="text" v-model="prob.probCredit" placeholder="placeholder" class="input" />
           </div>
-          <button type="button" class="button" @click="modifyProb(index)">Modify</button>
+          <button type="button" class="button" @click="modifyProb(index)">修改</button>
           <div class="admin-quiz-detail-container06">
             <input v-if="!images[index]" @change="img($event,index)" type="file">
               <img 
@@ -99,7 +96,7 @@
                         :src="prob.probImg"
                         class="bigImg"/>
                       <button type="button" class="button" @click="clearImage(index)">
-                        <span>Delete</span>
+                        <span>删除图片</span>
                       </button>
                     </div>
                   </div>
@@ -110,7 +107,7 @@
       
       <div class="admin-quiz-detail-container19">
         <h1 class="admin-quiz-detail-hero-heading3 heading1">
-          <span class="heading1">Add Question</span>
+          <span class="heading1">添加问题</span>
           <br />
         </h1>
         <div class="admin-quiz-detail-container20">
@@ -119,15 +116,15 @@
             placeholder="placeholder"
             class="admin-quiz-detail-textarea2 textarea"
           ></textarea>
-          <button type="button" class="button">Modify</button>
+          <button type="button" class="button">修改</button>
           <div class="admin-quiz-detail-container21">
             <button type="button" class="admin-quiz-detail-button11 button">
-                <span>Upload Picture</span>
+                <span>上传图片</span>
             </button>
           </div>
           <div class="admin-quiz-detail-container24">
             <span class="admin-quiz-detail-text59 bodyLarge">
-              Correcrt Answer: 
+              正确答案：
             </span>
             <select  v-model="addedOption" class="admin-quiz-detail-select2">
               <option value="A">A</option>
@@ -137,11 +134,11 @@
             </select>
           </div>
           <div class="admin-quiz-detail-container25">
-            <span class="admin-quiz-detail-text60 bodyLarge">Points: </span>
+            <span class="admin-quiz-detail-text60 bodyLarge">题目分数：</span>
             <input type="text" v-model="addedProb.probCredit" class="input" />
           </div>
           <button type="button" class="admin-quiz-detail-button14 button" @click="addProb">
-            Add
+            添加
           </button>
         </div>
       </div>
@@ -152,7 +149,7 @@
         class="admin-quiz-detail-navlink2 button"
         @click="save"
       >
-        Save
+        保存
     </button>
     </div>
     <div class="admin-quiz-detail-footer">
