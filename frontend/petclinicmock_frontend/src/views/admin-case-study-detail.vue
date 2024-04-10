@@ -33,7 +33,7 @@
       <div class="admin-case-study-detail-container03">
         <h1 class="admin-case-study-detail-hero-heading">
           <span class="heading1">
-            Manage Cases:
+            病例管理：
           </span>
           <span class="admin-case-study-detail-text004">{{ this.diseaseName }}</span>
         </h1>
@@ -41,17 +41,17 @@
     </div>
     <div class="admin-case-study-detail-container04">
       <router-link :to="{path:'/admin-case-study-list'}" class="admin-case-study-detail-navlink button">
-        Choose Disease
+        重选疾病类型
       </router-link>
       <router-link to="/admin-menu" class="admin-case-study-detail-navlink button">
-        Menu
+        返回管理员菜单
       </router-link>
     </div>
     <div class="admin-case-study-detail-container04"></div>
     <div class="admin-case-study-detail-hero1 heroContainer">
       <div class="admin-case-study-detail-container05">
         <h1 class="admin-case-study-detail-hero-heading1 heading1">
-          <span class="heading1">Introduction</span>
+          <span class="heading1">介绍</span>
           <br />
         </h1>
         <div class="admin-case-study-detail-container06">
@@ -62,7 +62,7 @@
               class="admin-case-study-detail-textarea textarea"
             ></textarea>
             <button type="button" class="admin-case-study-detail-button button" @click="modifyDiseaseIntro">
-              Modify
+              修改
             </button>
           </div>
         </div>
@@ -70,15 +70,15 @@
 
       <div class="admin-case-study-detail-container05" v-for="(caseItem, index) in cases" :key="index">
         <h1 class="admin-case-study-detail-hero-heading2 heading1">
-          <span class="heading1">Case {{ caseItem.caseID }}</span>
+          <span class="heading1">病例 {{ caseItem.caseID }}</span>
           <br />
             
         </h1>
         <button type="button" class="button" style="align-self: center;" @click="deleteCase(index)">    
-          <span>Delete</span>
+          <span>删除</span>
         </button>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">Summary</span>
+          <span class="admin-case-study-detail-text142 heading2">介绍</span>
           <div class="admin-case-study-detail-container57">
             <textarea
               v-model="summarys[index]"
@@ -86,10 +86,10 @@
               class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
             <button type="button" class="admin-case-study-detail-button40 button" @click="modifySummary(index)">
-              Modify
+              修改
             </button>
           </div>
-          <div class="admin-case-study-detail-text142">images:
+          <div class="admin-case-study-detail-text142">图片：
             <input  @change="img($event,index,0)" type="file" >
                 <span
                     id="dropzone"
@@ -108,7 +108,7 @@
                 class="admin-case-study-detail-image02"
               />
               <button type="button" class="button" @click="deleteImage(index,picIndex,0)">
-                <span>Delete</span>
+                <span>删除</span>
               </button>
             </div>
           </div>
@@ -186,8 +186,8 @@
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">diagnose</span>
-          <div class="admin-case-study-detail-text142">images:
+          <span class="admin-case-study-detail-text142 heading2">诊断结果</span>
+          <div class="admin-case-study-detail-text142">图像：
             <input  @change="img($event,index,4)" type="file" >
                 <span
                     id="dropzone"
@@ -235,7 +235,7 @@
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">treatment</span>
+          <span class="admin-case-study-detail-text142 heading2">治疗方案</span>
           <div class="admin-case-study-detail-text142">images:
             <input  @change="img($event,index,6)" type="file" >
                 <span

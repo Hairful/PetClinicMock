@@ -28,7 +28,7 @@
       <div class="admin-role-play-list-container02">
         <h1 class="admin-role-play-list-hero-heading">
           <span class="heading1">
-            Modify Role Play:
+            角色扮演管理：
           </span>
           <span class="admin-role-play-list-text04"> {{ role }} </span>
         </h1>
@@ -39,15 +39,15 @@
         to="/admin-role-play-menu"
         class="admin-role-play-list-navlink button"
       >
-        Choose Role
+        重选角色
       </router-link>
       <router-link to="/admin-menu" class="admin-role-play-list-navlink1 button">
-        Admin Menu
+        返回管理员菜单
       </router-link>
     </div>
     <div class="admin-role-play-list-hero1 heroContainer">
       <h1 class="admin-role-play-list-hero-heading1">
-        <span class="heading1">Manage a Job</span>
+        <span class="heading1">工作管理</span>
         <br />
       </h1>
       <div class="admin-role-play-list-container04">
@@ -56,7 +56,7 @@
           <input type="text" v-model="newJobDetail" placeholder="新工作的细节" class="input" />
           <button type="button" class="button" @click="addNewJob()">
             <span>
-              <span>Add New Job</span>
+              <span>添加</span>
               <br />
             </span>
           </button>
@@ -72,25 +72,25 @@
             <div class="admin-role-play-list-container07">
               <div class="admin-role-play-list-container08">
                 <input type="text" v-model="jobs[index]" placeholder="" class="input" />
-                <button type="button" class="button" @click="renameJob(index)">
+                <button  type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">
                   <span>
-                    <span>Rename</span>
+                    <span>重命名</span>
                     <br />
                   </span>
                 </button>
               </div>
               <div class="admin-role-play-list-container08">
                 <input type="text" v-model="jobDetails[index]" placeholder="" class="input" />
-                <button type="button" class="button" @click="renameJob(index)">
+                <button type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">
                   <span>
-                    <span>Modify</span>
+                    <span>修改</span>
                     <br />
                   </span>
                 </button>
               </div>
               <button type="button" class="admin-role-play-list-button2 button" @click="deleteJob(index)">
                 <span>
-                  <span>Delete</span>
+                  <span>删除</span>
                   <br />
                 </span>
               </button>
@@ -141,11 +141,11 @@ export default {
     },
     role2number(role) {
       switch (role) {
-        case 'Front Desk':
+        case '前台':
           return 0;
-        case 'Medical Assistant':
+        case '医助':
           return 1;
-        case 'Doctor':
+        case '医生':
           return 2;
         default:
           return -1;
@@ -596,7 +596,7 @@ export default {
   justify-content: center;
 }
 .admin-role-play-list-ul {
-  width: 285px;
+  width: auto;
   position: relative;
 }
 .admin-role-play-list-li {
@@ -618,7 +618,7 @@ export default {
 }
 .admin-role-play-list-container08 {
   flex: 0 0 auto;
-  width: 100%;
+  width: auto;
   height: auto;
   display: flex;
   align-items: center;
