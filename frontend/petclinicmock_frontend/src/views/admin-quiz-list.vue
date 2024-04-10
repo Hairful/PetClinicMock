@@ -24,26 +24,23 @@
     <div class="admin-quiz-list-container01"></div>
     <div class="heroContainer admin-quiz-list-hero">
       <div class="admin-quiz-list-container02">
-        <h1 class="admin-quiz-list-hero-heading">Manage Quiz</h1>
+        <h1 class="admin-quiz-list-hero-heading">测试管理</h1>
       </div>
     </div>
     <div class="admin-quiz-list-container03">
       <router-link to="/admin-menu" class="admin-quiz-list-navlink button">
-        <span>
-            Admin
-          <span>Menu</span>
-        </span>
+        <span>返回管理员菜单</span>
       </router-link>
     </div>
     <div class="admin-quiz-list-hero1 heroContainer">
       <h1 class="admin-quiz-list-hero-heading1">
-        <span class="heading1">Choose a Quiz</span>
+        <span class="heading1">选择测试</span>
         <br />
       </h1>
       <div class="admin-quiz-list-container04">
         <div class="admin-quiz-list-container05">
-          <input type="text" v-model="newQuizName" placeholder="enter quiz name" class="input" />
-          <button type="button" class="button" @click="addQuiz">Add</button>
+          <input type="text" v-model="newQuizName" placeholder="输入名称" class="input" />
+          <button type="button" class="button" @click="addQuiz">添加</button>
         </div>
       </div>
       <div 
@@ -53,19 +50,19 @@
         >
         <ul class="admin-quiz-list-ul list">
           <li class="admin-quiz-list-li list-item Content">
-            <span class="heading3">Quiz {{ quiz.quizID }}</span>
+            <span class="heading3">测试 {{ quiz.quizID }}</span>
             <div class="admin-quiz-list-container07">
               <div class="admin-quiz-list-container08">
                 <input type="text" v-model="inputName[index]" :placeholder="`${quiz.quizName}`" class="input" />
-                <button type="button" class="button" @click="renameQuiz(index)">Rename</button>
+                <button type="button" class="button" @click="renameQuiz(index)">重命名</button>
               </div>
               <router-link
                 :to="`/admin-quiz-detail?quizID=${quiz.quizID}`"
                 class="admin-quiz-list-navlink1 button"
               >
-                Manage Questions
+                管理问题
               </router-link>
-              <button type="button" class="button" @click="deleteQuiz(index)">Delete</button>
+              <button type="button" class="button" @click="deleteQuiz(index)">删除测试</button>
             </div>
           </li>
         </ul>

@@ -33,7 +33,7 @@
       <div class="admin-case-study-detail-container03">
         <h1 class="admin-case-study-detail-hero-heading">
           <span class="heading1">
-            Manage Cases:
+            病例管理：
           </span>
           <span class="admin-case-study-detail-text004">{{ this.diseaseName }}</span>
         </h1>
@@ -41,17 +41,17 @@
     </div>
     <div class="admin-case-study-detail-container04">
       <router-link :to="{path:'/admin-case-study-list'}" class="admin-case-study-detail-navlink button">
-        Choose Disease
+        重选疾病类型
       </router-link>
       <router-link to="/admin-menu" class="admin-case-study-detail-navlink button">
-        Menu
+        返回管理员菜单
       </router-link>
     </div>
     <div class="admin-case-study-detail-container04"></div>
     <div class="admin-case-study-detail-hero1 heroContainer">
       <div class="admin-case-study-detail-container05">
         <h1 class="admin-case-study-detail-hero-heading1 heading1">
-          <span class="heading1">Introduction</span>
+          <span class="heading1">介绍</span>
           <br />
         </h1>
         <div class="admin-case-study-detail-container06">
@@ -62,7 +62,7 @@
               class="admin-case-study-detail-textarea textarea"
             ></textarea>
             <button type="button" class="admin-case-study-detail-button button" @click="modifyDiseaseIntro">
-              Modify
+              修改
             </button>
           </div>
         </div>
@@ -70,15 +70,15 @@
 
       <div class="admin-case-study-detail-container05" v-for="(caseItem, index) in cases" :key="index">
         <h1 class="admin-case-study-detail-hero-heading2 heading1">
-          <span class="heading1">Case {{ caseItem.caseID }}</span>
+          <span class="heading1">Case {{ index+1 }}</span>
           <br />
             
         </h1>
         <button type="button" class="button" style="align-self: center;" @click="deleteCase(index)">    
-          <span>Delete</span>
+          <span>删除</span>
         </button>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">Summary</span>
+          <span class="admin-case-study-detail-text142 heading2">介绍</span>
           <div class="admin-case-study-detail-container57">
             <textarea
               v-model="summarys[index]"
@@ -86,10 +86,10 @@
               class="admin-case-study-detail-textarea5 textarea"
             ></textarea>
             <button type="button" class="admin-case-study-detail-button40 button" @click="modifySummary(index)">
-              Modify
+              修改
             </button>
           </div>
-          <div class="admin-case-study-detail-text142">images:
+          <div class="admin-case-study-detail-text142">图片：
             <input  @change="img($event,index,0)" type="file" >
                 <span
                     id="dropzone"
@@ -97,7 +97,7 @@
                     v-on:drop="handleDrop($event,index,0)"
                     class="admin-case-study-detail-image"
                   >
-                  <span class="bigImg-div " >或者将图片拖拽到这里</span >
+                  <span class="bigImg-div">或者将图片拖拽到这里</span >
                 </span>
             <div v-for="(pic, picIndex) in summaryPictures[index]"
                 :key="`summary-pic-${picIndex}`"
@@ -108,7 +108,7 @@
                 class="admin-case-study-detail-image02"
               />
               <button type="button" class="button" @click="deleteImage(index,picIndex,0)">
-                <span>Delete</span>
+                <span>删除</span>
               </button>
             </div>
           </div>
@@ -186,8 +186,8 @@
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">diagnose</span>
-          <div class="admin-case-study-detail-text142">images:
+          <span class="admin-case-study-detail-text142 heading2">诊断结果</span>
+          <div class="admin-case-study-detail-text142">图像：
             <input  @change="img($event,index,4)" type="file" >
                 <span
                     id="dropzone"
@@ -210,7 +210,7 @@
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-text142">videos:
+          <div class="admin-case-study-detail-text142">视频：
             <input  @change="img($event,index,5)" type="file" >
                 <span
                     id="dropzone"
@@ -235,8 +235,8 @@
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">treatment</span>
-          <div class="admin-case-study-detail-text142">images:
+          <span class="admin-case-study-detail-text142 heading2">治疗方案</span>
+          <div class="admin-case-study-detail-text142">图片：
             <input  @change="img($event,index,6)" type="file" >
                 <span
                     id="dropzone"
@@ -255,11 +255,11 @@
                 class="admin-case-study-detail-image02"
               ></img>
               <button type="button" class="button" @click="deleteImage(index,picIndex,6)">
-                <span>Delete</span>
+                <span>删除</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-text142">videos:
+          <div class="admin-case-study-detail-text142">视频
             <input  @change="img($event,index,7)" type="file" >
                 <span
                     id="dropzone"
@@ -278,27 +278,25 @@
                 controls
               ></video>
               <button type="button" class="button" @click="deleteImage(index, vidIndex,7)">
-                <span>Delete</span>
+                <span>删除</span>
               </button>
             </div>
           </div>
         </div>
         <div class="admin-case-study-detail-container88">
-          <span class="admin-case-study-detail-text142 heading2">Pharmacy</span>
+          <span class="admin-case-study-detail-text142 heading2">药物</span>
           <div class="admin-case-study-detail-container57">
-            <div class="admin-case-study-detail-text142">current medicines:</div>
-            <router-link 
+            <div
               v-for="(medicine, medIndex) in medicines[index]" 
               :key="`medicine-${medIndex}`" 
               to="/pharmacy" 
-              class="admin-case-study-detail-navlink3"
+              class="admin-case-study-detail-text111 bodyLarge"
             >
               <span class="bodyLarge"> {{ medicine.medicineName }}, {{ medicine.medicineIntro }}</span>
               <br />
-            </router-link>
-
+          </div>
             <div class="admin-case-study-detail-container90">
-              <div class="admin-case-study-detail-text142">add new medicine</div>
+              <div class="admin-case-study-detail-text142">添加药物</div>
               <select name="fff">
                 <option 
                 v-for="(medicine, medIndex) in Allmedicines" 
@@ -307,9 +305,9 @@
                 {{ medicine.medicineName }}
                 </option>
               </select>
-              <input type="text" placeholder="Dosage" class="input" />
+              <input type="text" placeholder="用量" class="input" />
               <div class="admin-case-study-detail-container91">
-                <button type="button" class="button">Add</button>
+                <button type="button" class="button">添加</button>
               </div>
             </div>
           </div>
@@ -318,11 +316,11 @@
       <!-- add case -->
       <div class="admin-case-study-detail-container54">
         <h1 class="admin-case-study-detail-hero-heading1 heading1">
-          <span class="heading1">Add Case</span>
+          <span class="heading1">添加病例</span>
           <br />
         </h1>
         <button type="button" class="admin-case-study-detail-button71 button" @click = addCase>
-          Add Case
+          添加病例
         </button>
       </div>
     </div>
@@ -332,7 +330,7 @@
         class="admin-case-study-detail-navlink button"
       >
         <span>
-          <span>Save</span>
+          <span>保存</span>
           <br />
         </span>
       </router-link>
@@ -395,18 +393,18 @@ export default {
           },
           data: {
             diseaseID : this.diseaseID,
-            summaryPictures: null,
-            summaryVideos: null,
-            examine: null,
-            examinePictures: null,
-            examineVideos: null,
-            diagnose: null,
-            diagnosePictures: null,
-            diagnoseVideos: null,
-            treatment: null,
-            treatmentPictures: null,
-            treatmentVideos:null,
-            medicines:null,
+            summaryPictures: [],
+            summaryVideos: [],
+            examine: '',
+            examinePictures: [],
+            examineVideos: [],
+            diagnose: '',
+            diagnosePictures: [],
+            diagnoseVideos: [],
+            treatment: '',
+            treatmentPictures: [],
+            treatmentVideos:[],
+            medicines:[],
           }
         })
         .then(response => {
@@ -740,6 +738,9 @@ export default {
 </script>
 
 <style scoped>
+.admin-case-study-detail-text111 {
+  color: var(--dl-color-gray-white);
+}
 .bigImg-div {
 		width: 200px;
 		height: 200px;

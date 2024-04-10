@@ -3,8 +3,7 @@ const sequelize = require('../config/database');
 const Disease = require('./Disease');
 const Medicine = require('./Medicine');
 const Media = require('./Media');
-const CaseMedicine = require('./CaseMedicine')
-
+const CaseMedicine = require('./CaseMedicine');
 const Case = sequelize.define('Case', {
     caseID: {
         type: DataTypes.INTEGER,

@@ -23,8 +23,7 @@ router.get('/department/list', isQueryValid(paramsInQueryOfDepartmentList), getD
 
 //启用Token认证
 
-router.get('/item/detail', isTokenValid, isQueryValid(paramsInQueryOfItemDetail), getItemDetail);
-router.get('/department/detail', isTokenValid, isQueryValid(paramsInQueryOfDepartmentDetail), getDepartmentDetail);
-router.get('/department/list', isTokenValid, isQueryValid(paramsInQueryOfDepartmentList), getDepartmentList);
+router.get('/item', isTokenValid, getItemDetail);
+
 
 module.exports = router;

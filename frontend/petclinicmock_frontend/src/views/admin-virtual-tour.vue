@@ -25,17 +25,14 @@
     <div class="heroContainer admin-virtual-tour-hero">
       <div class="admin-virtual-tour-container02">
         <h1 class="admin-virtual-tour-hero-heading">
-          Manage Virtual Tour Descriptions
+          虚拟导览管理
         </h1>
       </div>
     </div>
     <div class="admin-virtual-tour-container03">
       <router-link to="/admin-menu" class="admin-virtual-tour-navlink button">
         <span>
-          <span>
-            Admin
-          </span>
-          <span>Menu</span>
+          <span>返回管理员菜单</span>
         </span>
       </router-link>
     </div>
@@ -43,25 +40,16 @@
       <div class="admin-virtual-tour-container04"></div>
       <div class="admin-virtual-tour-container05">
         <ul class="admin-virtual-tour-ul list">
-          <li class="admin-virtual-tour-li list-item Content">
-            <span class="heading3">Function 1</span>
+          <li v-for="(item,index) in Items" class="admin-virtual-tour-li list-item Content">
+            <span class="heading3">{{ item.itemName }}</span>
             <div class="admin-virtual-tour-container06">
               <div class="admin-virtual-tour-container07">
                 <textarea
-                  placeholder="placeholder"
+                  v-model=" item.itemIntro"
                   class="admin-virtual-tour-textarea textarea"
                 ></textarea>
               </div>
-              <button type="button" class="button">Modify</button>
-            </div>
-          </li>
-          <li class="admin-virtual-tour-li1 list-item Content">
-            <span class="heading3">Function 2</span>
-            <div class="admin-virtual-tour-container08">
-              <div class="admin-virtual-tour-container09">
-                <textarea placeholder="placeholder" class="textarea"></textarea>
-              </div>
-              <button type="button" class="button">Modify</button>
+              <button type="button" class="button">修改</button>
             </div>
           </li>
         </ul>
@@ -86,16 +74,14 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminVirtualTour',
   props: {},
   data() {
     return {
       name:localStorage.getItem('username'),
-      departments:[],
-      departmentName:[],
-      departmentIntro:[],
-      departmentItems:[],
+      Items:[],
     }
   },
   methods: {
@@ -106,7 +92,7 @@ export default {
   },
   created() {
     axios
-      .get(`/3DVirtualTour/department/list`, 
+      .get(`/3DVirtualTour/item`, 
         {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('Token')}`
@@ -114,10 +100,9 @@ export default {
       })
       .then((response) => {
         if (response.data.status === 0) {
-          this.departments = response.data.departments;
+          this.Items = response.data.items;
           // Fetch the details for each job
 
-          return Promise.all(promises);
         } else {
           console.log(response.data.message);
         }
