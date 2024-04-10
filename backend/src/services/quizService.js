@@ -78,6 +78,7 @@ exports.getQuizDetails = async (userID, quizID) => {
         message: "成功",
         quizName: "",
         totalCredits: 0,
+        timer: 0,
         lastTry: undefined,
         lastTryTime: undefined,
         probs: []
@@ -93,6 +94,7 @@ exports.getQuizDetails = async (userID, quizID) => {
         }
         response.quizName = quiz.quizName;
         response.totalCredits = quiz.totalCredits;
+        response.timer = quiz.timer;
         // 查找与 userID 和 quizID 关联的 UserQuiz 记录
         const userQuiz = await UserQuiz.findOne({
             where: { UserUserID: userID, QuizQuizID: quizID }
