@@ -55,8 +55,8 @@
     <div class="quiz-result-hero1 heroContainer">
       <div v-for="(prob,index) in probs" class="quiz-result-container05">
         <h1 class="quiz-result-hero-heading1 heading1">
-          <span class="heading1">问题 {{ prob.probID }}</span>
-          <br />
+          <span class="heading1">问题 {{ index+1 }}</span>
+          <br/>
         </h1>
         <div class="quiz-result-container06">
           <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
