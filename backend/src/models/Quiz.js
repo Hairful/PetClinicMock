@@ -17,6 +17,11 @@ const Quiz = sequelize.define('Quiz', {
     totalCredits: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    timer: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+
     }
 });
 

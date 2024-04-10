@@ -7,12 +7,12 @@
 const express = require('express');
 const router = express.Router();
 const { createQuiz, updateQuiz, deleteQuiz } = require('../controllers/quizAdminController');
-const { isQueryValid } = require('../middlewares/formatCheck');
+const { isQueryValid, isBodyValid } = require('../middlewares/formatCheck');
 const { isTokenValid, isTokenAdmin } = require('../middlewares/authMiddleware');
-
+const paramsInBodyOfCreat = ['quizName', 'totalCredits', 'timer', 'probs'];
 const paramsInQueryOfDelete = ['quizID'];
 
-router.post('', isTokenValid, isTokenAdmin, createQuiz);
+router.post('', isTokenValid, isTokenAdmin, isBodyValid(paramsInBodyOfCreat), createQuiz);
 router.put('', isTokenValid, isTokenAdmin, updateQuiz);
 router.delete('', isTokenValid, isTokenAdmin, isQueryValid(paramsInQueryOfDelete), deleteQuiz);
 

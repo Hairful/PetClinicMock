@@ -20,7 +20,7 @@ const UserQuiz = require('../models/UserQuiz');
  */
 exports.createQuizWithProbs = async (quizData) => {
     try {
-        const { quizName, totalCredits, probs } = quizData;
+        const { quizName, totalCredits, timer, probs } = quizData;
         const existingQuiz = await Quiz.findOne({ where: { quizName } });
         if (existingQuiz) {
             return { status: 1, message: "重复的quizName" };
@@ -28,7 +28,8 @@ exports.createQuizWithProbs = async (quizData) => {
         // 创建新的测验
         const quiz = await Quiz.create({
             quizName: quizName,
-            totalCredits: totalCredits
+            totalCredits: totalCredits,
+            timer: timer
         });
         // 遍历并创建问题
         //记得注释第二行
@@ -84,27 +85,36 @@ exports.deleteQuiz = async (quizID) => {
  */
 exports.updateQuiz = async (quizData) => {
     try {
-        const { quizID, quizName, totalCredits, probs } = quizData;
+        const { quizID, quizName, totalCredits, timer, probs } = quizData;
         const quiz = await Quiz.findByPk(quizID);
         if (!quiz) {
             return { status: 1, message: "无对应quizID" };
         }
         // 更新 quiz
-        quiz.quizName = quizName;
-        quiz.totalCredits = totalCredits;
+        if (quizName !== undefined) {
+            quiz.quizName = quizName;
+        }
+        if (totalCredits !== undefined) {
+            quiz.totalCredits = totalCredits;
+        }
+        if (timer !== undefined) {
+            quiz.timer = timer;
+        }
         await quiz.save();
-        // 删除所有与 quizID 关联的问题
-        await Prob.destroy({ where: { quizID } });
-        await UserQuiz.destroy({ where: { QuizQuizID: quizID } });
-        // 遍历并创建问题
-        for (const prob of probs) {
-            await Prob.create({
-                quizID: quizID,
-                probCredit: prob.probCredit,
-                probText: prob.probText,
-                probImg: prob.probImg,
-                probAns: prob.probAns
-            });
+        // 如果probs存在，删除所有与 quizID 关联的问题，并创建新的问题
+        if (probs !== undefined) {
+            await Prob.destroy({ where: { quizID } });
+            await UserQuiz.destroy({ where: { QuizQuizID: quizID } });
+            // 遍历并创建问题
+            for (const prob of probs) {
+                await Prob.create({
+                    quizID: quizID,
+                    probCredit: prob.probCredit,
+                    probText: prob.probText,
+                    probImg: prob.probImg,
+                    probAns: prob.probAns
+                });
+            }
         }
         return { status: 0, message: "成功" };
     } catch (error) {
@@ -112,5 +122,4 @@ exports.updateQuiz = async (quizData) => {
         return { status: -9, message: '错误' };
     }
 }
-
 
