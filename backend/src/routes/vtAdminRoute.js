@@ -11,6 +11,6 @@ const { isBodyValid } = require('../middlewares/formatCheck');
 const { isTokenValid, isTokenAdmin } = require('../middlewares/authMiddleware');
 
 router.put('/item', isTokenValid, isTokenAdmin, updateItem);
-router.put('/department', isTokenValid, isTokenAdmin, updateDepartment);
+
 
 module.exports = router;
