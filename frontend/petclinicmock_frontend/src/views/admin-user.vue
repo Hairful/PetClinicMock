@@ -20,13 +20,12 @@
     ><div class="admin-user-container01"></div
     ><div class="heroContainer admin-user-hero"
       ><div class="admin-user-container02"
-        ><h1 class="admin-user-hero-heading">Manage Users</h1
+        ><h1 class="admin-user-hero-heading">管理用户</h1
         ></div></div
     ><div class="admin-user-container03"
       ><router-link to="/admin-menu" class="admin-user-navlink button"
         ><span
-          ><span>Admin <span v-html="raw1rdy"></span></span
-          ><span>Menu</span></span
+          ><span>返回管理员菜单</span></span
         ></router-link
       ></div
     ><div class="admin-user-hero1 heroContainer"
@@ -45,9 +44,9 @@
                   @input="validateInput(index)"
                 />
               </div> <span class="error" v-if="users[index].error">{{ users[index].error }}</span>
-              <input type="checkbox" v-model="users[index].isAdmin" /><span>isAdmin</span>
-              <button type="button" class="button" @click="updateUser(index)">Modify</button>
-              <button type="button" class="button" @click="deleteUser(index)">Delete</button>
+              <input type="checkbox" v-model="users[index].isAdmin" /><span>是否为管理员</span>
+              <button type="button" class="button" @click="updateUser(index)">修改</button>
+              <button type="button" class="button" @click="deleteUser(index)">删除</button>
             </div>
           </li>
           </ul></div

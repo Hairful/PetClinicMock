@@ -27,28 +27,28 @@
     <div class="admin-case-study-list-container01"></div>
     <div class="heroContainer admin-case-study-list-hero">
       <div class="admin-case-study-list-container02">
-        <h1 class="admin-case-study-list-hero-heading">Manage Cases</h1>
+        <h1 class="admin-case-study-list-hero-heading">病例管理</h1>
       </div>
     </div>
     <div class="admin-case-study-list-container03">
       <router-link to="/admin-menu" class="admin-case-study-list-navlink button">
-        Admin Menu
+        返回管理员菜单
       </router-link>
     </div>
     <div class="admin-case-study-list-hero1 heroContainer">
       <div class="admin-case-study-list-title" >新增疾病</div>
       <div class="admin-case-study-list-container04">
         <div class="admin-case-study-list-container05">
-          <input type="text" v-model="newName" placeholder="Disease Name" class="input" />
+          <input type="text" v-model="newName" placeholder="名称" class="input" />
         </div>
         <div class="admin-case-study-list-container06">
-          <input type="text" v-model="newType" placeholder="Disease Type" class="input" />
+          <input type="text" v-model="newType" placeholder="类型" class="input" />
         </div>
         <div class="admin-case-study-list-container06">
-          <input type="text" v-model="newIntro" placeholder="Disease Introduction" class="input" />
+          <input type="text" v-model="newIntro" placeholder="介绍" class="input" />
         </div>
         <button type="button" class="admin-case-study-list-button button" @click="addDisease">
-          Add Disease
+          新增疾病
         </button>
       </div>
 
@@ -74,9 +74,9 @@
             <div class="admin-case-study-list-container08">
               <div class="admin-case-study-list-container09">
                 <span class="admin-case-study-list-text17 heading3">
-                  Disease {{disease.diseaseName}}
+                  名称：{{disease.diseaseName}}
                 </span>
-                <span class="heading3">Type {{currentType}}</span>
+                <span class="heading3">类型：{{currentType}}</span>
               </div>
               <div class="admin-case-study-list-container10">
                 <button
@@ -84,13 +84,13 @@
                   class="admin-case-study-list-button1 button"
                   @click = deleteDisease(index)
                 >
-                  Delete Disease
+                  删除疾病
                 </button>
                 <router-link
                   :to="`/admin-case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${currentType}`"
                   class="admin-case-study-list-navlink1 button"
                 >
-                  Manage Cases
+                  管理病例
                 </router-link>
               </div>
               <div class="admin-case-study-list-container11">
@@ -101,7 +101,7 @@
                   @click = renameDisease(index)
                 >
                   <span class="admin-case-study-list-text19 bodyLarge">
-                    <span>Rename Disease</span>
+                    <span>重命名</span>
                     <br />
                   </span>
                 </button>
@@ -114,7 +114,7 @@
                   @click = renameDisease(index)
                 >
                   <span class="admin-case-study-list-text22 bodyLarge">
-                    Change Type
+                    修改类型
                   </span>
                 </button>
               </div>

@@ -19,7 +19,7 @@
             </span>
           </div>
           <div>
-            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> logout </button>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
           </div>
         </div>
         </div>
@@ -78,6 +78,15 @@
                 <br />
               </span>
             </router-link>
+            <router-link
+              to="/admin-pharmacy"
+              class="admin-menu-navlink3 button"
+            >
+              <span class="heading3">
+                <span>药物管理</span>
+                <br />
+              </span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -106,14 +115,6 @@ export default {
   props: {},
   data() {
     return {
-      rawvio9: ' ',
-      raw6qpn: ' ',
-      rawuosz: ' ',
-      raw5klp: ' ',
-      rawrxqo: ' ',
-      raw7b52: ' ',
-      rawi76z: ' ',
-      rawufkj: ' ',
       name:localStorage.getItem('username'),
     }
   },

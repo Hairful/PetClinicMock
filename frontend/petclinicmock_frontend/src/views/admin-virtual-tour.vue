@@ -11,10 +11,7 @@
         <div>
         <div data-thq="thq-navbar-nav" class="admin-virtual-tour-desktop-menu">
           <span>
-            <span>
               登录用户：
-              <span v-html="rawtoap"></span>
-            </span>
             <span class="admin-virtual-tour-text02">{{ name }}</span>
           </span>
         </div>
@@ -28,18 +25,14 @@
     <div class="heroContainer admin-virtual-tour-hero">
       <div class="admin-virtual-tour-container02">
         <h1 class="admin-virtual-tour-hero-heading">
-          Manage Virtual Tour Descriptions
+          虚拟导览管理
         </h1>
       </div>
     </div>
     <div class="admin-virtual-tour-container03">
       <router-link to="/admin-menu" class="admin-virtual-tour-navlink button">
         <span>
-          <span>
-            Admin
-            <span v-html="raw7n6i"></span>
-          </span>
-          <span>Menu</span>
+          <span>返回管理员菜单</span>
         </span>
       </router-link>
     </div>
@@ -47,25 +40,16 @@
       <div class="admin-virtual-tour-container04"></div>
       <div class="admin-virtual-tour-container05">
         <ul class="admin-virtual-tour-ul list">
-          <li class="admin-virtual-tour-li list-item Content">
-            <span class="heading3">Function 1</span>
+          <li v-for="(item,index) in Items" class="admin-virtual-tour-li list-item Content">
+            <span class="heading3">{{ item.itemName }}</span>
             <div class="admin-virtual-tour-container06">
               <div class="admin-virtual-tour-container07">
                 <textarea
-                  placeholder="placeholder"
+                  v-model=" item.itemIntro"
                   class="admin-virtual-tour-textarea textarea"
                 ></textarea>
               </div>
-              <button type="button" class="button">Modify</button>
-            </div>
-          </li>
-          <li class="admin-virtual-tour-li1 list-item Content">
-            <span class="heading3">Function 2</span>
-            <div class="admin-virtual-tour-container08">
-              <div class="admin-virtual-tour-container09">
-                <textarea placeholder="placeholder" class="textarea"></textarea>
-              </div>
-              <button type="button" class="button">Modify</button>
+              <button type="button" class="button">修改</button>
             </div>
           </li>
         </ul>
@@ -90,28 +74,39 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminVirtualTour',
   props: {},
   data() {
     return {
-      rawtoap: ' ',
-      rawuzw2: ' ',
-      rawvz7h: ' ',
-      raw954w: ' ',
-      rawykqb: ' ',
-      raww6ze: ' ',
-      rawitix: ' ',
-      rawua14: ' ',
-      raw7n6i: ' ',
       name:localStorage.getItem('username'),
+      Items:[],
     }
   },
   methods: {
     logout() {
-      localStorage.removeItem('username');
+      localStorage.clear();
       this.$router.push('/login');
     },
+  },
+  created() {
+    axios
+      .get(`/3DVirtualTour/item`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.Items = response.data.items;
+          // Fetch the details for each job
+
+        } else {
+          console.log(response.data.message);
+        }
+      })
   },
   metaInfo: {
     title: 'AdminVirtualTour - Roasted Rusty Swallow',

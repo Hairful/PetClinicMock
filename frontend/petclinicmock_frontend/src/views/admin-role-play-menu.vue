@@ -28,42 +28,42 @@
     <div class="heroContainer admin-role-play-menu-hero">
       <div class="admin-role-play-menu-container2">
         <h1 class="admin-role-play-menu-hero-heading heading1">
-          Manage Role Play
+          角色扮演管理
         </h1>
       </div>
     </div>
     <div class="admin-role-play-menu-container3">
       <router-link to="/admin-menu" class="admin-role-play-menu-navlink button">
-        Admin Menu
+        返回管理员菜单
       </router-link>
     </div>
     <div class="admin-role-play-menu-hero1 heroContainer">
       <h1 class="admin-role-play-menu-hero-heading1">
-        <span class="heading1">Choose a Role</span>
+        <span class="heading1">选择角色</span>
         <br />
       </h1>
       <div class="admin-role-play-menu-container4">
         <div class="admin-role-play-menu-container5">
           <router-link
-          :to="{ path: '/admin-role-play-list', query: { role: 'Front Desk' } }"
-            class="admin-role-play-menu-navlink1 button"
+          :to="{ path: '/admin-role-play-list', query: { role: '前台' } }"
+            class="admin-role-play-menu-navlink3 button"
           >
-            <span class="heading3">Front Desk</span>
+            <span class="heading3">前台</span>
           </router-link>
           <router-link
-            :to="{ path: '/admin-role-play-list', query: { role: 'Medical Assistant' } }"
-            class="admin-role-play-menu-navlink2 button"
+            :to="{ path: '/admin-role-play-list', query: { role: '医助' } }"
+            class="admin-role-play-menu-navlink3 button"
           >
             <span class="heading3">
-              <span>Medical Assistant</span>
+              <span>医助</span>
               <br />
             </span>
           </router-link>
           <router-link
-          :to="{ path: '/admin-role-play-list', query: { role: 'Doctor' } }"
+          :to="{ path: '/admin-role-play-list', query: { role: '医生' } }"
             class="admin-role-play-menu-navlink3 button"
           >
-            <span class="heading3">Doctor</span>
+            <span class="heading3">医生</span>
           </router-link>
         </div>
       </div>
@@ -326,14 +326,17 @@ export default {
   text-decoration: none;
 }
 .admin-role-play-menu-navlink3 {
-  width: 515px;
-  height: 91px;
+  width: 180px;
+  height: 100px;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-left: var(--dl-space-space-oneandhalfunits);
   margin-right: var(--dl-space-space-oneandhalfunits);
   border-radius: var(--dl-radius-radius-radius8);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 .admin-role-play-menu-footer {
   flex: 0 0 auto;
