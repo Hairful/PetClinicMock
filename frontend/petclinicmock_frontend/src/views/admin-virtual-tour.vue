@@ -11,10 +11,7 @@
         <div>
         <div data-thq="thq-navbar-nav" class="admin-virtual-tour-desktop-menu">
           <span>
-            <span>
               登录用户：
-              <span v-html="rawtoap"></span>
-            </span>
             <span class="admin-virtual-tour-text02">{{ name }}</span>
           </span>
         </div>
@@ -37,7 +34,6 @@
         <span>
           <span>
             Admin
-            <span v-html="raw7n6i"></span>
           </span>
           <span>Menu</span>
         </span>
@@ -95,23 +91,37 @@ export default {
   props: {},
   data() {
     return {
-      rawtoap: ' ',
-      rawuzw2: ' ',
-      rawvz7h: ' ',
-      raw954w: ' ',
-      rawykqb: ' ',
-      raww6ze: ' ',
-      rawitix: ' ',
-      rawua14: ' ',
-      raw7n6i: ' ',
       name:localStorage.getItem('username'),
+      departments:[],
+      departmentName:[],
+      departmentIntro:[],
+      departmentItems:[],
     }
   },
   methods: {
     logout() {
-      localStorage.removeItem('username');
+      localStorage.clear();
       this.$router.push('/login');
     },
+  },
+  created() {
+    axios
+      .get(`/3DVirtualTour/department/list`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.departments = response.data.departments;
+          // Fetch the details for each job
+
+          return Promise.all(promises);
+        } else {
+          console.log(response.data.message);
+        }
+      })
   },
   metaInfo: {
     title: 'AdminVirtualTour - Roasted Rusty Swallow',

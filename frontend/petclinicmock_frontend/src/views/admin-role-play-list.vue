@@ -13,9 +13,8 @@
           <span>
             <span>
               登录用户：
-              <span v-html="raw0x8n"></span>
             </span>
-            <span class="admin-role-play-list-text02">{{ data }}</span>
+            <span class="admin-role-play-list-text02">{{ name }}</span>
           </span>
         </div>
         <div>
@@ -30,7 +29,6 @@
         <h1 class="admin-role-play-list-hero-heading">
           <span class="heading1">
             Modify Role Play:
-            <span v-html="raw6ohr"></span>
           </span>
           <span class="admin-role-play-list-text04"> {{ role }} </span>
         </h1>
@@ -127,15 +125,6 @@ export default {
   props: {},
   data() {
     return {
-      raw0x8n: ' ',
-      raw6ohr: ' ',
-      rawo5hj: ' ',
-      rawvfo2: ' ',
-      rawj6ep: ' ',
-      rawfa5g: ' ',
-      raw8de5: ' ',
-      raw450q: ' ',
-      raweqk6: ' ',
       role: ' ',
       jobs: [],
       prevJobs: [],

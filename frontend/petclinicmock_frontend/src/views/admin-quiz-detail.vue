@@ -181,6 +181,7 @@ export default {
   props: {},
   data() {
     return {
+      name:localStorage.getItem('username'),
       image: null,
       thumbnail: null,
       quizID:'',

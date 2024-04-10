@@ -11,11 +11,8 @@
         <div>
         <div data-thq="thq-navbar-nav" class="admin-quiz-list-desktop-menu">
           <span>
-            <span>
               登录用户：
-              <span v-html="raw82w2"></span>
-            </span>
-            <span class="admin-quiz-list-text02">{{ data }}</span>
+            <span class="admin-quiz-list-text02">{{ name }}</span>
           </span>
         </div>
         <div>
@@ -33,10 +30,7 @@
     <div class="admin-quiz-list-container03">
       <router-link to="/admin-menu" class="admin-quiz-list-navlink button">
         <span>
-          <span>
             Admin
-            <span v-html="rawagmc"></span>
-          </span>
           <span>Menu</span>
         </span>
       </router-link>
@@ -102,15 +96,6 @@ export default {
   props: {},
   data() {
     return {
-      raw82w2: ' ',
-      rawmxoz: ' ',
-      rawkhj3: ' ',
-      rawn3ht: ' ',
-      rawujpq: ' ',
-      rawg0fk: ' ',
-      rawp1jv: ' ',
-      rawxjgq: ' ',
-      rawagmc: ' ',
       newQuizName:'',
       quizzes:[],
       inputName:[],

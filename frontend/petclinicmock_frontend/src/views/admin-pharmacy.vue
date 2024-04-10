@@ -9,8 +9,7 @@
             <div>
             <div data-thq="thq-navbar-nav" class="admin-pharmacy-desktop-menu">
                 <span>
-                    <span>登录用户：<span v-html="raw2lsw">
-                    </span>
+                    <span>登录用户：
                 </span>
                 <span class="admin-pharmacy-text02"> {{ name }} </span></span>
             </div>
@@ -79,15 +78,6 @@
     props: {},
     data() {
       return {
-        raw2lsw: ' ',
-        rawidwe: ' ',
-        rawryd1: ' ',
-        rawqw8m: ' ',
-        rawm1y9: ' ',
-        raw1b0l: ' ',
-        rawa7vs: ' ',
-        raw0snt: ' ',
-        raw2nmr: ' ',
         name: localStorage.getItem('username'),
         newMed: {
           medicineName: '',
