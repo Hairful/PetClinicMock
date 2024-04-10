@@ -70,7 +70,7 @@
 
       <div class="admin-case-study-detail-container05" v-for="(caseItem, index) in cases" :key="index">
         <h1 class="admin-case-study-detail-hero-heading2 heading1">
-          <span class="heading1">病例 {{ caseItem.caseID }}</span>
+          <span class="heading1">Case {{ index+1 }}</span>
           <br />
             
         </h1>
@@ -393,18 +393,18 @@ export default {
           },
           data: {
             diseaseID : this.diseaseID,
-            summaryPictures: null,
-            summaryVideos: null,
-            examine: null,
-            examinePictures: null,
-            examineVideos: null,
-            diagnose: null,
-            diagnosePictures: null,
-            diagnoseVideos: null,
-            treatment: null,
-            treatmentPictures: null,
-            treatmentVideos:null,
-            medicines:null,
+            summaryPictures: [],
+            summaryVideos: [],
+            examine: '',
+            examinePictures: [],
+            examineVideos: [],
+            diagnose: '',
+            diagnosePictures: [],
+            diagnoseVideos: [],
+            treatment: '',
+            treatmentPictures: [],
+            treatmentVideos:[],
+            medicines:[],
           }
         })
         .then(response => {
