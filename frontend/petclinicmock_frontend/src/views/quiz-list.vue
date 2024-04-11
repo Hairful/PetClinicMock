@@ -13,7 +13,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawqwc5"></span>
               </span>
               <span class="quiz-list-text02">{{name}}</span>
             </span>
@@ -52,6 +51,7 @@
             <span class="quiz-list-text19 bodyLarge">测试名称：  {{ quiz.quizName }}</span>
             <div></div>
             <span class="quiz-list-text19 bodyLarge">总分： {{ quiz.totalCredits }}</span>
+            <span class="quiz-list-text19 bodyLarge">测试限时： {{ quiz.timer }}</span>
             <span class="quiz-list-text20 bodyLarge">最后尝试分数： {{ quiz.lastTry}}</span>
             <span class="quiz-list-text19 bodyLarge">最后尝试时间：  {{ quiz.lastTryTime }}</span>
           </li>
@@ -83,7 +83,6 @@ export default {
   props: {},
   data() {
     return {
-      rawqwc5: ' ',
       name:localStorage.getItem('username'),
       ID:localStorage.getItem('userID'),
       quizzes:[],
@@ -114,6 +113,7 @@ export default {
       .then((response) => {
         if (response.data.status === 0) {
           this.quizzes=response.data.quizzes;
+          console.log(response.data)
         } else {
           console.log(response.data.message);
         }
