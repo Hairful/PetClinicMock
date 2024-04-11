@@ -292,12 +292,19 @@
               to="/pharmacy" 
               class="admin-case-study-detail-text111 bodyLarge"
             >
-              <span class="bodyLarge"> {{ medicine.medicineName }}, {{ medicine.medicineIntro }}</span>
+              <div>药品{{ medIndex+1 }} 
+                <button type="button" class="button" @click="deleteMed(index,medIndex)">删除</button> 
+              </div>
+              <span type="text">
+                {{ medicine.medicineName }}
+              </span>
+              <span>用量:</span><input type="text" v-model="medicine.dosage" class="input" />
+              <button type="button" class="button" @click="modifyMed(index)">修改</button>
               <br />
           </div>
             <div class="admin-case-study-detail-container90">
               <div class="admin-case-study-detail-text142">添加药物</div>
-              <select name="fff">
+              <select v-model="choosedMed[index]" name="fff" >
                 <option 
                 v-for="(medicine, medIndex) in Allmedicines" 
                 :key="`${medIndex}`" 
@@ -305,9 +312,9 @@
                 {{ medicine.medicineName }}
                 </option>
               </select>
-              <input type="text" placeholder="用量" class="input" />
+              <input type="text" v-model="newMedDosage[index]" placeholder="用量" class="input" />
               <div class="admin-case-study-detail-container91">
-                <button type="button" class="button">添加</button>
+                <button type="button" class="button" @click="addMed(index)">添加</button>
               </div>
             </div>
           </div>
@@ -379,10 +386,46 @@ export default {
       treatmentPictures:[],
       treatmentVideos:[],
       name: localStorage.getItem('username'),
-      
+      choosedMed:[],
+      newMedDosage:[],
     }
   },
   methods:{
+    modifyMed(index){
+      axios({
+          method: 'put',
+          url: '/admin/case',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            caseID : this.cases[index].caseID,
+            medicines : this.medicines[index],
+          }
+        })
+        .then(response => {
+          this.fetchCases();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    deleteMed(index,medIndex){
+      this.medicines[index].splice(medIndex,1);
+      this.modifyMed(index);
+    },
+    addMed(index){
+      let newMed = {};
+      let medIndex = this.choosedMed[index];
+      newMed.medicineName = this.Allmedicines[medIndex].medicineName;
+      newMed.medicineID = this.Allmedicines[medIndex].medicineID;
+      newMed.dosage = this.newMedDosage[index];
+      this.medicines[index].push(newMed);
+
+      this.modifyMed(index);
+    },
     addCase(){
       axios({
           method: 'post',
@@ -471,13 +514,6 @@ export default {
       }
     },
     async saveImage(file,index,kind){
-      let that = this;//改变this指向
-      if (!window.FileReader) return; // 看是否支持FileReader
-        let reader = new FileReader();
-        reader.readAsDataURL(file); // 关键一步，在这里转换的
-        reader.onloadend = function () {
-          //that.switchKind(kind)[index].push(this.result); 
-        }
         const uploadResult = await client.put('case/' + kind + "/" + file.name, file);
         this.switchKind(kind)[index].push(uploadResult.url); 
         console.log('上传成功:', uploadResult);
@@ -531,7 +567,6 @@ export default {
         this.treatmentVideos.push(caseItem.details.treatmentVideos?caseItem.details.treatmentVideos:[]);
         this.medicines.push(caseItem.details.medicines?caseItem.details.medicines:[]);
       })
-      
     },
     async deleteCase(index){
       try {
