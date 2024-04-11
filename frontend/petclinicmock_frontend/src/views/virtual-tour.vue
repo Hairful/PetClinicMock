@@ -19,7 +19,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
-import { ref, onMounted } from "vue";
+import { defineAsyncComponent,ref, onMounted } from "vue";
 import gsap from "gsap";
 import SpriteCanvas from "../three/SpriteCanvas";
 
@@ -29,6 +29,29 @@ let progress = ref(0);
 
 // 初始化场景
 const scene = new THREE.Scene();
+
+// 获取相应物品的URL
+async function getItemURL(itemName) {
+    try {
+        const response = await fetch('http://localhost:3000/getItemDetail');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        const item = data.data.find(item => item.itemName === itemName);
+        if (item) {
+            return item.itemURL;
+        } else {
+            console.error('物品未找到');
+            return null;
+        }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        return null;
+    }
+}
+
+
 
 // 初始化相机
 const camera = new THREE.PerspectiveCamera(
@@ -80,7 +103,7 @@ geometry.scale(1, 1, -1);
 // });
 // }
 // }
-onMounted(() => {
+onMounted( async() => {
 
   function moveTag(name) {
     let positions = {
@@ -705,7 +728,7 @@ transform: translate(100px,110px);
 
   // 创建一个视频元素
   const videoElement = document.createElement('video');
-  videoElement.src = './videos/video1.mp4';
+  videoElement.src = getItemURL("手术刀");
   videoElement.controls = true; // 显示视频控制条
   videoElement.style.width = '100%'; // 设置视频框的宽度
   videoElement.style.height = '100%'; // 设置视频框的高度
@@ -815,6 +838,8 @@ closeButtont1.addEventListener('click', () => {
   );
   scene.add(surgeryknife.mesh);
 
+
+  
   // 创建一个视频元素
   const video1Element = document.createElement('video');
   video1Element.src = './videos/surgeryknife.mp4';
