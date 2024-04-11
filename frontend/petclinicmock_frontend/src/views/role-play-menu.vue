@@ -1,5 +1,6 @@
 <template>
   <div class="role-play-menu-container">
+    <Chatbot />
     <div class="role-play-menu-header">
       <header
         data-thq="thq-navbar"
@@ -85,9 +86,14 @@
 </template>
 
 <script>
+import Chatbot from '../components/Chatbot.vue';
+
 export default {
   name: 'RolePlayMenu',
   props: {},
+  components: {
+    Chatbot,
+  },
   data() {
     return {
       rawqlrv: ' ',

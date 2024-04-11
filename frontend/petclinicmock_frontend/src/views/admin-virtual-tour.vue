@@ -1,5 +1,6 @@
 <template>
   <div class="admin-virtual-tour-container">
+    <Chatbot />
     <div class="admin-virtual-tour-header">
       <header
         data-thq="thq-navbar"
@@ -49,7 +50,35 @@
                   class="admin-virtual-tour-textarea textarea"
                 ></textarea>
               </div>
-              <button type="button" class="button">修改</button>
+              <div>
+                <div class="admin-virtual-tour-container06">
+                  <input v-if="!item.itemURL" @change="img($event,index)" type="file">
+                  <div class="admin-virtual-tour-container07">
+                    <div
+                      id="dropzone"
+                      v-on:dragover.prevent
+                      v-on:drop="handleDrop($event,index)"
+                      class="admin-case-study-detail-image"
+                    >
+                    <div class="bigImg-div " v-if="!item.itemURL">或者将图片拖拽到这里</div >
+                      <div v-else="item.itemURL">
+                        <img v-if="isImage(item.itemURL)"
+                          :src="item.itemURL"
+                          class="bigImg"
+                        />
+                        <video v-else="!isImage(item.itemURL)"
+                          :src="item.itemURL"
+                          class="bigImg"
+                        ></video>
+                        <button type="button" class="button" @click="clearURL(index)">
+                          <span>删除</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </div>
+              <button @click="saveItem(index)" type="button" class="button">修改</button>
             </div>
           </li>
         </ul>
@@ -75,9 +104,14 @@
 
 <script>
 import axios from 'axios';
+import Chatbot from '../components/Chatbot.vue';
+import client from '../oss.js';
 export default {
   name: 'AdminVirtualTour',
   props: {},
+  components: {
+    Chatbot,
+  },
   data() {
     return {
       name:localStorage.getItem('username'),
@@ -85,6 +119,118 @@ export default {
     }
   },
   methods: {
+    handleDrop(e,index) {
+      e.preventDefault();
+      let files = e.dataTransfer.files;
+
+      if (!files.length) return;
+
+      let file = files[0];
+      let reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.image = e.target.result[0];
+      };
+      this.saveImage(file,index);
+      
+    },
+    
+    async img(e,index) {
+      try {
+        //let that = this;//改变this指向
+        let file = e.target.files[0];
+        this.saveImage(file,index);
+        //上传至阿里云
+         
+      } catch (error) {
+        // 在此处添加错误处理逻辑。
+          console.error('发生错误:', error);
+      }
+    },
+    async saveImage(file,index){
+        const uploadResult = await client.put('3D/'+ file.name, file);
+        console.log(uploadResult);
+        this.Items[index].itemURL = uploadResult.url;
+        this.saveItem(index);
+    },
+    saveItem(index){
+      axios({
+          method: 'put',
+          url: '/admin/item',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            itemID : this.Items[index].itemID,
+            itemName : this.Items[index].itemName,
+            itemIntro : this.Items[index].itemIntro,
+            itemURL : this.Items[index].itemURL,
+          }
+        })
+        .then(response => {
+          this.refresh();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
+    },
+    refresh(){
+      axios
+      .get(`/3DVirtualTour/item`, 
+        {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
+        }
+      })
+      .then((response) => {
+        if (response.data.status === 0) {
+          this.Items = response.data.data;
+          console.log(response.data);
+        } else {
+          console.log(response.data.message);
+        }
+      })
+    },
+    isImage(url){
+      let suffic = '';
+        //获取类型结果
+      let result = false;
+        try {
+          let fileArr = url.split('.');
+          suffic = fileArr[fileArr.length - 1]
+          // console.log('suffic',suffic);
+        } catch (error) {
+            suffic = ''
+        }
+        //图片格式
+        var imgList = ['png','jpg','jpeg','bmp','gif'];
+        //进行图片匹配
+        result = imgList.some(item=>{
+          return item === suffic
+        })
+        // console.log('结果',result);
+        return result;
+    },
+    getPath(url){
+      let path = '';
+      try {
+          let fileArr = url.split('/');
+          path = fileArr[3]
+          // console.log('suffic',suffic);
+        } catch (error) {
+            suffic = ''
+        }
+        console.log(path);
+      return  path;
+    },
+    async clearURL(index){
+      let path=this.getPath(this.Items[index].itemURL);
+      const Result = await client.delete(path);
+        console.log(Result);
+        this.Items[index].itemURL = '';
+    },
     logout() {
       localStorage.clear();
       this.$router.push('/login');
@@ -100,9 +246,8 @@ export default {
       })
       .then((response) => {
         if (response.data.status === 0) {
-          this.Items = response.data.items;
-          // Fetch the details for each job
-
+          this.Items = response.data.data;
+          //console.log(response.data);
         } else {
           console.log(response.data.message);
         }
@@ -121,6 +266,19 @@ export default {
 </script>
 
 <style scoped>
+.bigImg-div {
+		width: 200px;
+		height: 200px;
+		border: 100%;
+		overflow: hidden;
+		border: 1px solid #ddd;
+    background-color:var(--dl-color-gray-900);
+	}
+.bigImg {
+		display: block;
+		width: 200px;
+		height: 200px;
+	}
 .admin-virtual-tour-container {
   width: 100%;
   display: flex;

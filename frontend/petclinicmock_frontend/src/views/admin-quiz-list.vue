@@ -135,6 +135,7 @@ export default {
             quizName: this.newQuizName,
             totalCredits: 1,
             probs:[],
+            timer: 0,
           }
         })
         .then(response => {

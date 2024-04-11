@@ -1,5 +1,6 @@
 <template>
   <div class="menu-container">
+    <Chatbot />
     <div class="menu-header">
       <header
         data-thq="thq-navbar"
@@ -78,9 +79,14 @@
 </template>
 
 <script>
+import Chatbot from '@/components/Chatbot.vue';
+
 export default {
   name: 'Menu',
   props: {},
+  components: {
+    Chatbot,
+  },
   data() {
     return {
       rawzkyy: ' ',

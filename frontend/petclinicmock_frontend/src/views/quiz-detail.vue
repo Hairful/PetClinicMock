@@ -13,7 +13,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawp27k"></span>
               </span>
               <span class="quiz-detail-text02">{{name}}</span>
             </span>
@@ -43,6 +42,8 @@
       <router-link to="/menu" class="quiz-detail-navlink1 button">
         返回菜单
       </router-link>
+      <div class="quiz-detail-text22 bodyLarge">剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}
+      </div>
     </div>
     <div class="quiz-detail-hero1 heroContainer" v-if="probs && probs.length > 0">
       <div class="quiz-detail-container05">
@@ -101,7 +102,6 @@ export default {
   props: {},
   data() {
     return {
-      rawp27k: ' ',
       name:localStorage.getItem('username'),
       ID:localStorage.getItem('userID'),
       quizID:'',
@@ -112,6 +112,12 @@ export default {
       ans:[],
       answers:[],
       credit:0,
+      timer: null,
+      totalTime:6000,
+      rest_h:0,
+      rest_min:0,
+      rest_s:0,
+      rest_ms:0,
     }
   },
   methods:{
@@ -174,7 +180,34 @@ export default {
       else
         this.currentProb ++;
     },
-
+    getRestTime(time){
+      this.rest_h = parseInt(time / 3600);
+      time = parseInt(time % 3600);
+      this.rest_min = parseInt(time / 60);
+      time = parseInt(time % 60);
+      this.rest_s = parseInt(time);
+    },
+    startTimer(){
+      console.log('start counting');
+      clearInterval(this.timer);
+      this.timer = setInterval(() => {
+        this.totalTime--; //递减
+        this.getRestTime(this.totalTime);
+        if (this.totalTime === 300) {
+          this.$message('还剩5分钟!');
+        }
+        if (this.totalTime === 0) {
+          // === 0 变成获取按钮
+          clearInterval(this.timer);
+          this.isCounting = false;
+          this.$message('时间到!');
+          this.submit();
+        }
+      }, 1);
+    },
+    stopTimer(){
+        clearInterval(this.timer);
+    },
     submit(){
       for(let i=0;i<this.ans.length;i++){
         let unit = {};
@@ -209,9 +242,13 @@ export default {
         console.log('No corresponding quizID');
       }
     });
-    
-
+    this.startTimer();
   },
+  beforeDestroy() {
+	    if (this.timer) {
+	      clearInterval(this.timer);
+	    }
+  	},
   metaInfo: {
     title: 'QuizDetail - Roasted Rusty Swallow',
     meta: [
