@@ -111,52 +111,6 @@
           <br />
         </h1>
         <div class="admin-quiz-detail-container20">
-          <!-- <textarea
-            v-model="addedProb.probText"
-            placeholder="placeholder"
-            class="admin-quiz-detail-textarea2 textarea"
-          ></textarea>
-          <button type="button" class="button">Modify</button>
-          <div class="admin-quiz-detail-container24">
-            <span class="admin-quiz-detail-text59 bodyLarge">
-              正确答案：
-            </span>
-            <select  v-model="addedOption" class="admin-quiz-detail-select2">
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-            </select>
-          </div>
-          <div class="admin-quiz-detail-container25">
-            <span class="admin-quiz-detail-text60 bodyLarge">题目分数：</span>
-            <input type="text" v-model="addedProb.probCredit" class="input" />
-          </div>
-          <div class="admin-quiz-detail-container06">
-            <input v-if="!addedProb.probImg" @change="add_img($event)" type="file">
-              <img 
-                :src="addedProb.probImg"
-                width="0"
-              />
-              <div class="admin-case-study-detail-container09">
-                  <div
-                    id="dropzone"
-                    v-on:dragover.prevent
-                    v-on:drop="add_handleDrop($event)"
-                    class="admin-case-study-detail-image"
-                  >
-                  <div class="bigImg-div " v-if="!addedProb.probImg">或者将图片拖拽到这里</div >
-                    <div v-else="addedProb.probImg">
-                      <img 
-                        :src="addedProb.probImg"
-                        class="bigImg"/>
-                      <button type="button" class="button" @click="add_clearImage()">
-                        <span>Delete</span>
-                      </button>
-                    </div>
-                  </div>
-              </div>
-          </div> -->
           <button type="button" class="admin-quiz-detail-button14 button" @click="addProb">
             添加
           </button>

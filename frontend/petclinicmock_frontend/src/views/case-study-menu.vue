@@ -1,5 +1,6 @@
 <template>
   <div class="case-study-menu-container">
+    <Chatbot />
     <div class="case-study-menu-header">
       <header
         data-thq="thq-navbar"
@@ -71,10 +72,14 @@
 
 <script>
 import axios from 'axios';
+import Chatbot from '../components/Chatbot.vue';
 
 export default {
   name: 'CaseStudyMenu',
   props: {},
+  components: {
+    Chatbot,
+  },
   data() {
     return {
       rawf7m2: ' ',
