@@ -1,71 +1,55 @@
 <template>
   <div class="admin-user-container">
     <div class="admin-user-header">
-      <header
-        data-thq="thq-navbar"
-        class="navbarContainer admin-user-navbar-interactive"
-      >
+      <header data-thq="thq-navbar" class="navbarContainer admin-user-navbar-interactive">
         <router-link to="/menu" class="admin-user-logo logo">PETCLINICMock</router-link>
         <div>
-        <div data-thq="thq-navbar-nav" class="admin-user-desktop-menu">
-          <span
-            ><span>登录用户： <span v-html="rawbedh"></span></span
-            ><span class="admin-user-text02">{{ name }}</span></span
-          ></div
-        ><div>
-          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+          <div data-thq="thq-navbar-nav" class="admin-user-desktop-menu">
+            <span><span>登录用户： <span v-html="rawbedh"></span></span><span class="admin-user-text02">{{ name
+                }}</span></span>
+          </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+          </div>
         </div>
-        </div>
-      </header></div
-    ><div class="admin-user-container01"></div
-    ><div class="heroContainer admin-user-hero"
-      ><div class="admin-user-container02"
-        ><h1 class="admin-user-hero-heading">管理用户</h1
-        ></div></div
-    ><div class="admin-user-container03"
-      ><router-link to="/admin-menu" class="admin-user-navlink button"
-        ><span
-          ><span>返回管理员菜单</span></span
-        ></router-link
-      ></div
-    ><div class="admin-user-hero1 heroContainer"
-      ><div class="admin-user-container04"></div
-      ><div class="admin-user-container05"
-        ><ul class="admin-user-ul list">
+      </header>
+    </div>
+    <div class="admin-user-container01"></div>
+    <div class="heroContainer admin-user-hero">
+      <div class="admin-user-container02">
+        <h1 class="admin-user-hero-heading">管理用户</h1>
+      </div>
+    </div>
+    <div class="admin-user-container03"><router-link to="/admin-menu"
+        class="admin-user-navlink button"><span><span>返回管理员菜单</span></span></router-link></div>
+    <div class="admin-user-hero1 heroContainer">
+      <div class="admin-user-container04"></div>
+      <div class="admin-user-container05">
+        <ul class="admin-user-ul list">
           <li class="admin-user-li list-item Content" v-for="(user, index) in users" :key="user.userID">
             <div class="admin-user-container06">
               <div class="admin-user-container07">
-                <input
-                  type="text"
-                  :placeholder="user.userName"
-                  class="input"
-                  v-model="users[index].userName"
-                  pattern="^[\u4e00-\u9fa5\w]{2,20}$"
-                  @input="validateInput(index)"
-                />
+                <input type="text" :placeholder="user.userName" class="input" v-model="users[index].userName"
+                  pattern="^[\u4e00-\u9fa5\w]{2,20}$" @input="validateInput(index)" />
               </div> <span class="error" v-if="users[index].error">{{ users[index].error }}</span>
               <input type="checkbox" v-model="users[index].isAdmin" /><span>是否为管理员</span>
               <button type="button" class="button" @click="updateUser(index)">修改</button>
               <button type="button" class="button" @click="deleteUser(index)">删除</button>
             </div>
           </li>
-          </ul></div
-      ></div
-    ><div class="admin-user-footer"
-      ><footer class="admin-user-footer1 footerContainer"
-        ><div class="admin-user-container08"
-          ><router-link to="/menu" class="admin-user-logo2 logo"
-            >PETCLINICMOCK</router-link
-          ></div
-        ><div class="admin-user-separator"></div
-        ><div class="admin-user-container09"
-          ><span class="bodySmall admin-user-text22"
-            >© 2024 SWD-G02, All Rights Reserved.</span
-          ></div
-        ></footer
-      ></div
-    ></div
-  >
+        </ul>
+      </div>
+    </div>
+    <div class="admin-user-footer">
+      <footer class="admin-user-footer1 footerContainer">
+        <div class="admin-user-container08"><router-link to="/menu"
+            class="admin-user-logo2 logo">PETCLINICMOCK</router-link></div>
+        <div class="admin-user-separator"></div>
+        <div class="admin-user-container09"><span class="bodySmall admin-user-text22">© 2024 SWD-G02, All Rights
+            Reserved.</span></div>
+      </footer>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -86,11 +70,11 @@ export default {
       rawp93p: ' ',
       raw1rdy: ' ',
       users: [],
-      name:localStorage.getItem('username'),
+      name: localStorage.getItem('username'),
     }
   },
   methods: {
-    logout(){
+    logout() {
       localStorage.clear();
       this.$router.push('/');
     },
@@ -102,22 +86,22 @@ export default {
         this.$set(this.users[index], 'error', '');
       }
     },
-    async fetchUsers() { 
+    async fetchUsers() {
       axios.get('/admin/user', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('Token')}`,
           'Content-Type': 'application/json'
-        } 
-      })
-      .then(response => {
-        if (response.status === 200) {
-          console.log(response.data.message); // "成功"
-          this.users = response.data.users; // update users with the response data
         }
       })
-      .catch(error => {
-        console.log(error);
-      });
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response.data.message); // "成功"
+            this.users = response.data.users; // update users with the response data
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     async deleteUser(index) {
       const user = this.users[index];
@@ -129,21 +113,21 @@ export default {
           'Content-Type': 'application/json'
         }
       })
-      .then(response => {
-        if (response.status === 200) {
-          console.log(response.data.message); // "成功"
-          this.fetchUsers(); // fetch users after the axios request has completed
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          if (error.response.status === 404) {
-            console.log(error.response.data.message); // "无对应userID"
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response.data.message); // "成功"
+            this.fetchUsers(); // fetch users after the axios request has completed
           }
-        } else {
-          console.log(error);
-        }
-      });
+        })
+        .catch(error => {
+          if (error.response) {
+            if (error.response.status === 404) {
+              console.log(error.response.data.message); // "无对应userID"
+            }
+          } else {
+            console.log(error);
+          }
+        });
     },
     async updateUser(index) {
       const user = this.users[index];
@@ -160,34 +144,34 @@ export default {
           isAdmin: user.isAdmin
         }
       })
-      .then(response => {
-        if (response.status === 200) {
-          console.log(response.data.message); // "成功"
-          this.fetchUsers(); // fetch users after the axios request has completed
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          if (error.response.status === 404) {
-            this.$message.warning(error.response.data.message); // "无对应userID"
-          } else if (error.response.status === 400) {
-            this.$message.warning(error.response.data.message); // "重复的userName"
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response.data.message); // "成功"
+            this.fetchUsers(); // fetch users after the axios request has completed
           }
-        } else {
-          console.log(error);
-        }
-      });
+        })
+        .catch(error => {
+          if (error.response) {
+            if (error.response.status === 404) {
+              this.$message.warning(error.response.data.message); // "无对应userID"
+            } else if (error.response.status === 400) {
+              this.$message.warning(error.response.data.message); // "重复的userName"
+            }
+          } else {
+            console.log(error);
+          }
+        });
     }
   },
   created() {
     this.fetchUsers()
   },
   metaInfo: {
-    title: 'AdminUser - Roasted Rusty Swallow',
+    title: 'AdminUser - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminUser - Roasted Rusty Swallow',
+        content: 'AdminUser - PetClinicMock',
       },
     ],
   },
@@ -199,6 +183,7 @@ export default {
   color: red;
   font: 1em sans-serif;
 }
+
 .admin-user-container {
   width: 100%;
   display: flex;
@@ -207,6 +192,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .admin-user-header {
   width: 100%;
   display: flex;
@@ -216,26 +202,32 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+
 .admin-user-logo {
   text-decoration: none;
 }
+
 .admin-user-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
+
 .admin-user-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;
 }
+
 .admin-user-burger-menu {
   display: none;
 }
+
 .admin-user-icon {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-user-mobile-menu1 {
   top: 0px;
   left: 0px;
@@ -248,11 +240,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .admin-user-nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-user-top {
   width: 100%;
   display: flex;
@@ -260,16 +254,19 @@ export default {
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
+
 .admin-user-close-menu {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .admin-user-icon02 {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-user-links {
   flex: 0 0 auto;
   display: flex;
@@ -277,18 +274,23 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-user-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-user-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-user-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-user-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-user-buttons {
   display: flex;
   margin-top: var(--dl-space-space-unit);
@@ -296,20 +298,24 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .admin-user-icon04 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .admin-user-icon06 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .admin-user-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-user-container01 {
   width: 200px;
   height: 92px;
@@ -317,6 +323,7 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-user-container02 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -324,6 +331,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-user-hero-heading {
   font-size: 48px;
   max-width: 800px;
@@ -331,10 +339,12 @@ export default {
   font-family: "STIX Two Text";
   line-height: 150%;
 }
+
 .admin-user-hero-sub-heading {
   font-size: 18px;
   text-align: center;
 }
+
 .admin-user-container03 {
   width: 100%;
   height: 138px;
@@ -344,6 +354,7 @@ export default {
   justify-content: center;
   background-color: var(--dl-color-gray-black);
 }
+
 .admin-user-navlink {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -355,12 +366,14 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .admin-user-hero1 {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
   background-color: var(--dl-color-gray-black);
 }
+
 .admin-user-container04 {
   flex: 0 0 auto;
   width: auto;
@@ -372,6 +385,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-user-container05 {
   flex: 0 0 auto;
   width: 983px;
@@ -380,6 +394,7 @@ export default {
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .admin-user-ul {
   flex: 1;
   width: auto;
@@ -388,6 +403,7 @@ export default {
   margin-right: 639px;
   flex-direction: column;
 }
+
 .admin-user-li {
   color: var(--dl-color-gray-white);
   width: 899px;
@@ -398,6 +414,7 @@ export default {
   list-style-image: none;
   list-style-position: outside;
 }
+
 .admin-user-container06 {
   flex: 0 0 auto;
   width: 100%;
@@ -407,6 +424,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-user-container07 {
   flex: 0 0 auto;
   width: auto;
@@ -414,6 +432,7 @@ export default {
   display: flex;
   flex-direction: row;
 }
+
 .admin-user-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -422,9 +441,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .admin-user-footer1 {
   height: 246;
 }
+
 .admin-user-container08 {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -433,9 +454,11 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-user-logo2 {
   text-decoration: none;
 }
+
 .admin-user-separator {
   flex: 0 0 auto;
   width: 100%;
@@ -454,6 +477,7 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
+
 .admin-user-container09 {
   flex: 0 0 auto;
   width: 100%;
@@ -462,118 +486,146 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 @media(max-width: 991px) {
   .admin-user-hero {
     flex-direction: column;
   }
+
   .admin-user-container02 {
     align-items: center;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-twounits);
     padding-right: 0px;
   }
+
   .admin-user-hero-heading {
     text-align: center;
   }
+
   .admin-user-hero-sub-heading {
     text-align: center;
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
+
   .admin-user-hero1 {
     flex-direction: column;
   }
 }
+
 @media(max-width: 767px) {
   .admin-user-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-user-desktop-menu {
     display: none;
   }
+
   .admin-user-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .admin-user-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-user-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-user-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-user-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-user-hero {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-user-hero-sub-heading {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
+
   .admin-user-hero1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-user-footer1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-user-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .admin-user-container09 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .admin-user-text22 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
 @media(max-width: 479px) {
   .admin-user-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
+
   .admin-user-mobile-menu1 {
     padding: 16px;
   }
+
   .admin-user-hero {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .admin-user-container02 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-user-hero1 {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .admin-user-footer1 {
     padding: var(--dl-space-space-unit);
   }
+
   .admin-user-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .admin-user-container09 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .admin-user-text22 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);

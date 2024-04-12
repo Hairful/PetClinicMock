@@ -38,6 +38,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .page-text {
   color: var(--dl-color-danger-300);
   font-size: 200px;

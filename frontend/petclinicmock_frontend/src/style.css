@@ -39,6 +39,7 @@
   --dl-color-custom-neutral-light: #FBFAF9;
   --dl-space-space-oneandhalfunits: 24px;
 }
+
 .button {
   color: var(--dl-color-gray-black);
   display: inline-block;
@@ -48,6 +49,7 @@
   border-radius: 4px;
   background-color: var(--dl-color-gray-white);
 }
+
 .input {
   color: var(--dl-color-gray-black);
   cursor: auto;
@@ -57,6 +59,7 @@
   border-radius: 4px;
   background-color: var(--dl-color-gray-white);
 }
+
 .textarea {
   color: var(--dl-color-gray-black);
   cursor: auto;
@@ -66,6 +69,7 @@
   border-radius: 4px;
   background-color: var(--dl-color-gray-white);
 }
+
 .list {
   width: 100%;
   margin: 1em 0px 1em 0px;
@@ -74,13 +78,16 @@
   list-style-type: none;
   list-style-position: outside;
 }
+
 .list-item {
   display: list-item;
 }
+
 .teleport-show {
   display: flex !important;
   transform: none !important;
 }
+
 .buttonFilled {
   color: var(--dl-color-custom-neutral-light);
   transition: 0.3s;
@@ -93,9 +100,11 @@
   padding-bottom: var(--dl-space-space-halfunit);
   background-color: var(--dl-color-custom-primary1);
 }
+
 .buttonFilled:hover {
   background-color: var(--dl-color-custom-primary2);
 }
+
 .buttonFilledSecondary {
   color: var(--dl-color-custom-neutral-light);
   transition: 0.3s;
@@ -107,9 +116,11 @@
   padding-bottom: var(--dl-space-space-halfunit);
   background-color: var(--dl-color-custom-primary1);
 }
+
 .buttonFilledSecondary:hover {
   background-color: var(--dl-color-custom-primary2);
 }
+
 .buttonOutline {
   color: var(--dl-color-custom-neutral-dark);
   border: 1px solid;
@@ -122,10 +133,12 @@
   padding-right: var(--dl-space-space-oneandhalfunits);
   padding-bottom: var(--dl-space-space-halfunit);
 }
+
 .buttonOutline:hover {
   color: var(--dl-color-custom-primary1);
   border-color: var(--dl-color-custom-primary1);
 }
+
 .buttonFlat {
   color: var(--dl-color-custom-neutral-dark);
   font-family: Noto Sans;
@@ -135,9 +148,11 @@
   padding-right: var(--dl-space-space-oneandhalfunits);
   padding-bottom: var(--dl-space-space-halfunit);
 }
+
 .buttonFlat:hover {
   color: var(--dl-color-custom-primary1);
 }
+
 .featuresContainer {
   flex: 0 0 auto;
   color: var(--dl-color-custom-neutral-light);
@@ -148,6 +163,7 @@
   justify-content: center;
   background-color: var(--dl-color-custom-neutral-dark);
 }
+
 .featuresCard {
   color: var(--dl-color-custom-neutral-dark);
   width: 100%;
@@ -159,6 +175,7 @@
   justify-content: flex-start;
   background-color: var(--dl-color-custom-neutral-light);
 }
+
 .featuresIcon {
   fill: var(--dl-color-custom-neutral-dark);
   width: 2rem;
@@ -166,6 +183,7 @@
   flex-shrink: 0;
   margin-right: var(--dl-space-space-oneandhalfunits);
 }
+
 .freePricingCard {
   gap: var(--dl-space-space-twounits);
   color: var(--dl-color-custom-neutral-dark);
@@ -178,6 +196,7 @@
   flex-direction: column;
   background-color: var(--dl-color-custom-neutral-light);
 }
+
 .basicPricingCard {
   gap: var(--dl-space-space-twounits);
   color: var(--dl-color-custom-neutral-dark);
@@ -190,6 +209,7 @@
   flex-direction: column;
   background-color: var(--dl-color-custom-neutral-light);
 }
+
 .proPricingCard {
   gap: var(--dl-space-space-twounits);
   color: var(--dl-color-custom-neutral-dark);
@@ -202,6 +222,7 @@
   flex-direction: column;
   background-color: var(--dl-color-custom-neutral-light);
 }
+
 .faqContainer {
   flex: 0 0 auto;
   color: var(--dl-color-custom-neutral-light);
@@ -212,6 +233,7 @@
   justify-content: center;
   background-color: var(--dl-color-custom-neutral-dark);
 }
+
 .navbarContainer {
   color: var(--dl-color-custom-neutral-dark);
   width: 100%;
@@ -225,10 +247,12 @@
   justify-content: space-between;
   background-color: var(--dl-color-custom-secondary1);
 }
+
 .mobileMenu {
   color: var(--dl-color-custom-neutral-dark);
   background-color: var(--dl-color-custom-secondary1);
 }
+
 .heroContainer {
   color: var(--dl-color-custom-neutral-dark);
   width: 100%;
@@ -243,6 +267,7 @@
   justify-content: center;
   background-color: var(--dl-color-custom-secondary1);
 }
+
 .pricingContainer {
   gap: var(--dl-space-space-twounits);
   color: var(--dl-color-custom-neutral-dark);
@@ -257,6 +282,7 @@
   justify-content: center;
   background-color: var(--dl-color-custom-secondary1);
 }
+
 .bannerContainer {
   color: var(--dl-color-custom-neutral-dark);
   width: 100%;
@@ -270,6 +296,7 @@
   justify-content: space-between;
   background-color: var(--dl-color-custom-secondary1);
 }
+
 .footerContainer {
   color: var(--dl-color-custom-neutral-dark);
   width: 100%;
@@ -283,9 +310,11 @@
   justify-content: space-between;
   background-color: var(--dl-color-custom-secondary1);
 }
+
 .socialIcons {
   fill: var(--dl-color-custom-neutral-dark);
 }
+
 .heading3 {
   font-size: 20px;
   text-align: center;
@@ -293,6 +322,7 @@
   font-weight: 600;
   line-height: 150%;
 }
+
 .Content {
   font-size: 16px;
   font-family: Inter;
@@ -301,6 +331,7 @@
   text-transform: none;
   text-decoration: none;
 }
+
 .logo {
   font-size: 2em;
   font-family: STIX Two Text;
@@ -308,6 +339,7 @@
   line-height: 150%;
   text-transform: uppercase;
 }
+
 .heading1 {
   font-size: 48px;
   text-align: center;
@@ -315,6 +347,7 @@
   font-weight: 700;
   line-height: 150%;
 }
+
 .Heading {
   font-size: 32px;
   font-family: Inter;
@@ -323,18 +356,21 @@
   text-transform: none;
   text-decoration: none;
 }
+
 .bodySmall {
   font-size: 16px;
   font-family: Noto Sans;
   font-weight: 400;
   line-height: 150%;
 }
+
 .heading2 {
   font-size: 35px;
   font-family: STIX Two Text;
   font-weight: 600;
   line-height: 150%;
 }
+
 .overline {
   font-size: 12px;
   font-family: Noto Sans;
@@ -342,6 +378,7 @@
   line-height: 150%;
   text-transform: uppercase;
 }
+
 .bodyLarge {
   font-size: 18px;
   font-family: Noto Sans;

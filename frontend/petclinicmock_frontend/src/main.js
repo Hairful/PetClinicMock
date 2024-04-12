@@ -16,7 +16,7 @@ new Vue({
 }).$mount('#app')
 
 axios.interceptors.request.use((config) => {
-  if(localStorage.getItem('Token')) {
+  if (localStorage.getItem('Token')) {
     config.headers.Authorization = localStorage.getItem('Token')
   }
   return config;
@@ -26,26 +26,26 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(
   response => {
-      return response;
+    return response;
   },
   error => {
       if (error.response) {
           switch (error.response.status) {
               case 401:
                   // 返回 401 清除token信息并跳转到登录页面
+                  window.alert("尚未登录");
                   localStorage.clear();
                   router.replace({
                       path: 'login',
-                      query: {redirect: router.currentRoute.fullPath}
                   })
+                  break;
               case 403:
                 window.alert("无对应权限");
                 router.replace({
                   path: 'menu',
-                  query: {redirect: router.currentRoute.fullPath}
               })
-              
+              break;
           }
       }
-      return Promise.reject(error.response.data)   // 返回接口返回的错误信息
-  });
+      return Promise.reject(error.response.data) // 返回接口返回的错误信息
+    });

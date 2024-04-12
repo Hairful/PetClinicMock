@@ -2,27 +2,24 @@
   <div class="case-study-menu-container">
     <Chatbot />
     <div class="case-study-menu-header">
-      <header
-        data-thq="thq-navbar"
-        class="navbarContainer case-study-menu-navbar-interactive"
-      >
+      <header data-thq="thq-navbar" class="navbarContainer case-study-menu-navbar-interactive">
         <router-link to="/" class="case-study-menu-logo logo">
           PETCLINICMock
         </router-link>
         <div>
-        <div data-thq="thq-navbar-nav" class="case-study-menu-desktop-menu">
-          <span>
+          <div data-thq="thq-navbar-nav" class="case-study-menu-desktop-menu">
             <span>
-              登录用户：
-              <span v-html="rawf7m2"></span>
+              <span>
+                登录用户：
+                <span v-html="rawf7m2"></span>
+              </span>
+              <span class="case-study-menu-text02">{{ name }}</span>
             </span>
-            <span class="case-study-menu-text02">{{name}}</span>
-          </span>
+          </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+          </div>
         </div>
-        <div>
-          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
-        </div>
-      </div>
       </header>
     </div>
     <div class="case-study-menu-container1"></div>
@@ -42,12 +39,9 @@
         <br />
       </h1>
       <div class="case-study-menu-container5">
-        <router-link
-          v-for="(diseaseType, index) in diseaseTypes"
-          :key="index"
-          :to="{path: '/case-study-list', query: { diseaseType: diseaseType }}"
-          :class="`case-study-menu-navlink1 button`"
-        >
+        <router-link v-for="(diseaseType, index) in diseaseTypes" :key="index"
+          :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
+          :class="`case-study-menu-navlink1 button`">
           <span class="heading3">{{ diseaseType }}</span>
         </router-link>
       </div>
@@ -91,23 +85,23 @@ export default {
       raw2f87: ' ',
       rawll5g: ' ',
       diseaseTypes: [],
-      name:localStorage.getItem('username'),
+      name: localStorage.getItem('username'),
     }
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       localStorage.clear();
       this.$router.push('/');
     }
   },
   created() {
     axios
-      .get(`/casestudy/disease/type`, 
+      .get(`/casestudy/disease/type`,
         {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('Token')}`
-        }
-      })
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`
+          }
+        })
       .then((response) => {
         if (response.data.status === 0) {
           this.diseaseTypes = response.data.diseaseTypes;
@@ -131,6 +125,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .case-study-menu-header {
   width: 100%;
   display: flex;
@@ -140,26 +135,32 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+
 .case-study-menu-logo {
   text-decoration: none;
 }
+
 .case-study-menu-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
+
 .case-study-menu-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;
 }
+
 .case-study-menu-burger-menu {
   display: none;
 }
+
 .case-study-menu-icon {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .case-study-menu-mobile-menu1 {
   top: 0px;
   left: 0px;
@@ -172,11 +173,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .case-study-menu-nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .case-study-menu-top {
   width: 100%;
   display: flex;
@@ -184,16 +187,19 @@ export default {
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
+
 .case-study-menu-close-menu {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .case-study-menu-icon02 {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .case-study-menu-links {
   flex: 0 0 auto;
   display: flex;
@@ -201,18 +207,23 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .case-study-menu-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .case-study-menu-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .case-study-menu-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .case-study-menu-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .case-study-menu-buttons {
   display: flex;
   margin-top: var(--dl-space-space-unit);
@@ -220,20 +231,24 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .case-study-menu-icon04 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .case-study-menu-icon06 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .case-study-menu-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+
 .case-study-menu-container1 {
   width: 200px;
   height: 92px;
@@ -241,6 +256,7 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .case-study-menu-container2 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -248,14 +264,17 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .case-study-menu-hero-heading {
   max-width: 800px;
   text-align: center;
 }
+
 .case-study-menu-hero-sub-heading {
   font-size: 18px;
   text-align: center;
 }
+
 .case-study-menu-container3 {
   width: 100%;
   height: 138px;
@@ -265,6 +284,7 @@ export default {
   justify-content: center;
   background-color: var(--dl-color-gray-black);
 }
+
 .case-study-menu-navlink {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -276,18 +296,21 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .case-study-menu-hero1 {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
   background-color: var(--dl-color-gray-black);
 }
+
 .case-study-menu-hero-heading1 {
   color: var(--dl-color-gray-white);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
 }
+
 .case-study-menu-container5 {
   flex: 1;
   width: auto;
@@ -298,6 +321,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .case-study-menu-navlink1 {
   width: 180px;
   height: 100px;
@@ -311,6 +335,7 @@ export default {
   justify-content: center;
   align-items: center
 }
+
 .case-study-menu-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -319,9 +344,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .case-study-menu-footer1 {
   height: 246;
 }
+
 .case-study-menu-container6 {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -330,9 +357,11 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .case-study-menu-logo2 {
   text-decoration: none;
 }
+
 .case-study-menu-separator {
   flex: 0 0 auto;
   width: 100%;
@@ -351,6 +380,7 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
+
 .case-study-menu-container7 {
   flex: 0 0 auto;
   width: 100%;
@@ -359,121 +389,150 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 @media(max-width: 991px) {
   .case-study-menu-hero {
     flex-direction: column;
   }
+
   .case-study-menu-container2 {
     align-items: center;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-twounits);
     padding-right: 0px;
   }
+
   .case-study-menu-hero-heading {
     text-align: center;
   }
+
   .case-study-menu-hero-sub-heading {
     text-align: center;
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
+
   .case-study-menu-hero1 {
     flex-direction: column;
   }
+
   .case-study-menu-hero-heading1 {
     text-align: center;
   }
 }
+
 @media(max-width: 767px) {
   .case-study-menu-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .case-study-menu-desktop-menu {
     display: none;
   }
+
   .case-study-menu-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .case-study-menu-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .case-study-menu-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .case-study-menu-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .case-study-menu-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .case-study-menu-hero {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .case-study-menu-hero-sub-heading {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
+
   .case-study-menu-hero1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .case-study-menu-footer1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .case-study-menu-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .case-study-menu-container7 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .case-study-menu-text24 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
 @media(max-width: 479px) {
   .case-study-menu-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
+
   .case-study-menu-mobile-menu1 {
     padding: 16px;
   }
+
   .case-study-menu-hero {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .case-study-menu-container2 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .case-study-menu-hero1 {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .case-study-menu-footer1 {
     padding: var(--dl-space-space-unit);
   }
+
   .case-study-menu-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .case-study-menu-container7 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .case-study-menu-text24 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
