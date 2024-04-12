@@ -208,11 +208,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'Register - Roasted Rusty Swallow',
+    title: 'Register - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'Register - Roasted Rusty Swallow',
+        content: 'Register - PetClinicMock',
       },
     ],
   },

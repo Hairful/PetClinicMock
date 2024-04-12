@@ -148,11 +148,11 @@ export default {
       });
   },
   metaInfo: {
-    title: 'RolePlayDetail - Roasted Rusty Swallow',
+    title: 'RolePlayDetail - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'RolePlayDetail - Roasted Rusty Swallow',
+        content: 'RolePlayDetail - PetClinicMock',
       },
     ],
   },

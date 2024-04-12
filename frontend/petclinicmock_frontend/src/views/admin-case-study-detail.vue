@@ -761,11 +761,11 @@ export default {
     });
   },
   metaInfo: {
-    title: 'AdminCaseStudyDetail - Roasted Rusty Swallow',
+    title: 'AdminCaseStudyDetail - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminCaseStudyDetail - Roasted Rusty Swallow',
+        content: 'AdminCaseStudyDetail - PetClinicMock',
       },
     ],
   },

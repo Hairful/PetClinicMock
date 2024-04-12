@@ -125,11 +125,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'AdminMenu - Roasted Rusty Swallow',
+    title: 'AdminMenu - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminMenu - Roasted Rusty Swallow',
+        content: 'AdminMenu - PetClinicMock',
       },
     ],
   },

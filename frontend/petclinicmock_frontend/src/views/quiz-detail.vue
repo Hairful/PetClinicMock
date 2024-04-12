@@ -250,11 +250,11 @@ export default {
 	    }
   	},
   metaInfo: {
-    title: 'QuizDetail - Roasted Rusty Swallow',
+    title: 'QuizDetail - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'QuizDetail - Roasted Rusty Swallow',
+        content: 'QuizDetail - PetClinicMock',
       },
     ],
   },

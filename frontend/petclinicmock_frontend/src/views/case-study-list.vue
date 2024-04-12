@@ -140,11 +140,11 @@ export default {
       });
   },
   metaInfo: {
-    title: 'CaseStudyList - Roasted Rusty Swallow',
+    title: 'CaseStudyList - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'CaseStudyList - Roasted Rusty Swallow',
+        content: 'CaseStudyList - PetClinicMock',
       },
     ],
   },

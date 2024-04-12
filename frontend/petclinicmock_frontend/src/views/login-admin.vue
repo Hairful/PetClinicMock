@@ -156,11 +156,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'LoginAdmin - Roasted Rusty Swallow',
+    title: 'LoginAdmin - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'LoginAdmin - Roasted Rusty Swallow',
+        content: 'LoginAdmin - PetClinicMock',
       },
     ],
   },

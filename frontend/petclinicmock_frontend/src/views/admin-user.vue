@@ -183,11 +183,11 @@ export default {
     this.fetchUsers()
   },
   metaInfo: {
-    title: 'AdminUser - Roasted Rusty Swallow',
+    title: 'AdminUser - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminUser - Roasted Rusty Swallow',
+        content: 'AdminUser - PetClinicMock',
       },
     ],
   },

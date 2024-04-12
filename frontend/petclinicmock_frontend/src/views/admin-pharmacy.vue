@@ -187,11 +187,11 @@
       this.fetchMedicines();
     },
     metaInfo: {
-      title: 'AdminPharmacy - Roasted Rusty Swallow',
+      title: 'AdminPharmacy - PetClinicMock',
       meta: [
         {
           property: 'og:title',
-          content: 'AdminPharmacy - Roasted Rusty Swallow',
+          content: 'AdminPharmacy - PetClinicMock',
         },
       ],
     },

@@ -126,11 +126,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'RolePlayList - Roasted Rusty Swallow',
+    title: 'RolePlayList - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'RolePlayList - Roasted Rusty Swallow',
+        content: 'RolePlayList - PetClinicMock',
       },
     ],
   },

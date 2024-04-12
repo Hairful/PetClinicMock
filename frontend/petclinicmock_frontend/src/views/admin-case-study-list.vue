@@ -301,11 +301,11 @@ export default {
       });
   },
   metaInfo: {
-    title: 'AdminCaseStudyList - Roasted Rusty Swallow',
+    title: 'AdminCaseStudyList - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminCaseStudyList - Roasted Rusty Swallow',
+        content: 'AdminCaseStudyList - PetClinicMock',
       },
     ],
   },

@@ -104,11 +104,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'AdminRolePlayMenu - Roasted Rusty Swallow',
+    title: 'AdminRolePlayMenu - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminRolePlayMenu - Roasted Rusty Swallow',
+        content: 'AdminRolePlayMenu - PetClinicMock',
       },
     ],
   },

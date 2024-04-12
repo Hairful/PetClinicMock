@@ -254,11 +254,11 @@ export default {
       })
   },
   metaInfo: {
-    title: 'AdminVirtualTour - Roasted Rusty Swallow',
+    title: 'AdminVirtualTour - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminVirtualTour - Roasted Rusty Swallow',
+        content: 'AdminVirtualTour - PetClinicMock',
       },
     ],
   },

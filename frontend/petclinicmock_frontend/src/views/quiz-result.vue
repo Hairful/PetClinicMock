@@ -159,11 +159,11 @@ export default {
     });
     },
   metaInfo: {
-    title: 'QuizResult - Roasted Rusty Swallow',
+    title: 'QuizResult - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'QuizResult - Roasted Rusty Swallow',
+        content: 'QuizResult - PetClinicMock',
       },
     ],
   },

@@ -374,11 +374,11 @@ export default {
       .catch(error => console.log(error));
   },
   metaInfo: {
-    title: 'AdminRolePlayList - Roasted Rusty Swallow',
+    title: 'AdminRolePlayList - PetClinicMock',
     meta: [
       {
         property: 'og:title',
-        content: 'AdminRolePlayList - Roasted Rusty Swallow',
+        content: 'AdminRolePlayList - PetClinicMock',
       },
     ],
   },
