@@ -1,7 +1,8 @@
-<!-- Chatbot.vue -->
 <template>
     <div class="chatbot" :class="{ expanded: isExpanded }" @click="toggleChatbot">
-        aaaaaa<!-- Your chatbot content goes here -->
+        <div>
+    <iframe :src="externalLink" width="100%" height="500px" frameborder="0"></iframe>
+  </div>
     </div>
 </template>
 
@@ -10,10 +11,15 @@ export default {
     data() {
         return {
             isExpanded: false,
+            externalLink: 'https://share.fastgpt.in/chat/share?shareId=yzk07q9v4sq8yzcihvyh7sil'
         };
     },
     methods: {
         toggleChatbot() {
+            if (!this.isExpanded) {
+                // Redirect to external link when expanding chatbot
+                window.location.href = this.externalLink;
+            }
             this.isExpanded = !this.isExpanded;
         },
     },
