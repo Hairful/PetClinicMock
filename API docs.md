@@ -364,7 +364,7 @@ Content-Type: application/json
 | 名称          | 位置   | 类型    | 必选 | 备注          |
 | ------------- | ------ | ------- | ---- | ------------- |
 | Authorization | Header | string  | 是   | 身份验证token |
-| searchString      | Param  | String | 是   | 病例ID        |
+| searchString      | Param  | String | 否   | 搜索字符串       |
 
 `Example`
 
