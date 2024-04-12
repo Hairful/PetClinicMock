@@ -890,6 +890,18 @@ transform: translate(100px,110px);
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
+  //创建动物仓标签
+  const livingRoom = new SpriteCanvas(
+    camera,
+    "动物仓",
+    new THREE.Vector3(-6, 10, 21)
+  );
+  scene.add(livingRoom.mesh);
+
+  // 点击动物仓时弹出视频框
+  livingRoom.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
 
 
   container.value.appendChild(renderer.domElement);
