@@ -153,6 +153,7 @@ export default {
         probAns: '',
         lastAns: '',
       },
+      totalTime:0,
     }
   },
   methods: {
@@ -236,6 +237,7 @@ export default {
       const uploadResult = await client.put('quiz/' + file.name, file);
       this.urls[index] = uploadResult.url;
       console.log('上传成功:', uploadResult);
+      this.save();
     },
     deleteProb(index) {
       this.probs.splice(index, 1);
@@ -313,10 +315,23 @@ export default {
     },
     async clearImage(index) {
       this.images[index] = '';//赋值
-      const Result = await client.delete(this.urls[index]);
+      const path = this.getPath(this.urls[index])
+      const Result = await client.delete(path);
       console.log('删除成功:', Result);
       this.urls[index] = '';
       this.probs[index].probImg = this.images[index];
+      this.save();
+    },
+    getPath(url) {
+      let path = '';
+      try {
+        path = url.substring(43);
+        console.log(path);
+      } catch (error) {
+        path = ''
+      }
+      console.log(path);
+      return path;
     },
     ans2option(ans) {
       switch (ans) {
@@ -360,6 +375,7 @@ export default {
           this.probs = response.data.probs;
           this.quizName = response.data.quizName;
           this.totalCredits = response.data.totalCredits;
+          this.totalTime = response.data.timer;
           this.probs.forEach(prob => {
             this.options.push(this.ans2option(prob.probAns));
             this.newText.push(prob.probText);

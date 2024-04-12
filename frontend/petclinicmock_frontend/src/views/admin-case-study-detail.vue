@@ -393,7 +393,8 @@ export default {
         });
     },
     async deleteImage(index, pvIndex, kind) {
-      const Result = await client.delete(this.switchKind(kind)[index][pvIndex]);
+      const path = this.getPath(this.switchKind(kind)[index][pvIndex])
+      const Result = await client.delete(path);
       console.log('删除成功:', Result);
       this.switchKind(kind)[index].splice(pvIndex, 1);
       this.modifyPV(index);
@@ -406,7 +407,17 @@ export default {
       this.saveImage(file, index, kind);
 
     },
-
+    getPath(url) {
+      let path = '';
+      try {
+        path = url.substring(43);
+        console.log(path);
+      } catch (error) {
+        path = ''
+      }
+      console.log(path);
+      return path;
+    },
     async img(e, index, kind) {
       try {
         //let that = this;//改变this指向

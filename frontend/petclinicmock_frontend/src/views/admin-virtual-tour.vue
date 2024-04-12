@@ -200,11 +200,10 @@ export default {
     getPath(url) {
       let path = '';
       try {
-        let fileArr = url.split('/');
-        path = fileArr[3]
-        // console.log('suffic',suffic);
+        path = url.substring(43);
+        console.log(path);
       } catch (error) {
-        suffic = ''
+        path = ''
       }
       console.log(path);
       return path;

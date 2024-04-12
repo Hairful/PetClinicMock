@@ -49,6 +49,10 @@
                 <input type="text" v-model="inputName[index]" :placeholder="`${quiz.quizName}`" class="input" />
                 <button type="button" class="button" @click="renameQuiz(index)">重命名</button>
               </div>
+              <div class="admin-quiz-list-container08">
+                <input type="text" v-model="quiz.timer"  class="input" />
+                <button type="button" class="button" @click="renameQuiz(index)">修改限时</button>
+              </div>
               <router-link :to="`/admin-quiz-detail?quizID=${quiz.quizID}`" class="admin-quiz-list-navlink1 button">
                 管理问题
               </router-link>
@@ -139,6 +143,7 @@ export default {
     renameQuiz(index) {
       const quizName = this.inputName[index];
       const quizID = this.quizzes[index].quizID;
+      const timer = this.quizzes[index].timer;
       axios({
         method: 'put',
         url: '/admin/quiz',
@@ -149,6 +154,7 @@ export default {
         data: {
           quizID: quizID,
           quizName: quizName,
+          timer: timer,
           totalCredits: this.quizzes[index].totalCredits,
           probs: this.quizzes[index].probs,
         }

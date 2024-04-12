@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'AdminMenu',
   props: {},
@@ -105,6 +106,14 @@ export default {
       localStorage.clear();
       this.$router.push('/');
     }
+  },
+  created() {
+    axios.get('/admin/user', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+          'Content-Type': 'application/json'
+        }
+      })
   },
   metaInfo: {
     title: 'AdminMenu - PetClinicMock',

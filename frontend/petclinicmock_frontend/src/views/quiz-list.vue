@@ -105,7 +105,6 @@ export default {
       .then((response) => {
         if (response.data.status === 0) {
           this.quizzes = response.data.quizzes;
-          console.log(response.data)
         } else {
           console.log(response.data.message);
         }
