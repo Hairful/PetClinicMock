@@ -9,11 +9,11 @@ const client = new OSS({
     bucket: 'pcm123', // 示例：'my-bucket-name'，填写存储空间名称。
 });
 
-const upload = async function(dir,file) {
+const upload = async function (dir, file) {
     try {
         // 上传文件到OSS，'object'是OSS中的文件名，'localfile'是本地文件的路径。
         const uploadResult = await client.put(dir + file.name, file);
-        
+
         console.log('上传成功:', uploadResult);
         return getResult;
     } catch (error) {
