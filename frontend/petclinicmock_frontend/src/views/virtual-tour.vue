@@ -731,7 +731,7 @@ transform: translate(100px,110px);
   });
 
   // 创建影像室
-  let arcPosition = new THREE.Vector3(10, 30, 10);
+  let arcPosition = new THREE.Vector3(10, 20, 10);
   let arcIndex = 66;
   let arcUrl = "./img/arc/";
   let arcEuler = new THREE.Euler(0, -Math.PI / 2, 0);
@@ -759,7 +759,7 @@ transform: translate(100px,110px);
   const fro13text = new SpriteCanvas(
     camera,
     "回二楼走廊",
-    new THREE.Vector3(10, 30, 8)
+    new THREE.Vector3(10, 20, 8)
   );
   scene.add(fro13text.mesh);
   fro13text.onClick(() => {
@@ -903,6 +903,110 @@ transform: translate(100px,110px);
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
+  //创建动物仓标签
+  const washingRoom = new SpriteCanvas(
+    camera,
+    "宠物洗浴区",
+    new THREE.Vector3(-8, 10, 18)
+  );
+  scene.add(washingRoom.mesh);
+
+  // 点击动物仓时弹出视频框
+  washingRoom.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建药品标签
+  const med = new SpriteCanvas(
+    camera,
+    "药品",
+    new THREE.Vector3(2, 11, 42)
+  );
+  scene.add(med.mesh);
+
+  // 点击药品时弹出视频框
+  med.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建称量仪器标签
+  const medEquipment = new SpriteCanvas(
+    camera,
+    "称量仪器",
+    new THREE.Vector3(2, 9.5, 40)
+  );
+  scene.add(medEquipment.mesh);
+
+  // 点击称量仪器时弹出视频框
+  medEquipment.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建特殊诊室详情
+  const specDetail = new SpriteCanvas(
+    camera,
+    "专诊详情",
+    new THREE.Vector3(13, 10, 39)
+  );
+  scene.add(specDetail.mesh);
+
+  // 点击动物仓时弹出视频框
+  specDetail.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建特殊诊室详情
+  const arcDetail = new SpriteCanvas(
+    camera,
+    "档案详情",
+    new THREE.Vector3(9, 20, 9)
+  );
+  scene.add(arcDetail.mesh);
+
+  // 点击动物仓时弹出视频框
+  arcDetail.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建手术准备室详情
+  const preDetail = new SpriteCanvas(
+    camera,
+    "准备室详情",
+    new THREE.Vector3(6, 10, 18)
+  );
+  scene.add(preDetail.mesh);
+
+  // 点击动物仓时弹出视频框
+  preDetail.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建处理台详情
+  const proDetail = new SpriteCanvas(
+    camera,
+    "处理台",
+    new THREE.Vector3(13.8, 8.8, 10)
+  );
+  scene.add(proDetail.mesh);
+
+  // 点击处理台时弹出视频框
+  proDetail.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  //创建设备详情
+  const proEquipment = new SpriteCanvas(
+    camera,
+    "处理设备",
+    new THREE.Vector3(16, 10.5, 9)
+  );
+  scene.add(proEquipment.mesh);
+
+  // 点击处理台时弹出视频框
+  proEquipment.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
 
   container.value.appendChild(renderer.domElement);
   render();
@@ -948,7 +1052,7 @@ class Item {
     try {
       const response = await axios.get('/3DVirtualTour/item', {
         headers: {
-          Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' // 替换为实际的身份验证 token
+          Authorization: `${localStorage.getItem('Token')}` // 替换为实际的身份验证 token
         }
       });
       const data = response.data;
