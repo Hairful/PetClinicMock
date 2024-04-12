@@ -32,16 +32,20 @@
         <span class="heading2">总分： {{ this.totalCredits }}</span>
       </div>
     </div>
-    <div class="quiz-detail-container04">
-      <router-link to="/quiz-list" class="quiz-detail-navlink button">
-        重选测试
-      </router-link>
-      <router-link to="/menu" class="quiz-detail-navlink1 button">
-        返回菜单
-      </router-link>
-      <div class="quiz-detail-text22 bodyLarge">剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}
+    <div class="quiz-detail-hero1 heroContainer">
+      <div class="quiz-detail-container04">
+        <router-link to="/quiz-list" class="quiz-detail-navlink button">
+          重选测试
+        </router-link>
+        <router-link to="/menu" class="quiz-detail-navlink1 button">
+          返回菜单
+        </router-link>  
+      </div> 
+      <div class="quiz-detail-text22 bodyLarge">
+        剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}
       </div>
     </div>
+      
     <div class="quiz-detail-hero1 heroContainer" v-if="probs && probs.length > 0">
       <div class="quiz-detail-container05">
         <h1 class="quiz-detail-hero-heading1 heading1">
@@ -106,7 +110,7 @@ export default {
       answers: [],
       credit: 0,
       timer: null,
-      totalTime: 6000,
+      totalTime: 0,
       rest_h: 0,
       rest_min: 0,
       rest_s: 0,
@@ -194,7 +198,7 @@ export default {
           this.$message('时间到!');
           this.submit();
         }
-      }, 1);
+      }, 1000);
     },
     stopTimer() {
       clearInterval(this.timer);
@@ -228,6 +232,8 @@ export default {
           this.probs = response.data.probs;
           this.quizName = response.data.quizName;
           this.totalCredits = response.data.totalCredits;
+          this.totalTime = response.data.timer * 60;
+          console.log(response.data);
         } else if (response.data.status === 1) {
           console.log('No corresponding quizID');
         }

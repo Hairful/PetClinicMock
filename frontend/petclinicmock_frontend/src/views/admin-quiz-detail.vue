@@ -153,6 +153,7 @@ export default {
         probAns: '',
         lastAns: '',
       },
+      totalTime:0,
     }
   },
   methods: {
@@ -360,6 +361,7 @@ export default {
           this.probs = response.data.probs;
           this.quizName = response.data.quizName;
           this.totalCredits = response.data.totalCredits;
+          this.totalTime = response.data.timer;
           this.probs.forEach(prob => {
             this.options.push(this.ans2option(prob.probAns));
             this.newText.push(prob.probText);
