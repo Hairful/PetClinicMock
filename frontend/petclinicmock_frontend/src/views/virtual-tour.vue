@@ -354,7 +354,7 @@ transform: translate(100px,110px);
   const fro3text = new SpriteCanvas(
     camera,
     "前台",
-    new THREE.Vector3(-15, -1, -5)
+    new THREE.Vector3(-13, -1, -7)
   );
   scene.add(fro3text.mesh);
   fro3text.onClick(() => {
@@ -873,6 +873,20 @@ transform: translate(100px,110px);
 
   // 点击手术仪器时弹出视频框
   pathRoom.onClick(() => {
+    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+  });
+
+  
+  //创建诊室流程
+  const consultRoom = new SpriteCanvas(
+    camera,
+    "诊室详情",
+    new THREE.Vector3(-16, -1, -7)
+  );
+  scene.add(consultRoom.mesh);
+
+  // 点击手术仪器时弹出视频框
+  consultRoom.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
