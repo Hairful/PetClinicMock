@@ -4,7 +4,7 @@
  * 作者: {YYZ}
  */
 
-require('dotenv').config({ path: `.env.${process.env.NODE_ENV || 'default'}` });
+// require('dotenv').config({ path: `.env.${process.env.NODE_ENV || 'default'}` });
 
 const tokenKey = process.env.TOKEN_KEY || "onlne-generted-security-key";
 

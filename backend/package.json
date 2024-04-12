@@ -4,8 +4,7 @@
   "description": "PCM系统后端",
   "main": "src/server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/server.js",
-    "dev": "cross-env NODE_ENV=development node src/server.js"
+    "start": "node src/server.js"
   },
   "author": "YYZ SSR HGN",
   "license": "ISC",
@@ -13,7 +12,6 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
-    "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "fuse.js": "^7.0.0",
     "jsonwebtoken": "^9.0.2",

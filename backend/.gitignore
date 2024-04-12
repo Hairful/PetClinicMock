@@ -12,6 +12,7 @@ coverage
 .env
 .env.development
 .env.production
+.env.default
 
 # Benchmarking
 benchmarks/graphs
