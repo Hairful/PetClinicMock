@@ -4,7 +4,7 @@
  * 作者: {YYZ}
  */
 
-require('dotenv').config('.env.${process.env.NODE_ENV}');
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV || 'default'}` });
 
 const { Sequelize } = require('sequelize');
 
