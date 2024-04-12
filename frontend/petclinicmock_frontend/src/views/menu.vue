@@ -42,7 +42,7 @@
               </span>
             </router-link>
           </div>
-          <div class="menu-container5">
+          <div class="menu-container4">
             <router-link to="/case-study-menu" class="menu-navlink3 button">
               <span class="heading3">
                 <span>病例学习</span>
@@ -334,16 +334,6 @@ export default {
   border-radius: var(--dl-radius-radius-radius8);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
-}
-
-.menu-container5 {
-  flex: 0 0 auto;
-  width: auto;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .menu-navlink2 {
