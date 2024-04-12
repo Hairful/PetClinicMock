@@ -25,6 +25,7 @@ export default {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    z-index: 9999; /* Set a high value to ensure it's in front */
     /* Add your small logo styles here */
 }
 
@@ -33,5 +34,6 @@ export default {
     height: 500px;
     border: whitesmoke 1px solid;
     background-color: white;
+    z-index: 9999; /* Ensure the expanded chatbot is also in front */
 }
 </style>

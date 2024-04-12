@@ -1,26 +1,23 @@
 <template>
   <div class="home-container">
     <div class="home-header">
-      <header
-        data-thq="thq-navbar"
-        class="home-navbar-interactive navbarContainer"
-      >
+      <header data-thq="thq-navbar" class="home-navbar-interactive navbarContainer">
         <span class="logo">PETCLINICMOCK</span>
         <div data-thq="thq-navbar-nav" class="home-desktop-menu">
           <div class="home-buttons">
             <router-link to="/login" class="home-login buttonFlat">
               登录
             </router-link>
-              <router-link to="/register" class="home-register buttonFilled">
-                注册
-              </router-link>
+            <router-link to="/register" class="home-register buttonFilled">
+              注册
+            </router-link>
           </div>
         </div>
         <div data-thq="thq-burger-menu" class="home-burger-menu">
           <svg viewBox="0 0 1024 1024" class="home-icon socialIcons">
             <path
-              d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-            ></path>
+              d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z">
+            </path>
           </svg>
         </div>
       </header>
@@ -36,22 +33,20 @@
       </div>
     </div>
     <div class="home-footer">
-        <footer
-          class="home-footer1 footerContainer"
-        >
-          <div class="home-container2">
-            <span class="logo">PETCLINICMOCK</span>
-          </div>
-          <div class="home-separator"></div>
-          <div class="home-container3">
-            <span class="bodySmall home-text14">
-              © 2024 SWD-G02, All Rights Reserved.
-            </span>
-            <router-link to="/login-admin" class="home-navlink button">
-              管理员登录
-            </router-link>
-          </div>
-        </footer>
+      <footer class="home-footer1 footerContainer">
+        <div class="home-container2">
+          <span class="logo">PETCLINICMOCK</span>
+        </div>
+        <div class="home-separator"></div>
+        <div class="home-container3">
+          <span class="bodySmall home-text14">
+            © 2024 SWD-G02, All Rights Reserved.
+          </span>
+          <router-link to="/login-admin" class="home-navlink button">
+            管理员登录
+          </router-link>
+        </div>
+      </footer>
     </div>
   </div>
 </template>
@@ -92,6 +87,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .home-header {
   width: 100%;
   display: flex;
@@ -101,35 +97,43 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+
 .home-navbar-interactive {
   justify-content: space-between;
 }
+
 .home-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
+
 .home-buttons {
   display: flex;
   align-items: stretch;
   flex-direction: row;
   justify-content: flex-end;
 }
+
 .home-login {
   margin-right: 32px;
   text-decoration: none;
 }
+
 .home-register {
   text-decoration: none;
 }
+
 .home-burger-menu {
   display: none;
 }
+
 .home-icon {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .home-mobile-menu1 {
   top: 0px;
   left: 0px;
@@ -142,11 +146,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .home-nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .home-top {
   width: 100%;
   display: flex;
@@ -154,16 +160,19 @@ export default {
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
+
 .home-close-menu {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .home-icon02 {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .home-links {
   flex: 0 0 auto;
   display: flex;
@@ -171,18 +180,23 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .home-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .home-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .home-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .home-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .home-buttons1 {
   display: flex;
   margin-top: var(--dl-space-space-unit);
@@ -190,20 +204,24 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .home-icon04 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .home-icon06 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .home-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+
 .home-hero {
   flex: 0 0 auto;
   width: 100%;
@@ -213,9 +231,11 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
+
 .home-hero1 {
   height: 667px;
 }
+
 .home-container1 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -223,14 +243,17 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .home-hero-heading {
   max-width: 800px;
   text-align: center;
 }
+
 .home-hero-sub-heading {
   font-size: 18px;
   text-align: center;
 }
+
 .home-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -239,11 +262,13 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .home-footer1 {
   z-index: 100;
   box-shadow: 5px 5px 10px 0px #d4d4d4;
   border-radius: var(--dl-radius-radius-radius4);
 }
+
 .home-container2 {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -252,6 +277,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .home-nav1 {
   flex: 0 0 auto;
   display: flex;
@@ -259,12 +285,15 @@ export default {
   align-items: center;
   flex-direction: row;
 }
+
 .home-nav321 {
   margin-left: var(--dl-space-space-unit);
 }
+
 .home-nav421 {
   margin-left: var(--dl-space-space-unit);
 }
+
 .home-separator {
   flex: 0 0 auto;
   width: 100%;
@@ -283,6 +312,7 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
+
 .home-container3 {
   flex: 0 0 auto;
   width: 100%;
@@ -291,111 +321,137 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .home-navlink {
   color: var(--dl-color-primary-700);
   border-width: 0px;
   text-decoration: none;
   background-color: transparent;
 }
+
 @media(max-width: 991px) {
   .home-hero1 {
     flex-direction: column;
   }
+
   .home-container1 {
     align-items: center;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-twounits);
     padding-right: 0px;
   }
+
   .home-hero-heading {
     text-align: center;
   }
+
   .home-hero-sub-heading {
     text-align: center;
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
 }
+
 @media(max-width: 767px) {
   .home-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .home-desktop-menu {
     display: none;
   }
+
   .home-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .home-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .home-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .home-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .home-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .home-hero1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .home-hero-sub-heading {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
+
   .home-footer1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .home-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .home-container3 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .home-text14 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
 @media(max-width: 479px) {
   .home-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
+
   .home-mobile-menu1 {
     padding: 16px;
   }
+
   .home-hero1 {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .home-container1 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .home-footer1 {
     padding: var(--dl-space-space-unit);
   }
+
   .home-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .home-container3 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .home-text14 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
