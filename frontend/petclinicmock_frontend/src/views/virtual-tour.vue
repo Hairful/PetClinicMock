@@ -831,8 +831,8 @@ transform: translate(100px,110px);
     new THREE.Vector3(-5, 9.5, 32)
   );
   scene.add(surgerydesk.mesh);
-    // 点击手术仪器时弹出视频框
-    surgerydesk.onClick(() => {
+  // 点击手术仪器时弹出视频框
+  surgerydesk.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
@@ -876,7 +876,7 @@ transform: translate(100px,110px);
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
-  
+
   //创建诊室流程
   const consultRoom = new SpriteCanvas(
     camera,
