@@ -4,14 +4,12 @@
  * 作者: {YYZ}
  */
 
-const cryptoKey = '9cd5b4cf89949207'
-const cryptoIV = 'e6db271db12d4d47'
-const cryptoAlgorithm = "aes-128-cbc";
+require('dotenv').config('.env.${process.env.NODE_ENV}');
 
-// 未被使用
+const cryptoKey = process.env.CRYPTO_MENT || '9cd5b4cf89949207'
+const cryptoIV = process.env.CRYPTO_IV || 'e6db271db12d4d47'
 
 module.exports = {
     cryptoKey,
-    cryptoIV,
-    cryptoAlgorithm
+    cryptoIV
 };

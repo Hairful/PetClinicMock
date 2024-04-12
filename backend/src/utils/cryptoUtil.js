@@ -5,7 +5,7 @@
  */
 
 const crypto = require('crypto');
-const { cryptoKey, cryptoIV, cryptoAlgorithm } = require('../config/cryptoConfig');
+const { cryptoKey, cryptoIV } = require('../config/cryptoConfig');
 
 /**
  * encrypt - AES-128-CBC对称加密
@@ -13,7 +13,7 @@ const { cryptoKey, cryptoIV, cryptoAlgorithm } = require('../config/cryptoConfig
  * @returns {string} 加密后的密文，16进制字符串
  */
 exports.encrypt = (text) => {
-    const cipher = crypto.createCipheriv(cryptoAlgorithm, cryptoKey, cryptoIV);
+    const cipher = crypto.createCipheriv("aes-128-cbc", cryptoKey, cryptoIV);
     let encrypted = cipher.update(text, 'utf8', 'hex');
     encrypted += cipher.final('hex');
     return encrypted;
@@ -25,7 +25,7 @@ exports.encrypt = (text) => {
  * @returns {string} 解密后的明文
  */
 exports.decrypt = (encryptedText) => {
-    const decipher = crypto.createDecipheriv(cryptoAlgorithm, cryptoKey, cryptoIV);
+    const decipher = crypto.createDecipheriv("aes-128-cbc", cryptoKey, cryptoIV);
     let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
     return decrypted;

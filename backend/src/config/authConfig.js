@@ -4,7 +4,9 @@
  * 作者: {YYZ}
  */
 
-const tokenKey = "onlne-generted-security-key";
+require('dotenv').config(`.env.${process.env.NODE_ENV}`);
+
+const tokenKey = process.env.TOKEN_KEY || "onlne-generted-security-key";
 
 module.exports = {
     tokenKey

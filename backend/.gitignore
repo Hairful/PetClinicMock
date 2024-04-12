@@ -8,6 +8,11 @@ package-lock.json
 .nyc_output
 coverage
 
+# Environment
+.env
+.env.development
+.env.production
+
 # Benchmarking
 benchmarks/graphs
 
