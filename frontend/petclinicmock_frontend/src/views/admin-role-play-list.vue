@@ -1,25 +1,22 @@
 <template>
   <div class="admin-role-play-list-container">
     <div class="admin-role-play-list-header">
-      <header
-        data-thq="thq-navbar"
-        class="navbarContainer admin-role-play-list-navbar-interactive"
-      >
+      <header data-thq="thq-navbar" class="navbarContainer admin-role-play-list-navbar-interactive">
         <router-link to="/menu" class="admin-role-play-list-logo logo">
           PETCLINICMock
         </router-link>
         <div>
-        <div data-thq="thq-navbar-nav" class="admin-role-play-list-desktop-menu">
-          <span>
+          <div data-thq="thq-navbar-nav" class="admin-role-play-list-desktop-menu">
             <span>
-              登录用户：
+              <span>
+                登录用户：
+              </span>
+              <span class="admin-role-play-list-text02">{{ name }}</span>
             </span>
-            <span class="admin-role-play-list-text02">{{ name }}</span>
-          </span>
-        </div>
-        <div>
-          <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
-        </div>
+          </div>
+          <div>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+          </div>
         </div>
       </header>
     </div>
@@ -35,10 +32,7 @@
       </div>
     </div>
     <div class="admin-role-play-list-container03">
-      <router-link
-        to="/admin-role-play-menu"
-        class="admin-role-play-list-navlink button"
-      >
+      <router-link to="/admin-role-play-menu" class="admin-role-play-list-navlink button">
         重选角色
       </router-link>
       <router-link to="/admin-menu" class="admin-role-play-list-navlink1 button">
@@ -64,15 +58,11 @@
       </div>
       <div class="admin-role-play-list-container06">
         <ul class="admin-role-play-list-ul list">
-          <li 
-            v-for="(job, index) in jobs" 
-            :key="index" 
-            class="admin-role-play-list-li list-item Content"
-          >
+          <li v-for="(job, index) in jobs" :key="index" class="admin-role-play-list-li list-item Content">
             <div class="admin-role-play-list-container07">
               <div class="admin-role-play-list-container08">
                 <input type="text" v-model="jobs[index]" placeholder="" class="input" />
-                <button  type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">
+                <button type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">
                   <span>
                     <span>重命名</span>
                     <br />
@@ -131,11 +121,11 @@ export default {
       jobDetails: [],
       newJob: '',
       newJobDetail: '',
-      name:localStorage.getItem('username'),
+      name: localStorage.getItem('username'),
     }
   },
   methods: {
-    logout(){
+    logout() {
       localStorage.clear();
       this.$router.push('/');
     },
@@ -156,12 +146,12 @@ export default {
       this.jobDetails = [];
       this.prevJobs = [];
       axios
-        .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
+        .get(`/roleplaying/list?role=${this.role2number(this.role)}`,
           {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('Token')}`
-          }
-        })
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('Token')}`
+            }
+          })
         .then((response) => {
           if (response.data.status === 0) {
             this.jobs = response.data.jobs;
@@ -169,12 +159,12 @@ export default {
             // Fetch the details for each job
             const promises = this.jobs.map(job => {
               return axios
-                .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
+                .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`,
                   {
-                  headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('Token')}`
-                  }
-                });
+                    headers: {
+                      'Authorization': `Bearer ${localStorage.getItem('Token')}`
+                    }
+                  });
             });
             return Promise.all(promises);
           } else {
@@ -213,27 +203,27 @@ export default {
             jobDetail: detail
           }
         })
-        .then(response => {
-          if (response.status === 200) {
-            console.log(response.data.message); // "成功"
-            this.fetchJobs(); // fetch jobs after the axios request has completed
-          }
-        })
-        .catch(error => {
-          if (error.response) {
-            if (error.response.status === 404) {
-              if (error.response.data.status === 1) {
-                this.$message.warning(error.response.data.message); // "无对应role"
-              } else if (error.response.data.status === 2) {
-                this.$message.warning(error.response.data.message); // "无对应job"
-              }
-            } else if (error.response.status === 400) {
-              this.$message.warning(error.response.data.message); // "重复的job"
+          .then(response => {
+            if (response.status === 200) {
+              console.log(response.data.message); // "成功"
+              this.fetchJobs(); // fetch jobs after the axios request has completed
             }
-          } else {
-            console.log(error);
-          }
-        });
+          })
+          .catch(error => {
+            if (error.response) {
+              if (error.response.status === 404) {
+                if (error.response.data.status === 1) {
+                  this.$message.warning(error.response.data.message); // "无对应role"
+                } else if (error.response.data.status === 2) {
+                  this.$message.warning(error.response.data.message); // "无对应job"
+                }
+              } else if (error.response.status === 400) {
+                this.$message.warning(error.response.data.message); // "重复的job"
+              }
+            } else {
+              console.log(error);
+            }
+          });
       } else {
         axios({
           method: 'put',
@@ -249,27 +239,27 @@ export default {
             jobDetail: detail
           }
         })
-        .then(response => {
-          if (response.status === 200) {
-            console.log(response.data.message); // "成功"
-            this.fetchJobs(); // fetch jobs after the axios request has completed
-          }
-        })
-        .catch(error => {
-          if (error.response) {
-            if (error.response.status === 404) {
-              if (error.response.data.status === 1) {
-                this.$message.warning(error.response.data.message); // "无对应role"
-              } else if (error.response.data.status === 2) {
-                this.$message.warning(error.response.data.message); // "无对应job"
-              }
-            } else if (error.response.status === 400) {
-              this.$message.warning(error.response.data.message); // "重复的job"
+          .then(response => {
+            if (response.status === 200) {
+              console.log(response.data.message); // "成功"
+              this.fetchJobs(); // fetch jobs after the axios request has completed
             }
-          } else {
-            console.log(error);
-          }
-        });
+          })
+          .catch(error => {
+            if (error.response) {
+              if (error.response.status === 404) {
+                if (error.response.data.status === 1) {
+                  this.$message.warning(error.response.data.message); // "无对应role"
+                } else if (error.response.data.status === 2) {
+                  this.$message.warning(error.response.data.message); // "无对应job"
+                }
+              } else if (error.response.status === 400) {
+                this.$message.warning(error.response.data.message); // "重复的job"
+              }
+            } else {
+              console.log(error);
+            }
+          });
       }
     },
     async addNewJob() {
@@ -286,23 +276,23 @@ export default {
           jobDetail: this.newJobDetail
         }
       })
-      .then(response => {
-        if (response.status === 200) {
-          console.log(response.data.message); // "成功"
-          this.fetchJobs(); // fetch jobs after the axios request has completed
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          if (error.response.status === 404) {
-            this.$message.warning(error.response.data.message); // "无对应role"
-          } else if (error.response.status === 400) {
-            this.$message.warning(error.response.data.message); // "重复的job"
+        .then(response => {
+          if (response.status === 200) {
+            console.log(response.data.message); // "成功"
+            this.fetchJobs(); // fetch jobs after the axios request has completed
           }
-        } else {
-          console.log(error);
-        }
-      });
+        })
+        .catch(error => {
+          if (error.response) {
+            if (error.response.status === 404) {
+              this.$message.warning(error.response.data.message); // "无对应role"
+            } else if (error.response.status === 400) {
+              this.$message.warning(error.response.data.message); // "重复的job"
+            }
+          } else {
+            console.log(error);
+          }
+        });
     },
     async deleteJob(index) {
       try {
@@ -335,12 +325,12 @@ export default {
   created() {
     this.role = this.$route.query.role;
     axios
-      .get(`/roleplaying/list?role=${this.role2number(this.role)}`, 
+      .get(`/roleplaying/list?role=${this.role2number(this.role)}`,
         {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('Token')}`
-        }
-      })
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('Token')}`
+          }
+        })
       .then((response) => {
         if (response.data.status === 0) {
           this.jobs = response.data.jobs;
@@ -348,12 +338,12 @@ export default {
           // Fetch the details for each job
           const promises = this.jobs.map(job => {
             return axios
-              .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`, 
+              .get(`/roleplaying/detail?role=${this.role2number(this.role)}&job=${job}`,
                 {
-                headers: {
-                  'Authorization': `Bearer ${localStorage.getItem('Token')}`
-                }
-              });
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('Token')}`
+                  }
+                });
           });
           return Promise.all(promises);
         } else {
@@ -394,6 +384,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .admin-role-play-list-header {
   width: 100%;
   display: flex;
@@ -403,26 +394,32 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+
 .admin-role-play-list-logo {
   text-decoration: none;
 }
+
 .admin-role-play-list-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
+
 .admin-role-play-list-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;
 }
+
 .admin-role-play-list-burger-menu {
   display: none;
 }
+
 .admin-role-play-list-icon {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-role-play-list-mobile-menu1 {
   top: 0px;
   left: 0px;
@@ -435,11 +432,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .admin-role-play-list-nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-role-play-list-top {
   width: 100%;
   display: flex;
@@ -447,16 +446,19 @@ export default {
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
+
 .admin-role-play-list-close-menu {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .admin-role-play-list-icon02 {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-role-play-list-links {
   flex: 0 0 auto;
   display: flex;
@@ -464,18 +466,23 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-role-play-list-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-role-play-list-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-role-play-list-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-role-play-list-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-role-play-list-buttons {
   display: flex;
   margin-top: var(--dl-space-space-unit);
@@ -483,20 +490,24 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .admin-role-play-list-icon04 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .admin-role-play-list-icon06 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .admin-role-play-list-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-role-play-list-container01 {
   width: 200px;
   height: 92px;
@@ -504,6 +515,7 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-role-play-list-container02 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -511,6 +523,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-role-play-list-hero-heading {
   font-size: 48px;
   max-width: 800px;
@@ -518,14 +531,17 @@ export default {
   font-family: "STIX Two Text";
   line-height: 150%;
 }
+
 .admin-role-play-list-text04 {
   color: var(--dl-color-custom-primary2);
   font-weight: 900;
 }
+
 .admin-role-play-list-hero-sub-heading {
   font-size: 18px;
   text-align: center;
 }
+
 .admin-role-play-list-container03 {
   width: 100%;
   height: 138px;
@@ -535,6 +551,7 @@ export default {
   justify-content: center;
   background-color: var(--dl-color-gray-black);
 }
+
 .admin-role-play-list-navlink {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -547,6 +564,7 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .admin-role-play-list-navlink1 {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -558,18 +576,21 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .admin-role-play-list-hero1 {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
   background-color: var(--dl-color-gray-black);
 }
+
 .admin-role-play-list-hero-heading1 {
   color: var(--dl-color-gray-white);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
 }
+
 .admin-role-play-list-container04 {
   flex: 0 0 auto;
   width: auto;
@@ -579,6 +600,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .admin-role-play-list-container05 {
   flex: 0 0 auto;
   width: 100%;
@@ -587,6 +609,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
+
 .admin-role-play-list-container06 {
   flex: 0 0 auto;
   width: auto;
@@ -595,10 +618,12 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
+
 .admin-role-play-list-ul {
   width: auto;
   position: relative;
 }
+
 .admin-role-play-list-li {
   color: var(--dl-color-gray-white);
   width: auto;
@@ -609,6 +634,7 @@ export default {
   list-style-image: none;
   list-style-position: outside;
 }
+
 .admin-role-play-list-container07 {
   flex: 0 0 auto;
   width: 100%;
@@ -616,6 +642,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .admin-role-play-list-container08 {
   flex: 0 0 auto;
   width: auto;
@@ -624,15 +651,18 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
+
 .admin-role-play-list-button2 {
   width: 94px;
   height: 36px;
 }
+
 .admin-role-play-list-navlink2 {
   width: 180px;
   height: 35px;
   text-decoration: none;
 }
+
 .admin-role-play-list-li1 {
   color: var(--dl-color-gray-white);
   width: auto;
@@ -643,6 +673,7 @@ export default {
   list-style-image: none;
   list-style-position: outside;
 }
+
 .admin-role-play-list-container09 {
   flex: 0 0 auto;
   width: 100%;
@@ -650,6 +681,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .admin-role-play-list-container10 {
   flex: 0 0 auto;
   width: 100%;
@@ -658,17 +690,21 @@ export default {
   align-items: center;
   justify-content: flex-start;
 }
+
 .admin-role-play-list-button4 {
   width: 94px;
   height: 36px;
 }
+
 .admin-role-play-list-button5 {
   width: 211px;
   height: 35px;
 }
+
 .admin-role-play-list-navlink3 {
   text-decoration: none;
 }
+
 .admin-role-play-list-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -677,9 +713,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .admin-role-play-list-footer1 {
   height: 246;
 }
+
 .admin-role-play-list-container11 {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -688,9 +726,11 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-role-play-list-logo2 {
   text-decoration: none;
 }
+
 .admin-role-play-list-separator {
   flex: 0 0 auto;
   width: 100%;
@@ -709,6 +749,7 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
+
 .admin-role-play-list-container12 {
   flex: 0 0 auto;
   width: 100%;
@@ -717,121 +758,150 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 @media(max-width: 991px) {
   .admin-role-play-list-hero {
     flex-direction: column;
   }
+
   .admin-role-play-list-container02 {
     align-items: center;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-twounits);
     padding-right: 0px;
   }
+
   .admin-role-play-list-hero-heading {
     text-align: center;
   }
+
   .admin-role-play-list-hero-sub-heading {
     text-align: center;
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
+
   .admin-role-play-list-hero1 {
     flex-direction: column;
   }
+
   .admin-role-play-list-hero-heading1 {
     text-align: center;
   }
 }
+
 @media(max-width: 767px) {
   .admin-role-play-list-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-role-play-list-desktop-menu {
     display: none;
   }
+
   .admin-role-play-list-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .admin-role-play-list-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-hero {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-role-play-list-hero-sub-heading {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-hero1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-role-play-list-footer1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-role-play-list-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .admin-role-play-list-container12 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .admin-role-play-list-text43 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
 @media(max-width: 479px) {
   .admin-role-play-list-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-mobile-menu1 {
     padding: 16px;
   }
+
   .admin-role-play-list-hero {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .admin-role-play-list-container02 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-hero1 {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .admin-role-play-list-footer1 {
     padding: var(--dl-space-space-unit);
   }
+
   .admin-role-play-list-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .admin-role-play-list-container12 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .admin-role-play-list-text43 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);

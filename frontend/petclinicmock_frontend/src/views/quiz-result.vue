@@ -1,10 +1,7 @@
 <template>
   <div class="quiz-result-container">
     <div class="quiz-result-header">
-      <header
-        data-thq="thq-navbar"
-        class="navbarContainer quiz-result-navbar-interactive"
-      >
+      <header data-thq="thq-navbar" class="navbarContainer quiz-result-navbar-interactive">
         <router-link to="/menu" class="quiz-result-logo logo">
           PETCLINICMock
         </router-link>
@@ -14,7 +11,7 @@
               <span>
                 登录用户：
               </span>
-              <span class="quiz-result-text02">{{name}}</span>
+              <span class="quiz-result-text02">{{ name }}</span>
             </span>
           </div>
           <div>
@@ -29,7 +26,7 @@
         <h1 class="quiz-result-hero-heading">
           <span class="heading1">
             测试结果：
-          </span> 
+          </span>
           <span class="quiz-result-text04">Quiz {{ this.quizName }}</span>
         </h1>
         <span class="heading2">总分： {{ this.totalCredits }}</span>
@@ -42,7 +39,7 @@
       </div>
     </div>
     <div class="quiz-result-container04">
-      <router-link :to="{path:'/quiz-detail', query:{ quizID: this.quizID } }" class="quiz-result-navlink button">
+      <router-link :to="{ path: '/quiz-detail', query: { quizID: this.quizID } }" class="quiz-result-navlink button">
         重新测试
       </router-link>
       <router-link to="/quiz-list" class="quiz-result-navlink1 button">
@@ -53,10 +50,10 @@
       </router-link>
     </div>
     <div class="quiz-result-hero1 heroContainer">
-      <div v-for="(prob,index) in probs" class="quiz-result-container05">
+      <div v-for="(prob, index) in probs" class="quiz-result-container05">
         <h1 class="quiz-result-hero-heading1 heading1">
-          <span class="heading1">问题 {{ index+1 }}</span>
-          <br/>
+          <span class="heading1">问题 {{ index + 1 }}</span>
+          <br />
         </h1>
         <div class="quiz-result-container06">
           <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
@@ -69,14 +66,14 @@
               <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
             </div>
             <div class="quiz-result-container08">
-            <span  v-if="prob.lastAns==prob.probAns">
-              <span class="quiz-result-text26 heading3">你的答案：</span>
-              <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
-            </span>
-            <span  v-else="prob.lastAns!=prob.probAns">
-              <span class="quiz-result-text27 heading3">你的答案：</span>
-              <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
-            </span>
+              <span v-if="prob.lastAns == prob.probAns">
+                <span class="quiz-result-text26 heading3">你的答案：</span>
+                <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
+              </span>
+              <span v-else="prob.lastAns!=prob.probAns">
+                <span class="quiz-result-text27 heading3">你的答案：</span>
+                <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
+              </span>
             </div>
           </div>
         </div>
@@ -108,18 +105,17 @@ export default {
   data() {
     return {
       raw2fy2: ' ',
-      name:localStorage.getItem('username'),
-      quizID:'',
-      probs:[],
-      quizName:'',
-      totalCredits:'',
-      yourCredit:0,
+      name: localStorage.getItem('username'),
+      quizID: '',
+      probs: [],
+      quizName: '',
+      totalCredits: '',
+      yourCredit: 0,
     }
   },
-  methods:{
-    ans2option(ans)
-    {
-      switch(ans){
+  methods: {
+    ans2option(ans) {
+      switch (ans) {
         case 1:
           return 'A';
         case 2:
@@ -129,10 +125,10 @@ export default {
         case 4:
           return 'D';
         default:
-            return '';
+          return '';
       }
     },
-    logout(){
+    logout() {
       localStorage.clear();
       this.$router.push('/');
     },
@@ -141,23 +137,23 @@ export default {
     this.quizID = this.$route.query.quizID;
     const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
     // Fetch disease details
-    axios.get(`/quiz/detail?quizID=${this.quizID}`, 
-    {
-      headers: {
-        'Authorization': `Bearer ${authToken}`
-      }
-    })
-    .then(response => {
-      if (response.data.status === 0) {
-        this.probs = response.data.probs;
-        this.quizName = response.data.quizName;
-        this.totalCredits = response.data.totalCredits;
-        this.yourCredit = response.data.lastTry;
-      } else if (response.data.status === 1) {
-        console.log('No corresponding quizID');
-      }
-    });
-    },
+    axios.get(`/quiz/detail?quizID=${this.quizID}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      })
+      .then(response => {
+        if (response.data.status === 0) {
+          this.probs = response.data.probs;
+          this.quizName = response.data.quizName;
+          this.totalCredits = response.data.totalCredits;
+          this.yourCredit = response.data.lastTry;
+        } else if (response.data.status === 1) {
+          console.log('No corresponding quizID');
+        }
+      });
+  },
   metaInfo: {
     title: 'QuizResult - PetClinicMock',
     meta: [
@@ -179,6 +175,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .quiz-result-header {
   width: 100%;
   display: flex;
@@ -188,9 +185,11 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+
 .quiz-result-logo {
   text-decoration: none;
 }
+
 .quiz-result-container01 {
   flex: 0 0 auto;
   width: auto;
@@ -199,23 +198,28 @@ export default {
   align-items: space-between;
   flex-direction: column;
 }
+
 .quiz-result-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
+
 .quiz-result-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;
 }
+
 .quiz-result-burger-menu {
   display: none;
 }
+
 .quiz-result-icon {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .quiz-result-mobile-menu1 {
   top: 0px;
   left: 0px;
@@ -228,11 +232,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .quiz-result-nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .quiz-result-top {
   width: 100%;
   display: flex;
@@ -240,16 +246,19 @@ export default {
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
+
 .quiz-result-close-menu {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .quiz-result-icon02 {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .quiz-result-links {
   flex: 0 0 auto;
   display: flex;
@@ -257,18 +266,23 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .quiz-result-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .quiz-result-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .quiz-result-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .quiz-result-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .quiz-result-buttons {
   display: flex;
   margin-top: var(--dl-space-space-unit);
@@ -276,20 +290,24 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .quiz-result-icon04 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .quiz-result-icon06 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .quiz-result-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+
 .quiz-result-container02 {
   width: 200px;
   height: 92px;
@@ -297,9 +315,11 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .quiz-result-hero {
   padding-bottom: var(--dl-space-space-sixunits);
 }
+
 .quiz-result-container03 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -307,6 +327,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .quiz-result-hero-heading {
   font-size: 48px;
   max-width: 800px;
@@ -314,17 +335,21 @@ export default {
   font-family: "STIX Two Text";
   line-height: 150%;
 }
+
 .quiz-result-text04 {
   color: var(--dl-color-custom-primary2);
   font-weight: 900;
 }
+
 .quiz-result-text08 {
   color: var(--dl-color-primary-100);
 }
+
 .quiz-result-hero-sub-heading {
   font-size: 18px;
   text-align: center;
 }
+
 .quiz-result-container04 {
   width: 100%;
   height: 138px;
@@ -334,6 +359,7 @@ export default {
   justify-content: center;
   background-color: var(--dl-color-gray-black);
 }
+
 .quiz-result-navlink {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -346,6 +372,7 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .quiz-result-navlink1 {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -358,6 +385,7 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .quiz-result-navlink2 {
   color: var(--dl-color-gray-white);
   font-size: 20px;
@@ -369,6 +397,7 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary2);
 }
+
 .quiz-result-hero1 {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
@@ -378,6 +407,7 @@ export default {
   padding-bottom: var(--dl-space-space-sixunits);
   background-color: var(--dl-color-gray-black);
 }
+
 .quiz-result-container05 {
   flex: 0 0 auto;
   width: 1021px;
@@ -387,6 +417,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .quiz-result-hero-heading1 {
   color: var(--dl-color-gray-white);
   max-width: 800px;
@@ -394,6 +425,7 @@ export default {
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
 }
+
 .quiz-result-container06 {
   flex: 1;
   width: 100%;
@@ -402,15 +434,18 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .quiz-result-text25 {
   color: var(--dl-color-gray-white);
 }
+
 .quiz-result-container07 {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
   align-items: flex-start;
 }
+
 .quiz-result-image {
   width: 200px;
   margin-top: var(--dl-space-space-twounits);
@@ -419,6 +454,7 @@ export default {
   margin-right: var(--dl-space-space-twounits);
   margin-bottom: var(--dl-space-space-twounits);
 }
+
 .quiz-result-image1 {
   width: 200px;
   margin-top: var(--dl-space-space-twounits);
@@ -427,6 +463,7 @@ export default {
   margin-right: var(--dl-space-space-twounits);
   margin-bottom: var(--dl-space-space-twounits);
 }
+
 .quiz-result-container08 {
   flex: 1;
   width: 100%;
@@ -436,6 +473,7 @@ export default {
   flex-direction: row;
   justify-content: flex-start;
 }
+
 .quiz-result-container09 {
   flex: 1;
   width: 100%;
@@ -445,12 +483,15 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .quiz-result-text26 {
   color: var(--dl-color-success-700);
 }
+
 .quiz-result-text27 {
   color: var(--dl-color-danger-700);
 }
+
 .quiz-result-container09 {
   flex: 0 0 auto;
   width: 1021px;
@@ -460,6 +501,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .quiz-result-hero-heading2 {
   color: var(--dl-color-gray-white);
   max-width: 800px;
@@ -467,6 +509,7 @@ export default {
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
 }
+
 .quiz-result-container10 {
   flex: 1;
   width: 100%;
@@ -475,15 +518,18 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .quiz-result-text30 {
   color: var(--dl-color-gray-white);
 }
+
 .quiz-result-container11 {
   flex: 0 0 auto;
   width: 100%;
   display: flex;
   align-items: flex-start;
 }
+
 .quiz-result-image2 {
   width: 200px;
   margin-top: var(--dl-space-space-twounits);
@@ -492,6 +538,7 @@ export default {
   margin-right: var(--dl-space-space-twounits);
   margin-bottom: var(--dl-space-space-twounits);
 }
+
 .quiz-result-image3 {
   width: 200px;
   margin-top: var(--dl-space-space-twounits);
@@ -500,6 +547,7 @@ export default {
   margin-right: var(--dl-space-space-twounits);
   margin-bottom: var(--dl-space-space-twounits);
 }
+
 .quiz-result-container12 {
   flex: 1;
   width: 100%;
@@ -509,12 +557,15 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .quiz-result-text31 {
   color: var(--dl-color-success-700);
 }
+
 .quiz-result-text32 {
   color: var(--dl-color-success-700);
 }
+
 .quiz-result-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -523,9 +574,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .quiz-result-footer1 {
   height: 246;
 }
+
 .quiz-result-container13 {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -534,9 +587,11 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .quiz-result-logo2 {
   text-decoration: none;
 }
+
 .quiz-result-separator {
   flex: 0 0 auto;
   width: 100%;
@@ -555,6 +610,7 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
+
 .quiz-result-container14 {
   flex: 0 0 auto;
   width: 100%;
@@ -563,124 +619,154 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 @media(max-width: 991px) {
   .quiz-result-hero {
     flex-direction: column;
   }
+
   .quiz-result-container03 {
     align-items: center;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-twounits);
     padding-right: 0px;
   }
+
   .quiz-result-hero-heading {
     text-align: center;
   }
+
   .quiz-result-hero-sub-heading {
     text-align: center;
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
+
   .quiz-result-hero1 {
     flex-direction: column;
   }
+
   .quiz-result-hero-heading1 {
     text-align: center;
   }
+
   .quiz-result-hero-heading2 {
     text-align: center;
   }
 }
+
 @media(max-width: 767px) {
   .quiz-result-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .quiz-result-desktop-menu {
     display: none;
   }
+
   .quiz-result-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .quiz-result-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .quiz-result-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .quiz-result-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .quiz-result-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .quiz-result-hero {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .quiz-result-hero-sub-heading {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
+
   .quiz-result-hero1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .quiz-result-footer1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .quiz-result-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .quiz-result-container14 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .quiz-result-text33 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
 @media(max-width: 479px) {
   .quiz-result-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
+
   .quiz-result-mobile-menu1 {
     padding: 16px;
   }
+
   .quiz-result-hero {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .quiz-result-container03 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .quiz-result-hero1 {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .quiz-result-footer1 {
     padding: var(--dl-space-space-unit);
   }
+
   .quiz-result-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .quiz-result-container14 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .quiz-result-text33 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);

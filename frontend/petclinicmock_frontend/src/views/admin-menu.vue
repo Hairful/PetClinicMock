@@ -1,27 +1,24 @@
 <template>
   <div class="admin-menu-container">
     <div class="admin-menu-header">
-      <header
-        data-thq="thq-navbar"
-        class="navbarContainer admin-menu-navbar-interactive"
-      >
+      <header data-thq="thq-navbar" class="navbarContainer admin-menu-navbar-interactive">
         <router-link to="/menu" class="admin-menu-logo logo">
           PETCLINICMock
         </router-link>
         <div>
-        <div class="admin-menu-container1">
-          <div data-thq="thq-navbar-nav" class="admin-menu-desktop-menu">
-            <span>
+          <div class="admin-menu-container1">
+            <div data-thq="thq-navbar-nav" class="admin-menu-desktop-menu">
               <span>
-                登录用户：
+                <span>
+                  登录用户：
+                </span>
+                <span class="admin-menu-text02">{{ name }}</span>
               </span>
-              <span class="admin-menu-text02">{{ name }}</span>
-            </span>
+            </div>
+            <div>
+              <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
+            </div>
           </div>
-          <div>
-            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
-          </div>
-        </div>
         </div>
       </header>
     </div>
@@ -35,19 +32,13 @@
         </div>
         <div class="admin-menu-container3">
           <div class="admin-menu-container4">
-            <router-link
-              to="/admin-user"
-              class="admin-menu-navlink3 button"
-            >
+            <router-link to="/admin-user" class="admin-menu-navlink3 button">
               <span class="heading3">
                 <span>用户</span>
                 <br />
               </span>
             </router-link>
-            <router-link
-              to="/admin-virtual-tour"
-              class="admin-menu-navlink3 button"
-            >
+            <router-link to="/admin-virtual-tour" class="admin-menu-navlink3 button">
               <span class="heading3">
                 <span>3D虚拟导览</span>
                 <br />
@@ -55,10 +46,7 @@
             </router-link>
           </div>
           <div class="admin-menu-container5">
-            <router-link
-              to="/admin-case-study-list"
-              class="admin-menu-navlink3 button"
-            >
+            <router-link to="/admin-case-study-list" class="admin-menu-navlink3 button">
               <span class="heading3">
                 <span>病例学习</span>
                 <br />
@@ -69,19 +57,13 @@
             </router-link>
           </div>
           <div class="admin-menu-container5">
-            <router-link
-              to="/admin-role-play-menu"
-              class="admin-menu-navlink3 button"
-            >
+            <router-link to="/admin-role-play-menu" class="admin-menu-navlink3 button">
               <span class="heading3">
                 <span>角色扮演</span>
                 <br />
               </span>
             </router-link>
-            <router-link
-              to="/admin-pharmacy"
-              class="admin-menu-navlink3 button"
-            >
+            <router-link to="/admin-pharmacy" class="admin-menu-navlink3 button">
               <span class="heading3">
                 <span>药物管理</span>
                 <br />
@@ -115,11 +97,11 @@ export default {
   props: {},
   data() {
     return {
-      name:localStorage.getItem('username'),
+      name: localStorage.getItem('username'),
     }
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       localStorage.clear();
       this.$router.push('/');
     }
@@ -145,6 +127,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .admin-menu-header {
   width: 100%;
   display: flex;
@@ -154,9 +137,11 @@ export default {
   flex-direction: column;
   background-color: var(--dl-color-gray-white);
 }
+
 .admin-menu-logo {
   text-decoration: none;
 }
+
 .admin-menu-container1 {
   flex: 0 0 auto;
   width: auto;
@@ -165,23 +150,28 @@ export default {
   align-items: space-between;
   flex-direction: column;
 }
+
 .admin-menu-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
 }
+
 .admin-menu-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;
 }
+
 .admin-menu-burger-menu {
   display: none;
 }
+
 .admin-menu-icon {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-menu-mobile-menu1 {
   top: 0px;
   left: 0px;
@@ -194,11 +184,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .admin-menu-nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-menu-top {
   width: 100%;
   display: flex;
@@ -206,16 +198,19 @@ export default {
   margin-bottom: var(--dl-space-space-threeunits);
   justify-content: space-between;
 }
+
 .admin-menu-close-menu {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .admin-menu-icon02 {
   width: var(--dl-size-size-xsmall);
   cursor: pointer;
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-menu-links {
   flex: 0 0 auto;
   display: flex;
@@ -223,18 +218,23 @@ export default {
   align-items: flex-start;
   flex-direction: column;
 }
+
 .admin-menu-nav12 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-menu-nav22 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-menu-nav32 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-menu-nav42 {
   margin-bottom: var(--dl-space-space-unit);
 }
+
 .admin-menu-buttons {
   display: flex;
   margin-top: var(--dl-space-space-unit);
@@ -242,20 +242,24 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 .admin-menu-icon04 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .admin-menu-icon06 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
   margin-right: var(--dl-space-space-twounits);
 }
+
 .admin-menu-icon08 {
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+
 .admin-menu-hero {
   flex: 0 0 auto;
   width: 100%;
@@ -265,11 +269,13 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
+
 .admin-menu-hero1 {
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
   background-color: var(--dl-color-gray-black);
 }
+
 .admin-menu-container2 {
   gap: var(--dl-space-space-oneandhalfunits);
   display: flex;
@@ -277,16 +283,19 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-menu-hero-heading {
   color: var(--dl-color-gray-white);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
 }
+
 .admin-menu-hero-sub-heading {
   font-size: 18px;
   text-align: center;
 }
+
 .admin-menu-container3 {
   flex: 0 0 auto;
   width: auto;
@@ -295,6 +304,7 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
+
 .admin-menu-container4 {
   flex: 1;
   width: auto;
@@ -305,6 +315,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .admin-menu-navlink {
   width: 515px;
   height: 91px;
@@ -315,6 +326,7 @@ export default {
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
 }
+
 .admin-menu-navlink1 {
   width: 515px;
   height: 91px;
@@ -325,6 +337,7 @@ export default {
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
 }
+
 .admin-menu-container5 {
   flex: 0 0 auto;
   width: auto;
@@ -334,6 +347,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .admin-menu-navlink2 {
   width: 515px;
   height: 91px;
@@ -344,6 +358,7 @@ export default {
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   text-decoration: none;
 }
+
 .admin-menu-navlink3 {
   width: 180px;
   height: 100px;
@@ -357,6 +372,7 @@ export default {
   justify-content: center;
   align-items: center
 }
+
 .admin-menu-footer {
   flex: 0 0 auto;
   width: 100%;
@@ -365,9 +381,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .admin-menu-footer1 {
   height: 246;
 }
+
 .admin-menu-container6 {
   gap: var(--dl-space-space-unit);
   display: flex;
@@ -376,9 +394,11 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .admin-menu-logo2 {
   text-decoration: none;
 }
+
 .admin-menu-separator {
   flex: 0 0 auto;
   width: 100%;
@@ -397,6 +417,7 @@ export default {
   border-left-width: 0px;
   border-right-width: 0px;
 }
+
 .admin-menu-container7 {
   flex: 0 0 auto;
   width: 100%;
@@ -405,105 +426,130 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
 @media(max-width: 991px) {
   .admin-menu-hero1 {
     flex-direction: column;
   }
+
   .admin-menu-container2 {
     align-items: center;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-twounits);
     padding-right: 0px;
   }
+
   .admin-menu-hero-heading {
     text-align: center;
   }
+
   .admin-menu-hero-sub-heading {
     text-align: center;
     padding-left: var(--dl-space-space-threeunits);
     padding-right: var(--dl-space-space-threeunits);
   }
 }
+
 @media(max-width: 767px) {
   .admin-menu-navbar-interactive {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-menu-desktop-menu {
     display: none;
   }
+
   .admin-menu-burger-menu {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .admin-menu-nav12 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-menu-nav22 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-menu-nav32 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-menu-nav42 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-menu-hero1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-menu-hero-sub-heading {
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
   }
+
   .admin-menu-footer1 {
     padding-left: var(--dl-space-space-twounits);
     padding-right: var(--dl-space-space-twounits);
   }
+
   .admin-menu-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .admin-menu-container7 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .admin-menu-text29 {
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
 }
+
 @media(max-width: 479px) {
   .admin-menu-navbar-interactive {
     padding: var(--dl-space-space-unit);
   }
+
   .admin-menu-mobile-menu1 {
     padding: 16px;
   }
+
   .admin-menu-hero1 {
     padding-top: var(--dl-space-space-twounits);
     padding-left: var(--dl-space-space-unit);
     padding-right: var(--dl-space-space-unit);
     padding-bottom: var(--dl-space-space-twounits);
   }
+
   .admin-menu-container2 {
     margin-bottom: var(--dl-space-space-unit);
   }
+
   .admin-menu-footer1 {
     padding: var(--dl-space-space-unit);
   }
+
   .admin-menu-separator {
     margin-top: var(--dl-space-space-oneandhalfunits);
     margin-bottom: var(--dl-space-space-oneandhalfunits);
   }
+
   .admin-menu-container7 {
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
   }
+
   .admin-menu-text29 {
     text-align: center;
     margin-bottom: var(--dl-space-space-oneandhalfunits);
