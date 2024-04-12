@@ -11,7 +11,13 @@ const Media = require('../models/Media');
 const sequelize = require('../config/database');
 const { Op } = require('sequelize');
 const Fuse = require('fuse.js');
-//const nodejieba = require("nodejieba");
+
+const loggerConfigurations = [
+  { name: 'case', level: 'info' },
+  { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getAllCases - 病例列表
  * @returns {Object} 对象
@@ -42,7 +48,7 @@ exports.getCaseList = async (diseaseID) => {
       return { status: 1, message: "无对应diseaseID" };
     }
   } catch (error) {
-    console.error('Error in getAllCases', error);
+    logger.error('Error in /caseService.js/getCaseList: ', error);
     return { status: -9, message: "错误" };
   }
 }
@@ -118,7 +124,7 @@ exports.getCaseDetail = async (caseID) => {
       ...groupedMedia
     };
   } catch (error) {
-    console.error('Error in getCaseDetail', error);
+    logger.error('Error in /caseService.js/getCaseDetail: ', error);
     return { status: -9, message: "错误" };
   }
 };
@@ -165,7 +171,7 @@ exports.getCaseByString = async (searchString) => {
       return { status: 1, message: "No matches found" };
     }
   } catch (error) {
-    console.error('Error in getCaseByString', error);
+    logger.error('Error in /caseService.js/getCaseByString: ', error);
     return { status: -9, message: "错误" };
   }
 };

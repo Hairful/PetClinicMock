@@ -32,7 +32,7 @@ exports.registerUser = async (userName, password) => {
         const newUser = await User.create({ userName: userName, password: hashedPassword, salt: salt });
         return { status: 0, message: '注册成功', userID: newUser.userID };
     } catch (error) {
-        logger.error('Error in /userAuthService.js/registerUser :', error);
+        logger.error('Error in /userAuthService.js/registerUser: ', error);
         return { status: -9, message: '错误' };
     }
 }

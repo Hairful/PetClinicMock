@@ -6,6 +6,12 @@
 
 const Job = require('../models/Job');
 
+const loggerConfigurations = [
+    { name: 'role', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getJobList - 获取工作列表
  * @param {integer} role - 角色
@@ -27,7 +33,7 @@ exports.getJobList = async (role) => {
             jobs: jobs,
         };
     } catch (error) {
-        console.error('Error In getJobList', error);
+        logger.error('Error In /roleService.js/getJobList', error);
         return { status: -9, message: `错误`, };
     }
 }
@@ -54,7 +60,7 @@ exports.getJobDetail = async (role, job) => {
             jobDetail: roleInstance.jobDetail
         }
     } catch (error) {
-        console.error('Error In getJobDetail', error);
+        logger.error('Error in /roleService.js/getJobDetail: ', error);
         return { status: -9, message: '错误' };
     }
 }

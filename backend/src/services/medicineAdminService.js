@@ -6,6 +6,12 @@
 
 const Medicine = require('../models/Medicine');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * createMedicine - 添加药品
  * @param {Object} medicineData - 药品数据
@@ -29,7 +35,7 @@ exports.createMedicine = async (medicineData) => {
             medicineID: newMedicine.medicineID
         };
     } catch (error) {
-        console.error('Error in createMedicine', error);
+        logger.error('Error in /medicineAdminService.js/createMedicine: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -53,7 +59,7 @@ exports.deleteMedicineById = async (medicineId) => {
             return { status: 1, message: "无对应medicineID" };
         }
     } catch (error) {
-        console.error('Error in deleteMedicineById', error);
+        logger.error('Error in /medicineAdminService.js/deleteMedicineById: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -85,7 +91,7 @@ exports.updateMedicine = async (medicineID, updates) => {
         await medicine.save();
         return { status: 0, message: "成功" };
     } catch (error) {
-        console.error('Error in updateMedicine', error);
+        logger.error('Error in /medicineAdminService.js/updateMedicine: ', error);
         return { status: -9, message: '错误' };
     }
 }
