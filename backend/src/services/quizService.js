@@ -26,7 +26,7 @@ exports.getQuizList = async (userID) => {
 
         // 获取所有测验
         const allQuizzes = await Quiz.findAll({
-            attributes: ['quizID', 'quizName', 'totalCredits']
+            attributes: ['quizID', 'quizName', 'totalCredits', 'timer']
         });
 
         const response = {
@@ -41,7 +41,8 @@ exports.getQuizList = async (userID) => {
             const quizResponse = {
                 quizID: quiz.quizID,
                 quizName: quiz.quizName,
-                totalCredits: quiz.totalCredits
+                totalCredits: quiz.totalCredits,
+                timer: quiz.timer
             };
 
             // 如果用户完成了测验，添加 lastTry 和 lastTryTime
