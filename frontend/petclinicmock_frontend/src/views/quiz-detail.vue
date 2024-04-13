@@ -31,6 +31,22 @@
         </h1>
         <span class="heading2">总分： {{ this.totalCredits }}</span>
       </div>
+      <suspenPopup top="500" left="60" height="150" width="650">
+        <div class="supen-popup">
+          <div> 
+            剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}<br></br>
+          </div>
+          <div>
+            题目完成情况：
+          </div>
+          <div class="quiz-situation">
+            <div v-for="(prob,index) in probs" >
+              <button v-if="ans[index]" class="quiz-finished button" @click="switchProb(index)"> {{index+1}} </button>
+              <button v-else="!ans[index]" class="quiz-unfinished button" @click="switchProb(index)"> {{index+1}} </button>
+            </div>
+          </div>
+        </div>
+      </suspenPopup>
     </div>
     <div class="quiz-detail-hero1 heroContainer">
       <div class="quiz-detail-container04">
@@ -41,9 +57,6 @@
           返回菜单
         </router-link>  
       </div> 
-      <div class="quiz-detail-text22 bodyLarge">
-        剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}
-      </div>
     </div>
       
     <div class="quiz-detail-hero1 heroContainer" v-if="probs && probs.length > 0">
@@ -94,9 +107,13 @@
 
 <script>
 import axios from 'axios';
+import suspenPopup from '../components/suspenPopup.vue';
 export default {
   name: 'QuizDetail',
   props: {},
+  components: {
+			suspenPopup,
+		},
   data() {
     return {
       name: localStorage.getItem('username'),
@@ -118,6 +135,9 @@ export default {
     }
   },
   methods: {
+    switchProb(num){
+      this.currentProb = num;
+    },
     async pushResult() {
       try {
         const response = await axios.post('/quiz/result', {
@@ -258,6 +278,48 @@ export default {
 </script>
 
 <style scoped>
+.quiz-unfinished{
+  border: 2px solid #aaa;
+  align-self: center;
+  width: 40px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: var(--dl-color-danger-700);
+}
+.quiz-finished{
+  border: 2px solid #aaa;
+  align-self: center;
+  width: 40px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: var(--dl-color-success-700);
+}
+.supen-popup {
+    flex-direction: column;
+		display: flex;
+		justify-content: center;
+		align-items:center;
+		border-radius: 20px;
+		box-sizing: border-box;
+    padding: 10px;
+		background: white;
+		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+		border: 5px solid #aaa;
+		font-size: 24rpx;
+		width: 200px;
+		height: auto ;
+	}
+  .quiz-situation {
+    flex-wrap: wrap;
+		display: flex;
+		justify-content: center;
+		align-items:center;
+    padding: 10px;
+		width: 200px;
+		height: auto ;
+	}
 .quiz-detail-container {
   width: 100%;
   display: flex;
