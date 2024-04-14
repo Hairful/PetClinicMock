@@ -1,8 +1,14 @@
 <template>
     <div class="chatbot" :class="{ expanded: isExpanded }" @click="toggleChatbot">
         <div>
-    <iframe :src="externalLink" width="100%" height="500px" frameborder="0"></iframe>
-  </div>
+            <div v-if="isExpanded">
+                <button> 关闭 </button>
+            </div>
+            <iframe v-if="isExpanded" :src="externalLink" width="100%" height="500px" frameborder="0"></iframe>
+            <div v-else>
+                <img src="../../public/img/chatbot.jpg" width="81.6111850866px" height="50px" alt="Chatbot" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -16,10 +22,6 @@ export default {
     },
     methods: {
         toggleChatbot() {
-            if (!this.isExpanded) {
-                // Redirect to external link when expanding chatbot
-                window.location.href = this.externalLink;
-            }
             this.isExpanded = !this.isExpanded;
         },
     },
@@ -31,7 +33,8 @@ export default {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 9999; /* Set a high value to ensure it's in front */
+    z-index: 9999;
+    /* Set a high value to ensure it's in front */
     /* Add your small logo styles here */
 }
 
@@ -40,6 +43,7 @@ export default {
     height: 500px;
     border: whitesmoke 1px solid;
     background-color: white;
-    z-index: 9999; /* Ensure the expanded chatbot is also in front */
+    z-index: 9999;
+    /* Ensure the expanded chatbot is also in front */
 }
 </style>
