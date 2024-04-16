@@ -11,7 +11,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawf7m2"></span>
               </span>
               <span class="case-study-menu-text02">{{ name }}</span>
             </span>
@@ -38,7 +37,7 @@
         <span class="heading1">选择疾病类型</span>
         <br />
       </h1>
-      <div class="case-study-menu-container5">
+      <div class="case-study-menu-containerfix">
         <router-link v-for="(diseaseType, index) in diseaseTypes" :key="index"
           :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
           :class="`case-study-menu-navlink1 button`">
@@ -76,14 +75,6 @@ export default {
   },
   data() {
     return {
-      rawf7m2: ' ',
-      rawb3zd: ' ',
-      rawjekz: ' ',
-      rawh8ql: ' ',
-      raw1b3v: ' ',
-      raw5sv7: ' ',
-      raw2f87: ' ',
-      rawll5g: ' ',
       diseaseTypes: [],
       name: localStorage.getItem('username'),
     }
@@ -321,7 +312,15 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
-
+.case-study-menu-containerfix {
+  width: 90%;
+  flex-wrap: wrap;
+  height: auto;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
 .case-study-menu-navlink1 {
   width: 180px;
   height: 100px;

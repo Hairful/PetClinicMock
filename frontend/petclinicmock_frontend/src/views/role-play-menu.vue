@@ -11,7 +11,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawiv06"></span>
               </span>
               <span class="role-play-menu-text02">{{ name }}</span>
             </span>
@@ -84,8 +83,6 @@ export default {
   },
   data() {
     return {
-      rawqlrv: ' ',
-      rawiv06: ' ',
       name: localStorage.getItem('username'),
     }
   },
@@ -312,14 +309,13 @@ export default {
 }
 
 .role-play-menu-container5 {
-  flex: 1;
-  width: auto;
+  flex-wrap: wrap;
+  width: 100%;
   height: auto;
   display: flex;
   align-self: center;
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: baseline;
 }
 
 .role-play-menu-navlink1 {
