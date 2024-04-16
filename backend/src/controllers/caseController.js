@@ -6,6 +6,12 @@
 
 const { getCaseList, getCaseDetail, getCaseByString } = require('../services/caseService');
 
+const loggerConfigurations = [
+    { name: 'case', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.getCaseList = async (req, res) => {
     try {
         const { diseaseID } = req.query;
@@ -22,9 +28,10 @@ exports.getCaseList = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getCaseList: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getCaseList:', error);
+        logger.error('Error in /caseController.js/getCaseList: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -45,12 +52,14 @@ exports.getCaseDetail = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getCaseDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getCaseDetail:', error);
+        logger.error('Error in /caseController.js/getCaseDetail: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
+
 exports.getCaseByString = async (req, res) => {
     try {
         const { searchString } = req.query;
@@ -67,9 +76,10 @@ exports.getCaseByString = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getCaseByString: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getCaseByString:', error);
+        logger.error('Error in /caseController.js/getCaseByString: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

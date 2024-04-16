@@ -35,17 +35,17 @@ exports.isTokenValid = async (req, res, next) => {
     try {
         decoded = jwt.verify(token, tokenKey);
     } catch (errorInJWT) {
-        logger.error('Error in /authMiddleware/isTokenValid', errorInJWT);
+        logger.error('Error in /authMiddleware/isTokenValid: ', errorInJWT);
         return res.status(401).json({ status: -1, message: '身份验证失败' });
     }
     // 检查用户是否存在
     const user = await User.findByPk(decoded.userID);
     if (!user) {
-        logger.info(`UserID ${decoded.userID} not found in database`);
+        logger.info({ userID: decoded.userID, message: `UserID not found in database` });
         return res.status(401).json({ status: 401, message: '身份验证失败' });
     }
-    logger.info({ token: req.headers.authorization, message: 'Token is valid' })
-    // 将用户信息添加到请求中，以便后续路由处理程序使用
+    logger.info({ userID: decoded.userID, token: req.headers.authorization, message: 'Token is valid' })
+    // 将用户信息添加到请求中，以便后续程序使用
     req.userIDInToken = decoded.userID;
     req.isAdminIDInToken = decoded.isAdmin;
     next();
@@ -62,7 +62,7 @@ exports.isTokenAdmin = async (req, res, next) => {
             logger.info({ userID: req.userIDInToken, message: 'No admin permission' })
             return res.status(403).json({ status: -2, message: '无对应权限' });
         }
-        logger.info({ token: req.headers.authorization, message: "Token is admin" })
+        logger.info({ administratorID: req.userIDInToken, token: req.headers.authorization, message: "Token is admin" })
         next();
     } catch (error) {
         logger.error('Error in /authMiddleware/isTokenAdmin:', error);

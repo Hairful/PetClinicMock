@@ -10,12 +10,12 @@ const logger = require('./utils/logUtil')(loggerConfigurations);
 
 sequelize.authenticate()
     .then(async () => {
-        logger.info('成功连接到数据库');
+        logger.info('Successfully connect to the database');
         //await sequelize.sync({ alter: true });
         app.listen(PORT, () => {
-            logger.info(`服务器运行在端口: ${PORT}`);
+            logger.info(`The server is running on port: ${PORT}`);
         });
     })
     .catch(err => {
-        logger.error('无法连接到数据库', err);
+        logger.error('Unable to connect to database', err);
     });

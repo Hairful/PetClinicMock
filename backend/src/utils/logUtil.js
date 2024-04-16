@@ -33,7 +33,7 @@ function createLogger(configurations) {
                     winston.format.printf(({ timestamp, level, message, ...info }) => {
                         let additionalInfo = '';
                         Object.keys(info).forEach(key => {
-                            additionalInfo += `{${key}: ${info[key]}}`;
+                            additionalInfo += `[${key}]: ${info[key]}`;
                         });
                         return `[${timestamp}] [${level}] ${additionalInfo} ${message}`;
                     })

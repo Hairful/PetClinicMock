@@ -28,7 +28,7 @@ exports.registerUser = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
-        logger.info({ userName: userName, message: 'User register: ' + result.message });
+        logger.info({ userName: userName, message: 'registerUser: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
         logger.error('Error in /userAuthController.js/registerUser:', error);
@@ -55,7 +55,7 @@ exports.loginUser = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
-        logger.info({ userName: userName, message: 'User register: ' + result.message });
+        logger.info({ userName: userName, message: 'loginUser: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
         logger.error('Error in /userAuthController.js/loginUser:', error);
