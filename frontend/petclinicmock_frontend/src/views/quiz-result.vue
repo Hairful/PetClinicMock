@@ -104,7 +104,6 @@ export default {
   props: {},
   data() {
     return {
-      raw2fy2: ' ',
       name: localStorage.getItem('username'),
       quizID: '',
       probs: [],

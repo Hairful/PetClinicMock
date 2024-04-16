@@ -11,7 +11,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawks35"></span>
               </span>
               <span class="role-play-detail-text02">{{ name }}</span>
             </span>
@@ -28,7 +27,6 @@
         <h1 class="role-play-detail-hero-heading">
           <span class="heading1">
             角色扮演：
-            <span v-html="raw1c3x"></span>
           </span>
           <span class="role-play-detail-text04"> {{ role }}</span>
         </h1>
@@ -87,15 +85,6 @@ export default {
   },
   data() {
     return {
-      rawks35: ' ',
-      raw1c3x: ' ',
-      raw2abd: ' ',
-      raw39oh: ' ',
-      raw1g6y: ' ',
-      rawvzss: ' ',
-      rawrfsl: ' ',
-      rawybr1: ' ',
-      rawuxqk: ' ',
       role: ' ',
       job: ' ',
       jobDetail: ' ',

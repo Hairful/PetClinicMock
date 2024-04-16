@@ -11,7 +11,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawiv06"></span>
                 <span class="role-play-list-text02">{{ name }}</span>
               </span>
             </span>
@@ -85,15 +84,6 @@ export default {
   },
   data() {
     return {
-      raw9ci3: ' ',
-      rawulc0: ' ',
-      raw1sis: ' ',
-      rawznbn: ' ',
-      rawksgs: ' ',
-      rawdhhu: ' ',
-      rawszzz: ' ',
-      rawh591: ' ',
-      raws6fs: ' ',
       role: ' ',
       jobs: [],
       name: localStorage.getItem('username'),
