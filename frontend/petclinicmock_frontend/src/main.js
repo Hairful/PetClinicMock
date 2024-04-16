@@ -33,7 +33,7 @@ axios.interceptors.response.use(
           switch (error.response.status) {
               case 401:
                   // 返回 401 清除token信息并跳转到登录页面
-                  window.alert("尚未登录");
+                  window.alert("尚未登录或已过期");
                   localStorage.clear();
                   router.replace({
                       path: 'login',
