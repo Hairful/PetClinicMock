@@ -11,7 +11,7 @@ export default {
     data() {
         return {
             isExpanded: false,
-            externalLink: 'https://share.fastgpt.in/chat/share?shareId=yzk07q9v4sq8yzcihvyh7sil'
+            externalLink: 'https://share.fastgpt.in/chat/share?shareId=pjjdzokpuqrs88dnl8e04g2g'
         };
     },
     methods: {
