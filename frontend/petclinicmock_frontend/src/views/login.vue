@@ -119,14 +119,8 @@ export default {
         }
       } catch (error) {
         // Handle error
-        if (error.response.status === 401) {
-          // Login failed
-          // Show error message
-          this.$message.warning('用户名或密码错误！');
-        } else {
-          // Handle other status
-          this.$message.warning('用户名没有注册！');
-        }
+        // Show error message
+        this.$message.warning(error.message);
       }
     },
     // 重置验证码

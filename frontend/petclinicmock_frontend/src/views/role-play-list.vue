@@ -45,9 +45,10 @@
         <span class="heading1">选择职责</span>
         <br />
       </h1>
+      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="role-play-list-container4">
         <ul class="role-play-list-ul list">
-          <li v-for="(job, index) in jobs" :key="index" class="role-play-list=li list-item Content">
+          <li v-for="(job, index) in filteredJobs" :key="index" class="role-play-list=li list-item Content">
             <router-link :to="{ path: '/role-play-detail', query: { role: role, job: job } }"
               class="role-play-list-navlink2 button bodyLarge">
               {{ job }}
@@ -87,7 +88,15 @@ export default {
       role: ' ',
       jobs: [],
       name: localStorage.getItem('username'),
+      searchQuery: ''
     }
+  },
+  computed: {
+    filteredJobs() {
+      return this.jobs.filter(job =>
+        job.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
   },
   methods: {
     logout() {
@@ -140,6 +149,12 @@ export default {
 </script>
 
 <style scoped>
+.rounded-input {
+  border-radius: 2px;
+  padding: 5px;
+  margin-bottom: var(--dl-space-space-twounits);
+}
+
 .role-play-list-container {
   width: 100%;
   display: flex;
