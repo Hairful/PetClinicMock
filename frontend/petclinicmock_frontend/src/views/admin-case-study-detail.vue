@@ -456,7 +456,7 @@ export default {
       this.$router.push('/');
     },
     updatePV() {
-      //console.log(this.cases);
+      console.log(this.cases);
       this.summaryPictures = [];
       this.summaryVideos = [];
       this.examinePictures = [];
@@ -467,14 +467,14 @@ export default {
       this.treatmentVideos = [];
       this.medicines = [];
       this.cases.forEach(caseItem => {
-        this.summaryPictures.push(caseItem.details.summaryPicture ? caseItem.details.summaryPicture : []);
-        this.summaryVideos.push(caseItem.details.summaryVideo ? caseItem.details.summaryVideo : []);
-        this.examinePictures.push(caseItem.details.examinePicture ? caseItem.details.examinePicture : []);
-        this.examineVideos.push(caseItem.details.examineVideo ? caseItem.details.examineVideo : []);
-        this.diagnosePictures.push(caseItem.details.diagnosePicture ? caseItem.details.diagnosePicture : []);
-        this.diagnoseVideos.push(caseItem.details.diagnoseVideo ? caseItem.details.diagnoseVideo : []);
-        this.treatmentPictures.push(caseItem.details.treatmentPicture ? caseItem.details.treatmentPicture : []);
-        this.treatmentVideos.push(caseItem.details.treatmentVideo ? caseItem.details.treatmentVideo : []);
+        this.summaryPictures.push(caseItem.details.summaryPictures ? caseItem.details.summaryPictures : []);
+        this.summaryVideos.push(caseItem.details.summaryVideos ? caseItem.details.summaryVideos : []);
+        this.examinePictures.push(caseItem.details.examinePictures ? caseItem.details.examinePictures : []);
+        this.examineVideos.push(caseItem.details.examineVideos ? caseItem.details.examineVideos : []);
+        this.diagnosePictures.push(caseItem.details.diagnosePictures ? caseItem.details.diagnosePictures : []);
+        this.diagnoseVideos.push(caseItem.details.diagnoseVideos ? caseItem.details.diagnoseVideos : []);
+        this.treatmentPictures.push(caseItem.details.treatmentPictures ? caseItem.details.treatmentPictures : []);
+        this.treatmentVideos.push(caseItem.details.treatmentVideos ? caseItem.details.treatmentVideos : []);
         this.medicines.push(caseItem.details.medicines ? caseItem.details.medicines : []);
       })
     },

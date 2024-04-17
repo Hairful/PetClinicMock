@@ -105,7 +105,6 @@ export default {
           userName: this.formLogin.name,
           password: this.formLogin.password,
         });
-        console.log(response.data);
         if (response.status === 200) {
           if (response.data.status === 0) {
             // Login successful
