@@ -5,8 +5,12 @@
         <router-link to="/menu" class="admin-user-logo logo">PETCLINICMock</router-link>
         <div>
           <div data-thq="thq-navbar-nav" class="admin-user-desktop-menu">
-            <span><span>登录用户： <span v-html="rawbedh"></span></span><span class="admin-user-text02">{{ name
-                }}</span></span>
+            <span>
+              <span>登录用户： 
+              </span>
+              <span class="admin-user-text02">{{ name }}
+              </span>
+            </span>
           </div>
           <div>
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
@@ -31,10 +35,11 @@
               <div class="admin-user-container07">
                 <input type="text" :placeholder="user.userName" class="input" v-model="users[index].userName"
                   pattern="^[\u4e00-\u9fa5\w]{2,20}$" @input="validateInput(index)" />
-              </div> <span class="error" v-if="users[index].error">{{ users[index].error }}</span>
-              <input type="checkbox" v-model="users[index].isAdmin" /><span>是否为管理员</span>
-              <button type="button" class="button" @click="updateUser(index)">修改</button>
-              <button type="button" class="button" @click="deleteUser(index)">删除</button>
+                <span style="margin-left: 50px;" class="error" v-if="users[index].error">{{ users[index].error }}</span>
+                <input style="margin-left: 50px;" type="checkbox" v-model="users[index].isAdmin" /><span>是否为管理员</span>
+                <button style="margin-left: 50px;" type="button" class="button" @click="updateUser(index)">修改</button>
+                <button style="margin-left: 50px;" type="button" class="button" @click="deleteUser(index)">删除</button>
+              </div>
             </div>
           </li>
         </ul>
@@ -60,15 +65,6 @@ export default {
   props: {},
   data() {
     return {
-      rawbedh: ' ',
-      raw7a0p: ' ',
-      rawj58l: ' ',
-      rawpjnf: ' ',
-      raw3c96: ' ',
-      rawc5cu: ' ',
-      rawhiyy: ' ',
-      rawp93p: ' ',
-      raw1rdy: ' ',
       users: [],
       name: localStorage.getItem('username'),
     }
@@ -431,6 +427,7 @@ export default {
   height: auto;
   display: flex;
   flex-direction: row;
+  margin-top: 20px;
 }
 
 .admin-user-footer {

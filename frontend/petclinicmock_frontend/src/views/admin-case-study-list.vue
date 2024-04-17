@@ -10,7 +10,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawol4e"></span>
               </span>
               <span class="admin-case-study-list-text02">{{ name }}</span>
             </span>
@@ -78,7 +77,7 @@
                   </router-link>
                 </div>
                 <div class="admin-case-study-list-container11">
-                  <input type="text" v-model="inputName[index]" :placeholder="`${disease.diseaseName}`" class="input" />
+                  <input type="text" v-model="disease.diseaseName" :placeholder="`${disease.diseaseName}`" class="input" />
                   <button type="button" class="admin-case-study-list-button2 button" @click=renameDisease(index)>
                     <span class="admin-case-study-list-text19 bodyLarge">
                       <span>重命名</span>
@@ -125,18 +124,9 @@ export default {
   props: {},
   data() {
     return {
-      rawol4e: ' ',
-      raw6od9: ' ',
-      raw21fk: ' ',
-      rawczdr: ' ',
-      raw4irw: ' ',
-      rawx3jj: ' ',
-      raw96j1: ' ',
-      rawbwjf: ' ',
       currentType: '',
       diseaseTypes: [],
       diseases: [],
-      inputName: [],
       inputType: [],
       newName: '',
       newType: '',
@@ -150,7 +140,7 @@ export default {
       this.$router.push('/');
     },
     renameDisease(index) {
-      const diseaseName = this.inputName[index];
+      const diseaseName = this.diseases[index].diseaseName;
       const diseaseID = this.diseases[index].diseaseID;
       const diseaseType = this.inputType[index];
       axios({
