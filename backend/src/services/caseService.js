@@ -111,6 +111,9 @@ exports.getCaseDetail = async (caseID) => {
     return {
       status: 0,
       message: "成功",
+      examine: caseInfo.examine,
+      summary: caseInfo.summary,
+      treatment: caseInfo.treatment,
       diseases: caseInfo.Disease,
       medicines: medicines.map(med => {
         const caseMedicine = caseMedicines.find(cm => cm.MedicineMedicineID === med.medicineID);
