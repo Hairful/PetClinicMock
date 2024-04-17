@@ -6,6 +6,12 @@
 
 const Disease = require('../models/Disease');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * createDisease - 添加疾病
  * @param {Object} diseaseData - 疾病数据
@@ -27,7 +33,7 @@ exports.createDisease = async (diseaseData) => {
             diseaseID: newDisease.diseaseID
         };
     } catch (error) {
-        console.error('Error in createDisease', error);
+        logger.error('Error in /diseaseAdminService.js/createDisease: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -49,7 +55,7 @@ exports.deleteDiseaseById = async (diseaseId) => {
             return { status: 1, message: "无对应diseaseID" };
         }
     } catch (error) {
-        console.error('Error in deleteDiseaseById', error);
+        logger.error('Error in /diseaseAdminService.js/deleteDiseaseById: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -75,7 +81,7 @@ exports.updateDisease = async (diseaseID, updates) => {
         await disease.save();
         return { status: 0, message: "成功" };
     } catch (error) {
-        console.error('Error in updateDisease', error);
+        logger.error('Error in /diseaseAdminService.js/updateDisease: ', error);
         return { status: -9, message: '错误' };
     }
 };

@@ -6,12 +6,19 @@
 
 const { getDiseaseList, getDiseaseTypes, getDiseasesByID } = require('../services/diseaseService');
 
+const loggerConfigurations = [
+    { name: 'disease', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.getDiseaseTypes = async (req, res) => {
     try {
         const result = await getDiseaseTypes();
+        logger.info({ userID: req.userIDInToken, message: 'getDiseaseTypes: ' + result.message });
         res.status(200).json(result);
     } catch (error) {
-        console.error('Error in getDiseaseTypes:', error);
+        logger.error('Error in /diseaseController.js/getDiseaseTypes: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -32,9 +39,10 @@ exports.getDiseaseList = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getDiseaseList: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getDiseaseList: ', error);
+        logger.error('Error in /diseaseController.js/getDiseaseList: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -52,9 +60,10 @@ exports.getDiseaseDetail = async (req, res) => {
                 httpStatus = 404;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getDiseaseDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getDiseaseDetail:', error);
+        consloggerole.error('Error in /diseaseController.js/getDiseaseDetail: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

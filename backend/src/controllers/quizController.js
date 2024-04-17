@@ -6,6 +6,12 @@
 
 const { getQuizDetails, getQuizList, recordExamEntry } = require('../services/quizService')
 
+const loggerConfigurations = [
+    { name: 'quiz', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.getQuizList = async (req, res) => {
     try {
         const result = await getQuizList(req.userIDInToken);
@@ -24,9 +30,10 @@ exports.getQuizList = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getQuizList: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getQuizList:', error);
+        logger.error('Error in /quizController.js/getQuizList: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }
@@ -47,9 +54,10 @@ exports.getQuizDetail = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getQuizDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getQuizDetail:', error);
+        logger.error('Error in /quizController.js/getQuizDetail: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }
@@ -79,9 +87,10 @@ exports.recordExamEntry = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'recordExamEntry: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in recordExamEntry:', error);
+        logger.error('Error in /quizController.js/recordExamEntry: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }

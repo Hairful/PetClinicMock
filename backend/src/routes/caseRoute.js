@@ -6,7 +6,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { getCaseDetail, getCaseList } = require('../controllers/caseController');
+const { getCaseDetail, getCaseList, getCaseByString } = require('../controllers/caseController');
 const { isQueryValid } = require('../middlewares/formatCheck');
 const { isTokenValid } = require('../middlewares/authMiddleware');
 
@@ -21,6 +21,6 @@ router.get('/detail', isQueryValid(paramsInQueryOfDetail), getCaseDetail);
 //启用Token认证
 router.get('/list', isTokenValid, getCaseList);
 router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getCaseDetail);
-
+router.get('/search', isTokenValid, getCaseByString);
 
 module.exports = router;

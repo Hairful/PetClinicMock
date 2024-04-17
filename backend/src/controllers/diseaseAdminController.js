@@ -6,6 +6,12 @@
 
 const { createDisease, updateDisease, deleteDiseaseById } = require('../services/diseaseAdminService');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.createDisease = async (req, res) => {
     try {
         const result = await createDisease(req.body);
@@ -21,9 +27,10 @@ exports.createDisease = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'createDisease: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createDisease:', error);
+        logger.error('Error in /diseaseAdminController.js/createDisease: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -48,9 +55,10 @@ exports.updateDisease = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'updateDisease: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateDisease:', error);
+        logger.error('Error in /diseaseAdminController.js/updateDisease: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -71,9 +79,10 @@ exports.deleteDisease = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'deleteDisease: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteDisease:', error);
+        logger.error('Error in /diseaseAdminController.js/deleteDisease: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

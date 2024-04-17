@@ -4,8 +4,15 @@
  * 作者: {YYZ}
  */
 
-const { getItemDetail, getDepartmentList, getDepartmentDetail } = require('../services/vtService');
+const { getItemDetail } = require('../services/vtService');
 
+const loggerConfigurations = [
+    { name: 'vt', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
+/* TODO: We may delete them later, I'm not sure.
 exports.getDepartmentList = async (req, res) => {
     try {
         const result = await getDepartmentList();
@@ -20,7 +27,7 @@ exports.getDepartmentList = async (req, res) => {
         }
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getDepartmentList:', error);
+        logger.error('Error in /vtController.js/getDepartmentList:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }
@@ -41,12 +48,15 @@ exports.getDepartmentDetail = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getDepartmentDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getDepartmentDetail:', error);
+        logger.error('Error in /vtController.js/getDepartmentDetail:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }
+ */
+
 
 exports.getItemDetail = async (req, res) => {
     try {
@@ -64,9 +74,10 @@ exports.getItemDetail = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getItemDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getItemDetail:', error);
+        logger.error('Error in /vtController.js/getItemDetail:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }

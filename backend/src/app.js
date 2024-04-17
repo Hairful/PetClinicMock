@@ -1,5 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const httpLogger = require('./middlewares/httpLogger');
+const { limiter } = require('./middlewares/rateLimit');
+
 const userAuthRoute = require('./routes/userAuthRoute');
 const diseaseRoute = require('./routes/diseaseRoute');
 const quizRoute = require('./routes/quizRoute');
@@ -21,6 +25,9 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
+
+app.use(limiter);
+app.use(httpLogger);
 
 app.use('', userAuthRoute);
 app.use('/disease', diseaseRoute);

@@ -34,9 +34,10 @@
         <span class="heading1">测试</span>
         <br />
       </h1>
+      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="quiz-list-container4">
         <ul class="quiz-list-ul list">
-          <li class="quiz-list-li list-item Content" v-for="(quiz, index) in quizzes" :key="quiz.quizID">
+          <li class="quiz-list-li list-item Content" v-for="(quiz, index) in filteredQuizzes" :key="quiz.quizID">
             <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button bodyLarge`">
               测试 {{ index + 1 }}
             </router-link>
@@ -78,6 +79,14 @@ export default {
       name: localStorage.getItem('username'),
       ID: localStorage.getItem('userID'),
       quizzes: [],
+      searchQuery: '',
+    }
+  },
+  computed: {
+    filteredQuizzes() {
+      return this.quizzes.filter(quiz => {
+        return quiz.quizName.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
     }
   },
   methods: {
@@ -127,6 +136,12 @@ export default {
 </script>
 
 <style scoped>
+.rounded-input {
+  border-radius: 2px;
+  padding: 5px;
+  margin-bottom: var(--dl-space-space-twounits);
+}
+
 .quiz-list-container {
   width: 100%;
   display: flex;

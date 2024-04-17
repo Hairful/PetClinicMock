@@ -6,6 +6,12 @@
 
 const { getJobDetail, getJobList } = require('../services/roleService');
 
+const loggerConfigurations = [
+    { name: 'role', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.getJobList = async (req, res) => {
     try {
         const { role } = req.query;
@@ -22,9 +28,10 @@ exports.getJobList = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getJobList: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getJobList:', error);
+        logger.error('Error in /roleController.js/getJobList:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -48,9 +55,10 @@ exports.getJobDetail = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getJobDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getJobDetail:', error);
+        logger.error('Error in /roleController.js/getJobDetail:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

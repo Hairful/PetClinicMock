@@ -6,6 +6,12 @@
 
 const { createJob, updateJob, deleteJob } = require('../services/roleAdminService');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.createJob = async (req, res) => {
     try {
         const { role, job, jobDetail } = req.body;
@@ -25,9 +31,10 @@ exports.createJob = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'createJob: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createJob:', error);
+        logger.error('Error in /roleAdminController.js/createJob: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -54,9 +61,10 @@ exports.updateJob = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'updateJob: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateJob:', error);
+        logger.error('Error in /roleAdminController.js/updateJob: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -80,9 +88,10 @@ exports.deleteJob = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'deleteJob: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteMedicine:', error);
+        logger.error('Error in /roleAdminController.js/deleteMedicine: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

@@ -6,6 +6,12 @@
 
 const { createCase, updateCase, deleteCase } = require('../services/caseAdminService');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.createCase = async (req, res) => {
     try {
         const result = await createCase(req.body);
@@ -24,9 +30,10 @@ exports.createCase = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'createCase: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createCase:', error);
+        logger.error('Error in /caseAdminController/createCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -52,9 +59,10 @@ exports.updateCase = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'updateCase: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateCase:', error);
+        logger.error('Error in /caseAdminController/updateCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -75,9 +83,10 @@ exports.deleteCase = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'deleteCase: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteCase:', error);
+        logger.error('Error in /caseAdminController/deleteCase:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

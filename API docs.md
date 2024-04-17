@@ -26,6 +26,13 @@ Content-Type: application/json
     "message": "缺少必选参数/多余参数/格式错误"
 }
 
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+{
+    "status": -4,
+    "message": "超出请求限制"
+}
+
 HTTP/1.1 500
 Content-Type: application/json
 {
@@ -356,6 +363,68 @@ Content-Type: application/json
     "message": "无对应diseaseID"
 }
 ```
+
+## `GET /casestudy/case/search`
+
+病例搜索
+
+### 请求参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| searchString      | Param  | String | 否   | 搜索字符串       |
+
+`Example`
+
+```json
+GET /casestudy/case/search?searchString=发热咳嗽
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型     | 必选 | 备注 |
+| ------- | ---- | -------- | ---- | ---- |
+| status  | Body | integer  | 是   | 状态 |
+| message | Body | string   | 是   | 信息 |
+| cases   | Body | object[] | 否   | 病例 |
+
+`Example`
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0,
+    "message": "成功",
+    "cases": [
+        {
+            "caseID": 26,
+            "summary": "一只1岁的泰迪犬，主人反映犬只打喷嚏，鼻子流涕",
+            "examine": "鼻腔分泌物增多，发热",
+            "diagnose": "感冒",
+            "treatment": "对症治疗和营养支持"
+        },
+        {
+            "caseID": 44,
+            "summary": "主人称宠物因伤口发炎发热，食欲下降。",
+            "examine": "局部检查：发现伤口部位红肿热痛，伤口内有脓液。",
+            "diagnose": "外科感染",
+            "treatment": "局部清洗、消毒，口服抗生素，注射消炎药物。"
+        }
+    ]
+}
+```json
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+{
+   {
+    "status": 1,
+    "message": "No matches found"
+    }
+}
+
 
 ## `GET /casestudy/case/detail`
 

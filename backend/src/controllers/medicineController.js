@@ -6,6 +6,12 @@
 
 const { getAllMedicines, getMedicineById } = require('../services/medicineService');
 
+const loggerConfigurations = [
+    { name: 'medicine', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.getMedicineList = async (req, res) => {
     try {
         const result = await getAllMedicines();
@@ -21,9 +27,10 @@ exports.getMedicineList = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getMedicineList: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getMedicineList:', error);
+        logger.error('Error in /medicineControlller.js/getMedicineList:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }
@@ -44,9 +51,10 @@ exports.getMedicineDetail = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userID: req.userIDInToken, message: 'getMedicineDetail: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in getMedicineDetail:', error);
+        logger.error('Error in /medicineControlller.js/getMedicineDetail:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }

@@ -6,6 +6,12 @@
 
 const Disease = require('../models/Disease');
 
+const loggerConfigurations = [
+    { name: 'disease', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getDiseaseList - 获取所有疾病列表
  * @param {string} diseaseType - 疾病类型
@@ -38,7 +44,7 @@ exports.getDiseaseList = async (diseaseType) => {
             return { status: 1, message: "无对应diseaseType" };
         }
     } catch (error) {
-        console.error('Error in getDiseaseList: ', error);
+        logger.error('Error in /diseaseService.js/getDiseaseList: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -61,7 +67,7 @@ exports.getDiseaseTypes = async () => {
             diseaseTypes: disease_types_list
         };
     } catch (error) {
-        console.error('Error in getUniqueDiseaseType', error);
+        logger.error('Error in /diseaseService.js/getDiseaseTypes: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -92,7 +98,7 @@ exports.getDiseasesByID = async (diseaseID) => {
             return { status: 1, message: "无对应diseaseID" };
         }
     } catch (error) {
-        console.error('Error in getDiseasesByID', error);
+        logger.error('Error in /diseaseService.js/getDiseasesByID: ', error);
         return { status: -9, message: '错误' };
     }
 }

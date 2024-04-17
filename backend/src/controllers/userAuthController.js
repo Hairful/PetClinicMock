@@ -6,6 +6,12 @@
 
 const { registerUser, loginUser } = require('../services/userAuthService');
 
+const loggerConfigurations = [
+    { name: 'auth', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.registerUser = async (req, res) => {
     try {
         const { userName, password } = req.body;
@@ -22,9 +28,10 @@ exports.registerUser = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userName: userName, message: 'registerUser: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in registerUser:', error);
+        logger.error('Error in /userAuthController.js/registerUser:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }
@@ -48,9 +55,10 @@ exports.loginUser = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ userName: userName, message: 'loginUser: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in loginUser:', error);
+        logger.error('Error in /userAuthController.js/loginUser:', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 }

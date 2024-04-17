@@ -4,6 +4,12 @@
  * 作者: {YYZ}
  */
 
+const loggerConfigurations = [
+    { name: 'auth', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.isQueryValid = (requiredParams) => {
     return (req, res, next) => {
         try {
@@ -20,6 +26,7 @@ exports.isQueryValid = (requiredParams) => {
                 }
             });
             if (missingParams.length === 0 && unexpectedParams.length === 0) {
+                logger.info({ userID: req.userIDInToken, message: 'Query parameters are valid.' });
                 next();
             } else {
                 let errorMessage = '';
@@ -29,10 +36,11 @@ exports.isQueryValid = (requiredParams) => {
                 if (unexpectedParams.length > 0) {
                     errorMessage += `多余参数: ${unexpectedParams.join(', ')}.`;
                 }
+                logger.info({ userID: req.userIDInToken, message: `Invalid query parameters: ${errorMessage}` });
                 res.status(400).json({ status: -3, message: errorMessage });
             }
         } catch (error) {
-            console.error('Error in isQueryValid:', error);
+            logger.error('Error in /formatCheck.js/isQueryValid:', error);
             res.status(500).json({ status: -1, message: '错误' });
         }
     };
@@ -61,11 +69,13 @@ exports.isBodyValid = (requiredParams) => {
                 errorMessage += `多余参数: ${unexpectedParams.join(', ')}.`;
             }
             if (errorMessage) {
+                logger.info({ userID: req.userIDInToken, message: `Invalid body parameters: ${errorMessage}` });
                 return res.status(400).json({ status: -3, message: errorMessage });
             }
+            logger.info('Body parameters are valid.');
             next();
         } catch (error) {
-            console.error('Error in isBodyValid:', error);
+            logger.error('Error in /formatCheck.js/isBodyValid:', error)
             res.status(500).json({ status: -9, message: '错误' });
         }
     };

@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   devServer: {
     allowedHosts: "all",
-    proxy: 'http://localhost:3000',
+    proxy: 'https://39.107.248.10:3000',
     client: {
       overlay: false,
     },

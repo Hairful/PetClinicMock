@@ -6,6 +6,12 @@
 
 const { createQuizWithProbs, updateQuiz, deleteQuiz } = require('../services/quizAdminService');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.createQuiz = async (req, res) => {
     try {
         const result = await createQuizWithProbs(req.body);
@@ -21,9 +27,10 @@ exports.createQuiz = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'createQuiz: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createQuiz:', error);
+        logger.error('Error in /quizAdminController.js/createQuiz: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -43,9 +50,10 @@ exports.updateQuiz = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'updateQuiz: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateQuiz:', error);
+        logger.error('Error in /quizAdminController.js/updateQuiz: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -66,9 +74,10 @@ exports.deleteQuiz = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'deleteQuiz: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteCase:', error);
+        logger.error('Error in /quizAdminController.js/deleteQuiz: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

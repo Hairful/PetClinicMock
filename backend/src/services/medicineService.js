@@ -6,6 +6,12 @@
 
 const Medicine = require('../models/Medicine');
 
+const loggerConfigurations = [
+    { name: 'medicine', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getAllMedicines - 获取所有药品列表
  * @returns {Object} 对象
@@ -28,7 +34,7 @@ exports.getAllMedicines = async () => {
             return { status: 1, message: "无药品数据" };
         }
     } catch (error) {
-        console.error('Error in getAllMedicines', error);
+        logger.error('Error in /medicineService.js/getAllMedicines: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -56,7 +62,7 @@ exports.getMedicineById = async (medicineId) => {
             return { status: 1, message: "无对应medicineID" };
         }
     } catch (error) {
-        console.error('Error in getMedicineById', error);
+        logger.error('Error in /medicineService.js/getMedicineById', error);
         return { status: -9, message: '错误' };
     }
 }

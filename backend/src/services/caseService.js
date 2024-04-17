@@ -9,6 +9,15 @@ const Disease = require('../models/Disease');
 const Medicine = require('../models/Medicine');
 const Media = require('../models/Media');
 const sequelize = require('../config/database');
+const { Op } = require('sequelize');
+const Fuse = require('fuse.js');
+
+const loggerConfigurations = [
+  { name: 'case', level: 'info' },
+  { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getAllCases - 病例列表
  * @returns {Object} 对象
@@ -39,10 +48,12 @@ exports.getCaseList = async (diseaseID) => {
       return { status: 1, message: "无对应diseaseID" };
     }
   } catch (error) {
-    console.error('Error in getAllCases', error);
+    logger.error('Error in /caseService.js/getCaseList: ', error);
     return { status: -9, message: "错误" };
   }
 }
+
+
 
 /**
  * getCaseDetails - 获取病例详情
@@ -113,7 +124,54 @@ exports.getCaseDetail = async (caseID) => {
       ...groupedMedia
     };
   } catch (error) {
-    console.error('Error in getCaseDetail', error);
+    logger.error('Error in /caseService.js/getCaseDetail: ', error);
+    return { status: -9, message: "错误" };
+  }
+};
+exports.getCaseByString = async (searchString) => {
+  try {
+    let cases = await Case.findAll({
+      attributes: ['caseID', 'summary', 'examine', 'diagnose', 'treatment']
+    });
+    cases = cases.map(c => c.get({ plain: true }));
+    if (searchString == undefined) {
+      return {
+        status: 0,
+        message: "成功",
+        cases: cases
+      };
+    }
+    if (!searchString.trim()) {
+      return {
+        status: 0,
+        message: "成功",
+        cases: cases
+      };
+    }
+
+    const options = {
+      includeScore: true,
+      keys: ['caseID', 'summary', 'examine', 'diagnose', 'treatment'],
+      threshold: 0.7, // 调整匹配敏感度
+    };
+
+    // 创建Fuse对象
+    const fuse = new Fuse(cases, options);
+
+    // 使用Fuse.js进行搜索
+    const results = fuse.search(searchString);
+
+    if (results.length > 0) {
+      return {
+        status: 0,
+        message: "成功",
+        cases: results.map(result => result.item)
+      };
+    } else {
+      return { status: 1, message: "No matches found" };
+    }
+  } catch (error) {
+    logger.error('Error in /caseService.js/getCaseByString: ', error);
     return { status: -9, message: "错误" };
   }
 };

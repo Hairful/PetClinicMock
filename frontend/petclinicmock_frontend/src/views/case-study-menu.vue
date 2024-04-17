@@ -37,8 +37,9 @@
         <span class="heading1">选择疾病类型</span>
         <br />
       </h1>
+      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="case-study-menu-containerfix">
-        <router-link v-for="(diseaseType, index) in diseaseTypes" :key="index"
+        <router-link v-for="(diseaseType, index) in filteredDiseaseTypes" :key="index"
           :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
           :class="`case-study-menu-navlink1 button`">
           <span class="heading3">{{ diseaseType }}</span>
@@ -77,6 +78,14 @@ export default {
     return {
       diseaseTypes: [],
       name: localStorage.getItem('username'),
+      searchQuery: '',
+    }
+  },
+  computed: {
+    filteredDiseaseTypes() {
+      return this.diseaseTypes.filter(diseaseType => 
+        diseaseType.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     }
   },
   methods: {
@@ -108,6 +117,11 @@ export default {
 </script>
 
 <style scoped>
+.rounded-input {
+  border-radius: 2px;
+  padding: 5px;
+}
+
 .case-study-menu-container {
   width: 100%;
   display: flex;

@@ -10,6 +10,12 @@ const Quiz = require('../models/Quiz');
 const UserProb = require('../models/UserProb');
 const UserQuiz = require('../models/UserQuiz');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * createQuizWithProbs - 添加试题
  * @param {Object} quizData - 试题数据
@@ -49,7 +55,7 @@ exports.createQuizWithProbs = async (quizData) => {
             quizID: quiz.quizID
         };
     } catch (error) {
-        console.error('Error In createQuizWithProbs :', error);
+        logger.error('Error in /quizAdminService.js/createQuizWithProbs: ', error);
         return { status: -9, message: '错误' };
     }
 
@@ -69,7 +75,7 @@ exports.deleteQuiz = async (quizID) => {
         await existingQuiz.destroy()
         return { status: 0, message: "成功" };
     } catch (error) {
-        console.error('Error In deleteQuiz :', error);
+        logger.error('Error in /quizAdminService.js/deleteQuiz: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -118,7 +124,7 @@ exports.updateQuiz = async (quizData) => {
         }
         return { status: 0, message: "成功" };
     } catch (error) {
-        console.error('Error In updateQuiz :', error);
+        logger.error('Error in /quizAdminService.js/updateQuiz: ', error);
         return { status: -9, message: '错误' };
     }
 }
