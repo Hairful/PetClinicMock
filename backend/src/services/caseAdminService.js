@@ -8,7 +8,7 @@ const Case = require('../models/Case');
 const Disease = require('../models/Disease');
 const Medicine = require('../models/Medicine');
 const Media = require('../models/Media');
-
+const redisClient = require('../config/redisClient');
 const loggerConfigurations = [
     { name: 'admin', level: 'info' },
     { name: 'error', level: 'error' }
@@ -24,13 +24,13 @@ exports.createCase = async (caseData) => {
     try {
         const disease = await Disease.findByPk(caseData.diseaseID);
         if (!disease) {
-            return { status: 1, message: "无对应疾病ID" };
+            return { status: 1, message: "无对应diseaseID" };
         }
         // 检查medicineIDs是否存在
         for (let medicineData of caseData.medicines) {
             const medicine = await Medicine.findByPk(medicineData.medicineID);
             if (!medicine) {
-                return { status: 2, message: "无对应药品ID" };
+                return { status: 2, message: "无对应medicineID" };
             }
         }
         // 创建新的Case实例
@@ -83,12 +83,12 @@ exports.updateCase = async (caseData) => {
     try {
         const existingCase = await Case.findByPk(caseData.caseID);
         if (!existingCase) {
-            return { status: 1, message: "无对应病例ID" };
+            return { status: 1, message: "无对应caseID" };
         }
         if (caseData.diseaseID !== undefined) {
             const existingDisease = await Disease.findByPk(caseData.diseaseID);
             if (!existingDisease) {
-                return { status: 2, message: "无对应疾病ID" };
+                return { status: 2, message: "无对应diseaseID" };
             }
         }
         // 更新Case表中的记录
@@ -129,12 +129,16 @@ exports.updateCase = async (caseData) => {
                 } else {
                     return {
                         status: 3,
-                        message: "无对应药品ID"
+                        message: "无对应medicineID"
                     };
                 }
             }
+            await redisClient.del(`caseInfo:${caseData.caseID}`);
+            await redisClient.del(`caseMedicines:${caseData.caseID}`);
             return { status: 0, message: "成功" };
         } else {
+            await redisClient.del(`caseInfo:${caseData.caseID}`);
+            await redisClient.del(`caseMedicines:${caseData.caseID}`);
             return { status: 0, message: "成功" };
         }
     } catch (error) {
@@ -152,9 +156,11 @@ exports.deleteCase = async (caseID) => {
     try {
         const caseToDelete = await Case.findByPk(caseID);
         if (!caseToDelete) {
-            return { status: 1, message: "无对应病例ID" };
+            return { status: 1, message: "无对应caseID" };
         }
         await caseToDelete.destroy();
+        await redisClient.del(`caseInfo:${caseID}`);
+        await redisClient.del(`caseMedicines:${caseID}`);
         return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /caseAdminService.js/deleteCase', error);

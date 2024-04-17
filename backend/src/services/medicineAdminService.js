@@ -52,6 +52,11 @@ exports.deleteMedicineById = async (medicineId) => {
             where: { medicineID: medicineId }
         });
         if (result > 0) {
+            redisClient.flushAll().then((result) => {
+                logger.info('FlushAll result:', result);
+            }).catch((error) => {
+                logger.error('FlushAll error:', error);
+            });
             // 如果找到并删除了记录，返回成功的状态和消息
             return { status: 0, message: "成功" };
         } else {
@@ -89,6 +94,11 @@ exports.updateMedicine = async (medicineID, updates) => {
             }
         }
         await medicine.save();
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /medicineAdminService.js/updateMedicine: ', error);

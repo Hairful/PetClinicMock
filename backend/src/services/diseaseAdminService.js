@@ -50,6 +50,11 @@ exports.deleteDiseaseById = async (diseaseId) => {
             where: { diseaseID: diseaseId }
         });
         if (result > 0) {
+            redisClient.flushAll().then((result) => {
+                logger.info('FlushAll result:', result);
+            }).catch((error) => {
+                logger.error('FlushAll error:', error);
+            });
             return { status: 0, message: "成功" };
         } else {
             return { status: 1, message: "无对应疾病ID" };
@@ -79,6 +84,11 @@ exports.updateDisease = async (diseaseID, updates) => {
             }
         }
         await disease.save();
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /diseaseAdminService.js/updateDisease: ', error);

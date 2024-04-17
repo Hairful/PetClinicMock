@@ -11,7 +11,7 @@ const Media = require('../models/Media');
 const sequelize = require('../config/database');
 const { Op } = require('sequelize');
 const Fuse = require('fuse.js');
-
+const redisClient = require('../config/redisClient');
 const loggerConfigurations = [
   { name: 'case', level: 'info' },
   { name: 'error', level: 'error' }
@@ -45,7 +45,7 @@ exports.getCaseList = async (diseaseID) => {
         }))
       };
     } else {
-      return { status: 1, message: "无对应疾病ID" };
+      return { status: 1, message: "无对应diseaseID" };
     }
   } catch (error) {
     logger.error('Error in /caseService.js/getCaseList: ', error);
@@ -65,36 +65,64 @@ exports.getCaseList = async (diseaseID) => {
 
 exports.getCaseDetail = async (caseID) => {
   try {
-    const caseInfo = await Case.findByPk(caseID, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
-      include: [
-        {
-          model: Disease,
-          attributes: { exclude: ['createdAt', 'updatedAt'] }
-        },
-        {
-          model: Media,
-          through: { attributes: [] },
-          attributes: ['mediaType', 'mediaURL']
-        }
-      ]
-    });
+    let caseInfo = await redisClient.get(`caseInfo:${caseID}`);
+    let caseMedicines;
+
+    if (caseInfo) {
+      caseInfo = JSON.parse(caseInfo);
+
+    } else {
+      caseInfo = await Case.findByPk(caseID, {
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: [
+          {
+            model: Disease,
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          },
+          {
+            model: Media,
+            through: { attributes: [] },
+            attributes: ['mediaType', 'mediaURL']
+          }
+        ]
+
+      }
+
+      );
+
+      if (caseInfo) {
+        await redisClient.set(`caseInfo:${caseID}`, JSON.stringify(caseInfo));
+      }
+
+    }
 
     if (!caseInfo) {
-      return { status: 1, message: "无对应病例ID" };
+      return { status: 1, message: "无对应caseID" };
     }
-    const caseMedicines = await sequelize.query(
-      'SELECT `MedicineMedicineID` ,`dosage` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
-      {
-        replacements: { caseID: caseID },
-        type: sequelize.QueryTypes.SELECT
-      }
-    );
+
+    caseMedicines = await redisClient.get(`caseMedicines:${caseID}`);
+
+    if (!caseMedicines) {
+      const rawCaseMedicines = await sequelize.query(
+        'SELECT `MedicineMedicineID`, `dosage` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
+        {
+          replacements: { caseID: caseID },
+          type: sequelize.QueryTypes.SELECT
+        }
+      );
+
+      caseMedicines = rawCaseMedicines.map(cm => ({
+        MedicineMedicineID: cm.MedicineMedicineID,
+        dosage: cm.dosage
+      }));
+
+      await redisClient.set(`caseMedicines:${caseID}`, JSON.stringify(caseMedicines));
+    } else {
+      caseMedicines = JSON.parse(caseMedicines);
+    }
 
     const medicineIDs = caseMedicines.map(cm => cm.MedicineMedicineID);
-
-
-    const medicines = await Medicine.findAll({
+    let medicines = await Medicine.findAll({
       where: { medicineID: medicineIDs },
       attributes: ['medicineID', 'medicineName', 'medicineIntro']
     });
@@ -127,7 +155,7 @@ exports.getCaseDetail = async (caseID) => {
       ...groupedMedia
     };
   } catch (error) {
-    logger.error('Error in /caseService.js/getCaseDetail: ', error);
+    logger.error('Error in getCaseDetail: ', error);
     return { status: -9, message: "错误" };
   }
 };
@@ -171,7 +199,7 @@ exports.getCaseByString = async (searchString) => {
         cases: results.map(result => result.item)
       };
     } else {
-      return { status: 1, message: "无对应信息" };
+      return { status: 1, message: "No matches found" };
     }
   } catch (error) {
     logger.error('Error in /caseService.js/getCaseByString: ', error);
