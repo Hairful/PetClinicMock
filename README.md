@@ -17,16 +17,6 @@ A web application that simulates a pet clinic.
 AWS Amplify Server Build `amplify.yml`:
 ```yml
 version: 1
-backend:
-  phases:
-    build:
-      commands:
-        - cd backend/src
-        - npm i
-        - node server.js
-    postBuild:
-        commands:
-        - cd ..
 frontend:
   phases:
     preBuild:
