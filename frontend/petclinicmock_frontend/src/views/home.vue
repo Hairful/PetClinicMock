@@ -26,8 +26,9 @@
       <div class="home-hero1 heroContainer">
         <div class="home-container1">
           <h1 class="home-hero-heading heading1">
-            PetClinicMock: <br />
-            以全新的方式，定义宠物医疗培训
+            <vue-typer :text='["PetClinicMock", "以全新的方式，定义宠物医疗培训"]' :repeat='Infinity' :shuffle='false'
+              initial-action='typing' :pre-type-delay='70' :type-delay='70' :pre-erase-delay='2000' :erase-delay='250'
+              erase-style='select-all' :erase-on-complete='false' caret-animation='smooth'></vue-typer>
           </h1>
         </div>
       </div>
@@ -42,9 +43,6 @@
           <span class="bodySmall home-text14">
             © 2024 SWD-G02, All Rights Reserved.
           </span>
-          <router-link to="/login-admin" class="home-navlink button">
-            管理员登录
-          </router-link>
         </div>
       </footer>
     </div>

@@ -59,7 +59,7 @@
           <span class="heading1">病例 {{ index+1 }}</span>
           <br />
         </h1>
-        <div  class="case-study-detail-container10">
+        <div class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">介绍</span>
           <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.summary }} </span>
           <div class="case-study-detail-container11">

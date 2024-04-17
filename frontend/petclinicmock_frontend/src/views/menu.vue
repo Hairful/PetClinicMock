@@ -29,29 +29,37 @@
         </div>
         <div class="menu-container3">
           <div class="menu-container4">
-            <router-link to="/virtual-tour" class="menu-navlink3 button">
-              <span class="heading3">
-                <span>3D 虚拟导览</span>
-                <br />
-              </span>
-            </router-link>
-            <router-link to="/role-play-menu" class="menu-navlink3 button">
-              <span class="heading3">
-                <span>角色扮演</span>
-                <br />
-              </span>
-            </router-link>
+            <el-tooltip class="menu-item" effect="dark" content="3D 虚拟导览" placement="left-start">
+              <router-link to="/virtual-tour" class="menu-navlink3 button" >
+                <span class="heading3">
+                  <span>3D 虚拟导览</span>
+                  <br />
+                </span>
+              </router-link>
+            </el-tooltip>
+            <el-tooltip class="menu-item" effect="dark" content="3D 虚拟导览" placement="left-start">
+              <router-link to="/role-play-menu" class="menu-navlink3 button">
+                <span class="heading3">
+                  <span>角色扮演</span>
+                  <br />
+                </span>
+              </router-link>
+            </el-tooltip>
           </div>
           <div class="menu-container4">
-            <router-link to="/case-study-menu" class="menu-navlink3 button">
-              <span class="heading3">
-                <span>病例学习</span>
-                <br />
-              </span>
-            </router-link>
-            <router-link to="/quiz-list" class="menu-navlink3 button">
-              <span class="heading3">测试</span>
-            </router-link>
+            <el-tooltip class="menu-item" effect="dark" content="3D 虚拟导览" placement="right-start">
+              <router-link to="/case-study-menu" class="menu-navlink3 button">
+                <span class="heading3">
+                  <span>病例学习</span>
+                  <br />
+                </span>
+              </router-link>
+            </el-tooltip>
+            <el-tooltip class="menu-item" effect="dark" content="3D 虚拟导览" placement="right-start">
+              <router-link to="/quiz-list" class="menu-navlink3 button">
+                <span class="heading3">测试</span>
+              </router-link>
+            </el-tooltip>
           </div>
         </div>
       </div>
@@ -109,6 +117,11 @@ export default {
 </script>
 
 <style scoped>
+.menu-item {
+  width: 400px;
+  height: 400px;
+}
+
 .menu-navlink4 {
   color: var(--dl-color-primary-700);
   border-width: 0px;
