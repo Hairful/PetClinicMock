@@ -59,15 +59,15 @@
           <span class="heading1">病例 {{ index+1 }}</span>
           <br />
         </h1>
-        <div v-if="caseItem.summary" class="case-study-detail-container10">
+        <div  class="case-study-detail-container10">
           <span class="case-study-detail-text24 heading2">介绍</span>
           <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.summary }} </span>
           <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.summaryPicture" :key="`summary-pic-${picIndex}`"
+            <img v-for="(pic, picIndex) in caseItem.details.summaryPictures" :key="`summary-pic-${picIndex}`"
               alt="image" :src="pic" class="case-study-detail-image02" />
           </div>
           <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.summaryVideo" :key="`summary-vid-${vidIndex}`" :src="vid"
+            <video v-for="(vid, vidIndex) in caseItem.details.summaryVideos" :key="`summary-vid-${vidIndex}`" :src="vid"
               class="case-study-detail-video02" controls></video>
           </div>
         </div>
@@ -75,11 +75,11 @@
           <span class="case-study-detail-text24 heading2">检查结果</span>
           <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.examine }} </span>
           <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.examinePicture" :key="`examine-pic-${picIndex}`"
+            <img v-for="(pic, picIndex) in caseItem.details.examinePictures" :key="`examine-pic-${picIndex}`"
               alt="image" :src="pic" class="case-study-detail-image02" />
           </div>
           <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.examineVideo" :key="`examine-vid-${vidIndex}`" :src="vid"
+            <video v-for="(vid, vidIndex) in caseItem.details.examineVideos" :key="`examine-vid-${vidIndex}`" :src="vid"
               class="case-study-detail-video02" controls></video>
           </div>
         </div>
@@ -87,11 +87,11 @@
           <span class="case-study-detail-text24 heading2">临床诊断</span>
           <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.diagnose }} </span>
           <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.diagnosePicture" :key="`diagnose-pic-${picIndex}`"
+            <img v-for="(pic, picIndex) in caseItem.details.diagnosePictures" :key="`diagnose-pic-${picIndex}`"
               alt="image" :src="pic" class="case-study-detail-image02" />
           </div>
           <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.diagnoseVideo" :key="`diagnose-vid-${vidIndex}`"
+            <video v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos" :key="`diagnose-vid-${vidIndex}`"
               :src="vid" class="case-study-detail-video02" controls></video>
           </div>
         </div>
@@ -99,11 +99,11 @@
           <span class="case-study-detail-text24 heading2">治疗方案</span>
           <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.treatment }} </span>
           <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.treatmentPicture" :key="`treatment-pic-${picIndex}`"
+            <img v-for="(pic, picIndex) in caseItem.details.treatmentPictures" :key="`treatment-pic-${picIndex}`"
               alt="image" :src="pic" class="case-study-detail-image02" />
           </div>
           <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.treatmentVideo" :key="`treatment-vid-${vidIndex}`"
+            <video v-for="(vid, vidIndex) in caseItem.details.treatmentVideos" :key="`treatment-vid-${vidIndex}`"
               :src="vid" class="case-study-detail-video02" controls></video>
           </div>
         </div>

@@ -160,6 +160,7 @@ export default {
         }
       })
         .then(response => {
+          this.$message('修改成功');
           this.refresh();
         })
         .catch(error => {
