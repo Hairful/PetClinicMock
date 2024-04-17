@@ -26,20 +26,9 @@
       <div class="home-hero1 heroContainer">
         <div class="home-container1">
           <h1 class="home-hero-heading heading1">
-            <vue-typer
-            <vue-typer
-              :text='["PetClinicMock","以全新的方式，定义宠物医疗培训"]'
-              :repeat='Infinity'
-              :shuffle='false'
-              initial-action='typing'
-              :pre-type-delay='70'
-              :type-delay='70'
-              :pre-erase-delay='2000'
-              :erase-delay='250'
-              erase-style='select-all'
-              :erase-on-complete='false'
-              caret-animation='smooth'
-            ></vue-typer>
+            <vue-typer :text='["PetClinicMock", "以全新的方式，定义宠物医疗培训"]' :repeat='Infinity' :shuffle='false'
+              initial-action='typing' :pre-type-delay='70' :type-delay='70' :pre-erase-delay='2000' :erase-delay='250'
+              erase-style='select-all' :erase-on-complete='false' caret-animation='smooth'></vue-typer>
           </h1>
         </div>
       </div>
