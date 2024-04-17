@@ -890,7 +890,7 @@ transform: translate(100px,110px);
   //创建手术仪器流程
   const surgeryEquipment = new SpriteCanvas(
     camera,
-    "手术仪器",
+    "手术实践",
     new THREE.Vector3(-7, 9.5, 32)
   );
   scene.add(surgeryEquipment.mesh);
@@ -966,10 +966,10 @@ transform: translate(100px,110px);
     createVideoEle(washingItem.itemURL, washingItem.itemDetail);
   });
 
-  //创建药品标签
+  //创建药房详情标签
   const med = new SpriteCanvas(
     camera,
-    "药品",
+    "药房详情",
     new THREE.Vector3(2, 11, 42)
   );
   scene.add(med.mesh);
@@ -1047,7 +1047,7 @@ transform: translate(100px,110px);
   //创建处理室设备详情
   const proEquipment = new SpriteCanvas(
     camera,
-    "处理设备",
+    "处理实践",
     new THREE.Vector3(16, 10.5, 9)
   );
   scene.add(proEquipment.mesh);
