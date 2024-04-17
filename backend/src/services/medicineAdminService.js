@@ -5,7 +5,7 @@
  */
 
 const Medicine = require('../models/Medicine');
-
+const redisClient = require('../config/redisClient');
 const loggerConfigurations = [
     { name: 'admin', level: 'info' },
     { name: 'error', level: 'error' }
@@ -29,6 +29,11 @@ exports.createMedicine = async (medicineData) => {
         }
         // 如果不存在，创建新的Disease实例
         const newMedicine = await Medicine.create(medicineData);
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return {
             status: 0,
             message: "成功",
