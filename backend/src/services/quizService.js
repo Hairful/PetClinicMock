@@ -10,6 +10,12 @@ const Quiz = require('../models/Quiz');
 const UserProb = require('../models/UserProb');
 const UserQuiz = require('../models/UserQuiz');
 
+const loggerConfigurations = [
+    { name: 'quiz', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getQuizList - 获取试卷列表
  * @param {integer} userID - 用户ID
@@ -26,7 +32,7 @@ exports.getQuizList = async (userID) => {
 
         // 获取所有测验
         const allQuizzes = await Quiz.findAll({
-            attributes: ['quizID', 'quizName', 'totalCredits']
+            attributes: ['quizID', 'quizName', 'totalCredits', 'timer']
         });
 
         const response = {
@@ -41,7 +47,8 @@ exports.getQuizList = async (userID) => {
             const quizResponse = {
                 quizID: quiz.quizID,
                 quizName: quiz.quizName,
-                totalCredits: quiz.totalCredits
+                totalCredits: quiz.totalCredits,
+                timer: quiz.timer
             };
 
             // 如果用户完成了测验，添加 lastTry 和 lastTryTime
@@ -61,7 +68,7 @@ exports.getQuizList = async (userID) => {
 
         return response;
     } catch (error) {
-        console.error('Error In getQuizList :', error);
+        logger.error('Error in /quizService.js/getQuizList: ', error);
         return { status: -9, message: '错误' };
     }
 };
@@ -126,7 +133,7 @@ exports.getQuizDetails = async (userID, quizID) => {
         }
         return response;
     } catch (error) {
-        console.error('Error In getQuizDetails:', error);
+        logger.error('Error in /quizService.js/getQuizDetails: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -207,7 +214,7 @@ exports.recordExamEntry = async (input) => {
         }
         return { "status": 0, "message": "成功" };
     } catch (error) {
-        console.error('Error In recordExamEntry:', error);
+        logger.error('Error in /quizService.js/recordExamEntry: ', error);
         return { status: -9, message: '错误' };
     }
 }

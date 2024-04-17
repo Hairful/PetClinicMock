@@ -7,6 +7,12 @@
 const Department = require('../models/Department');
 const Item = require('../models/Item');
 
+const loggerConfigurations = [
+    { name: 'vt', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getItemDetail - 获取3D虚拟导览中物品详情
  * @param {integer} itemID - 物品ID
@@ -29,7 +35,7 @@ exports.getItemDetail = async () => {
             data: itemDetails
         };
     } catch (error) {
-        console.error('Error in getItemDetail:', error);
+        logger.error('Error in vtService.js/getItemDetail: ', error);
         return { status: -9, message: '失败' };
     }
 }

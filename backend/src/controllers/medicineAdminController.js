@@ -6,6 +6,12 @@
 
 const { createMedicine, updateMedicine, deleteMedicineById } = require('../services/medicineAdminService');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 exports.createMedicine = async (req, res) => {
     try {
         const result = await createMedicine(req.body);
@@ -21,9 +27,10 @@ exports.createMedicine = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'createMedicine: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in createMedicine:', error);
+        logger.error('Error in /medicineAdminController.js/createMedicine: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -45,9 +52,10 @@ exports.updateMedicine = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'updateMedicine: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateMedicine:', error);
+        logger.error('Error in /medicineAdminController.js/updateMedicine: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };
@@ -71,9 +79,10 @@ exports.deleteMedicine = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'deleteMedicine: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in deleteMedicine:', error);
+        logger.error('Error in /medicineAdminController.js/deleteMedicine: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

@@ -6,6 +6,12 @@
 
 const Job = (require('../models/Job'));
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * createJob - 创建工作
  * @param {integer} role - 角色
@@ -24,7 +30,7 @@ exports.createJob = async (role, job, jobDetail) => {
         const result = await Job.create({ role, job, jobDetail });
         return { status: 0, message: '成功' };
     } catch (error) {
-        console.error('Error In createJob', error);
+        logger.error('Error in /roleAdminService.js/createJob: ', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -96,7 +102,7 @@ exports.updateJob = async (role, prevJob, job, jobDetail) => {
 
 
     } catch (error) {
-        console.error('Error In updateJob', error);
+        logger.error('Error in /roleAdminService.js/updateJob', error);
         return { status: -9, message: '错误' };
     }
 }
@@ -127,7 +133,7 @@ exports.deleteJob = async (role, job) => {
         await roleInstance.destroy();
         return { status: 0, message: '成功' };
     } catch (error) {
-        console.error('Error In deleteJob', error);
+        logger.error('Error in /roleAdminService.js/deleteJob: ', error);
         return { status: -9, message: '错误' };
     }
 }

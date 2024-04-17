@@ -1,16 +1,21 @@
-const sequelize = require('./config/database'); // 导入 Sequelize 实例
+const sequelize = require('./config/database');
 const app = require('./app');
 const PORT = process.env.PORT || 3000;
 
+const loggerConfigurations = [
+    { name: 'server', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('./utils/logUtil')(loggerConfigurations);
 
 sequelize.authenticate()
     .then(async () => {
-        console.log('Database connection has been established successfully.');
+        logger.info('Successfully connect to the database');
         //await sequelize.sync({ alter: true });
         app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            logger.info(`The server is running on port: ${PORT}`);
         });
     })
     .catch(err => {
-        console.error('Unable to connect to the database:', err);
+        logger.error('Unable to connect to database', err);
     });

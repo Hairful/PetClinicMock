@@ -4,7 +4,13 @@
  * 作者: {YYZ}
  */
 
-const { updateItemInfo, updateDepartmentInfo } = require('../services/vtAdminService');
+const { updateItemInfo } = require('../services/vtAdminService');
+
+const loggerConfigurations = [
+    { name: 'auth', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
 
 exports.updateItem = async (req, res) => {
     try {
@@ -22,9 +28,10 @@ exports.updateItem = async (req, res) => {
                 httpStatus = 500;
                 break;
         }
+        logger.info({ administratorID: req.userIDInToken, message: 'Administrator updates item: ' + result.message });
         res.status(httpStatus).json(result);
     } catch (error) {
-        console.error('Error in updateItemInfo:', error);
+        logger.error('Error in /vtAdminController.js/updateItem: ', error);
         res.status(500).json({ status: -9, message: '错误' });
     }
 };

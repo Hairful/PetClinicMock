@@ -9,6 +9,12 @@ const Disease = require('../models/Disease');
 const Medicine = require('../models/Medicine');
 const Media = require('../models/Media');
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * createCase - 添加病例
  * @param {Object} caseData - 病例数据
@@ -63,7 +69,7 @@ exports.createCase = async (caseData) => {
             caseID: newCase.caseID
         };
     } catch (error) {
-        console.error('Error in createCase', error);
+        logger.error('Error in /caseAdminService.js/createCase: ', error);
         throw error;
     }
 }
@@ -132,7 +138,7 @@ exports.updateCase = async (caseData) => {
             return { status: 0, message: "成功" };
         }
     } catch (error) {
-        console.error('Error in updateCase', error);
+        logger.error('Error in /caseAdminService.js/updateCase', error);
         return { status: -9, message: "失败" };
     }
 }
@@ -151,7 +157,7 @@ exports.deleteCase = async (caseID) => {
         await caseToDelete.destroy();
         return { status: 0, message: "成功" };
     } catch (error) {
-        console.error('Error in deleteCase', error);
+        logger.error('Error in /caseAdminService.js/deleteCase', error);
         return { status: -9, message: "失败" };
     }
 }

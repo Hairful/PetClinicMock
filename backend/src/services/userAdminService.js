@@ -7,6 +7,12 @@
 const User = require('../models/User');
 const { encrypt, decrypt, hashPassword, generateSalt } = require('../utils/cryptoUtil')
 
+const loggerConfigurations = [
+    { name: 'admin', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
 /**
  * getAllUser - 获取所有用户
  * @returns {Object} 对象
@@ -21,7 +27,7 @@ exports.getAllUsers = async () => {
         }));
         return { status: 0, message: '成功', users };
     } catch (error) {
-        console.error('Error in getAllUsers:', error);
+        logger.error('Error in userAdminService.js/getAllUsers: ', error);
         return { status: -9, message: '失败' };
     }
 }
@@ -51,7 +57,7 @@ exports.createUser = async (userName, password, isAdmin) => {
         return { status: 0, message: '成功', userID: newUser.userID };
     }
     catch (error) {
-        console.error('Error in createUser:', error);
+        logger.error('Error in userAdminService.js/createUser: ', error);
         return { status: -9, message: '失败' };
     }
 }
@@ -88,7 +94,7 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
             return { status: 0, message: '成功' };
         }
     } catch (error) {
-        console.error('Error in updateUser:', error);
+        logger.error('Error in Error in userAdminService.js/updateUser: ', error);
         return { status: -9, message: '失败' };
     }
 }
@@ -108,7 +114,7 @@ exports.deleteUser = async (userID) => {
         await user.destroy();
         return { status: 0, message: '成功' };
     } catch (error) {
-        console.error('Error in deleteUser:', error);
+        logger.error('Error in /userAdminService.js/deleteUser: ', error);
         return { status: -9, message: '失败' };
     }
 }
