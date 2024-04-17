@@ -26,6 +26,13 @@ Content-Type: application/json
     "message": "缺少必选参数/多余参数/格式错误"
 }
 
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+{
+    "status": -4,
+    "message": "超出请求限制"
+}
+
 HTTP/1.1 500
 Content-Type: application/json
 {
@@ -356,11 +363,13 @@ Content-Type: application/json
     "message": "无对应diseaseID"
 }
 ```
+
 ## `GET /casestudy/case/search`
 
 病例搜索
 
 ### 请求参数
+
 | 名称          | 位置   | 类型    | 必选 | 备注          |
 | ------------- | ------ | ------- | ---- | ------------- |
 | Authorization | Header | string  | 是   | 身份验证token |
@@ -372,6 +381,7 @@ Content-Type: application/json
 GET /casestudy/case/search?searchString=发热咳嗽
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
+
 ### 返回响应
 
 | 名称    | 位置 | 类型     | 必选 | 备注 |
