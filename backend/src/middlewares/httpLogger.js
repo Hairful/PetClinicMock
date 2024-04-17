@@ -1,7 +1,7 @@
 /**
  * 文件: /backend/src/middlewares/httpLogger.js
- * 描述: I have no idea how to code this middleware. I need time.
- * 作者: {}
+ * 描述: 记录http的中间件
+ * 作者: {YYZ}
  */
 
 /*
@@ -11,5 +11,44 @@
 {req}->route->log->auth->controller->log->{res}
                             |
                         service
-aziyiyo
+
+错误的，gpt提供了两个思路
+1.重写.send.json方法
+2.监听
  */
+
+const loggerConfigurations = [
+    { name: 'http', level: 'info' },
+    { name: 'error', level: 'error' }
+];
+const logger = require('../utils/logUtil')(loggerConfigurations);
+
+const httpLogger = (req, res, next) => {
+    const start = process.hrtime();
+    try {
+        res.on('finish', () => {
+            const durationInMilliseconds = getDurationInMilliseconds(start);
+            logger.info({
+                method: req.method,
+                path: req.originalUrl,
+                statusCode: res.statusCode,
+                duration: `${durationInMilliseconds.toLocaleString()} ms`,
+                userAgent: req.headers['user-agent'],
+                referer: req.headers['referer'],
+                ip: req.ip
+            });
+        });
+    } catch (error) {
+        logger.error('Error in httpLogger', error);
+    }
+    next();
+};
+
+function getDurationInMilliseconds(start) {
+    const NS_PER_SEC = 1e9;
+    const NS_TO_MS = 1e6;
+    const diff = process.hrtime(start);
+    return (diff[0] * NS_PER_SEC + diff[1]) / NS_TO_MS;
+}
+
+module.exports = httpLogger;
