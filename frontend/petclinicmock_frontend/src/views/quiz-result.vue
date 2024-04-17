@@ -58,7 +58,7 @@
         <div class="quiz-result-container06">
           <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
           <div class="quiz-result-container07">
-            <img v-if="prob.probImg" :src="prob.probImg" alt="quiz image" />
+            <img v-if="prob.probImg" :src="prob.probImg" class="quiz-result-image"  />
           </div>
           <div class="quiz-result-container09">
             <div class="quiz-result-container08">

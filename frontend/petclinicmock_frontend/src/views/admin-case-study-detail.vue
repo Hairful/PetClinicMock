@@ -50,7 +50,7 @@
         </h1>
         <div class="admin-case-study-detail-container06">
           <div class="admin-case-study-detail-container07">
-            <textarea v-model="this.newIntro" :placeholder="`${this.diseaseIntro}`"
+            <textarea v-model="diseaseIntro" :placeholder="`${this.diseaseIntro}`"
               class="admin-case-study-detail-textarea textarea"></textarea>
             <button type="button" class="admin-case-study-detail-button button" @click="modifyDiseaseIntro">
               修改
@@ -71,7 +71,7 @@
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">介绍</span>
           <div class="admin-case-study-detail-container57">
-            <textarea v-model="summarys[index]" :placeholder="`${caseItem.summary}`"
+            <textarea v-model="caseItem.summary" :placeholder="`${caseItem.summary}`"
               class="admin-case-study-detail-textarea5 textarea"></textarea>
             <button type="button" class="admin-case-study-detail-button40 button" @click="modifySummary(index)">
               修改
@@ -270,11 +270,9 @@ export default {
       diseaseName: ' ',
       diseaseType: ' ',
       diseaseIntro: ' ',
-      newIntro: '',
       cases: [],
       Allmedicines: [],
       medicines: [],
-      summarys: [],
       summaryPictures: [],
       summaryVideos: [],
       examinePictures: [],
@@ -500,7 +498,7 @@ export default {
       })
         .then(response => {
           if (response.data.status === 0) {
-            this.diseaseIntro = response.data.diseaseIntro;
+            this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
           } else if (response.data.status === 1) {
             console.log('No corresponding diseaseID');
           }
@@ -569,7 +567,7 @@ export default {
         },
         data: {
           diseaseID: this.diseaseID,
-          diseaseIntro: this.newIntro,
+          diseaseIntro: this.diseaseIntro,
         }
       })
         .then(response => {
@@ -591,7 +589,7 @@ export default {
         },
         data: {
           caseID: this.cases[index].caseID,
-          summary: this.summarys[index],
+          summary: this.cases[index].summary,
         }
       })
         .then(response => {
@@ -617,7 +615,6 @@ export default {
       .then(response => {
         if (response.data.status === 0) {
           this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
-          this.newIntro = this.diseaseIntro;
         } else if (response.data.status === 1) {
           console.log('No corresponding diseaseID');
         }

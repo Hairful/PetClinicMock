@@ -69,7 +69,7 @@
           <span class="quiz-detail-text22 bodyLarge">({{ probs[this.currentProb].probCredit }}分)</span>
           <span class="quiz-detail-text22 bodyLarge" v-html="probs[this.currentProb].probText"></span>
           <div class="quiz-detail-container07">
-            <img alt="image" :src="`${probs[this.currentProb].probImg}`" class="quiz-detail-image" />
+            <img v-if="probs[this.currentProb].probImg" alt="image" :src="`${probs[this.currentProb].probImg}`" class="quiz-detail-image" />
           </div>
           <div class="quiz-detail-container08">
             <select class="quiz-detail-select" v-model="ans[currentProb]">
