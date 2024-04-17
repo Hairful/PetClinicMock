@@ -25,7 +25,7 @@ exports.getJobList = async (role) => {
         });
         const jobs = roles.map((role) => role.job);
         if (jobs.length === 0) {
-            return { status: 1, message: '无对应role', };
+            return { status: 1, message: '无对应角色', };
         }
         return {
             status: 0,
@@ -48,11 +48,11 @@ exports.getJobDetail = async (role, job) => {
     try {
         const rolejob = await Job.findOne({ where: { role } });
         if (!rolejob) {
-            return { status: 1, message: '无对应role' };
+            return { status: 1, message: '无对应角色' };
         }
         const roleInstance = await Job.findOne({ where: { role, job } });
         if (!roleInstance) {
-            return { status: 2, message: '无对应job' };
+            return { status: 2, message: '无对应工作' };
         }
         return {
             status: 0,

@@ -25,7 +25,7 @@ exports.registerUser = async (userName, password) => {
     try {
         const userExist = await User.findOne({ where: { userName } });
         if (userExist) {
-            return { status: 1, message: '重复userName' };
+            return { status: 1, message: '重复用户名' };
         }
         const salt = generateSalt();
         const hashedPassword = hashPassword(password, salt);
@@ -47,11 +47,11 @@ exports.loginUser = async (userName, password) => {
     try {
         const userExist = await User.findOne({ where: { userName } });
         if (!userExist) {
-            return { status: 2, message: '无对应userName' };
+            return { status: 2, message: '无对应用户名' };
         }
         const hashedPassword = hashPassword(password, userExist.salt);
         if (userExist.password !== hashedPassword) {
-            return { status: 1, message: 'userName或password错误' };
+            return { status: 1, message: '用户名或密码错误' };
         }
         const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });
         return { status: 0, message: '登录成功', userID: userExist.userID, token: token };

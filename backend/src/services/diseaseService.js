@@ -41,7 +41,7 @@ exports.getDiseaseList = async (diseaseType) => {
                 }))
             };
         } else {
-            return { status: 1, message: "无对应diseaseType" };
+            return { status: 1, message: "无对应疾病类型" };
         }
     } catch (error) {
         logger.error('Error in /diseaseService.js/getDiseaseList: ', error);
@@ -95,7 +95,7 @@ exports.getDiseasesByID = async (diseaseID) => {
                 }
             };
         } else {
-            return { status: 1, message: "无对应diseaseID" };
+            return { status: 1, message: "无对应疾病ID" };
         }
     } catch (error) {
         logger.error('Error in /diseaseService.js/getDiseasesByID: ', error);

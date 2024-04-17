@@ -45,7 +45,7 @@ exports.getCaseList = async (diseaseID) => {
         }))
       };
     } else {
-      return { status: 1, message: "无对应diseaseID" };
+      return { status: 1, message: "无对应疾病ID" };
     }
   } catch (error) {
     logger.error('Error in /caseService.js/getCaseList: ', error);
@@ -81,7 +81,7 @@ exports.getCaseDetail = async (caseID) => {
     });
 
     if (!caseInfo) {
-      return { status: 1, message: "无对应caseID" };
+      return { status: 1, message: "无对应病例ID" };
     }
     const caseMedicines = await sequelize.query(
       'SELECT `MedicineMedicineID` ,`dosage` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
@@ -168,7 +168,7 @@ exports.getCaseByString = async (searchString) => {
         cases: results.map(result => result.item)
       };
     } else {
-      return { status: 1, message: "No matches found" };
+      return { status: 1, message: "无对应信息" };
     }
   } catch (error) {
     logger.error('Error in /caseService.js/getCaseByString: ', error);

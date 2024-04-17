@@ -25,7 +25,7 @@ exports.createJob = async (role, job, jobDetail) => {
             where: { job: job }
         });
         if (jobexist) {
-            return { status: 2, message: '重复的job' };
+            return { status: 2, message: '重复的工作' };
         }
         const result = await Job.create({ role, job, jobDetail });
         return { status: 0, message: '成功' };
@@ -50,13 +50,13 @@ exports.updateJob = async (role, prevJob, job, jobDetail) => {
                 where: { role }
             });
             if (!rolejob) {
-                return { status: 1, message: '无对应role' };
+                return { status: 1, message: '无对应角色' };
             }
             const roleInstance = await Job.findOne({
                 where: { role: role, job: job }
             });
             if (!roleInstance) {
-                return { status: 2, message: '无对应job' };
+                return { status: 2, message: '无对应工作' };
             }
             const result = await Job.findOne({
                 where: { role, job }
@@ -75,19 +75,19 @@ exports.updateJob = async (role, prevJob, job, jobDetail) => {
                 where: { job: job }
             });
             if (jobexist) {
-                return { status: 3, message: '重复的job' };
+                return { status: 3, message: '重复的工作' };
             }
             const rolejob = await Job.findOne({
                 where: { role }
             });
             if (!rolejob) {
-                return { status: 1, message: '无对应role' };
+                return { status: 1, message: '无对应角色' };
             }
             const roleInstance = await Job.findOne({
                 where: { role: role, job: prevJob }
             });
             if (!roleInstance) {
-                return { status: 2, message: '无对应job' };
+                return { status: 2, message: '无对应工作' };
             }
             const result = await Job.findOne({
                 where: { role: role, job: prevJob }
@@ -119,13 +119,13 @@ exports.deleteJob = async (role, job) => {
             where: { role }
         });
         if (!rolejob) {
-            return { status: 1, message: '无对应role' };
+            return { status: 1, message: '无对应角色' };
         }
         const roleIns = await Job.findOne({
             where: { role, job }
         });
         if (!roleIns) {
-            return { status: 2, message: '无对应job' };
+            return { status: 2, message: '无对应工作' };
         }
         const roleInstance = await Job.findOne({
             where: { role, job }

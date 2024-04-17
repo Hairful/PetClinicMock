@@ -24,13 +24,13 @@ exports.createCase = async (caseData) => {
     try {
         const disease = await Disease.findByPk(caseData.diseaseID);
         if (!disease) {
-            return { status: 1, message: "无对应diseaseID" };
+            return { status: 1, message: "无对应疾病ID" };
         }
         // 检查medicineIDs是否存在
         for (let medicineData of caseData.medicines) {
             const medicine = await Medicine.findByPk(medicineData.medicineID);
             if (!medicine) {
-                return { status: 2, message: "无对应medicineID" };
+                return { status: 2, message: "无对应药品ID" };
             }
         }
         // 创建新的Case实例
@@ -83,12 +83,12 @@ exports.updateCase = async (caseData) => {
     try {
         const existingCase = await Case.findByPk(caseData.caseID);
         if (!existingCase) {
-            return { status: 1, message: "无对应caseID" };
+            return { status: 1, message: "无对应病例ID" };
         }
         if (caseData.diseaseID !== undefined) {
             const existingDisease = await Disease.findByPk(caseData.diseaseID);
             if (!existingDisease) {
-                return { status: 2, message: "无对应diseaseID" };
+                return { status: 2, message: "无对应疾病ID" };
             }
         }
         // 更新Case表中的记录
@@ -129,7 +129,7 @@ exports.updateCase = async (caseData) => {
                 } else {
                     return {
                         status: 3,
-                        message: "无对应medicineID"
+                        message: "无对应药品ID"
                     };
                 }
             }
@@ -152,7 +152,7 @@ exports.deleteCase = async (caseID) => {
     try {
         const caseToDelete = await Case.findByPk(caseID);
         if (!caseToDelete) {
-            return { status: 1, message: "无对应caseID" };
+            return { status: 1, message: "无对应病例ID" };
         }
         await caseToDelete.destroy();
         return { status: 0, message: "成功" };

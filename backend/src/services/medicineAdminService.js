@@ -25,7 +25,7 @@ exports.createMedicine = async (medicineData) => {
             where: { medicineName: medicineData.medicineName }
         });
         if (existingmedicine) {
-            return { status: 1, message: "重复的medicineName" };
+            return { status: 1, message: "重复的药品名称" };
         }
         // 如果不存在，创建新的Disease实例
         const newMedicine = await Medicine.create(medicineData);
@@ -56,7 +56,7 @@ exports.deleteMedicineById = async (medicineId) => {
             return { status: 0, message: "成功" };
         } else {
             // 没有找到，返回错误
-            return { status: 1, message: "无对应medicineID" };
+            return { status: 1, message: "无对应药品ID" };
         }
     } catch (error) {
         logger.error('Error in /medicineAdminService.js/deleteMedicineById: ', error);
@@ -77,11 +77,11 @@ exports.updateMedicine = async (medicineID, updates) => {
             where: { medicineName: updates.medicineName }
         });
         if (medicineExistByName && medicineExistByName.medicineID !== medicineID) {
-            return { status: 1, message: "重复的medicineName" };
+            return { status: 1, message: "重复的药品名称" };
         }
         const medicine = await Medicine.findByPk(medicineID);
         if (!medicine) {
-            return { status: 2, message: "无对应medicineID" };
+            return { status: 2, message: "无对应药品ID" };
         }
         for (const key in updates) {
             if (medicine[key] !== undefined && updates.hasOwnProperty(key)) {

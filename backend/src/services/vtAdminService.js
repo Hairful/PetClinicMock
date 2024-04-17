@@ -24,7 +24,7 @@ exports.updateItemInfo = async (itemID, itemName, itemIntro, itemURL) => {
     try {
         const item = await Item.findByPk(itemID);
         if (!item) {
-            return { status: 1, message: '无对应itemID' };
+            return { status: 1, message: '无对应物品ID' };
         }
         await Item.update({ itemName, itemIntro, itemURL }, { where: { itemID } });
         return { status: 0, message: '成功' };
