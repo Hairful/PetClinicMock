@@ -56,10 +56,56 @@ const geometry = new THREE.BoxGeometry(10, 10, 10);
 geometry.scale(1, 1, -1);
 
 onMounted(async () => {
+  const frontdeskItem = new Item();
+  frontdeskItem.setItemInfo('手术刀');
+
   const surgeryknifeItem = new Item();
   surgeryknifeItem.setItemInfo('手术刀');
+
   const labdeskItem = new Item();
   labdeskItem.setItemInfo('手术刀');
+
+  const filmItem = new Item();
+  filmItem.setItemInfo('手术刀');
+
+  const surgerydeskItem = new Item();
+  surgerydeskItem.setItemInfo('手术刀');
+
+  const surgeryEquipmentItem = new Item();
+  surgeryEquipmentItem.setItemInfo('手术刀');
+
+  const immItem = new Item();
+  immItem.setItemInfo('手术刀');
+
+  const conItem = new Item();
+  conItem.setItemInfo('手术刀');
+
+  const livingItem = new Item();
+  livingItem.setItemInfo('手术刀');
+
+  const washingItem = new Item();
+  washingItem.setItemInfo('手术刀');
+
+  const medItem = new Item();
+  medItem.setItemInfo('手术刀');
+
+  const weighItem = new Item();
+  weighItem.setItemInfo('手术刀');
+
+  const specItem = new Item();
+  specItem.setItemInfo('手术刀');
+
+  const archItem = new Item();
+  archItem.setItemInfo('手术刀');
+
+  const preItem = new Item();
+  preItem.setItemInfo('手术刀');
+
+  const proItem = new Item();
+  proItem.setItemInfo('手术刀');
+
+  const proEquipItem = new Item();
+  proEquipItem.setItemInfo('手术刀');
 
   function createVideoEle(videoURL, detailContent) {
     // 创建一个视频元素
@@ -782,7 +828,7 @@ transform: translate(100px,110px);
   scene.add(desk.mesh);
 
   desk.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(frontdeskItem.itemURL, frontdeskItem.itemDetail);
   });
 
   //创建手术刀流程
@@ -808,7 +854,7 @@ transform: translate(100px,110px);
 
   // 点击化验台时弹出视频框
   labdesk.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(labdeskItem.itemURL, labdeskItem.itemDetail);
   });
 
   //创建影像台流程
@@ -858,12 +904,12 @@ transform: translate(100px,110px);
   );
   scene.add(immRoom.mesh);
 
-  // 点击手术仪器时弹出视频框
+  // 点击免疫室时弹出视频框
   immRoom.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
-  //创建免疫室流程
+  //创建病理室流程
   const pathRoom = new SpriteCanvas(
     camera,
     "病理室详情",
@@ -871,7 +917,7 @@ transform: translate(100px,110px);
   );
   scene.add(pathRoom.mesh);
 
-  // 点击手术仪器时弹出视频框
+  // 点击病理室时弹出视频框
   pathRoom.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
@@ -885,7 +931,7 @@ transform: translate(100px,110px);
   );
   scene.add(consultRoom.mesh);
 
-  // 点击手术仪器时弹出视频框
+  // 点击诊室时弹出视频框
   consultRoom.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
@@ -903,7 +949,7 @@ transform: translate(100px,110px);
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
-  //创建动物仓标签
+  //创建动物洗浴区标签
   const washingRoom = new SpriteCanvas(
     camera,
     "宠物洗浴区",
@@ -911,7 +957,7 @@ transform: translate(100px,110px);
   );
   scene.add(washingRoom.mesh);
 
-  // 点击动物仓时弹出视频框
+  // 点击动物洗浴区时弹出视频框
   washingRoom.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
@@ -950,12 +996,12 @@ transform: translate(100px,110px);
   );
   scene.add(specDetail.mesh);
 
-  // 点击动物仓时弹出视频框
+  // 点击特殊诊室时弹出视频框
   specDetail.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
-  //创建特殊诊室详情
+  //创建档案室详情
   const arcDetail = new SpriteCanvas(
     camera,
     "档案详情",
@@ -963,7 +1009,7 @@ transform: translate(100px,110px);
   );
   scene.add(arcDetail.mesh);
 
-  // 点击动物仓时弹出视频框
+  // 点击档案室时弹出视频框
   arcDetail.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
@@ -976,7 +1022,7 @@ transform: translate(100px,110px);
   );
   scene.add(preDetail.mesh);
 
-  // 点击动物仓时弹出视频框
+  // 点击手术准备室时弹出视频框
   preDetail.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
@@ -994,7 +1040,7 @@ transform: translate(100px,110px);
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
 
-  //创建设备详情
+  //创建处理室设备详情
   const proEquipment = new SpriteCanvas(
     camera,
     "处理设备",
@@ -1002,7 +1048,7 @@ transform: translate(100px,110px);
   );
   scene.add(proEquipment.mesh);
 
-  // 点击处理台时弹出视频框
+  // 点击处理台设备时弹出视频框
   proEquipment.onClick(() => {
     createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
   });
