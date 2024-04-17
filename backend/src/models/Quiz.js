@@ -21,7 +21,6 @@ const Quiz = sequelize.define('Quiz', {
     timer: {
         type: DataTypes.INTEGER,
         allowNull: false
-
     }
 });
 

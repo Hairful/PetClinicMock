@@ -7,7 +7,6 @@
 const jwt = require('jsonwebtoken');
 const { tokenKey } = require('../config/authConfig');
 const User = require('../models/User');
-const { use } = require('../app');
 
 const loggerConfigurations = [
     { name: 'auth', level: 'info' },
