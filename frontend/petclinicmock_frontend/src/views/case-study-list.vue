@@ -11,7 +11,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="raw04s3"></span>
               </span>
               <span class="case-study-list-text02">{{ name }}</span>
             </span>
@@ -28,7 +27,6 @@
         <h1 class="case-study-list-hero-heading">
           <span class="heading1">
             病例学习：
-            <span v-html="rawndcw"></span>
           </span>
           <span class="case-study-list-text04"> {{ this.diseaseType }} </span>
         </h1>
@@ -48,7 +46,7 @@
         <br />
       </h1>
       <div class="case-study-list-container4">
-        <ul class="case-study-list-ul list">
+        <!-- <ul class="case-study-list-ul list">
           <li v-for="(disease, index) in diseases" :key="disease.diseaseID"
             :class="`case-study-list-li Content list-item`">
             <router-link
@@ -57,7 +55,15 @@
               {{ disease.diseaseName }}
             </router-link>
           </li>
-        </ul>
+        </ul> -->
+        <div v-for="(disease, index) in diseases" :key="disease.diseaseID"
+            :class="`case-study-list-li Content list-item`">
+            <router-link
+              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
+              :class="`case-study-list-navlink2 bodyLarge button`">
+              {{ disease.diseaseName }}
+            </router-link>
+          </div>
       </div>
     </div>
     <div class="case-study-list-footer">
@@ -90,15 +96,6 @@ export default {
   },
   data() {
     return {
-      raw04s3: ' ',
-      rawndcw: ' ',
-      rawxcnr: ' ',
-      rawjjs0: ' ',
-      rawzyec: ' ',
-      rawcllw: ' ',
-      rawrv43: ' ',
-      raw0efx: ' ',
-      rawlq2c: ' ',
       diseaseType: ' ',
       diseases: [],
       name: localStorage.getItem('username'),
@@ -361,12 +358,13 @@ export default {
 }
 
 .case-study-list-container4 {
-  flex: 0 0 auto;
-  width: auto;
+  flex-wrap: wrap;
+  width: 75%;
   height: 100%;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-self: center;
+  align-items: center;
+  justify-content: baseline;
 }
 
 .case-study-list-ul {
@@ -376,7 +374,9 @@ export default {
 
 .case-study-list-li {
   color: var(--dl-color-gray-white);
-  width: auto;
+  width: 23%;
+  margin-right: 5%;
+  margin-left: 5%;
   text-align: left;
   border-radius: var(--dl-radius-radius-radius8);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
