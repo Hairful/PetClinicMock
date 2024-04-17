@@ -45,25 +45,16 @@
         <span class="heading1">选择疾病</span>
         <br />
       </h1>
+      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="case-study-list-container4">
-        <!-- <ul class="case-study-list-ul list">
-          <li v-for="(disease, index) in diseases" :key="disease.diseaseID"
-            :class="`case-study-list-li Content list-item`">
-            <router-link
-              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
-              :class="`case-study-list-navlink2 bodyLarge button`">
-              {{ disease.diseaseName }}
-            </router-link>
-          </li>
-        </ul> -->
-        <div v-for="(disease, index) in diseases" :key="disease.diseaseID"
-            :class="`case-study-list-li Content list-item`">
-            <router-link
-              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
-              :class="`case-study-list-navlink2 bodyLarge button`">
-              {{ disease.diseaseName }}
-            </router-link>
-          </div>
+        <div v-for="(disease, index) in filteredDiseases" :key="disease.diseaseID"
+          :class="`case-study-list-li Content list-item`">
+          <router-link
+            :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
+            :class="`case-study-list-navlink2 bodyLarge button`">
+            {{ disease.diseaseName }}
+          </router-link>
+        </div>
       </div>
     </div>
     <div class="case-study-list-footer">
@@ -99,7 +90,15 @@ export default {
       diseaseType: ' ',
       diseases: [],
       name: localStorage.getItem('username'),
+      searchQuery: '',
     }
+  },
+  computed: {
+    filteredDiseases() {
+      return this.diseases.filter(disease =>
+        disease.diseaseName.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
   },
   methods: {
     logout() {
@@ -142,6 +141,12 @@ export default {
 </script>
 
 <style scoped>
+.rounded-input {
+  border-radius: 2px;
+  padding: 5px;
+  margin-bottom: var(--dl-space-space-twounits);
+}
+
 .case-study-list-container {
   width: 100%;
   display: flex;
