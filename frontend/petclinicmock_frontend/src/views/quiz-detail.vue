@@ -28,7 +28,7 @@
       </header>
     </div>
     <div class="quiz-detail-container02"></div>
-    <div class="quiz-detail-hero heroContainer">
+    <div class="heroContainer">
       <div class="quiz-detail-container03">
         <h1 class="quiz-detail-hero-heading">
           <span class="heading1">
@@ -55,7 +55,7 @@
         </div>
       </suspenPopup>
     </div>
-    <div class="quiz-detail-hero1 heroContainer">
+    <div class="heroContainer">
       <div class="quiz-detail-container04">
         <router-link to="/quiz-list" class="quiz-detail-navlink button">
           重选测试
@@ -66,15 +66,15 @@
       </div> 
     </div>
       
-    <div class="quiz-detail-hero1 heroContainer" v-if="probs && probs.length > 0">
+    <div class="heroContainer" v-if="probs && probs.length > 0">
       <div class="quiz-detail-container05">
         <h1 class="quiz-detail-hero-heading1 heading1">
           <span class="heading1">问题 {{ this.currentProb + 1 }}</span>
           <br />
         </h1>
         <div class="quiz-detail-container06">
-          <span class="quiz-detail-text22 bodyLarge">({{ probs[this.currentProb].probCredit }}分)</span>
-          <span class="quiz-detail-text22 bodyLarge" v-html="probs[this.currentProb].probText"></span>
+          <span class="bodyLarge">({{ probs[this.currentProb].probCredit }}分)</span>
+          <span class="bodyLarge" v-html="probs[this.currentProb].probText"></span>
           <div class="quiz-detail-container07">
             <img v-if="probs[this.currentProb].probImg" alt="image" :src="`${probs[this.currentProb].probImg}`" class="quiz-detail-image" />
           </div>
@@ -89,7 +89,7 @@
         </div>
       </div>
     </div>
-    <div class="quiz-detail-container13">
+    <div class="quiz-detail-container04">
       <button class="quiz-detail-navlink2 button" @click="lastProb">上一题</button>
       <button class="quiz-detail-navlink2 button" @click="nextProb">下一题</button>
       <button class="quiz-detail-navlink2 button" @click="submit">提交测试</button>
@@ -537,7 +537,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .quiz-detail-navlink {
@@ -584,7 +584,7 @@ export default {
 }
 
 .quiz-detail-hero-heading1 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   align-self: center;
   text-align: center;

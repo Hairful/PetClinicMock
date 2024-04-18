@@ -47,7 +47,7 @@
         返回菜单
       </router-link>
     </div>
-    <div class="case-study-list-hero1 heroContainer">
+    <div class="heroContainer">
       <h1 class="case-study-list-hero-heading1">
         <span class="heading1">选择疾病</span>
         <br />
@@ -58,6 +58,7 @@
           :class="`case-study-list-li Content list-item`">
           <router-link
             :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
+            target="_blank"
             :class="`case-study-list-navlink2 bodyLarge button`">
             {{ disease.diseaseName }}
           </router-link>
@@ -351,7 +352,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .case-study-list-navlink {
@@ -387,7 +388,7 @@ export default {
 }
 
 .case-study-list-hero-heading1 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);

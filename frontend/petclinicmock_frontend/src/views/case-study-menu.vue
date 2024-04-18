@@ -29,17 +29,9 @@
       </header>
     </div>
     <div class="case-study-menu-container1"></div>
-    <div class="heroContainer case-study-menu-hero">
-      <div class="case-study-menu-container2">
-        <h1 class="case-study-menu-hero-heading heading1">病例学习</h1>
-      </div>
-    </div>
-    <div class="case-study-menu-container3">
-      <router-link to="/menu" class="case-study-menu-navlink button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="case-study-menu-hero1 heroContainer">
+    <div class="heroContainer case-study-menu-hero"></div>
+
+    <div class="heroContainer">
       <h1 class="case-study-menu-hero-heading1 heading1">
         <span class="heading1">选择疾病类型</span>
         <br />
@@ -337,11 +329,11 @@ export default {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .case-study-menu-hero-heading1 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);

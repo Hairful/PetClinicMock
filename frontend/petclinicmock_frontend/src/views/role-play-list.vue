@@ -39,7 +39,7 @@
         </h1>
       </div>
     </div>
-    <div class="role-play-list-container3">
+    <div class="buttonsContainer">
       <router-link to="/role-play-menu" class="role-play-list-navlink button">
         重选角色
       </router-link>
@@ -47,8 +47,8 @@
         返回菜单
       </router-link>
     </div>
-    <div class="role-play-list-hero1 heroContainer">
-      <h1 class="role-play-list-hero-heading1">
+    <div class="heroContainer">
+      <h1 >
         <span class="heading1">选择职责</span>
         <br />
       </h1>

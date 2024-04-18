@@ -34,13 +34,8 @@
         <h1 class="role-play-menu-hero-heading heading1">角色扮演</h1>
       </div>
     </div>
-    <div class="role-play-menu-container3">
-      <router-link to="/menu" class="role-play-menu-navlink button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="role-play-menu-hero1 heroContainer">
-      <h1 class="role-play-menu-hero-heading1">
+    <div class="heroContainer">
+      <h1 >
         <span class="heading1">选择一个角色</span>
         <br />
       </h1>

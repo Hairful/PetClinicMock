@@ -33,14 +33,7 @@
         <h1 class="quiz-list-hero-heading">测试</h1>
       </div>
     </div>
-    <div class="quiz-list-container3">
-      <router-link to="/menu" class="quiz-list-navlink button">返回菜单</router-link>
-    </div>
-    <div class="quiz-list-hero1 heroContainer">
-      <h1 class="quiz-list-hero-heading1">
-        <span class="heading1">测试</span>
-        <br />
-      </h1>
+    <div class="heroContainer">
       <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="quiz-list-container4">
         <ul class="quiz-list-ul list">
@@ -387,7 +380,7 @@ export default {
 }
 
 .quiz-list-li {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   width: 899px;
   text-align: left;
   border-radius: var(--dl-radius-radius-radius8);
