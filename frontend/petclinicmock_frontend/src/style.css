@@ -39,7 +39,26 @@
   --dl-color-custom-neutral-light: #FBFAF9;
   --dl-space-space-oneandhalfunits: 24px;
 }
-
+.head-router{
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .button {
   color: var(--dl-color-gray-black);
   display: inline-block;
