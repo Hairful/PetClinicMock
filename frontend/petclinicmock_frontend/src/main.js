@@ -1,12 +1,14 @@
 
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import LottieVuePlayer from '@lottiefiles/vue-lottie-player'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import LottieVuePlayer from '@lottiefiles/vue-lottie-player';
 import ElementUI from 'element-ui';
 import axios from 'axios';
 import 'element-ui/lib/theme-chalk/index.css';
-import VueTyperPlugin from 'vue-typer'
+import VueTyperPlugin from 'vue-typer';
+import scroll from 'vue-seamless-scroll';
+Vue.use(scroll)
 Vue.use(VueTyperPlugin)
 Vue.use(LottieVuePlayer)
 Vue.config.productionTip = false
