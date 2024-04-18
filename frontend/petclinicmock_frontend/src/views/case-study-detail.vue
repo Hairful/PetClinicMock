@@ -39,19 +39,7 @@
         </h1>
       </div>
     </div>
-    <div class="case-study-detail-container04">
-      <router-link :to="{ path: '/case-study-list', query: { diseaseType: this.diseaseType } }"
-        class="case-study-detail-navlink button">
-        重选疾病
-      </router-link>
-      <router-link to="/case-study-menu" class="case-study-detail-navlink1 button">
-        重选疾病类型
-      </router-link>
-      <router-link to="/menu" class="case-study-detail-navlink2 button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="case-study-detail-hero1 heroContainer">
+    <div class="heroContainer">
       <div class="case-study-detail-container05">
         <h1 class="case-study-detail-hero-heading1 heading1">
           <span class="heading1">疾病介绍</span>

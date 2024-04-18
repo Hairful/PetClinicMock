@@ -39,7 +39,7 @@
         </h1>
       </div>
     </div>
-    <div class="role-play-detail-container4">
+    <div class="buttonsContainer">
       <router-link :to="{ path: '/role-play-list', query: { role: this.role } }"
         class="role-play-detail-navlink button">
         重选职责
@@ -51,13 +51,13 @@
         返回菜单
       </router-link>
     </div>
-    <div class="role-play-detail-hero1 heroContainer">
-      <h1 class="role-play-detail-hero-heading1">
+    <div class="heroContainer">
+      <h1 >
         <span class="heading1"> {{ this.job }} </span>
         <br />
       </h1>
       <div class="role-play-detail-container5">
-        <span class="role-play-detail-text21 bodyLarge">
+        <span class="bodyLarge">
           {{ this.jobDetail }}
         </span>
       </div>
@@ -364,7 +364,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .role-play-detail-navlink {
@@ -428,9 +428,7 @@ export default {
   justify-content: center;
 }
 
-.role-play-detail-text21 {
-  color: var(--dl-color-gray-white);
-}
+
 
 .role-play-detail-footer {
   flex: 0 0 auto;

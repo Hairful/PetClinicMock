@@ -28,7 +28,7 @@
       </header>
     </div>
     <div class="quiz-result-container02"></div>
-    <div class="quiz-result-hero heroContainer">
+    <div class="heroContainer">
       <div class="quiz-result-container03">
         <h1 class="quiz-result-hero-heading">
           <span class="heading1">
@@ -56,14 +56,14 @@
         返回菜单
       </router-link>
     </div>
-    <div class="quiz-result-hero1 heroContainer">
+    <div class="heroContainer">
       <div v-for="(prob, index) in probs" class="quiz-result-container05">
         <h1 class="quiz-result-hero-heading1 heading1">
           <span class="heading1">问题 {{ index + 1 }}</span>
           <br />
         </h1>
         <div class="quiz-result-container06">
-          <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
+          <span class="bodyLarge" v-html="prob.probText"></span>
           <div class="quiz-result-container07">
             <img v-if="prob.probImg" :src="prob.probImg" class="quiz-result-image"  />
           </div>
@@ -387,7 +387,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .quiz-result-navlink {
@@ -449,7 +449,7 @@ export default {
 }
 
 .quiz-result-hero-heading1 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   align-self: center;
   text-align: center;
