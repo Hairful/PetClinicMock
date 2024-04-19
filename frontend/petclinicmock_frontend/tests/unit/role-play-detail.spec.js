@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import Menu from '@/views/menu.vue';
+import RolePlayDetail from '@/views/role-play-detail.vue';
 
 jest.mock('axios');
 
@@ -10,18 +10,23 @@ const localVue = createLocalVue();
 localVue.use(ElementUI);
 localVue.use(VueRouter);
 const router = new VueRouter({
-  routes: [{ path: '/', component: Menu }],
+  routes: [{ path: '/', component: RolePlayDetail }],
 });
 
-describe('Menu.vue', () => {
+describe('RolePlayDetail.vue', () => {
   let wrapper;
   const mockData = {
+    status: 0,
+    data: {
+      rolePlayID: '1',
+      rolePlayName: 'Test Role Play',
+    },
   };
 
   beforeEach(async () => {
     axios.get.mockResolvedValue({ data: mockData });
 
-    wrapper = mount(Menu, {
+    wrapper = mount(RolePlayDetail, {
       localVue,
       router,
     });
@@ -36,7 +41,7 @@ describe('Menu.vue', () => {
 
   it('renders user name', () => {
     // Check if the user name is rendered
-    const userName = wrapper.find('.menu-text02');
+    const userName = wrapper.find('.role-play-detail-text02');
     expect(userName.exists()).toBe(true);
   });
 

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CaseStudyDetail.vue renders the component correctly 1`] = `
+<div class="case-study-detail-container" caseitem="[object Object]">
+  <div class="chatbot">
+    <div>
+      <!---->
+      <div><img src="../../public/img/chatbot.jpg" width="81.6111850866px" height="50px" alt="Chatbot"></div>
+    </div>
+  </div>
+  <div class="case-study-detail-header">
+    <header data-thq="thq-navbar" class="navbarContainer case-study-detail-navbar-interactive"><a href="#/menu" class="case-study-detail-logo logo">
+        PETCLINICMock
+      </a>
+      <div><a href="#/menu" class="head-router"> 菜单 </a> <a href="#/virtual-tour" class="head-router"> 导览 </a> <a href="#/case-study-menu" class="head-router-current"> 学习 </a> <a href="#/role-play-menu" class="head-router"> 扮演 </a> <a href="#/quiz-list" class="head-router"> 测试 </a></div>
+      <div class="case-study-detail-container01">
+        <div data-thq="thq-navbar-nav" class="case-study-detail-desktop-menu"><span><span>
+              登录用户：
+            </span> <span class="case-study-detail-text02"></span></span></div>
+        <div><button class="buttonFilled" style="margin-top: 10px;"> 登出系统 </button></div>
+      </div>
+    </header>
+  </div>
+  <div class="case-study-detail-container02"></div>
+  <div class="case-study-detail-hero heroContainer">
+    <div class="case-study-detail-container03">
+      <h1 class="case-study-detail-hero-heading"><span class="heading1">
+          病例学习：
+        </span> <span class="case-study-detail-text04">  </span></h1>
+    </div>
+  </div>
+  <div class="heroContainer">
+    <div class="case-study-detail-container05">
+      <h1 class="case-study-detail-hero-heading1 heading1"><span class="heading1">疾病介绍</span> <br></h1>
+      <div class="case-study-detail-container06"><span class="case-study-detail-text21 bodyLarge">   </span></div>
+    </div>
+  </div>
+  <div class="case-study-detail-footer">
+    <footer class="case-study-detail-footer1 footerContainer">
+      <div class="case-study-detail-container23"><a href="#/menu" class="case-study-detail-logo2 logo">
+          PETCLINICMOCK
+        </a></div>
+      <div class="case-study-detail-separator"></div>
+      <div class="case-study-detail-container24"><span class="bodySmall case-study-detail-text35">
+          © 2024 SWD-G02, All Rights Reserved.
+        </span></div>
+    </footer>
+  </div>
+</div>
+`;

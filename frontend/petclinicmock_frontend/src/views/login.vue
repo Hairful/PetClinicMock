@@ -112,6 +112,7 @@ export default {
             localStorage.setItem('Token', this.token);//将token存在localstorage中
             localStorage.setItem('username', this.formLogin.name);
             localStorage.setItem('userID', response.data.userID);
+            localStorage.setItem('isAdmin', response.data.isAdmin);
             console.log('Login successful');
             this.$router.push('/menu'); // Navigate to menu page
           }
