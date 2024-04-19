@@ -99,7 +99,7 @@
 }
 
 .list-item {
-  display:ruby;
+  display: list-item;
 }
 
 .teleport-show {
@@ -313,8 +313,7 @@
   display: flex;
   min-height: auto;
   align-items: center;
-  margin-top: var(--dl-space-space-sixunits);
-  padding-top: var(--dl-space-space-sixunits);
+  padding-top: 200px;
   padding-left: var(--dl-space-space-threeunits);
   padding-right: var(--dl-space-space-threeunits);
   flex-direction: column;

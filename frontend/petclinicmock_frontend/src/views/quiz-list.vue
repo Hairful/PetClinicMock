@@ -84,13 +84,9 @@
 
 <script>
 import axios from 'axios';
-import tableC from '../components/table';
 export default {
   name: 'QuizList',
   props: {},
-  components:{
-    tableC,
-  },
   data() {
     return {
       name: localStorage.getItem('username'),
