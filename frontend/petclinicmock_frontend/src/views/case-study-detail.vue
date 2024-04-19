@@ -187,7 +187,8 @@ export default {
     })
       .then(response => {
         if (response.data.status === 0) {
-          this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
+          if (response && response.data && response.data.diseaseDetail)
+            this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
         } else if (response.data.status === 1) {
           console.log('No corresponding diseaseID');
         }
