@@ -28,38 +28,32 @@
         </div>
       </header>
     </div>
-    <div class="role-play-detail-container2"></div>
-    <div class="role-play-detail-hero heroContainer">
-      <div class="role-play-detail-container3">
-        <h1 class="role-play-detail-hero-heading">
-          <span class="heading1">
-            角色扮演：
-          </span>
-          <span class="role-play-detail-text04"> {{ role }}</span>
-        </h1>
-      </div>
-    </div>
-    <div class="buttonsContainer">
-      <router-link :to="{ path: '/role-play-list', query: { role: this.role } }"
-        class="role-play-detail-navlink button">
-        重选职责
-      </router-link>
-      <router-link to="/role-play-menu" class="role-play-detail-navlink1 button">
-        重选角色
-      </router-link>
-      <router-link to="/menu" class="role-play-detail-navlink2 button">
-        返回菜单
-      </router-link>
-    </div>
     <div class="heroContainer">
-      <h1 >
-        <span class="heading1"> {{ this.job }} </span>
-        <br />
-      </h1>
-      <div class="role-play-detail-container5">
-        <span class="bodyLarge">
-          {{ this.jobDetail }}
-        </span>
+      <div class="shadowContainer">
+        <div class="containerLeft underLine">
+          <div class="heading1">
+            <span class="heading2"> 角色扮演：</span>
+            <span class="role-play-detail-text04 heading2"> {{ role }}</span>
+          </div>
+        </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/role-play-menu" class="routerlink">>角色扮演</router-link>
+            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{role}}</router-link>
+            <span class="routerlink">>{{job}}</span>
+          </div>
+        </div>
+        <div class="containerCenter">
+          <div class="role-play-detail-container5" >
+            <span class="heading2"> 工作名: {{ this.job }} </span>
+          </div>
+          <div class="role-play-detail-container5">
+            <span class="bodyLarge">
+              {{ this.jobDetail }}
+            </span>      
+          </div>
+        </div>
       </div>
     </div>
     <div class="role-play-detail-footer">
@@ -426,6 +420,7 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  margin: 5%;
 }
 
 

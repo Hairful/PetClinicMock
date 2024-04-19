@@ -28,7 +28,6 @@
         </div>
       </header>
     </div>
-    <div class="case-study-detail-container02"></div>
     <div class="heroContainer">
       <div class="shadowContainer">
         <div class="containerLeft">
