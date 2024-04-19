@@ -28,14 +28,11 @@
         </div>
       </header>
     </div>
-    <div class="case-study-list-container1"></div>
     <div class="heroContainer">
       <div class="shadowContainer">
           <div class="containerLeft">
             <div class="case-study-list-hero-heading underLine">
-              <span class="heading2">
-                病例学习：
-              </span>
+              <span class="heading2">疾病种类：</span>
               <span class="case-study-list-text04 heading2"> {{ this.diseaseType }} </span>
             </div>
           </div>
@@ -46,7 +43,7 @@
               <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`" class="routerlink">>{{this.diseaseType}}</router-link>
             </div>
           </div>
-          <div class="containerCenter">
+          <div class="containerCenter" style="margin: 20px;">
             <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
           </div>
           <div class="case-study-list-container4">
@@ -412,7 +409,7 @@ export default {
   border-radius: var(--dl-radius-radius-radius8);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   list-style-type: disc;
-  background-color: #363636;
+  background-color: #707070;
   list-style-image: none;
   list-style-position: outside;
 }
