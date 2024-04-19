@@ -43,7 +43,7 @@ exports.createUser = async (userName, password, isAdmin) => {
     try {
         const existingUser = await User.findOne({ where: { userName: userName } });
         if (existingUser) {
-            return { status: 1, message: '重复的userName' };
+            return { status: 1, message: '重复的用户名' };
         }
         const salt = generateSalt();
         const hashedPassword = hashPassword(password, salt);
@@ -74,13 +74,13 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
     try {
         const user = await User.findByPk(userID);
         if (!user) {
-            return { status: 1, message: '无对应userID' };
+            return { status: 1, message: '无对应用户ID' };
         }
         if (userName) {
             const userExist = await User.findOne({ where: { userName: userName } });
             if (userExist !== null) {
                 if (userExist.userID !== userID)
-                    return { status: 2, message: '重复的的userName' };
+                    return { status: 2, message: '重复的用户名' };
                 else {
                     user.userName = userName;
                 }
@@ -109,7 +109,7 @@ exports.deleteUser = async (userID) => {
     try {
         const user = await User.findByPk(userID);
         if (!user) {
-            return { status: 1, message: '无对应userID' };
+            return { status: 1, message: '无对应用户ID' };
         }
         await user.destroy();
         return { status: 0, message: '成功' };

@@ -89,7 +89,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
   "status": 1,
-  "message": "重复的userName"
+  "message": "重复的用户名"
 }
 ```
 
@@ -140,14 +140,14 @@ HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 {
   "status": 1,
-  "message": "userName或password错误"
+  "message": "用户名或密码错误"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
   "status": 2,
-  "message": "无对应userName"
+  "message": "无对应用户名"
 }
 ```
 
@@ -249,7 +249,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseType"
+    "message": "无对应疾病类型"
 }
 ```
 
@@ -302,7 +302,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 ```
 
@@ -360,7 +360,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 ```
 
@@ -419,12 +419,10 @@ Content-Type: application/json
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
-   {
     "status": 1,
-    "message": "No matches found"
-    }
+    "message": "无对应信息"
 }
-
+```
 
 ## `GET /casestudy/case/detail`
 
@@ -515,7 +513,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应caseID"
+    "message": "无对应病例ID"
 }
 
 ```
@@ -618,7 +616,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseType"
+    "message": "无对应疾病类型"
 }
 ```
 
@@ -669,7 +667,7 @@ HTTP/1.1
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 ```
 
@@ -777,7 +775,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应medicineID"
+    "message": "无对应药品ID"
 }
 ```
 
@@ -824,7 +822,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应role"
+    "message": "无对应角色"
 }
 ```
 
@@ -873,14 +871,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应role",
+    "message": "无对应角色",
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应job",
+    "message": "无对应工作",
 }
 
 ```
@@ -951,7 +949,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应userID",
+    "message": "无对应用户ID",
 }
 ```
 
@@ -1029,14 +1027,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应quizID",
+    "message": "无对应试题ID",
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应userID",
+    "message": "无对应用户ID",
 }
 ```
 
@@ -1105,28 +1103,28 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应quizID",
+    "message": "无对应试题ID",
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应userID",
+    "message": "无对应用户ID",
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 3,
-    "message": "无对应probNumber",
+    "message": "无对应题目ID",
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 4,
-    "message": "无对应probAns",
+    "message": "无对应题目答案",
 }
 ```
 
@@ -1193,7 +1191,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应itemID"
+    "message": "无对应物品ID"
 }
 
 ```
@@ -1306,7 +1304,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复的userName"
+    "message": "重复的用户名"
 }
 ```
 
@@ -1358,14 +1356,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应userID"
+    "message": "无对应用户ID"
 }
 
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 2,
-    "message": "重复的userName"
+    "message": "重复的用户名"
 }
 ```
 
@@ -1408,7 +1406,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应userID"
+    "message": "无对应用户ID"
 }
 
 ```
@@ -1464,7 +1462,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复的diseaseName"
+    "message": "重复的疾病名称"
 }
 
 ```
@@ -1516,14 +1514,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 2,
-    "message": "重复的diseaseName"
+    "message": "重复的疾病名称"
 }
 
 ```
@@ -1567,7 +1565,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 
 ```
@@ -1620,7 +1618,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复的medicineName"
+    "message": "重复的药品名称"
 }
 
 ```
@@ -1671,14 +1669,14 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复的medicineName"
+    "message": "重复的药品名称"
 }
 
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 404,
-    "message": "无对应medicineID"
+    "message": "无对应药品ID"
 }
 ```
 
@@ -1721,7 +1719,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应medicineID"
+    "message": "无对应药品ID"
 }
 
 ```
@@ -1781,14 +1779,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseType"
+    "message": "无对应疾病类型"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应diseaseID"
+    "message": "无对应药品ID"
 }
 
 ```
@@ -1880,14 +1878,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应medicineID"
+    "message": "无对应药品ID"
 }
 
 ```
@@ -1967,21 +1965,21 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应caseID"
+    "message": "无对应病例ID"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应diseaseID"
+    "message": "无对应疾病ID"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 3,
-    "message": "无对应medicineID"
+    "message": "无对应药品ID"
 }
 
 
@@ -2026,7 +2024,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应caseID"
+    "message": "无对应病例ID"
 }
 ```
 
@@ -2077,13 +2075,13 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应role"
+    "message": "无对应角色"
 }
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 2, 
-    "message": "重复的job",
+    "message": "重复的工作",
 }
 
 ```
@@ -2137,21 +2135,21 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应role"
+    "message": "无对应角色"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应job"
+    "message": "无对应工作"
 }
 
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 3,
-    "message": "重复的job"
+    "message": "重复的工作"
 }
 ```
 
@@ -2195,14 +2193,14 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应role"
+    "message": "无对应角色"
 }
 
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 2,
-    "message": "无对应job"
+    "message": "无对应工作"
 }
 ```
 
@@ -2277,7 +2275,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
     "status": 1,
-    "message": "重复的quizName"
+    "message": "重复的试题名称"
 }
 
 ```
@@ -2353,7 +2351,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应quizName"
+    "message": "无对应试题名称"
 }
 
 ```
@@ -2397,7 +2395,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应quizName"
+    "message": "无对应试题名称"
 }
 
 ```
@@ -2450,7 +2448,7 @@ HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
     "status": 1,
-    "message": "无对应itemID"
+    "message": "无对应物品ID"
 }
 
 ```

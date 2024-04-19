@@ -59,7 +59,7 @@ exports.getMedicineById = async (medicineId) => {
                 medicineIntro: medicine.medicineIntro
             };
         } else {
-            return { status: 1, message: "无对应medicineID" };
+            return { status: 1, message: "无对应药品ID" };
         }
     } catch (error) {
         logger.error('Error in /medicineService.js/getMedicineById', error);

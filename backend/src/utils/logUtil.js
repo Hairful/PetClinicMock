@@ -27,15 +27,15 @@ function createLogger(configurations) {
         transports: [
             ...transports,
             new winston.transports.Console({
-                level: 'error',
+                level: 'warn',
                 format: winston.format.combine(
                     winston.format.colorize(),
                     winston.format.printf(({ timestamp, level, message, ...info }) => {
                         let additionalInfo = '';
                         Object.keys(info).forEach(key => {
-                            additionalInfo += `[${key}]: ${info[key]}`;
+                            additionalInfo += `{[${key}]: ${info[key]}} `;
                         });
-                        return `[${timestamp}] [${level}] ${additionalInfo} ${message}`;
+                        return `[${timestamp}][${level}]${additionalInfo}${message}`;
                     })
                 )
             })
