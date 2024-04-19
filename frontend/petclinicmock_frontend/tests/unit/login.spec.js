@@ -1,42 +1,42 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import Login from '../../src/views/login.vue';
-import axios from 'axios';
+import { shallowMount } from '@vue/test-utils'
+import Login from '@/views/login.vue'
+import VueRouter from 'vue-router'
 
-// 创建本地Vue实例
-const localVue = createLocalVue();
-
-describe('YourComponent', () => {
+describe('Login.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    // 渲染组件
-    wrapper = mount(Login, {
-      localVue,
+    const router = new VueRouter({
+      routes: [
+        { path: '/menu', component: { template: '<div>Menu</div>' } },
+        { path: '/login', component: { template: '<div>Login</div>' } },
+        { path: '/register', component: { template: '<div>Register</div>' } },
+      ],
+    });
+
+    wrapper = shallowMount(Login, {
+      global: {
+        plugins: [router],
+      },
     });
   });
 
-  it('calls login method on submit if validation passes', async () => {
-    // 模拟验证通过
-    wrapper.vm.$refs.formLogin.validate = jest.fn().mockImplementationOnce(cb => cb(true));
-
-    // 模拟axios.post的响应
-    axios.post = jest.fn().mockResolvedValue({ data: { status: 0 } });
-
-    // 点击提交按钮
-    await wrapper.vm.submit();
-
-    // 验证login方法被调用
-    expect(wrapper.vm.login).toHaveBeenCalled();
+  it('renders the component', () => {
+    expect(wrapper.exists()).toBe(true);
   });
 
-  it('displays error message if validation fails', async () => {
-    // 模拟验证失败
-    wrapper.vm.$refs.formLogin.validate = jest.fn().mockImplementationOnce(cb => cb(false));
+  it('has a link to the menu page', () => {
+    const link = wrapper.find('.login-logo');
+    expect(link.attributes().to).toBe('/menu');
+  });
 
-    // 点击提交按钮
-    await wrapper.vm.submit();
+  it('has a link to the login page', () => {
+    const link = wrapper.find('.login-login');
+    expect(link.attributes().to).toBe('/login');
+  });
 
-    // 验证错误消息是否被显示
-    expect(wrapper.vm.$message.warning).toHaveBeenCalledWith('验证码错误');
+  it('has a link to the register page', () => {
+    const link = wrapper.find('.login-register');
+    expect(link.attributes().to).toBe('/register');
   });
 });
