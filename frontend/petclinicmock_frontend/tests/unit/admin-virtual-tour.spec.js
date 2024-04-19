@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import Menu from '@/views/menu.vue';
+import AdminVirtualTour from '@/views/admin-virtual-tour.vue';
 
 jest.mock('axios');
 
@@ -10,18 +10,25 @@ const localVue = createLocalVue();
 localVue.use(ElementUI);
 localVue.use(VueRouter);
 const router = new VueRouter({
-  routes: [{ path: '/', component: Menu }],
+  routes: [{ path: '/', component: AdminVirtualTour }],
 });
 
-describe('Menu.vue', () => {
+describe('AdminVirtualTour.vue', () => {
   let wrapper;
   const mockData = {
+    status: 0,
+    data: [
+      {
+        itemID: '1',
+        itemName: 'Test Tour',
+      },
+    ],
   };
 
   beforeEach(async () => {
     axios.get.mockResolvedValue({ data: mockData });
 
-    wrapper = mount(Menu, {
+    wrapper = mount(AdminVirtualTour, {
       localVue,
       router,
     });
@@ -34,9 +41,9 @@ describe('Menu.vue', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it('renders user name', () => {
-    // Check if the user name is rendered
-    const userName = wrapper.find('.menu-text02');
+  it('renders logged-in username', () => {
+    // Check if the logged-in username is rendered
+    const userName = wrapper.find('.admin-virtual-tour-text02');
     expect(userName.exists()).toBe(true);
   });
 
