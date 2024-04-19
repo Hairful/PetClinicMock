@@ -1,3 +1,8 @@
+/**
+ * 文件: /src/server.js
+ * 描述: 服务器入口文件
+ * 作者: {YYZ}
+ */
 const sequelize = require('./config/database');
 const app = require('./app');
 const PORT = process.env.PORT || 3000;

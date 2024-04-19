@@ -8,12 +8,23 @@ const redis = require('redis');
 
 const loggerConfigurations = [
     { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'error', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
 const redisClient = redis.createClient({
-    url: process.env.REDIS_URL || 'redis://localhost:6379'
+    socket: {
+        url: process.env.REDIS_URL || 'redis://localhost:6379',
+        reconnectStrategy: (retries) => {
+            if (retries > 10) {
+                logger.error("Too many retries on redis.");
+                return new Error("Too many retries.");
+            } else {
+                logger.warn("Retry on redis.");
+                return Math.min(retries * 100, 3000);
+            }
+        },
+    },
 });
 
 redisClient.on('error', (err) => {
