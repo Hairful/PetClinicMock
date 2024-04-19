@@ -7,6 +7,13 @@
           PETCLINICMock
         </router-link>
         <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router-current"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
+        <div>
           <div data-thq="thq-navbar-nav" class="role-play-menu-desktop-menu">
             <span>
               <span>
@@ -21,36 +28,43 @@
         </div>
       </header>
     </div>
-    <div class="role-play-menu-container1"></div>
-    <div class="heroContainer role-play-menu-hero">
-      <div class="role-play-menu-container2">
-        <h1 class="role-play-menu-hero-heading heading1">角色扮演</h1>
-      </div>
-    </div>
-    <div class="role-play-menu-container3">
-      <router-link to="/menu" class="role-play-menu-navlink button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="role-play-menu-hero1 heroContainer">
-      <h1 class="role-play-menu-hero-heading1">
-        <span class="heading1">选择一个角色</span>
-        <br />
-      </h1>
-      <div class="role-play-menu-container4">
-        <div class="role-play-menu-container5">
-          <router-link :to="{ path: '/role-play-list', query: { role: '前台' } }" class="role-play-menu-navlink1 button">
-            <span class="heading3">前台</span>
-          </router-link>
-          <router-link :to="{ path: '/role-play-list', query: { role: '医助' } }" class="role-play-menu-navlink1 button">
-            <span class="heading3">
-              <span>医助</span>
-              <br />
-            </span>
-          </router-link>
-          <router-link :to="{ path: '/role-play-list', query: { role: '医生' } }" class="role-play-menu-navlink1 button">
-            <span class="heading3">医生</span>
-          </router-link>
+    <div class="heroContainer">
+        <div class="shadowContainer">
+          <div class="containerLeft underLine">
+            <div class="heading1">
+              <span class="heading2">选择一个角色</span>
+            </div>
+          </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/role-play-menu" class="routerlink">>角色扮演</router-link>
+          </div>
+        </div>
+        <div class="containerCenter">
+          <div class="role-play-menu-container5">
+            <router-link :to="{ path: '/role-play-list', query: { role: '前台' } }" class="role-play-menu-navlink1 button-common">
+              <img
+              src="@/assets/qiantai_1.png"
+              style="width: 100px; height: 100px; margin-right: 50px;"
+              />
+              <span class="heading3">前台</span>
+            </router-link>
+            <router-link :to="{ path: '/role-play-list', query: { role: '医助' } }" class="role-play-menu-navlink1 button-common">
+              <img
+              src="@/assets/hushi-01.png"
+              style="width: 100px; height: 100px; margin-right: 50px;"
+              />
+              <span class="heading3">医助</span>
+            </router-link>
+            <router-link :to="{ path: '/role-play-list', query: { role: '医生' } }" class="role-play-menu-navlink1 button-common">
+              <img
+              src="@/assets/yisheng.png"
+              style="width: 100px; height: 100px; margin-right: 50px;"
+              />
+              <span class="heading3">医生</span>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -105,6 +119,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .role-play-menu-container {
   width: 100%;
   display: flex;
@@ -309,18 +347,18 @@ export default {
 }
 
 .role-play-menu-container5 {
-  flex-wrap: wrap;
   width: 100%;
   height: auto;
   display: flex;
   align-self: center;
   align-items: center;
-  justify-content: baseline;
+  justify-content:center;
+  flex-direction: column;
 }
 
 .role-play-menu-navlink1 {
-  width: 180px;
-  height: 100px;
+  width: 500px;
+  height: 120px;
   margin-top: var(--dl-space-space-oneandhalfunits);
   margin-left: var(--dl-space-space-oneandhalfunits);
   margin-right: var(--dl-space-space-oneandhalfunits);

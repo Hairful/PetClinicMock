@@ -7,6 +7,13 @@
           PETCLINICMock
         </router-link>
         <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router-current"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
+        <div>
           <div data-thq="thq-navbar-nav" class="case-study-list-desktop-menu">
             <span>
               <span>
@@ -21,39 +28,33 @@
         </div>
       </header>
     </div>
-    <div class="case-study-list-container1"></div>
-    <div class="heroContainer case-study-list-hero">
-      <div class="case-study-list-container2">
-        <h1 class="case-study-list-hero-heading">
-          <span class="heading1">
-            病例学习：
-          </span>
-          <span class="case-study-list-text04"> {{ this.diseaseType }} </span>
-        </h1>
-      </div>
-    </div>
-    <div class="case-study-list-container3">
-      <router-link to="/case-study-menu" class="case-study-list-navlink button">
-        重选疾病类型
-      </router-link>
-      <router-link to="/menu" class="case-study-list-navlink1 button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="case-study-list-hero1 heroContainer">
-      <h1 class="case-study-list-hero-heading1">
-        <span class="heading1">选择疾病</span>
-        <br />
-      </h1>
-      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
-      <div class="case-study-list-container4">
-        <div v-for="(disease, index) in filteredDiseases" :key="disease.diseaseID"
-          :class="`case-study-list-li Content list-item`">
-          <router-link
-            :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
-            :class="`case-study-list-navlink2 bodyLarge button`">
-            {{ disease.diseaseName }}
-          </router-link>
+    <div class="heroContainer">
+      <div class="shadowContainer">
+          <div class="containerLeft">
+            <div class="case-study-list-hero-heading underLine">
+              <span class="heading2">疾病种类：</span>
+              <span class="case-study-list-text04 heading2"> {{ this.diseaseType }} </span>
+            </div>
+          </div>
+          <div class="containerLeft">
+            <div class="labelContainer">
+              <router-link to="/menu" class="routerlink">>主菜单</router-link>
+              <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
+              <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`" class="routerlink">>{{this.diseaseType}}</router-link>
+            </div>
+          </div>
+          <div class="containerCenter" style="margin: 20px;">
+            <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
+          </div>
+          <div class="case-study-list-container4">
+            <div v-for="(disease, index) in filteredDiseases" :key="disease.diseaseID"
+              :class="`case-study-list-li Content list-item`">
+              <router-link
+                :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
+                :class="`case-study-list-navlink2 bodyLarge button`">
+                {{ disease.diseaseName }}
+              </router-link>
+            </div>
         </div>
       </div>
     </div>
@@ -141,6 +142,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .rounded-input {
   border-radius: 2px;
   padding: 5px;
@@ -297,15 +322,13 @@ export default {
 
 .case-study-list-hero-heading {
   font-size: 48px;
-  max-width: 800px;
-  text-align: center;
+  width: 100%;
   font-family: "STIX Two Text";
   line-height: 150%;
 }
 
 .case-study-list-text04 {
   color: var(--dl-color-custom-primary2);
-  font-weight: 900;
 }
 
 .case-study-list-hero-sub-heading {
@@ -320,7 +343,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .case-study-list-navlink {
@@ -356,7 +379,7 @@ export default {
 }
 
 .case-study-list-hero-heading1 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
@@ -386,7 +409,7 @@ export default {
   border-radius: var(--dl-radius-radius-radius8);
   margin-bottom: var(--dl-space-space-oneandhalfunits);
   list-style-type: disc;
-  background-color: var(--dl-color-custom-primary2);
+  background-color: #707070;
   list-style-image: none;
   list-style-position: outside;
 }

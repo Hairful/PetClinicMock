@@ -57,55 +57,58 @@ geometry.scale(1, 1, -1);
 
 onMounted(async () => {
   const frontdeskItem = new Item();
-  frontdeskItem.setItemInfo('手术刀');
+  frontdeskItem.setItemInfo('前台');
 
   const surgeryknifeItem = new Item();
   surgeryknifeItem.setItemInfo('手术刀');
 
   const labdeskItem = new Item();
-  labdeskItem.setItemInfo('手术刀');
+  labdeskItem.setItemInfo('化验台');
 
   const filmItem = new Item();
-  filmItem.setItemInfo('手术刀');
+  filmItem.setItemInfo('影像台');
 
   const surgerydeskItem = new Item();
-  surgerydeskItem.setItemInfo('手术刀');
+  surgerydeskItem.setItemInfo('手术操控台');
 
   const surgeryEquipmentItem = new Item();
-  surgeryEquipmentItem.setItemInfo('手术刀');
+  surgeryEquipmentItem.setItemInfo('手术仪器');
 
   const immItem = new Item();
-  immItem.setItemInfo('手术刀');
+  immItem.setItemInfo('免疫室');
+
+  const pathItem = new Item();
+  pathItem.setItemInfo('病理室');
 
   const conItem = new Item();
-  conItem.setItemInfo('手术刀');
+  conItem.setItemInfo('诊室');
 
   const livingItem = new Item();
-  livingItem.setItemInfo('手术刀');
+  livingItem.setItemInfo('动物仓');
 
   const washingItem = new Item();
-  washingItem.setItemInfo('手术刀');
+  washingItem.setItemInfo('动物洗浴区');
 
   const medItem = new Item();
-  medItem.setItemInfo('手术刀');
+  medItem.setItemInfo('药品');
 
   const weighItem = new Item();
-  weighItem.setItemInfo('手术刀');
+  weighItem.setItemInfo('称量仪器');
 
   const specItem = new Item();
-  specItem.setItemInfo('手术刀');
+  specItem.setItemInfo('专科诊室');
 
   const archItem = new Item();
-  archItem.setItemInfo('手术刀');
+  archItem.setItemInfo('档案室');
 
   const preItem = new Item();
-  preItem.setItemInfo('手术刀');
+  preItem.setItemInfo('手术准备室');
 
   const proItem = new Item();
-  proItem.setItemInfo('手术刀');
+  proItem.setItemInfo('处理室');
 
   const proEquipItem = new Item();
-  proEquipItem.setItemInfo('手术刀');
+  proEquipItem.setItemInfo('处理设备');
 
   function createVideoEle(videoURL, detailContent) {
     // 创建一个视频元素
@@ -124,6 +127,7 @@ onMounted(async () => {
     videoContainer.style.width = '400px'; // 设置视频框的宽度
     videoContainer.style.height = '300px'; // 设置视频框的高度
     videoContainer.style.backgroundColor = 'black'; // 设置背景颜色为黑色
+    videoContainer.style.zIndex = '99999';
     videoContainer.appendChild(videoElement);
 
     // 创建关闭按钮
@@ -171,7 +175,7 @@ onMounted(async () => {
       const closeButton = document.createElement('button');
       closeButton.innerText = '关闭';
       closeButton.style.position = 'absolute';
-      closeButton.style.top = '10px';
+      closeButton.style.top = '-5px';
       closeButton.style.right = '10px';
       closeButton.style.backgroundColor = 'red';
       closeButton.style.color = 'white';
@@ -867,7 +871,7 @@ transform: translate(100px,110px);
 
   // 点击影像台时弹出视频框
   film.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(filmItem.itemURL, filmItem.itemDetail);
   });
 
   //创建手术台流程
@@ -879,21 +883,21 @@ transform: translate(100px,110px);
   scene.add(surgerydesk.mesh);
   // 点击手术仪器时弹出视频框
   surgerydesk.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(surgerydeskItem.itemURL, surgerydeskItem.itemDetail);
   });
 
 
   //创建手术仪器流程
   const surgeryEquipment = new SpriteCanvas(
     camera,
-    "手术仪器",
+    "手术实践",
     new THREE.Vector3(-7, 9.5, 32)
   );
   scene.add(surgeryEquipment.mesh);
 
   // 点击手术仪器时弹出视频框
   surgeryEquipment.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(surgeryEquipmentItem.itemURL, surgeryEquipmentItem.itemDetail);
   });
 
   //创建免疫室流程
@@ -906,7 +910,7 @@ transform: translate(100px,110px);
 
   // 点击免疫室时弹出视频框
   immRoom.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(immItem.itemURL, immItem.itemDetail);
   });
 
   //创建病理室流程
@@ -919,7 +923,7 @@ transform: translate(100px,110px);
 
   // 点击病理室时弹出视频框
   pathRoom.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(pathItem.itemURL, pathItem.itemDetail);
   });
 
 
@@ -933,7 +937,7 @@ transform: translate(100px,110px);
 
   // 点击诊室时弹出视频框
   consultRoom.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(conItem.itemURL, conItem.itemDetail);
   });
 
   //创建动物仓标签
@@ -946,7 +950,7 @@ transform: translate(100px,110px);
 
   // 点击动物仓时弹出视频框
   livingRoom.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(livingItem.itemURL, livingItem.itemDetail);
   });
 
   //创建动物洗浴区标签
@@ -959,20 +963,20 @@ transform: translate(100px,110px);
 
   // 点击动物洗浴区时弹出视频框
   washingRoom.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(washingItem.itemURL, washingItem.itemDetail);
   });
 
-  //创建药品标签
+  //创建药房详情标签
   const med = new SpriteCanvas(
     camera,
-    "药品",
+    "药房详情",
     new THREE.Vector3(2, 11, 42)
   );
   scene.add(med.mesh);
 
   // 点击药品时弹出视频框
   med.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(medItem.itemURL, medItem.itemDetail);
   });
 
   //创建称量仪器标签
@@ -985,7 +989,7 @@ transform: translate(100px,110px);
 
   // 点击称量仪器时弹出视频框
   medEquipment.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(weighItem.itemURL, weighItem.itemDetail);
   });
 
   //创建特殊诊室详情
@@ -998,7 +1002,7 @@ transform: translate(100px,110px);
 
   // 点击特殊诊室时弹出视频框
   specDetail.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(specItem.itemURL, specItem.itemDetail);
   });
 
   //创建档案室详情
@@ -1011,7 +1015,7 @@ transform: translate(100px,110px);
 
   // 点击档案室时弹出视频框
   arcDetail.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(archItem.itemURL, archItem.itemDetail);
   });
 
   //创建手术准备室详情
@@ -1024,7 +1028,7 @@ transform: translate(100px,110px);
 
   // 点击手术准备室时弹出视频框
   preDetail.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(preItem.itemURL, preItem.itemDetail);
   });
 
   //创建处理台详情
@@ -1037,20 +1041,20 @@ transform: translate(100px,110px);
 
   // 点击处理台时弹出视频框
   proDetail.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(proItem.itemURL, proItem.itemDetail);
   });
 
   //创建处理室设备详情
   const proEquipment = new SpriteCanvas(
     camera,
-    "处理设备",
+    "处理实践",
     new THREE.Vector3(16, 10.5, 9)
   );
   scene.add(proEquipment.mesh);
 
   // 点击处理台设备时弹出视频框
   proEquipment.onClick(() => {
-    createVideoEle(surgeryknifeItem.itemURL, surgeryknifeItem.itemDetail);
+    createVideoEle(proEquipItem.itemURL, proEquipItem.itemDetail);
   });
 
 

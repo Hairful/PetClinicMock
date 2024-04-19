@@ -298,11 +298,13 @@ export default {
             this.probs = response.data.probs;
             this.quizName = response.data.quizName;
             this.totalCredits = response.data.totalCredits;
-            this.probs.forEach(prob => {
+            if (this.probs) {
+              this.probs.forEach(prob => {
               this.options.push(this.ans2option(prob.probAns));
               this.newText.push(prob.probText);
               this.images.push(prob.probImg);
-            });
+              });
+            }
           } else if (response.data.status === 1) {
             console.log('No corresponding quizID');
           }
@@ -376,12 +378,14 @@ export default {
           this.quizName = response.data.quizName;
           this.totalCredits = response.data.totalCredits;
           this.totalTime = response.data.timer;
-          this.probs.forEach(prob => {
-            this.options.push(this.ans2option(prob.probAns));
-            this.newText.push(prob.probText);
-            this.images.push(prob.probImg);
-            this.urls.push(prob.probImg);
-          });
+          if (this.probs) {
+            this.probs.forEach(prob => {
+              this.options.push(this.ans2option(prob.probAns));
+              this.newText.push(prob.probText);
+              this.images.push(prob.probImg);
+              this.urls.push(prob.probImg);
+            });
+          }
         } else if (response.data.status === 1) {
           console.log('No corresponding quizID');
         }

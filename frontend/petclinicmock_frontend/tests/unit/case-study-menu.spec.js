@@ -1,32 +1,21 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import axios from 'axios';
-import ElementUI from 'element-ui';
-import Menu from '@/views/menu.vue';
-
-jest.mock('axios');
+import CaseStudyMenu from '@/views/case-study-menu.vue';
 
 const localVue = createLocalVue();
-localVue.use(ElementUI);
 localVue.use(VueRouter);
 const router = new VueRouter({
-  routes: [{ path: '/', component: Menu }],
+  routes: [{ path: '/', component: CaseStudyMenu }],
 });
 
-describe('Menu.vue', () => {
+describe('CaseStudyMenu.vue', () => {
   let wrapper;
-  const mockData = {
-  };
 
-  beforeEach(async () => {
-    axios.get.mockResolvedValue({ data: mockData });
-
-    wrapper = mount(Menu, {
+  beforeEach(() => {
+    wrapper = mount(CaseStudyMenu, {
       localVue,
       router,
     });
-
-    await localVue.nextTick();
   });
 
   it('renders correctly', () => {
@@ -36,7 +25,7 @@ describe('Menu.vue', () => {
 
   it('renders user name', () => {
     // Check if the user name is rendered
-    const userName = wrapper.find('.menu-text02');
+    const userName = wrapper.find('.case-study-menu-text02');
     expect(userName.exists()).toBe(true);
   });
 
@@ -44,5 +33,12 @@ describe('Menu.vue', () => {
     // Check if the logout button is rendered
     const logoutButton = wrapper.find('.buttonFilled');
     expect(logoutButton.exists()).toBe(true);
+  });
+
+  it('renders search input', () => {
+    // Check if the search input is rendered
+    // Replace '.search-input' with the actual class or id of the search input
+    const searchInput = wrapper.find('.rounded-input');
+    expect(searchInput.exists()).toBe(true);
   });
 });

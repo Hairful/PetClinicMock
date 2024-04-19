@@ -6,6 +6,13 @@
         <router-link to="/menu" class="case-study-detail-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router-current"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
         <div class="case-study-detail-container01">
           <div data-thq="thq-navbar-nav" class="case-study-detail-desktop-menu">
             <span>
@@ -21,100 +28,103 @@
         </div>
       </header>
     </div>
-    <div class="case-study-detail-container02"></div>
-    <div class="case-study-detail-hero heroContainer">
-      <div class="case-study-detail-container03">
-        <h1 class="case-study-detail-hero-heading">
-          <span class="heading1">
-            病例学习：
-          </span>
-          <span class="case-study-detail-text04"> {{ diseaseName }} </span>
-        </h1>
-      </div>
-    </div>
-    <div class="case-study-detail-container04">
-      <router-link :to="{ path: '/case-study-list', query: { diseaseType: this.diseaseType } }"
-        class="case-study-detail-navlink button">
-        重选疾病
-      </router-link>
-      <router-link to="/case-study-menu" class="case-study-detail-navlink1 button">
-        重选疾病类型
-      </router-link>
-      <router-link to="/menu" class="case-study-detail-navlink2 button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="case-study-detail-hero1 heroContainer">
-      <div class="case-study-detail-container05">
-        <h1 class="case-study-detail-hero-heading1 heading1">
-          <span class="heading1">疾病介绍</span>
-          <br />
-        </h1>
-        <div class="case-study-detail-container06">
-          <span class="case-study-detail-text21 bodyLarge"> {{ diseaseIntro }} </span>
-        </div>
-      </div>
-      <div class="case-study-detail-container09" v-for="(caseItem, index) in cases" :key="index">
-        <h1 class="case-study-detail-hero-heading2 heading1">
-          <span class="heading1">病例 {{ index+1 }}</span>
-          <br />
-        </h1>
-        <div  class="case-study-detail-container10">
-          <span class="case-study-detail-text24 heading2">介绍</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.summary }} </span>
-          <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.summaryPictures" :key="`summary-pic-${picIndex}`"
-              alt="image" :src="pic" class="case-study-detail-image02" />
-          </div>
-          <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.summaryVideos" :key="`summary-vid-${vidIndex}`" :src="vid"
-              class="case-study-detail-video02" controls></video>
+
+    <div class="heroContainer">
+      <div class="shadowContainer">
+        <div class="containerLeft">
+          <div class="case-study-detail-hero-heading underLine">
+            <span class="heading2">
+              病例学习：
+            </span>
+            <span class="case-study-detail-text04 heading2"> {{ diseaseName }} </span>
           </div>
         </div>
-        <div class="case-study-detail-container10">
-          <span class="case-study-detail-text24 heading2">检查结果</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.examine }} </span>
-          <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.examinePictures" :key="`examine-pic-${picIndex}`"
-              alt="image" :src="pic" class="case-study-detail-image02" />
+          <div class="containerLeft">
+            <div class="labelContainer">
+              <router-link to="/menu" class="routerlink">>主菜单</router-link>
+              <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
+              <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`" class="routerlink">>{{this.diseaseType}}</router-link>
+              <span>>{{this.diseaseName}}</span>
+            </div>
           </div>
-          <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.examineVideos" :key="`examine-vid-${vidIndex}`" :src="vid"
-              class="case-study-detail-video02" controls></video>
-          </div>
-        </div>
-        <div class="case-study-detail-container10">
-          <span class="case-study-detail-text24 heading2">临床诊断</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.diagnose }} </span>
-          <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.diagnosePictures" :key="`diagnose-pic-${picIndex}`"
-              alt="image" :src="pic" class="case-study-detail-image02" />
-          </div>
-          <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos" :key="`diagnose-vid-${vidIndex}`"
-              :src="vid" class="case-study-detail-video02" controls></video>
-          </div>
-        </div>
-        <div class="case-study-detail-container10">
-          <span class="case-study-detail-text24 heading2">治疗方案</span>
-          <span class="case-study-detail-text25 bodyLarge"> {{ caseItem.details.treatment }} </span>
-          <div class="case-study-detail-container11">
-            <img v-for="(pic, picIndex) in caseItem.details.treatmentPictures" :key="`treatment-pic-${picIndex}`"
-              alt="image" :src="pic" class="case-study-detail-image02" />
-          </div>
-          <div class="case-study-detail-container12">
-            <video v-for="(vid, vidIndex) in caseItem.details.treatmentVideos" :key="`treatment-vid-${vidIndex}`"
-              :src="vid" class="case-study-detail-video02" controls></video>
-          </div>
-        </div>
-        <div class="case-study-detail-container22">
-          <span class="case-study-detail-text32 heading2">药物使用</span>
-          <li v-for="(medicine, medIndex) in caseItem.details.medicines" :key="`medicine-${medIndex}`"
-            class="case-study-detail-text25 bodyLarge">
-            <span class="bodyLarge"> {{ medIndex }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{
-                  medicine.medicineIntro }}<br /> &emsp; 使用剂量：{{ medicine.dosage }}</span>
+        <div class="case-study-detail-container02"></div>
+        <div class="case-study-detail-container05 ">
+          <h1 class="case-study-detail-hero-heading underLine1 ">
+            <span class="heading2">疾病介绍</span>
             <br />
-          </li>
+          </h1>
+          <div class="containerCenter">
+            <span class="bodyLarge"> {{ diseaseIntro }} </span>
+          </div>
+        </div>
+        <div class="case-study-detail-container02"></div>
+      </div>
+      <div class="case-study-detail-container02"></div>
+
+      <div class="case-study-detail-container05 " v-for="(caseItem, index) in cases" :key="index">
+        <div class="case-study-detail-container02"></div>
+        <div class="shadowContainer">
+          <h1 class="case-study-detail-hero-heading2 heading1">
+            <span class="heading1">病例 {{ index+1 }}</span>
+            <br />
+          </h1>
+          <div class="case-study-detail-container10">
+            <span class="case-study-detail-heading2 underLine1">介绍</span>
+            <span class="bodyLarge"> {{ caseItem.summary }} </span>
+            <div class="case-study-detail-container11">
+              <img v-for="(pic, picIndex) in caseItem.details.summaryPictures" :key="`summary-pic-${picIndex}`"
+                alt="image" :src="pic" class="case-study-detail-image02" />
+            </div>
+            <div class="case-study-detail-container12">
+              <video v-for="(vid, vidIndex) in caseItem.details.summaryVideos" :key="`summary-vid-${vidIndex}`" :src="vid"
+                class="case-study-detail-video02" controls></video>
+            </div>
+          </div>
+          <div class="case-study-detail-container10">
+            <span class="case-study-detail-heading2 underLine1">检查结果</span>
+            <span class="bodyLarge"> {{ caseItem.details.examine }} </span>
+            <div class="case-study-detail-container11">
+              <img v-for="(pic, picIndex) in caseItem.details.examinePictures" :key="`examine-pic-${picIndex}`"
+                alt="image" :src="pic" class="case-study-detail-image02" />
+            </div>
+            <div class="case-study-detail-container12">
+              <video v-for="(vid, vidIndex) in caseItem.details.examineVideos" :key="`examine-vid-${vidIndex}`" :src="vid"
+                class="case-study-detail-video02" controls></video>
+            </div>
+          </div>
+          <div class="case-study-detail-container10">
+            <span class="case-study-detail-heading2 underLine1">临床诊断</span>
+            <span class="bodyLarge"> {{ caseItem.details.diagnose }} </span>
+            <div class="case-study-detail-container11">
+              <img v-for="(pic, picIndex) in caseItem.details.diagnosePictures" :key="`diagnose-pic-${picIndex}`"
+                alt="image" :src="pic" class="case-study-detail-image02" />
+            </div>
+            <div class="case-study-detail-container12">
+              <video v-for="(vid, vidIndex) in caseItem.details.diagnoseVideos" :key="`diagnose-vid-${vidIndex}`"
+                :src="vid" class="case-study-detail-video02" controls></video>
+            </div>
+          </div>
+          <div class="case-study-detail-container10">
+            <span class="case-study-detail-heading2 underLine1">治疗方案</span>
+            <span class="bodyLarge"> {{ caseItem.details.treatment }} </span>
+            <div class="case-study-detail-container11">
+              <img v-for="(pic, picIndex) in caseItem.details.treatmentPictures" :key="`treatment-pic-${picIndex}`"
+                alt="image" :src="pic" class="case-study-detail-image02" />
+            </div>
+            <div class="case-study-detail-container12">
+              <video v-for="(vid, vidIndex) in caseItem.details.treatmentVideos" :key="`treatment-vid-${vidIndex}`"
+                :src="vid" class="case-study-detail-video02" controls></video>
+            </div>
+          </div>
+          <div class="case-study-detail-container10">
+            <span class="case-study-detail-heading2 underLine1">药物使用</span>
+            <li v-for="(medicine, medIndex) in caseItem.details.medicines" :key="`medicine-${medIndex}`"
+              class="bodyLarge">
+              <span class="bodyLarge"> {{ medIndex }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{
+                    medicine.medicineIntro }}<br /> &emsp; 使用剂量：{{ medicine.dosage }}</span>
+              <br />
+            </li>
+          </div>
         </div>
       </div>
     </div>
@@ -177,7 +187,8 @@ export default {
     })
       .then(response => {
         if (response.data.status === 0) {
-          this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
+          if (response && response.data && response.data.diseaseDetail)
+            this.diseaseIntro = response.data.diseaseDetail.diseaseIntro;
         } else if (response.data.status === 1) {
           console.log('No corresponding diseaseID');
         }
@@ -236,6 +247,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .case-study-detail-container {
   width: 100%;
   display: flex;
@@ -398,13 +433,18 @@ export default {
 }
 
 .case-study-detail-hero-heading {
+  width: 100%;
   font-size: 48px;
-  max-width: 800px;
-  text-align: center;
   font-family: "STIX Two Text";
   line-height: 150%;
 }
 
+.case-study-detail-heading2 {
+  width: 100%;
+  font-size: 30px;
+  font-family: "STIX Two Text";
+  line-height: 150%;
+}
 .case-study-detail-text04 {
   color: var(--dl-color-custom-primary2);
   font-weight: 900;
@@ -471,11 +511,10 @@ export default {
 }
 
 .case-study-detail-container05 {
-  flex: 0 0 auto;
-  width: 1021px;
+  width: 100%;
   height: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
 }
@@ -559,7 +598,7 @@ export default {
 }
 
 .case-study-detail-hero-heading2 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   align-self: center;
   text-align: center;
@@ -573,6 +612,7 @@ export default {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  padding: 4%;
 }
 
 .case-study-detail-text24 {

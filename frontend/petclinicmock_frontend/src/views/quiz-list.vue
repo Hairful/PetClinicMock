@@ -6,6 +6,13 @@
           PETCLINICMock
         </router-link>
         <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router-current"> 测试 </router-link>
+        </div>
+        <div>
           <div data-thq="thq-navbar-nav" class="quiz-list-desktop-menu">
             <span>
               <span>
@@ -20,35 +27,41 @@
         </div>
       </header>
     </div>
-    <div class="quiz-list-container1"></div>
-    <div class="heroContainer quiz-list-hero">
-      <div class="quiz-list-container2">
-        <h1 class="quiz-list-hero-heading">测试</h1>
-      </div>
-    </div>
-    <div class="quiz-list-container3">
-      <router-link to="/menu" class="quiz-list-navlink button">返回菜单</router-link>
-    </div>
-    <div class="quiz-list-hero1 heroContainer">
-      <h1 class="quiz-list-hero-heading1">
-        <span class="heading1">测试</span>
-        <br />
-      </h1>
+    <div class="heroContainer">
       <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
-      <div class="quiz-list-container4">
-        <ul class="quiz-list-ul list">
-          <li class="quiz-list-li list-item Content" v-for="(quiz, index) in filteredQuizzes" :key="quiz.quizID">
-            <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button bodyLarge`">
-              测试 {{ index + 1 }}
-            </router-link>
-            <span class="quiz-list-text19 bodyLarge">测试名称： {{ quiz.quizName }}</span>
-            <div></div>
-            <span class="quiz-list-text19 bodyLarge">总分： {{ quiz.totalCredits }}</span>
-            <span class="quiz-list-text19 bodyLarge">测试限时： {{ quiz.timer }}分钟 </span>
-            <span class="quiz-list-text20 bodyLarge">最后尝试分数： {{ quiz.lastTry }}</span>
-            <span class="quiz-list-text19 bodyLarge">最后尝试时间： {{ quiz.lastTryTime }}</span>
-          </li>
-        </ul>
+      <div class="containerCenter">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>测试编号</th>
+              <th>测试名称</th>
+              <th>总分</th>
+              <th>测试限时(分钟)</th>
+              <th>最后尝试分数</th>
+              <th>最后尝试时间</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(quiz, index) in filteredQuizzes" :key="quiz.quizID" :class="`tr-color-` + index % 2 + ` bodyLarge`">
+              <td>{{ index + 1 }}</td>
+              <td style="width: 30%;">
+                <router-link :to="getQuizLink(quiz)" :class="`routerlink`">
+                  {{ quiz.quizName }}
+                </router-link>
+              </td>
+              <td>{{ quiz.totalCredits }}</td>
+              <td>{{ quiz.timer }}</td>
+              <td>{{ quiz.lastTry }}</td>
+              <td>{{ quiz.lastTryTime }}</td>
+              <td>
+                <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button-common`">
+                  进行测试
+                </router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="quiz-list-footer">
@@ -87,7 +100,7 @@ export default {
       return this.quizzes.filter(quiz => {
         return quiz.quizName.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
-    }
+    },
   },
   methods: {
     logout() {
@@ -136,6 +149,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .rounded-input {
   border-radius: 2px;
   padding: 5px;
@@ -356,7 +393,7 @@ export default {
 }
 
 .quiz-list-li {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   width: 899px;
   text-align: left;
   border-radius: var(--dl-radius-radius-radius8);
@@ -368,14 +405,11 @@ export default {
 
 .quiz-list-navlink1 {
   color: var(--dl-color-gray-white);
-  width: 100px;
-  margin-right: 20px;
+  width: 120px;
+  height: 100%;
   text-align: left;
-  border-color: var(--dl-color-gray-white);
-  border-width: 0px;
-  border-radius: var(--dl-radius-radius-radius8);
   text-decoration: none;
-  background-color: var(--dl-color-custom-primary2);
+  margin: 5%;
 }
 
 .quiz-list-text19 {

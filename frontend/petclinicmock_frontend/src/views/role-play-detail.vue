@@ -6,6 +6,13 @@
         <router-link to="/menu" class="role-play-detail-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router-current"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
         <div class="role-play-detail-container1">
           <div data-thq="thq-navbar-nav" class="role-play-detail-desktop-menu">
             <span>
@@ -21,38 +28,32 @@
         </div>
       </header>
     </div>
-    <div class="role-play-detail-container2"></div>
-    <div class="role-play-detail-hero heroContainer">
-      <div class="role-play-detail-container3">
-        <h1 class="role-play-detail-hero-heading">
-          <span class="heading1">
-            角色扮演：
-          </span>
-          <span class="role-play-detail-text04"> {{ role }}</span>
-        </h1>
-      </div>
-    </div>
-    <div class="role-play-detail-container4">
-      <router-link :to="{ path: '/role-play-list', query: { role: this.role } }"
-        class="role-play-detail-navlink button">
-        重选职责
-      </router-link>
-      <router-link to="/role-play-menu" class="role-play-detail-navlink1 button">
-        重选角色
-      </router-link>
-      <router-link to="/menu" class="role-play-detail-navlink2 button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="role-play-detail-hero1 heroContainer">
-      <h1 class="role-play-detail-hero-heading1">
-        <span class="heading1"> {{ this.job }} </span>
-        <br />
-      </h1>
-      <div class="role-play-detail-container5">
-        <span class="role-play-detail-text21 bodyLarge">
-          {{ this.jobDetail }}
-        </span>
+    <div class="heroContainer">
+      <div class="shadowContainer">
+        <div class="containerLeft underLine">
+          <div class="heading1">
+            <span class="heading2"> 角色扮演：</span>
+            <span class="role-play-detail-text04 heading2"> {{ role }}</span>
+          </div>
+        </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/role-play-menu" class="routerlink">>角色扮演</router-link>
+            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{role}}</router-link>
+            <span class="routerlink">>{{job}}</span>
+          </div>
+        </div>
+        <div class="containerCenter">
+          <div class="role-play-detail-container5" >
+            <span class="heading2"> 工作名: {{ this.job }} </span>
+          </div>
+          <div class="role-play-detail-container5">
+            <span class="bodyLarge">
+              {{ this.jobDetail }}
+            </span>      
+          </div>
+        </div>
       </div>
     </div>
     <div class="role-play-detail-footer">
@@ -147,6 +148,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .role-play-detail-container {
   width: 100%;
   display: flex;
@@ -333,7 +358,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .role-play-detail-navlink {
@@ -395,11 +420,10 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  margin: 5%;
 }
 
-.role-play-detail-text21 {
-  color: var(--dl-color-gray-white);
-}
+
 
 .role-play-detail-footer {
   flex: 0 0 auto;

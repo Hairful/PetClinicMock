@@ -7,6 +7,13 @@
           PETCLINICMock
         </router-link>
         <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router-current"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
+        <div>
           <div data-thq="thq-navbar-nav" class="case-study-menu-desktop-menu">
             <span>
               <span>
@@ -21,29 +28,29 @@
         </div>
       </header>
     </div>
-    <div class="case-study-menu-container1"></div>
-    <div class="heroContainer case-study-menu-hero">
-      <div class="case-study-menu-container2">
-        <h1 class="case-study-menu-hero-heading heading1">病例学习</h1>
-      </div>
-    </div>
-    <div class="case-study-menu-container3">
-      <router-link to="/menu" class="case-study-menu-navlink button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="case-study-menu-hero1 heroContainer">
-      <h1 class="case-study-menu-hero-heading1 heading1">
-        <span class="heading1">选择疾病类型</span>
-        <br />
-      </h1>
-      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
-      <div class="case-study-menu-containerfix">
-        <router-link v-for="(diseaseType, index) in filteredDiseaseTypes" :key="index"
-          :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
-          :class="`case-study-menu-navlink1 button`">
-          <span class="heading3">{{ diseaseType }}</span>
-        </router-link>
+    <div class="heroContainer">
+      <div class="shadowContainer heroContainer">
+        <div class="containerLeft">
+          <div class="case-study-menu-hero-heading1 heading1">
+            <span class="heading2">选择疾病类型</span>
+          </div>
+        </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
+          </div>
+        </div>
+        <div class="containerCenter" style="margin: 20px;">
+          <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
+        </div>
+        <div class="case-study-menu-containerfix">
+          <router-link v-for="(diseaseType, index) in filteredDiseaseTypes" :key="index"
+            :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
+            :class="`case-study-menu-navlink1 button-common`">
+            <span class="heading3">{{ diseaseType }}</span>
+          </router-link>
+        </div>
       </div>
     </div>
     <div class="case-study-menu-footer">
@@ -117,6 +124,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .rounded-input {
   border-radius: 2px;
   padding: 5px;
@@ -306,14 +337,15 @@ export default {
   padding-top: 0px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .case-study-menu-hero-heading1 {
-  color: var(--dl-color-gray-white);
-  max-width: 800px;
-  text-align: center;
-  padding-bottom: var(--dl-space-space-twounits);
+  color: var(--dl-color-gray-black);
+  width: 100%;
+  text-align: start;
+  border-bottom-color:black;
+  border-bottom-width: 1px;
 }
 
 .case-study-menu-container5 {
@@ -327,13 +359,13 @@ export default {
   justify-content: center;
 }
 .case-study-menu-containerfix {
-  width: 90%;
+  width: 80%;
   flex-wrap: wrap;
   height: auto;
   display: flex;
   align-self: center;
   align-items: center;
-  justify-content: center;
+  justify-content: baseline;
 }
 .case-study-menu-navlink1 {
   width: 180px;

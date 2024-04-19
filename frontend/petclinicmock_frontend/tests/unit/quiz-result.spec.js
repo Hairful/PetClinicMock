@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import Menu from '@/views/menu.vue';
+import QuizResult from '@/views/quiz-result.vue';
 
 jest.mock('axios');
 
@@ -10,18 +10,26 @@ const localVue = createLocalVue();
 localVue.use(ElementUI);
 localVue.use(VueRouter);
 const router = new VueRouter({
-  routes: [{ path: '/', component: Menu }],
+  routes: [{ path: '/', component: QuizResult }],
 });
 
-describe('Menu.vue', () => {
+describe('QuizResult.vue', () => {
   let wrapper;
   const mockData = {
+    status: 0,
+    data: {
+      quizID: '1',
+      quizName: 'Test Quiz',
+      probs: [],
+      totalCredits: 0,
+      lastTry: 0,
+    },
   };
 
   beforeEach(async () => {
     axios.get.mockResolvedValue({ data: mockData });
 
-    wrapper = mount(Menu, {
+    wrapper = mount(QuizResult, {
       localVue,
       router,
     });
@@ -36,7 +44,7 @@ describe('Menu.vue', () => {
 
   it('renders user name', () => {
     // Check if the user name is rendered
-    const userName = wrapper.find('.menu-text02');
+    const userName = wrapper.find('.quiz-result-text02');
     expect(userName.exists()).toBe(true);
   });
 

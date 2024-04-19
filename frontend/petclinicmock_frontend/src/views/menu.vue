@@ -4,6 +4,13 @@
     <div class="menu-header">
       <header data-thq="thq-navbar" class="navbarContainer menu-navbar-interactive">
         <router-link to="/menu" class="menu-logo logo">PETCLINICMock</router-link>
+        <div>
+          <router-link to="/menu" class="head-router-current"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
         <div class="menu-container1">
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
             <span>
@@ -19,8 +26,7 @@
         </div>
       </header>
     </div>
-    <div class="menu-hero">
-      <div class="menu-hero1 heroContainer">
+    <div class="heroContainer">
         <div class="menu-container2">
           <h1 class="menu-hero-heading">
             <span class="heading1">选择功能</span>
@@ -29,33 +35,44 @@
         </div>
         <div class="menu-container3">
           <div class="menu-container4">
-            <router-link to="/virtual-tour" class="menu-navlink3 button">
-              <span class="heading3">
-                <span>3D 虚拟导览</span>
-                <br />
-              </span>
-            </router-link>
-            <router-link to="/role-play-menu" class="menu-navlink3 button">
-              <span class="heading3">
-                <span>角色扮演</span>
-                <br />
-              </span>
-            </router-link>
+              <router-link to="/virtual-tour" class="button-common" >
+                <img 
+                src="@/assets/yiyuan.png"
+                />
+                <span class="heading3">
+                  <span>3D 虚拟导览</span>
+                  <br />
+                </span>
+              </router-link>
+              <router-link to="/role-play-menu" class="button-common">
+                <img 
+                src="@/assets/yishengxinxi.png"
+                />
+                <span class="heading3">
+                  <span>角色扮演</span>
+                  <br />
+                </span>
+              </router-link>
           </div>
           <div class="menu-container4">
-            <router-link to="/case-study-menu" class="menu-navlink3 button">
-              <span class="heading3">
-                <span>病例学习</span>
-                <br />
-              </span>
-            </router-link>
-            <router-link to="/quiz-list" class="menu-navlink3 button">
-              <span class="heading3">测试</span>
-            </router-link>
+              <router-link to="/case-study-menu" class="button-common">
+                <img 
+                src="@/assets/xuexi.png"
+                />
+                <span class="heading3">
+                  <span>病例学习</span>
+                  <br />
+                </span>
+              </router-link>
+              <router-link to="/quiz-list" class="button-common">
+                <img 
+                src="@/assets/xinxitianxie.png"
+                />
+                <span class="heading3">测试</span>
+              </router-link>
           </div>
         </div>
       </div>
-    </div>
     <div class="menu-footer">
       <footer class="menu-footer1 footerContainer">
         <div class="menu-container6">
@@ -77,7 +94,6 @@
 
 <script>
 import Chatbot from '@/components/Chatbot.vue';
-
 export default {
   name: 'Menu',
   props: {},
@@ -86,7 +102,6 @@ export default {
   },
   data() {
     return {
-      rawzkyy: ' ',
       name: localStorage.getItem('username'),
     }
   },
@@ -109,6 +124,31 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
+.menu-item {
+  width: 400px;
+  height: 400px;
+}
+
 .menu-navlink4 {
   color: var(--dl-color-primary-700);
   border-width: 0px;
@@ -259,13 +299,10 @@ export default {
 }
 
 .menu-hero {
-  flex: 0 0 auto;
-  width: 100%;
+  width: 70%;
   height: auto;
-  display: flex;
-  margin-top: 96px;
-  align-items: flex-start;
-  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 3px gray;
 }
 
 .menu-hero1 {
@@ -283,7 +320,7 @@ export default {
 }
 
 .menu-hero-heading {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   text-align: center;
   padding-bottom: var(--dl-space-space-twounits);
@@ -348,19 +385,26 @@ export default {
 }
 
 .menu-navlink3 {
-  width: 180px;
-  height: 100px;
-  margin-top: var(--dl-space-space-oneandhalfunits);
-  margin-left: var(--dl-space-space-oneandhalfunits);
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  border-radius: var(--dl-radius-radius-radius8);
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
+  width: 400px;
+  height: 250px;
+  transition: 0.5s;
+  border-radius: 20px;
+  color: white;
+  background-color: #292929;
+  margin-top: var(--dl-space-space-threeunits);
+  margin-left: var(--dl-space-space-threeunits);
+  margin-right: var(--dl-space-space-threeunits);
+  margin-bottom: var(--dl-space-space-threeunits);
   text-decoration: none;
   display: flex;
   justify-content: center;
+  
   align-items: center
 }
-
+.menu-navlink3:hover {
+  color: var(--dl-color-gray-white);
+  background-color: rgb(49, 144, 245);
+}
 .menu-footer {
   flex: 0 0 auto;
   width: 100%;

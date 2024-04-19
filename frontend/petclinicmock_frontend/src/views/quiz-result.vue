@@ -5,6 +5,13 @@
         <router-link to="/menu" class="quiz-result-logo logo">
           PETCLINICMock
         </router-link>
+        <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router-current"> 测试 </router-link>
+        </div>
         <div class="quiz-result-container01">
           <div data-thq="thq-navbar-nav" class="quiz-result-desktop-menu">
             <span>
@@ -20,60 +27,63 @@
         </div>
       </header>
     </div>
-    <div class="quiz-result-container02"></div>
-    <div class="quiz-result-hero heroContainer">
-      <div class="quiz-result-container03">
-        <h1 class="quiz-result-hero-heading">
-          <span class="heading1">
-            测试结果：
-          </span>
-          <span class="quiz-result-text04">Quiz {{ this.quizName }}</span>
-        </h1>
-        <span class="heading2">总分： {{ this.totalCredits }}</span>
-        <span class="heading2">
-          <span class="heading2">
-            你的得分：
-          </span>
-          <span class="quiz-result-text08">{{ this.yourCredit }}</span>
-        </span>
-      </div>
-    </div>
-    <div class="quiz-result-container04">
-      <router-link :to="{ path: '/quiz-detail', query: { quizID: this.quizID } }" class="quiz-result-navlink button">
-        重新测试
-      </router-link>
-      <router-link to="/quiz-list" class="quiz-result-navlink1 button">
-        选择测试
-      </router-link>
-      <router-link to="/menu" class="quiz-result-navlink2 button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="quiz-result-hero1 heroContainer">
-      <div v-for="(prob, index) in probs" class="quiz-result-container05">
-        <h1 class="quiz-result-hero-heading1 heading1">
-          <span class="heading1">问题 {{ index + 1 }}</span>
-          <br />
-        </h1>
-        <div class="quiz-result-container06">
-          <span class="quiz-result-text25 bodyLarge" v-html="prob.probText"></span>
-          <div class="quiz-result-container07">
-            <img v-if="prob.probImg" :src="prob.probImg" alt="quiz image" />
+    <div class="heroContainer">
+      <div class="shadowContainer-white">
+        <div class="containerCenter">
+          <div class="quiz-result-container03">
+            <h1 class="quiz-result-hero-heading">
+              <span class="heading1">
+                测试结果：
+              </span>
+              <span class="quiz-result-text04">Quiz {{ this.quizName }}</span>
+            </h1>
+            <span class="heading2">总分： {{ this.totalCredits }}</span>
+            <span class="heading2">
+              <span class="heading2">
+                你的得分：
+              </span>
+              <span class="quiz-result-text08">{{ this.yourCredit }}</span>
+            </span>
           </div>
-          <div class="quiz-result-container09">
-            <div class="quiz-result-container08">
-              <span class="quiz-result-text26 heading3">正确答案：</span>
-              <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
+        </div>
+        <div class="containerCenter" style="margin-top: 20px;">
+          <router-link :to="{ path: '/quiz-detail', query: { quizID: this.quizID } }" class="quiz-result-navlink button">
+            重新测试
+          </router-link>
+          <router-link to="/quiz-list" class="quiz-result-navlink1 button">
+            选择其余测试
+          </router-link>
+          <router-link to="/menu" class="quiz-result-navlink2 button">
+            返回主菜单
+          </router-link>
+        </div>
+      </div>
+      <div class="containerCenter">
+        <div v-for="(prob, index) in probs" class="quiz-result-container05 shadowContainer-white">
+          <h1 class="quiz-result-hero-heading1 heading1">
+            <span class="heading1">问题 {{ index + 1 }}</span>
+            <br />
+          </h1>
+          <div class="quiz-result-container06">
+            <span class="bodyLarge" v-html="prob.probText"></span>
+            <div class="quiz-result-container07">
+              <img v-if="prob.probImg" :src="prob.probImg" class="quiz-result-image"  />
             </div>
-            <div class="quiz-result-container08">
-              <span v-if="prob.lastAns == prob.probAns">
-                <span class="quiz-result-text26 heading3">你的答案：</span>
-                <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
-              </span>
-              <span v-else="prob.lastAns!=prob.probAns">
-                <span class="quiz-result-text27 heading3">你的答案：</span>
-                <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
-              </span>
+            <div class="quiz-result-container09">
+              <div class="quiz-result-container08">
+                <span class="quiz-result-text26 heading3">正确答案：</span>
+                <span class="quiz-result-text26 heading3" v-html="ans2option(prob.probAns)"></span>
+              </div>
+              <div class="quiz-result-container08">
+                <span v-if="prob.lastAns == prob.probAns">
+                  <span class="quiz-result-text26 heading3">你的答案：</span>
+                  <span class="quiz-result-text26 heading3" v-html="ans2option(prob.lastAns)"></span>
+                </span>
+                <span v-else="prob.lastAns!=prob.probAns">
+                  <span class="quiz-result-text27 heading3">你的答案：</span>
+                  <span class="quiz-result-text27 heading3" v-html="ans2option(prob.lastAns)"></span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -166,6 +176,30 @@ export default {
 </script>
 
 <style scoped>
+.head-router{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  text-align: center;
+  font-family: STIX Two Text;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 20px;
+}
+.head-router:hover{
+  color: gray;
+}
+.head-router-current{
+  width: 50px;
+  height: auto;
+  font-size: 24px;
+  font-family: STIX Two Text;
+  font-weight: 600;
+  line-height: 150%;
+  margin-left: 20px;
+  border-bottom-color: var(--dl-color-custom-primary1);
+  border-bottom-width: 4px;
+}
 .quiz-result-container {
   width: 100%;
   display: flex;
@@ -356,7 +390,7 @@ export default {
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-custom-secondary1);
 }
 
 .quiz-result-navlink {
@@ -409,16 +443,17 @@ export default {
 
 .quiz-result-container05 {
   flex: 0 0 auto;
-  width: 1021px;
+  width: 70%;
   height: 100%;
   display: flex;
+  margin: 2%;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
 }
 
 .quiz-result-hero-heading1 {
-  color: var(--dl-color-gray-white);
+  color: var(--dl-color-gray-black);
   max-width: 800px;
   align-self: center;
   text-align: center;

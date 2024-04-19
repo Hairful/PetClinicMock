@@ -53,7 +53,7 @@
                       <div class="bigImg-div " v-if="!item.itemURL">或者将图片拖拽到这里</div>
                       <div v-else="item.itemURL">
                         <img v-if="isImage(item.itemURL)" :src="item.itemURL" class="bigImg" />
-                        <video v-else="!isImage(item.itemURL)" :src="item.itemURL" class="bigImg"></video>
+                        <video v-else="!isImage(item.itemURL)" :src="item.itemURL" class="bigImg" controls></video>
                         <button type="button" class="button" @click="clearURL(index)">
                           <span>删除</span>
                         </button>

@@ -7,6 +7,13 @@
           PETCLINICMock
         </router-link>
         <div>
+          <router-link to="/menu" class="head-router"> 菜单 </router-link>
+          <router-link to="/virtual-tour" class="head-router"> 导览 </router-link>
+          <router-link to="/case-study-menu" class="head-router"> 学习 </router-link>
+          <router-link to="/role-play-menu" class="head-router-current"> 扮演 </router-link>
+          <router-link to="/quiz-list" class="head-router"> 测试 </router-link>
+        </div>
+        <div>
           <div data-thq="thq-navbar-nav" class="role-play-list-desktop-menu">
             <span>
               <span>
@@ -21,40 +28,38 @@
         </div>
       </header>
     </div>
-    <div class="role-play-list-container1"></div>
-    <div class="heroContainer role-play-list-hero">
-      <div class="role-play-list-container2">
-        <h1 class="role-play-list-hero-heading">
-          <span class="heading1">
-            角色扮演：
-          </span>
-          <span class="role-play-list-text04">{{ this.role }}</span>
-        </h1>
-      </div>
-    </div>
-    <div class="role-play-list-container3">
-      <router-link to="/role-play-menu" class="role-play-list-navlink button">
-        重选角色
-      </router-link>
-      <router-link to="/menu" class="role-play-list-navlink button">
-        返回菜单
-      </router-link>
-    </div>
-    <div class="role-play-list-hero1 heroContainer">
-      <h1 class="role-play-list-hero-heading1">
-        <span class="heading1">选择职责</span>
-        <br />
-      </h1>
-      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
-      <div class="role-play-list-container4">
-        <ul class="role-play-list-ul list">
-          <li v-for="(job, index) in filteredJobs" :key="index" class="role-play-list=li list-item Content">
-            <router-link :to="{ path: '/role-play-detail', query: { role: role, job: job } }"
-              class="role-play-list-navlink2 button bodyLarge">
-              {{ job }}
-            </router-link>
-          </li>
-        </ul>
+    <div class="heroContainer">
+      <div class="shadowContainer">
+        <div class="containerLeft underLine">
+          <div class="role-play-list-container2">
+            <h1 class="role-play-list-hero-heading">
+              <span class="heading2">
+                角色：
+              </span>
+              <span class="role-play-list-text04 heading2">{{ this.role }}</span>
+            </h1>
+          </div>
+        </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/role-play-menu" class="routerlink">>角色扮演</router-link>
+            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{this.role}}</router-link>
+          </div>
+        </div>
+        <div class="containerCenter">
+          <div class="containerCenter" style="margin: 20px;">
+            <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
+          </div>
+          <div class="role-play-list-container4">
+              <div v-for="(job, index) in filteredJobs" :key="index" class="role-play-list=li list-item Content">
+                <router-link :to="{ path: '/role-play-detail', query: { role: role, job: job } }"
+                  class="role-play-list-navlink2 bodyLarge button">
+                  {{ job }}
+                </router-link>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="role-play-list-footer">
@@ -359,12 +364,13 @@ export default {
 }
 
 .role-play-list-container4 {
-  flex: 0 0 auto;
-  width: auto;
+  flex-wrap: wrap;
+  width: 75%;
   height: 100%;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-self: center;
+  align-items: center;
+  justify-content: baseline;
 }
 
 .role-play-list-ul {
@@ -394,7 +400,7 @@ export default {
   margin-right: var(--dl-space-space-twounits);
   border-radius: var(--dl-radius-radius-radius8);
   text-decoration: none;
-  background-color: var(--dl-color-custom-primary2);
+  background-color: #707070;
   margin-bottom: var(--dl-space-space-unit);
 }
 
