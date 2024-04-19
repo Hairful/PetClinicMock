@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import RolePlayDetail from '@/views/role-play-detail.vue'; // replace with actual path to component
+import QuizDetail from '@/views/quiz-detail.vue'; // replace with actual path to component
 
 jest.mock('axios');
 
@@ -10,21 +10,22 @@ const localVue = createLocalVue();
 localVue.use(ElementUI);
 localVue.use(VueRouter); // tell Vue to use VueRouter
 const router = new VueRouter({
-  routes: [{ path: '/', component: RolePlayDetail }],
+  routes: [{ path: '/', component: QuizDetail }],
 });
 
-describe('RolePlayDetail.vue', () => {
+describe('QuizDetail.vue', () => {
   it('renders correctly', async () => {
     const mockData = {
       status: 0,
       data: {
-        message: 'Test Message',
+        quizName: 'Test Quiz',
+        questions: [],
       },
     };
 
     axios.get.mockResolvedValue({ data: mockData });
 
-    const wrapper = mount(RolePlayDetail, {
+    const wrapper = mount(QuizDetail, {
       localVue,
       router,
       mocks: {
