@@ -27,72 +27,78 @@
         </div>
       </header>
     </div>
-    <div class="quiz-detail-container02"></div>
     <div class="heroContainer">
-      <div class="quiz-detail-container03">
-        <h1 class="quiz-detail-hero-heading">
-          <span class="heading1">
-            测试：
-          </span>
-          <span class="quiz-detail-text04">{{ this.quizName }}</span>
-        </h1>
-        <span class="heading2">总分： {{ this.totalCredits }}</span>
-      </div>
-      <suspenPopup top="500" left="60" height="150" width="650">
-        <div class="supen-popup">
-          <div> 
-            剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}<br></br>
+      <div class="containerCenter">
+        <el-dialog
+          title="确认提交"
+          :visible.sync="dialogFormVisible"
+          v-if="dialogFormVisible"
+          width="600px"
+          style="margin-top: 10%;"
+        >
+        <div class="containerCenter" style="flex-direction: column;align-content: center;display: flex;">
+          <div v-if="isUnfinished" class="bodyLarge"  style="margin: 4%;">
+            尚有未完成的题目
+          </div>
+          <div class="bodyLarge"  style="margin: 4%;">
+            是否确认提交
           </div>
           <div>
-            题目完成情况：
+            <button class="quiz-detail-navlink2 button" @click="confirmSubmit(1)">确认</button>
+            <button class="quiz-detail-navlink2 button" @click="confirmSubmit(0)">取消</button>
           </div>
-          <div class="quiz-situation">
-            <div v-for="(prob,index) in probs" >
-              <button v-if="ans[index]" class="quiz-finished button" @click="switchProb(index)"> {{index+1}} </button>
-              <button v-else="!ans[index]" class="quiz-unfinished button" @click="switchProb(index)"> {{index+1}} </button>
+        </div>
+        </el-dialog>
+        <suspenPopup top="500" left="60" height="150" width="650">
+          <div class="supen-popup">
+            <div> 
+              剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}<br></br>
+            </div>
+            <div>
+              题目完成情况：
+            </div>
+            <div class="quiz-situation">
+              <div v-for="(prob,index) in probs" >
+                <button v-if="ans[index]" class="quiz-finished button" @click="switchProb(index)"> {{index+1}} </button>
+                <button v-else="!ans[index]" class="quiz-unfinished button" @click="switchProb(index)"> {{index+1}} </button>
+              </div>
+            </div>
+          </div>
+        </suspenPopup>
+      </div>  
+      <div class="shadowContainer-white">
+        <div class="containerCenter" v-if="probs && probs.length > 0">
+          <div class="quiz-detail-container05">
+            <h1 class="quiz-detail-hero-heading1 heading1">
+              <span class="heading1">问题 {{ this.currentProb + 1 }}</span>
+              <br />
+            </h1>
+            <div class="quiz-detail-container06">
+              <span class="bodyLarge">({{ probs[this.currentProb].probCredit }}分)</span>
+              <span class="bodyLarge" v-html="probs[this.currentProb].probText"></span>
+              <div class="quiz-detail-container07">
+                <img v-if="probs[this.currentProb].probImg" alt="image" :src="`${probs[this.currentProb].probImg}`" class="quiz-detail-image" />
+              </div>
+              <div class="quiz-detail-container08">
+                <select class="quiz-detail-select" v-model="ans[currentProb]">
+                  <option value=A>A</option>
+                  <option value=B>B</option>
+                  <option value=C>C</option>
+                  <option value=D>D</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
-      </suspenPopup>
-    </div>
-    <div class="heroContainer">
-      <div class="quiz-detail-container04">
-        <router-link to="/quiz-list" class="quiz-detail-navlink button">
-          重选测试
-        </router-link>
-        <router-link to="/menu" class="quiz-detail-navlink1 button">
-          返回菜单
-        </router-link>  
-      </div> 
-    </div>
-      
-    <div class="heroContainer" v-if="probs && probs.length > 0">
-      <div class="quiz-detail-container05">
-        <h1 class="quiz-detail-hero-heading1 heading1">
-          <span class="heading1">问题 {{ this.currentProb + 1 }}</span>
-          <br />
-        </h1>
-        <div class="quiz-detail-container06">
-          <span class="bodyLarge">({{ probs[this.currentProb].probCredit }}分)</span>
-          <span class="bodyLarge" v-html="probs[this.currentProb].probText"></span>
-          <div class="quiz-detail-container07">
-            <img v-if="probs[this.currentProb].probImg" alt="image" :src="`${probs[this.currentProb].probImg}`" class="quiz-detail-image" />
-          </div>
-          <div class="quiz-detail-container08">
-            <select class="quiz-detail-select" v-model="ans[currentProb]">
-              <option value=A>A</option>
-              <option value=B>B</option>
-              <option value=C>C</option>
-              <option value=D>D</option>
-            </select>
-          </div>
+        <div class="containerCenter" 
+        style="
+        margin-top: 10%;
+        ">
+          <button class="quiz-detail-navlink2 button" @click="lastProb">上一题</button>
+          <button class="quiz-detail-navlink2 button" @click="nextProb">下一题</button>
+          <button class="quiz-detail-navlink2 button" @click="trySubmit">提交测试</button>
         </div>
       </div>
-    </div>
-    <div class="quiz-detail-container04">
-      <button class="quiz-detail-navlink2 button" @click="lastProb">上一题</button>
-      <button class="quiz-detail-navlink2 button" @click="nextProb">下一题</button>
-      <button class="quiz-detail-navlink2 button" @click="submit">提交测试</button>
     </div>
     <div class="quiz-detail-footer">
       <footer class="quiz-detail-footer1 footerContainer">
@@ -139,9 +145,23 @@ export default {
       rest_min: 0,
       rest_s: 0,
       rest_ms: 0,
+      dialogFormVisible:false,
+      confirm:false,
+      isUnfinished:false,
     }
   },
   methods: {
+    confirmSubmit(flag){
+      this.dialogFormVisible=false;
+      this.isUnfinished=false;
+      if(flag){
+        this.confirm=true;
+      }
+      if(this.confirm)
+      {
+        this.submit();
+      }
+    },
     switchProb(num){
       this.currentProb = num;
     },
@@ -189,7 +209,7 @@ export default {
     },
     lastProb() {
       if (this.currentProb == 0) {
-        this.$message.warning('This is the first question')
+        this.$message.warning('已是第一题')
       }
       else
         this.currentProb--;
@@ -197,7 +217,7 @@ export default {
     },
     nextProb() {
       if (this.currentProb >= this.probs.length - 1) {
-        this.$message.warning('This is the last question')
+        this.$message.warning('已为最后一题')
       }
       else
         this.currentProb++;
@@ -229,6 +249,15 @@ export default {
     },
     stopTimer() {
       clearInterval(this.timer);
+    },
+    trySubmit(){
+      for(let i=0;i<this.probs.length;i++ ){
+        if(!this.ans[i]){
+          this.isUnfinished = true;
+          break;
+        }
+      }
+      this.dialogFormVisible = true;
     },
     submit() {
       for (let i = 0; i < this.ans.length; i++) {
@@ -575,7 +604,7 @@ export default {
 
 .quiz-detail-container05 {
   flex: 0 0 auto;
-  width: 1021px;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: flex-start;
@@ -738,9 +767,11 @@ export default {
   border-width: 0px;
   border-radius: var(--dl-radius-radius-radius8);
   text-decoration: none;
+  background-color: var(--dl-color-custom-primary1);
+}
+.quiz-detail-navlink2:hover {
   background-color: var(--dl-color-custom-primary2);
 }
-
 .quiz-detail-footer {
   flex: 0 0 auto;
   width: 100%;
