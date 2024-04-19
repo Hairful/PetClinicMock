@@ -27,28 +27,41 @@
         </div>
       </header>
     </div>
-    <div class="quiz-list-container1"></div>
-    <div class="heroContainer quiz-list-hero">
-      <div class="quiz-list-container2">
-        <h1 class="quiz-list-hero-heading">测试</h1>
-      </div>
-    </div>
     <div class="heroContainer">
       <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
-      <div class="quiz-list-container4">
-        <ul class="quiz-list-ul list">
-          <li class="quiz-list-li list-item Content" v-for="(quiz, index) in filteredQuizzes" :key="quiz.quizID">
-            <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button bodyLarge`">
-              测试 {{ index + 1 }}
-            </router-link>
-            <span class="quiz-list-text19 bodyLarge">测试名称： {{ quiz.quizName }}</span>
-            <div></div>
-            <span class="quiz-list-text19 bodyLarge">总分： {{ quiz.totalCredits }}</span>
-            <span class="quiz-list-text19 bodyLarge">测试限时： {{ quiz.timer }}分钟 </span>
-            <span class="quiz-list-text20 bodyLarge">最后尝试分数： {{ quiz.lastTry }}</span>
-            <span class="quiz-list-text19 bodyLarge">最后尝试时间： {{ quiz.lastTryTime }}</span>
-          </li>
-        </ul>
+      <div class="containerCenter">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>测试编号</th>
+              <th>测试名称</th>
+              <th>总分</th>
+              <th>测试限时(分钟)</th>
+              <th>最后尝试分数</th>
+              <th>最后尝试时间</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(quiz, index) in filteredQuizzes" :key="quiz.quizID" :class="`tr-color-` + index % 2 + ` bodyLarge`">
+              <td>{{ index + 1 }}</td>
+              <td style="width: 30%;">
+                <router-link :to="getQuizLink(quiz)" :class="`routerlink`">
+                  {{ quiz.quizName }}
+                </router-link>
+              </td>
+              <td>{{ quiz.totalCredits }}</td>
+              <td>{{ quiz.timer }}</td>
+              <td>{{ quiz.lastTry }}</td>
+              <td>{{ quiz.lastTryTime }}</td>
+              <td>
+                <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button-common`">
+                  进行测试
+                </router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="quiz-list-footer">
@@ -71,9 +84,13 @@
 
 <script>
 import axios from 'axios';
+import tableC from '../components/table';
 export default {
   name: 'QuizList',
   props: {},
+  components:{
+    tableC,
+  },
   data() {
     return {
       name: localStorage.getItem('username'),
@@ -87,7 +104,7 @@ export default {
       return this.quizzes.filter(quiz => {
         return quiz.quizName.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
-    }
+    },
   },
   methods: {
     logout() {
@@ -392,14 +409,11 @@ export default {
 
 .quiz-list-navlink1 {
   color: var(--dl-color-gray-white);
-  width: 100px;
-  margin-right: 20px;
+  width: 120px;
+  height: 100%;
   text-align: left;
-  border-color: var(--dl-color-gray-white);
-  border-width: 0px;
-  border-radius: var(--dl-radius-radius-radius8);
   text-decoration: none;
-  background-color: var(--dl-color-custom-primary2);
+  margin: 5%;
 }
 
 .quiz-list-text19 {

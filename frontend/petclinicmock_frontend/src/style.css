@@ -334,6 +334,17 @@
   border-radius: 5px;
   box-shadow: 0 0 20px 0px gray;
 }
+.shadowContainer-white {
+  width: 70%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  align-items: flex-start;
+  border-radius: 5px;
+  box-shadow: 0 0 20px 0px gray;
+  background-color: white;
+}
 .labalContainer{
   width: 100%;
   display: flex;
@@ -353,6 +364,27 @@
   height: auto;
   display: flex;
   justify-content: center;
+}
+.table{
+  width: 80%;
+}
+.table tr th {
+  text-align: center;
+  height: 30px;
+  border-bottom-color: gray;
+  border-bottom-width: 2px;
+}
+.table td{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.tr-color-0 {
+  background: transparent;
+}
+/* 定义余数为 1 的行颜色 */
+.tr-color-1 {
+  background: rgba(220, 220, 220, 0.7);
 }
 .pricingContainer {
   gap: var(--dl-space-space-twounits);
