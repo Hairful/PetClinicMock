@@ -2,13 +2,13 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import QuizDetail from '@/views/quiz-detail.vue'; // replace with actual path to component
+import QuizDetail from '@/views/quiz-detail.vue';
 
 jest.mock('axios');
 
 const localVue = createLocalVue();
 localVue.use(ElementUI);
-localVue.use(VueRouter); // tell Vue to use VueRouter
+localVue.use(VueRouter);
 const router = new VueRouter({
   routes: [{ path: '/', component: QuizDetail }],
 });
@@ -17,12 +17,10 @@ describe('QuizDetail.vue', () => {
   let wrapper;
   const mockData = {
     status: 0,
-    data: [
-      {
-        quizID: '1',
-        quizName: 'Test Quiz',
-      },
-    ],
+    data: {
+      quizID: '1',
+      quizName: 'Test Quiz',
+    },
   };
 
   beforeEach(async () => {
