@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
-import Login from '@/views/login.vue'
+import LoginAdmin from '@/views/login-admin.vue'
 import VueRouter from 'vue-router'
 
-describe('Login.vue', () => {
+describe('LoginAdmin.vue', () => {
   let wrapper;
 
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('Login.vue', () => {
       ],
     });
 
-    wrapper = shallowMount(Login, {
+    wrapper = shallowMount(LoginAdmin, {
       global: {
         plugins: [router],
       },
@@ -25,12 +25,12 @@ describe('Login.vue', () => {
   });
 
   it('has a link to the login page', () => {
-    const link = wrapper.find('.login-login');
+    const link = wrapper.find('.login-admin-login');
     expect(link.attributes().to).toBe('/login');
   });
 
   it('has a link to the register page', () => {
-    const link = wrapper.find('.login-register');
+    const link = wrapper.find('.login-admin-register');
     expect(link.attributes().to).toBe('/register');
   });
 });
