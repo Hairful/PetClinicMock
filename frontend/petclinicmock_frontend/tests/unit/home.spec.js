@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
-import Login from '@/views/login.vue'
+import Home from '@/views/home.vue'
 import VueRouter from 'vue-router'
 
-describe('Login.vue', () => {
+describe('Home.vue', () => {
   let wrapper;
 
   beforeEach(() => {
@@ -13,24 +13,25 @@ describe('Login.vue', () => {
       ],
     });
 
-    wrapper = shallowMount(Login, {
+    wrapper = shallowMount(Home, {
       global: {
         plugins: [router],
       },
     });
   });
 
-  it('renders the component', () => {
+  it('renders correctly', () => {
+    // Check if the component is rendered
     expect(wrapper.exists()).toBe(true);
   });
 
   it('has a link to the login page', () => {
-    const link = wrapper.find('.login-login');
+    const link = wrapper.find('.home-login');
     expect(link.attributes().to).toBe('/login');
   });
 
   it('has a link to the register page', () => {
-    const link = wrapper.find('.login-register');
+    const link = wrapper.find('.home-register');
     expect(link.attributes().to).toBe('/register');
   });
 });
