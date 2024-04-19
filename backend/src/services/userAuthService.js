@@ -54,7 +54,7 @@ exports.loginUser = async (userName, password) => {
             return { status: 1, message: '用户名或密码错误' };
         }
         const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });
-        return { status: 0, message: '登录成功', userID: userExist.userID, token: token };
+        return { status: 0, message: '登录成功', userID: userExist.userID, token: token, isAdmin: userExist.isAdmin };
     } catch (error) {
         logger.error('Error in /userAuthService.js/loginUser :', error);
         return { status: -9, message: '错误' };
