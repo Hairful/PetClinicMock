@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RolePlayMenu.vue renders correctly 1`] = `
+<div
+  class="role-play-menu-container"
+>
+  <chatbot-stub />
+   
+  <div
+    class="role-play-menu-header"
+  >
+    <header
+      class="navbarContainer role-play-menu-navbar-interactive"
+      data-thq="thq-navbar"
+    >
+      <router-link-stub
+        ariacurrentvalue="page"
+        class="role-play-menu-logo logo"
+        event="click"
+        tag="a"
+        to="/menu"
+      >
+        
+        PETCLINICMock
+      
+      </router-link-stub>
+       
+      <div>
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="head-router"
+          event="click"
+          tag="a"
+          to="/menu"
+        >
+           菜单 
+        </router-link-stub>
+         
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="head-router"
+          event="click"
+          tag="a"
+          to="/virtual-tour"
+        >
+           导览 
+        </router-link-stub>
+         
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="head-router"
+          event="click"
+          tag="a"
+          to="/case-study-menu"
+        >
+           学习 
+        </router-link-stub>
+         
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="head-router-current"
+          event="click"
+          tag="a"
+          to="/role-play-menu"
+        >
+           扮演 
+        </router-link-stub>
+         
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="head-router"
+          event="click"
+          tag="a"
+          to="/quiz-list"
+        >
+           测试 
+        </router-link-stub>
+      </div>
+       
+      <div>
+        <div
+          class="role-play-menu-desktop-menu"
+          data-thq="thq-navbar-nav"
+        >
+          <span>
+            <span>
+              
+              登录用户：
+            
+            </span>
+             
+            <span
+              class="role-play-menu-text02"
+            >
+              
+            </span>
+          </span>
+        </div>
+         
+        <div>
+          <button
+            class="buttonFilled"
+            style="margin-top: 10px;"
+          >
+             登出系统 
+          </button>
+        </div>
+      </div>
+    </header>
+  </div>
+   
+  <div
+    class="role-play-menu-container1"
+  />
+   
+  <div
+    class="heroContainer role-play-menu-hero"
+  >
+    <div
+      class="role-play-menu-container2"
+    >
+      <h1
+        class="role-play-menu-hero-heading heading1"
+      >
+        角色扮演
+      </h1>
+    </div>
+  </div>
+   
+  <div
+    class="heroContainer"
+  >
+    <h1>
+      <span
+        class="heading1"
+      >
+        选择一个角色
+      </span>
+       
+      <br />
+    </h1>
+     
+    <div
+      class="role-play-menu-container4"
+    >
+      <div
+        class="role-play-menu-container5"
+      >
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="role-play-menu-navlink1 button"
+          event="click"
+          tag="a"
+          to="[object Object]"
+        >
+          <span
+            class="heading3"
+          >
+            前台
+          </span>
+        </router-link-stub>
+         
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="role-play-menu-navlink1 button"
+          event="click"
+          tag="a"
+          to="[object Object]"
+        >
+          <span
+            class="heading3"
+          >
+            <span>
+              医助
+            </span>
+             
+            <br />
+          </span>
+        </router-link-stub>
+         
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="role-play-menu-navlink1 button"
+          event="click"
+          tag="a"
+          to="[object Object]"
+        >
+          <span
+            class="heading3"
+          >
+            医生
+          </span>
+        </router-link-stub>
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="role-play-menu-footer"
+  >
+    <footer
+      class="role-play-menu-footer1 footerContainer"
+    >
+      <div
+        class="role-play-menu-container6"
+      >
+        <router-link-stub
+          ariacurrentvalue="page"
+          class="role-play-menu-logo2 logo"
+          event="click"
+          tag="a"
+          to="/menu"
+        >
+          
+          PETCLINICMOCK
+        
+        </router-link-stub>
+      </div>
+       
+      <div
+        class="role-play-menu-separator"
+      />
+       
+      <div
+        class="role-play-menu-container7"
+      >
+        <span
+          class="bodySmall role-play-menu-text24"
+        >
+          
+          © 2024 SWD-G02, All Rights Reserved.
+        
+        </span>
+      </div>
+    </footer>
+  </div>
+</div>
+`;
