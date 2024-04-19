@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
-import Menu from '@/views/menu.vue';
+import AdminUser from '@/views/admin-user.vue';
 
 jest.mock('axios');
 
@@ -10,18 +10,26 @@ const localVue = createLocalVue();
 localVue.use(ElementUI);
 localVue.use(VueRouter);
 const router = new VueRouter({
-  routes: [{ path: '/', component: Menu }],
+  routes: [{ path: '/admin/user', component: AdminUser }],
 });
 
-describe('Menu.vue', () => {
+describe('AdminUser.vue', () => {
   let wrapper;
   const mockData = {
+    status: 200,
+    data: [
+      {
+        userID: '1',
+        userName: 'Test User',
+        isAdmin: true,
+      },
+    ],
   };
 
   beforeEach(async () => {
     axios.get.mockResolvedValue({ data: mockData });
 
-    wrapper = mount(Menu, {
+    wrapper = mount(AdminUser, {
       localVue,
       router,
     });
@@ -36,7 +44,7 @@ describe('Menu.vue', () => {
 
   it('renders user name', () => {
     // Check if the user name is rendered
-    const userName = wrapper.find('.menu-text02');
+    const userName = wrapper.find('.admin-user-text02');
     expect(userName.exists()).toBe(true);
   });
 
