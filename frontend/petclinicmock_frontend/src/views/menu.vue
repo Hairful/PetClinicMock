@@ -26,8 +26,7 @@
         </div>
       </header>
     </div>
-    <div class="menu-hero">
-      <div class="heroContainer">
+    <div class="heroContainer">
         <div class="menu-container2">
           <h1 class="menu-hero-heading">
             <span class="heading1">选择功能</span>
@@ -36,7 +35,7 @@
         </div>
         <div class="menu-container3">
           <div class="menu-container4">
-              <router-link to="/virtual-tour" class="menu-navlink3 " >
+              <router-link to="/virtual-tour" class="button-common" >
                 <img 
                 src="@/assets/yiyuan.png"
                 />
@@ -45,7 +44,7 @@
                   <br />
                 </span>
               </router-link>
-              <router-link to="/role-play-menu" class="menu-navlink3 ">
+              <router-link to="/role-play-menu" class="button-common">
                 <img 
                 src="@/assets/yishengxinxi.png"
                 />
@@ -56,7 +55,7 @@
               </router-link>
           </div>
           <div class="menu-container4">
-              <router-link to="/case-study-menu" class="menu-navlink3">
+              <router-link to="/case-study-menu" class="button-common">
                 <img 
                 src="@/assets/xuexi.png"
                 />
@@ -65,7 +64,7 @@
                   <br />
                 </span>
               </router-link>
-              <router-link to="/quiz-list" class="menu-navlink3">
+              <router-link to="/quiz-list" class="button-common">
                 <img 
                 src="@/assets/xinxitianxie.png"
                 />
@@ -74,7 +73,6 @@
           </div>
         </div>
       </div>
-    </div>
     <div class="menu-footer">
       <footer class="menu-footer1 footerContainer">
         <div class="menu-container6">
@@ -301,13 +299,10 @@ export default {
 }
 
 .menu-hero {
-  flex: 0 0 auto;
-  width: 100%;
+  width: 70%;
   height: auto;
-  display: flex;
-  margin-top: 96px;
-  align-items: flex-start;
-  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 0 3px 3px gray;
 }
 
 .menu-hero1 {

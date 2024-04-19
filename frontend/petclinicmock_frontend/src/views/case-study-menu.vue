@@ -29,20 +29,29 @@
       </header>
     </div>
     <div class="case-study-menu-container1"></div>
-    <div class="heroContainer case-study-menu-hero"></div>
-
     <div class="heroContainer">
-      <h1 class="case-study-menu-hero-heading1 heading1">
-        <span class="heading1">选择疾病类型</span>
-        <br />
-      </h1>
-      <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
-      <div class="case-study-menu-containerfix">
-        <router-link v-for="(diseaseType, index) in filteredDiseaseTypes" :key="index"
-          :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
-          :class="`case-study-menu-navlink1 button`">
-          <span class="heading3">{{ diseaseType }}</span>
-        </router-link>
+      <div class="shadowContainer heroContainer">
+        <div class="containerLeft">
+          <div class="case-study-menu-hero-heading1 heading1">
+            <span class="heading2">选择疾病类型</span>
+          </div>
+        </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
+          </div>
+        </div>
+        <div class="containerCenter" style="margin: 20px;">
+          <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
+        </div>
+        <div class="case-study-menu-containerfix">
+          <router-link v-for="(diseaseType, index) in filteredDiseaseTypes" :key="index"
+            :to="{ path: '/case-study-list', query: { diseaseType: diseaseType } }"
+            :class="`case-study-menu-navlink1 button-common`">
+            <span class="heading3">{{ diseaseType }}</span>
+          </router-link>
+        </div>
       </div>
     </div>
     <div class="case-study-menu-footer">
@@ -334,9 +343,10 @@ export default {
 
 .case-study-menu-hero-heading1 {
   color: var(--dl-color-gray-black);
-  max-width: 800px;
-  text-align: center;
-  padding-bottom: var(--dl-space-space-twounits);
+  width: 100%;
+  text-align: start;
+  border-bottom-color:black;
+  border-bottom-width: 1px;
 }
 
 .case-study-menu-container5 {
@@ -350,13 +360,13 @@ export default {
   justify-content: center;
 }
 .case-study-menu-containerfix {
-  width: 90%;
+  width: 80%;
   flex-wrap: wrap;
   height: auto;
   display: flex;
   align-self: center;
   align-items: center;
-  justify-content: center;
+  justify-content: baseline;
 }
 .case-study-menu-navlink1 {
   width: 180px;
