@@ -60,18 +60,90 @@ exports.getCaseList = async (diseaseID) => {
  */
 exports.getCaseDetail = async (caseID) => {
   try {
-    let [caseInfo, caseMedicines] = await Promise.all([
-      getCaseInfoFromRedisOrDatabase(caseID),
-      getCaseMedicinesFromRedisOrDatabase(caseID)
-    ]);
-
+    let caseInfo;
+    let caseMedicines;
+    if (redisStatus()) {
+      try {
+        // 尝试从Redis获取缓存数据
+        caseInfo = await redisClient.get(`caseInfo:${caseID}`);
+        if (caseInfo) {
+          caseInfo = JSON.parse(caseInfo);
+        }
+      } catch (redisError) {
+        logger.error('Redis error in getCaseDetail: ', redisError);
+        logger.warn('Fetching data from database as error in Redis.');
+      }
+    } else {
+      logger.warn('Fetching data from database as Redis is not available.');
+    }
+    if (!caseInfo) {
+      // 如果Redis中没有数据或Redis操作失败，则从数据库获取
+      caseInfo = await Case.findByPk(caseID, {
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: [
+          {
+            model: Disease,
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          },
+          {
+            model: Media,
+            through: { attributes: [] },
+            attributes: ['mediaType', 'mediaURL']
+          }
+        ]
+      });
+      if (caseInfo && redisStatus()) {
+        try {
+          await redisClient.set(`caseInfo:${caseID}`, JSON.stringify(caseInfo), {
+            EX: 300,
+            NX: false
+          });
+        } catch (errorRedis) {
+          logger.error('Redis error on medicines in getCaseDetail: ', errorRedis)
+        }
+      }
+    }
+    if (!caseInfo) {
+      return { status: 1, message: "无对应caseID" };
+    }
+    if (redisStatus()) {
+      try {
+        // 尝试从Redis获取药品信息
+        caseMedicines = await redisClient.get(`caseMedicines:${caseID}`);
+        if (caseMedicines) {
+          caseMedicines = JSON.parse(caseMedicines);
+        }
+      } catch (redisError) {
+        logger.error('Redis error on medicines in getCaseDetail: ', redisError);
+      }
+    }
+    if (!caseMedicines) {
+      logger.warn('Fetching medicines from database as Redis is not available.');
+      // 如果Redis操作失败，从数据库获取药品信息
+      const rawCaseMedicines = await sequelize.query(
+        'SELECT `MedicineMedicineID`, `dosage` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
+        {
+          replacements: { caseID: caseID },
+          type: sequelize.QueryTypes.SELECT
+        }
+      );
+      caseMedicines = rawCaseMedicines.map(cm => ({
+        MedicineMedicineID: cm.MedicineMedicineID,
+        dosage: cm.dosage
+      }));
+      if (redisStatus()) {
+        await redisClient.set(`caseMedicines:${caseID}`, JSON.stringify(caseMedicines), {
+          EX: 300,
+          NX: true
+        });
+      }
+    }
     // 查询所有相关药品的详细信息
     const medicineIDs = caseMedicines.map(cm => cm.MedicineMedicineID);
     let medicines = await Medicine.findAll({
       where: { medicineID: medicineIDs },
       attributes: ['medicineID', 'medicineName', 'medicineIntro']
     });
-
     const groupedMedia = caseInfo.Media.reduce((acc, media) => {
       if (acc[media.mediaType]) {
         acc[media.mediaType].push(media.mediaURL);
@@ -80,7 +152,6 @@ exports.getCaseDetail = async (caseID) => {
       }
       return acc;
     }, {});
-
     return {
       status: 0,
       message: "成功",
@@ -153,85 +224,50 @@ exports.getCaseByString = async (searchString) => {
   }
 };
 
-async function getCaseInfoFromRedisOrDatabase(caseID) {
-  let caseInfo;
-  if (redisStatus()) {
-    try {
-      caseInfo = await redisClient.get(`caseInfo:${caseID}`);
-      if (caseInfo) {
-        caseInfo = JSON.parse(caseInfo);
-      }
-    } catch (redisError) {
-      logger.error('Redis error in getCaseDetail: ', redisError);
-      logger.warn('Fetching data from database as error in Redis.');
-    }
-  } else {
-    logger.warn('Fetching data from database as Redis is not available.');
-  }
-  if (!caseInfo) {
-    caseInfo = await Case.findByPk(caseID, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
-      include: [
-        {
-          model: Disease,
-          attributes: { exclude: ['createdAt', 'updatedAt'] }
-        },
-        {
-          model: Media,
-          through: { attributes: [] },
-          attributes: ['mediaType', 'mediaURL']
-        }
-      ]
+exports.getCaseByString = async (searchString) => {
+  try {
+    let cases = await Case.findAll({
+      attributes: ['caseID', 'summary', 'examine', 'diagnose', 'treatment']
     });
-    if (caseInfo && redisStatus()) {
-      try {
-        await redisClient.set(`caseInfo:${caseID}`, JSON.stringify(caseInfo), {
-          EX: 300,
-          NX: false
-        });
-      } catch (errorRedis) {
-        logger.error('Redis error on medicines in getCaseDetail: ', errorRedis)
-      }
+    cases = cases.map(c => c.get({ plain: true }));
+    if (searchString == undefined) {
+      return {
+        status: 0,
+        message: "成功",
+        cases: cases
+      };
     }
-  }
-  return caseInfo;
-}
+    if (!searchString.trim()) {
+      return {
+        status: 0,
+        message: "成功",
+        cases: cases
+      };
+    }
 
-async function getCaseMedicinesFromRedisOrDatabase(caseID) {
-  let caseMedicines;
-  if (redisStatus()) {
-    try {
-      caseMedicines = await redisClient.get(`caseMedicines:${caseID}`);
-      if (caseMedicines) {
-        caseMedicines = JSON.parse(caseMedicines);
-      }
-    } catch (redisError) {
-      logger.error('Redis error on medicines in getCaseDetail: ', redisError);
+    const options = {
+      includeScore: true,
+      keys: ['caseID', 'summary', 'examine', 'diagnose', 'treatment'],
+      threshold: 0.7, // 调整匹配敏感度
+    };
+
+    // 创建Fuse对象
+    const fuse = new Fuse(cases, options);
+
+    // 使用Fuse.js进行搜索
+    const results = fuse.search(searchString);
+
+    if (results.length > 0) {
+      return {
+        status: 0,
+        message: "成功",
+        cases: results.map(result => result.item)
+      };
+    } else {
+      return { status: 1, message: "No matches found" };
     }
+  } catch (error) {
+    logger.error('Error in /caseService.js/getCaseByString: ', error);
+    return { status: -9, message: "错误" };
   }
-  if (!caseMedicines) {
-    logger.warn('Fetching medicines from database as Redis is not available.');
-    const rawCaseMedicines = await sequelize.query(
-      'SELECT `MedicineMedicineID`, `dosage` FROM `casemedicine` WHERE `CaseCaseID` = :caseID',
-      {
-        replacements: { caseID: caseID },
-        type: sequelize.QueryTypes.SELECT
-      }
-    );
-    caseMedicines = rawCaseMedicines.map(cm => ({
-      MedicineMedicineID: cm.MedicineMedicineID,
-      dosage: cm.dosage
-    }));
-    if (redisStatus()) {
-      try {
-        await redisClient.set(`caseMedicines:${caseID}`, JSON.stringify(caseMedicines), {
-          EX: 300,
-          NX: true
-        });
-      } catch (redisError) {
-        logger.error('Redis error on set medicine in getCaseDetail: ', redisError);
-      }
-    }
-  }
-  return caseMedicines;
-}
+};
