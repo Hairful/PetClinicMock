@@ -5,7 +5,7 @@
  */
 
 const Medicine = require('../models/Medicine');
-const redisClient = require('../config/redisClient');
+const { redisClient } = require('../config/redisClient');
 const loggerConfigurations = [
     { name: 'admin', level: 'info' },
     { name: 'error', level: 'error' }

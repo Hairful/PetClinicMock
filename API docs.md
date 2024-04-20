@@ -149,6 +149,13 @@ Content-Type: application/json
   "status": 2,
   "message": "无对应用户名"
 }
+
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+{
+  "status": 3,
+  "message": "尝试次数过多，5分钟内禁止登录"
+}
 ```
 
 # 2. 病例学习

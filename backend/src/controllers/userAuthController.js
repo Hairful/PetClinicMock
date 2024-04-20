@@ -51,6 +51,9 @@ exports.loginUser = async (req, res) => {
             case 2:
                 httpStatus = 404;
                 break;
+            case 3:
+                httpStatus = 429;
+                break;
             case -9:
                 httpStatus = 500;
                 break;
