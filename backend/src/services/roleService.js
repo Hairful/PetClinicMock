@@ -7,8 +7,8 @@
 const Job = require('../models/Job');
 
 const loggerConfigurations = [
-    { name: 'roleplay', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-role', level: 'info' },
+    { name: 'error-role', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

@@ -11,8 +11,8 @@ const UserProb = require('../models/UserProb');
 const UserQuiz = require('../models/UserQuiz');
 
 const loggerConfigurations = [
-    { name: 'quiz', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-quiz', level: 'info' },
+    { name: 'error-quiz', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

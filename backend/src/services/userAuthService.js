@@ -8,11 +8,12 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { encrypt, decrypt, hashPassword, generateSalt } = require('../utils/cryptoUtil');
 const { tokenKey } = require('../config/authConfig')
-const { isRedisConnected, redisClient } = require('../config/redisClient'); // 引入redisClient
+const { redisStatus, redisClient } = require('../config/redisClient'); // 引入redisClient
+const { warn, level } = require('winston');
 
 const loggerConfigurations = [
-    { name: 'auth', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-auth', level: 'info' },
+    { name: 'error-auth', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -31,7 +32,7 @@ exports.registerUser = async (userName, password) => {
         const salt = generateSalt();
         const hashedPassword = hashPassword(password, salt);
         const newUser = await User.create({ userName: userName, password: hashedPassword, salt: salt });
-        if (isRedisConnected) {
+        if (redisStatus) {
             try {
                 await redisClient.set(`user:${userName}`, JSON.stringify({ password: hashedPassword, isAdmin: false, userID: newUser.userID, salt: salt }), {
                     EX: 300,
@@ -61,7 +62,7 @@ exports.loginUser = async (userName, password) => {
     try {
         let cooldown
         let userExist
-        if (isRedisConnected) {
+        if (redisStatus) {
             try {
                 cooldown = await redisClient.get(`cooldown:${userName}`);
                 if (cooldown) {
@@ -91,7 +92,7 @@ exports.loginUser = async (userName, password) => {
         }
         const hashedPassword = hashPassword(password, userExist.salt);
         if (userExist.password !== hashedPassword) {
-            if (isRedisConnected) {
+            if (redisStatus) {
                 try {
                     const attempts = await redisClient.incr(`attempts:${userName}`);
                     if (attempts === 1) {
@@ -112,7 +113,7 @@ exports.loginUser = async (userName, password) => {
             }
             return { status: 1, message: '用户名或密码错误' };
         }
-        if (isRedisConnected) {
+        if (redisStatus) {
             try {
                 await redisClient.set(`user:${userName}`, JSON.stringify({ password: userExist.password, isAdmin: userExist.isAdmin, userID: userExist.userID, salt: userExist.salt }), {
                     EX: 300,

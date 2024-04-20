@@ -7,8 +7,8 @@
 const Medicine = require('../models/Medicine');
 
 const loggerConfigurations = [
-    { name: 'medicine', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-medicine', level: 'info' },
+    { name: 'error-medicine', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

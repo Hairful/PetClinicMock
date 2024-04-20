@@ -7,12 +7,16 @@
 const redis = require('redis');
 
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'warn' }
+    { name: 'info-redis', level: 'info' },
+    { name: 'error-redis', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
 let isRedisConnected;
+
+function redisStatus() {
+    return isRedisConnected;
+}
 
 const redisClient = redis.createClient({
     socket: {
@@ -50,6 +54,6 @@ redisClient.connect()
     });
 
 module.exports = {
-    isRedisConnected,
+    redisStatus,
     redisClient
 };;

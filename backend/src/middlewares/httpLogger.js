@@ -18,8 +18,8 @@
  */
 
 const loggerConfigurations = [
-    { name: 'http', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-http', level: 'info' },
+    { name: 'error-http', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

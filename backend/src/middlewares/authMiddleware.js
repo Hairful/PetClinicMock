@@ -9,8 +9,8 @@ const { tokenKey } = require('../config/authConfig');
 const User = require('../models/User');
 
 const loggerConfigurations = [
-    { name: 'auth', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-auth', level: 'info' },
+    { name: 'error-auth', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

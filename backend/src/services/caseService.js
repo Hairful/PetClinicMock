@@ -11,10 +11,10 @@ const Media = require('../models/Media');
 const sequelize = require('../config/database');
 const { Op } = require('sequelize');
 const Fuse = require('fuse.js');
-const { redisClient, isRedisConnected } = require('../config/redisClient');
+const { redisClient, redisStatus } = require('../config/redisClient');
 const loggerConfigurations = [
-  { name: 'case', level: 'info' },
-  { name: 'error', level: 'error' }
+  { name: 'info-case', level: 'info' },
+  { name: 'error-case', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -62,7 +62,7 @@ exports.getCaseDetail = async (caseID) => {
   try {
     let caseInfo;
     let caseMedicines;
-    if (isRedisConnected) {
+    if (redisStatus) {
       try {
         // 尝试从Redis获取缓存数据
         caseInfo = await redisClient.get(`caseInfo:${caseID}`);
@@ -92,7 +92,7 @@ exports.getCaseDetail = async (caseID) => {
           }
         ]
       });
-      if (caseInfo && isRedisConnected) {
+      if (caseInfo && redisStatus) {
         await redisClient.set(`caseInfo:${caseID}`, JSON.stringify(caseInfo), {
           EX: 300,
           NX: false
@@ -102,7 +102,7 @@ exports.getCaseDetail = async (caseID) => {
     if (!caseInfo) {
       return { status: 1, message: "无对应caseID" };
     }
-    if (isRedisConnected) {
+    if (redisStatus) {
       try {
         // 尝试从Redis获取药品信息
         caseMedicines = await redisClient.get(`caseMedicines:${caseID}`);
@@ -127,7 +127,7 @@ exports.getCaseDetail = async (caseID) => {
         MedicineMedicineID: cm.MedicineMedicineID,
         dosage: cm.dosage
       }));
-      if (isRedisConnected) {
+      if (redisStatus) {
         await redisClient.set(`caseMedicines:${caseID}`, JSON.stringify(caseMedicines), {
           EX: 300,
           NX: true

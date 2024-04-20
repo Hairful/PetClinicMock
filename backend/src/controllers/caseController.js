@@ -7,8 +7,8 @@
 const { getCaseList, getCaseDetail, getCaseByString } = require('../services/caseService');
 
 const loggerConfigurations = [
-    { name: 'case', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-case', level: 'info' },
+    { name: 'error-case', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
