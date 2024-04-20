@@ -44,7 +44,7 @@ const httpLogger = (req, res, next) => {
     next();
 };
 
-function getDurationInMilliseconds(start) {
+async function getDurationInMilliseconds(start) {
     const NS_PER_SEC = 1e9;
     const NS_TO_MS = 1e6;
     const diff = process.hrtime(start);
