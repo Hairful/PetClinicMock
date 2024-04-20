@@ -62,7 +62,7 @@ exports.getCaseDetail = async (caseID) => {
   try {
     let caseInfo;
     let caseMedicines;
-    if (redisStatus) {
+    if (redisStatus()) {
       try {
         // 尝试从Redis获取缓存数据
         caseInfo = await redisClient.get(`caseInfo:${caseID}`);
@@ -92,17 +92,21 @@ exports.getCaseDetail = async (caseID) => {
           }
         ]
       });
-      if (caseInfo && redisStatus) {
-        await redisClient.set(`caseInfo:${caseID}`, JSON.stringify(caseInfo), {
-          EX: 300,
-          NX: false
-        });
+      if (caseInfo && redisStatus()) {
+        try {
+          await redisClient.set(`caseInfo:${caseID}`, JSON.stringify(caseInfo), {
+            EX: 300,
+            NX: false
+          });
+        } catch (errorRedis) {
+          logger.error('Redis error on medicines in getCaseDetail: ', errorRedis)
+        }
       }
     }
     if (!caseInfo) {
       return { status: 1, message: "无对应caseID" };
     }
-    if (redisStatus) {
+    if (redisStatus()) {
       try {
         // 尝试从Redis获取药品信息
         caseMedicines = await redisClient.get(`caseMedicines:${caseID}`);
@@ -127,7 +131,7 @@ exports.getCaseDetail = async (caseID) => {
         MedicineMedicineID: cm.MedicineMedicineID,
         dosage: cm.dosage
       }));
-      if (redisStatus) {
+      if (redisStatus()) {
         await redisClient.set(`caseMedicines:${caseID}`, JSON.stringify(caseMedicines), {
           EX: 300,
           NX: true

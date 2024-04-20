@@ -32,7 +32,7 @@ exports.registerUser = async (userName, password) => {
         const salt = generateSalt();
         const hashedPassword = hashPassword(password, salt);
         const newUser = await User.create({ userName: userName, password: hashedPassword, salt: salt });
-        if (redisStatus) {
+        if (redisStatus()) {
             try {
                 await redisClient.set(`user:${userName}`, JSON.stringify({ password: hashedPassword, isAdmin: false, userID: newUser.userID, salt: salt }), {
                     EX: 300,
@@ -62,7 +62,7 @@ exports.loginUser = async (userName, password) => {
     try {
         let cooldown
         let userExist
-        if (redisStatus) {
+        if (redisStatus()) {
             try {
                 cooldown = await redisClient.get(`cooldown:${userName}`);
                 if (cooldown) {
@@ -92,7 +92,7 @@ exports.loginUser = async (userName, password) => {
         }
         const hashedPassword = hashPassword(password, userExist.salt);
         if (userExist.password !== hashedPassword) {
-            if (redisStatus) {
+            if (redisStatus()) {
                 try {
                     const attempts = await redisClient.incr(`attempts:${userName}`);
                     if (attempts === 1) {
@@ -113,7 +113,7 @@ exports.loginUser = async (userName, password) => {
             }
             return { status: 1, message: '用户名或密码错误' };
         }
-        if (redisStatus) {
+        if (redisStatus()) {
             try {
                 await redisClient.set(`user:${userName}`, JSON.stringify({ password: userExist.password, isAdmin: userExist.isAdmin, userID: userExist.userID, salt: userExist.salt }), {
                     EX: 300,
