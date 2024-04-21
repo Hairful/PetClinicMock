@@ -56,7 +56,8 @@
               <td>{{ quiz.lastTryTime }}</td>
               <td>
                 <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button-common`">
-                  进行测试
+                  <div v-if="quiz.lastTryTime">查看结果</div>
+                  <div v-else>开始新的</div>
                 </router-link>
               </td>
             </tr>

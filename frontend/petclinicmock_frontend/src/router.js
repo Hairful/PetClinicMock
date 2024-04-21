@@ -177,7 +177,13 @@ router.beforeEach((to, from, next) => {
     if (token === null || token === '') {
       next('/login');
     } else {
-      next();
+      if((to.path.indexOf('admin')!=-1) && !localStorage.getItem('isAdmin'))
+      {
+        window.alert("无对应权限");
+        next(from.path);
+      }
+      else
+        next();
     }
   }
 });
