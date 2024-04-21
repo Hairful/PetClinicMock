@@ -132,15 +132,16 @@ onMounted(async () => {
 
     // 创建关闭按钮
     const closeButton = document.createElement('button');
-    closeButton.innerText = '关闭';
+    closeButton.innerText = 'X';
     closeButton.style.position = 'absolute';
-    closeButton.style.top = '10px';
+    closeButton.style.top = '8px';
     closeButton.style.right = '10px';
-    closeButton.style.color = 'white'; // 设置文字颜色为白色
-    closeButton.style.backgroundColor = 'red'; // 设置背景颜色为红色
+    closeButton.style.color = '#f8f8f8'; // 设置文字颜色为白色
+    closeButton.style.backgroundColor = 'transparent'; // 设置背景颜色为红色
     closeButton.style.border = 'none'; // 移除边框
     closeButton.style.padding = '5px 10px'; // 设置内边距
-    closeButton.style.borderRadius = '5px'; // 设置圆角
+    closeButton.style.borderRadius = '50%'; // 圆形按钮
+    closeButton.style.fontSize = '17px'; // 调整字体大小
     closeButton.addEventListener('click', () => {
       document.body.removeChild(videoContainer); // 移除视频框
       videoElement.pause(); // 暂停视频播放
@@ -159,6 +160,7 @@ onMounted(async () => {
     detailsButton.style.border = 'none'; // 移除边框
     detailsButton.style.padding = '5px 10px'; // 设置内边距
     detailsButton.style.borderRadius = '5px'; // 设置圆角
+    closeButton.style.fontSize = '17px'; // 调整字体大小
     detailsButton.addEventListener('click', () => {
       const detailBox = document.createElement('div');
       detailBox.innerHTML = detailContent;
@@ -171,29 +173,37 @@ onMounted(async () => {
       detailBox.style.borderRadius = '10px';
       detailBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
       detailBox.style.zIndex = '9999';
+      
 
       const closeButton = document.createElement('button');
-      closeButton.innerText = '关闭';
+      closeButton.innerText = 'X';
       closeButton.style.position = 'absolute';
       closeButton.style.top = '-5px';
       closeButton.style.right = '10px';
-      closeButton.style.backgroundColor = 'red';
-      closeButton.style.color = 'white';
+      closeButton.style.backgroundColor = 'white'; // 透明背景
+      closeButton.style.color = 'red';
       closeButton.style.border = 'none';
-      closeButton.style.padding = '5px 10px';
-      closeButton.style.borderRadius = '5px';
+      closeButton.style.padding = '0'; // 减少内边距
+      closeButton.style.width = '30px'; // 增加宽度
+      closeButton.style.height = '30px'; // 增加高度
+      closeButton.style.borderRadius = '50%'; // 圆形按钮
+      closeButton.style.fontSize = '17px'; // 调整字体大小
       closeButton.addEventListener('click', () => {
         videoContainer.removeChild(detailBox);
       });
 
       detailBox.appendChild(closeButton);
       videoContainer.appendChild(detailBox);
+      // 添加拖拽功能
+      makeDraggable(detailBox);
 
     });
 
+    
+
     // 创建操作流程按钮
     const workflowButton = document.createElement('button');
-    workflowButton.innerText = '操作视频演示';
+    workflowButton.innerText = '视频演示';
     workflowButton.style.position = 'absolute';
     workflowButton.style.top = '10px'; // 垂直居中
     workflowButton.style.left = '80px'; // 水平居中
@@ -208,7 +218,65 @@ onMounted(async () => {
 
     document.body.appendChild(videoContainer); // 将视频框添加到文档中
     videoElement.play(); // 播放视频
+
+    // 监听页面即将关闭事件
+    window.addEventListener('beforeunload', () => {
+      document.body.removeChild(videoContainer);
+      videoElement.pause();
+    });
+    // 阻止事件冒泡
+    videoContainer.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    // 添加拖拽功能
+    makeDraggable(videoContainer);
   }
+
+  function makeDraggable(element) {
+    let pos1 = 0,
+        pos2 = 0,
+        pos3 = 0,
+        pos4 = 0;
+    if (document.getElementById(element.id + '-header')) {
+        // 如果存在标题栏，则标题栏用于拖动
+        document.getElementById(element.id + '-header').onmousedown = dragMouseDown;
+    } else {
+        // 否则，直接在元素上点击拖动
+        element.onmousedown = dragMouseDown;
+    }
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // 获取鼠标点击位置与元素当前位置的差值
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // 鼠标移动时调用 elementDrag 函数
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // 计算元素新的位置
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // 设置元素新的位置
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        // 停止拖动时清除事件监听
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+  
 
   function moveTag(name) {
     let positions = {
