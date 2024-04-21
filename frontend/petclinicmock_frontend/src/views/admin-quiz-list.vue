@@ -37,7 +37,7 @@
       <div class="admin-quiz-list-container04">
         <div class="admin-quiz-list-container05">
           <input type="text" v-model="newQuizName" placeholder="输入名称" class="input" />
-          <button type="button" class="button" @click="addQuiz">添加</button>
+          <button type="button" class="button" style="background-color: var(--dl-color-success-700);" @click="addQuiz">添加</button>
         </div>
       </div>
       <div v-for="(quiz, index) in quizzes" :key="quiz.quizID" class="admin-quiz-list-container06">
@@ -56,7 +56,7 @@
               <router-link :to="`/admin-quiz-detail?quizID=${quiz.quizID}`" class="admin-quiz-list-navlink1 button">
                 管理问题
               </router-link>
-              <button type="button" class="button" @click="deleteQuiz(index)">删除测试</button>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteQuiz(index)">删除测试</button>
             </div>
           </li>
         </ul>

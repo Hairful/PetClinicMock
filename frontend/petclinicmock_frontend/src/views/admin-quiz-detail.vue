@@ -80,7 +80,7 @@
                 <div class="bigImg-div " v-if="!images[index]">或者将图片拖拽到这里</div>
                 <div v-else="images[index]">
                   <img :src="prob.probImg" class="bigImg" />
-                  <button type="button" class="button" @click="clearImage(index)">
+                  <button type="button" class="admin-quiz-detail-button button" @click="clearImage(index)">
                     <span>删除图片</span>
                   </button>
                 </div>
@@ -648,6 +648,7 @@ export default {
 .admin-quiz-detail-button {
   align-self: center;
   margin-bottom: var(--dl-space-space-twounits);
+  background-color: var(--dl-color-danger-700);
 }
 
 .admin-quiz-detail-container06 {
@@ -745,7 +746,7 @@ export default {
 }
 
 .bigImg-div {
-  width: 200px;
+  width: auto;
   height: 200px;
   border: 100%;
   overflow: hidden;
@@ -755,7 +756,7 @@ export default {
 
 .bigImg {
   display: block;
-  width: 200px;
+  width: auto;
   height: 200px;
 }
 
@@ -991,6 +992,7 @@ export default {
 .admin-quiz-detail-button14 {
   align-self: center;
   margin-bottom: var(--dl-space-space-twounits);
+  background-color: var(--dl-color-success-700);
 }
 
 .admin-quiz-detail-container26 {
