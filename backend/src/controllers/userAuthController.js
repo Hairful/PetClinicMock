@@ -7,8 +7,8 @@
 const { registerUser, loginUser } = require('../services/userAuthService');
 
 const loggerConfigurations = [
-    { name: 'auth', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-auth', level: 'info' },
+    { name: 'error-auth', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -50,6 +50,9 @@ exports.loginUser = async (req, res) => {
                 break;
             case 2:
                 httpStatus = 404;
+                break;
+            case 3:
+                httpStatus = 429;
                 break;
             case -9:
                 httpStatus = 500;

@@ -7,8 +7,8 @@
 const { getJobDetail, getJobList } = require('../services/roleService');
 
 const loggerConfigurations = [
-    { name: 'role', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-role', level: 'info' },
+    { name: 'error-role', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

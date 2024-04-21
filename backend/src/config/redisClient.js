@@ -7,16 +7,23 @@
 const redis = require('redis');
 
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'warn' }
+    { name: 'info-redis', level: 'info' },
+    { name: 'error-redis', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
+
+let isRedisConnected;
+
+function redisStatus() {
+    return isRedisConnected;
+}
 
 const redisClient = redis.createClient({
     socket: {
         url: process.env.REDIS_URL || 'redis://localhost:6379',
         reconnectStrategy: (retries) => {
             if (retries > 10) {
+                isRedisConnected = false;
                 logger.error("Too many retries on redis.");
                 return new Error("Too many retries.");
             } else {
@@ -24,19 +31,29 @@ const redisClient = redis.createClient({
                 return Math.min(retries * 100, 3000);
             }
         },
+        connect: () => {
+            isRedisConnected = true;
+            logger.info("Successfully reconnected to Redis.");
+        },
     },
 });
 
 redisClient.on('error', (err) => {
+    isRedisConnected = false;
     logger.error('Redis Client Error', err); // 使用logger.error替换console.log
 });
 
 redisClient.connect()
     .then(() => {
+        isRedisConnected = true;
         logger.info('Successfully connected to Redis');
     })
     .catch(err => {
+        isRedisConnected = false;
         logger.error('Unable to connect to Redis', err);
     });
 
-module.exports = redisClient;
+module.exports = {
+    redisStatus,
+    redisClient
+};;

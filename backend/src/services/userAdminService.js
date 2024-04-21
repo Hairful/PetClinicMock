@@ -6,10 +6,10 @@
 
 const User = require('../models/User');
 const { encrypt, decrypt, hashPassword, generateSalt } = require('../utils/cryptoUtil')
-
+const sequelize = require('../config/database')
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -71,29 +71,34 @@ exports.createUser = async (userName, password, isAdmin) => {
  * @returns {Object} 包含修改用户信息结果的对象
  */
 exports.updateUser = async (userID, userName, password, isAdmin) => {
+    const t = await sequelize.transaction();
     try {
-        const user = await User.findByPk(userID);
+        const user = await User.findByPk(userID, { transaction: t });
         if (!user) {
+            await t.rollback();
             return { status: 1, message: '无对应用户ID' };
         }
         if (userName) {
-            const userExist = await User.findOne({ where: { userName: userName } });
+            const userExist = await User.findOne({ where: { userName: userName } }, { transaction: t });
             if (userExist !== null) {
-                if (userExist.userID !== userID)
+                if (userExist.userID !== userID) {
+                    await t.rollback();
                     return { status: 2, message: '重复的用户名' };
-                else {
+                } else {
                     user.userName = userName;
                 }
             }
             else {
                 user.userName = userName;
             }
-            if (password) user.password = hashPassword(password, user.salt);
-            if (isAdmin !== undefined) user.isAdmin = isAdmin;
-            await user.save();
-            return { status: 0, message: '成功' };
         }
+        if (password) user.password = hashPassword(password, user.salt);
+        if (isAdmin !== undefined) user.isAdmin = isAdmin;
+        await user.save({ transaction: t });
+        await t.commit();
+        return { status: 0, message: '成功' };
     } catch (error) {
+        await t.rollback();
         logger.error('Error in Error in userAdminService.js/updateUser: ', error);
         return { status: -9, message: '失败' };
     }

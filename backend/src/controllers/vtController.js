@@ -7,8 +7,8 @@
 const { getItemDetail } = require('../services/vtService');
 
 const loggerConfigurations = [
-    { name: 'vt', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-vt', level: 'info' },
+    { name: 'error-vt', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

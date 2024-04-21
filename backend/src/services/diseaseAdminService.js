@@ -5,10 +5,10 @@
  */
 
 const Disease = require('../models/Disease');
-const redisClient = require('../config/redisClient');
+const { redisClient } = require('../config/redisClient');
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

@@ -7,8 +7,8 @@
 const { updateItemInfo } = require('../services/vtAdminService');
 
 const loggerConfigurations = [
-    { name: 'auth', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
