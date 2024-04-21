@@ -157,7 +157,6 @@ export default {
         }
       })
         .then(response => {
-          this.refresh();
           this.chooseType(this.inputType[index]);
         })
         .catch(error => {

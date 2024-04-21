@@ -47,8 +47,8 @@
       <div class="admin-role-play-list-container04">
         <div class="admin-role-play-list-container05">
           <input type="text" v-model="newJob" placeholder="添加新的工作" class="input" />
-          <input type="text" v-model="newJobDetail" placeholder="新工作的细节" class="input" />
-          <button type="button" class="button" @click="addNewJob()">
+          <textarea v-model="newJobDetail" placeholder="新工作的细节" class="textarea"> </textarea>
+          <button type="button" class="button" style="background-color: var(--dl-color-success-700);" @click="addNewJob()">
             <span>
               <span>添加</span>
               <br />
@@ -70,7 +70,7 @@
                 </button>
               </div>
               <div class="admin-role-play-list-container08">
-                <input type="text" v-model="jobDetails[index]" placeholder="" class="input" />
+                <textarea v-model="jobDetails[index]" placeholder="" class="textarea" style="width: 300px; height: 100px;"> </textarea>
                 <button type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">
                   <span>
                     <span>修改</span>
@@ -78,7 +78,7 @@
                   </span>
                 </button>
               </div>
-              <button type="button" class="admin-role-play-list-button2 button" @click="deleteJob(index)">
+              <button type="button" class="admin-role-play-list-button2 button" style="background-color: var(--dl-color-danger-700);" @click="deleteJob(index)">
                 <span>
                   <span>删除</span>
                   <br />

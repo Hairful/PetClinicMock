@@ -54,7 +54,7 @@
                       <div v-else="item.itemURL">
                         <img v-if="isImage(item.itemURL)" :src="item.itemURL" class="bigImg" />
                         <video v-else="!isImage(item.itemURL)" :src="item.itemURL" class="bigImg" controls></video>
-                        <button type="button" class="button" @click="clearURL(index)">
+                        <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="clearURL(index)">
                           <span>删除</span>
                         </button>
                       </div>
@@ -514,8 +514,8 @@ export default {
 }
 
 .admin-virtual-tour-textarea {
-  width: 443px;
-  height: 51px;
+  width: 550px;
+  height: 100px;
 }
 
 .admin-virtual-tour-li1 {

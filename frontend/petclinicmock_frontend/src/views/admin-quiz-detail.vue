@@ -992,6 +992,7 @@ export default {
 .admin-quiz-detail-button14 {
   align-self: center;
   margin-bottom: var(--dl-space-space-twounits);
+  background-color: var(--dl-color-success-700);
 }
 
 .admin-quiz-detail-container26 {

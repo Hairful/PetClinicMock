@@ -37,7 +37,7 @@
         </div>
         <textarea style="width: 700px; height: 60px;" v-model="newMed.medicineIntro" placeholder="添加药品描述"
           class="textarea"></textarea>
-        <button type="button" class="button" @click="addMedicine()">添加药品</button>
+        <button type="button" class="button" style="background-color: var(--dl-color-success-700);" @click="addMedicine()">添加药品</button>
       </div>
       <div class="admin-pharmacy-container07">
         <ul class="admin-pharmacy-ul list">
@@ -50,7 +50,7 @@
               <textarea style="width: 700px; height: 60px;" v-model="medicine.medicineIntro" placeholder="修改药品描述"
                 class="textarea"></textarea>
               <button type="button" class="button" @click="modifyMedicine(index)">修改药品信息</button>
-              <button type="button" class="button" @click="deleteMedicine(index)">删除药品</button>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteMedicine(index)">删除药品</button>
             </div>
           </li>
         </ul>

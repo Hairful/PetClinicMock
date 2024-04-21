@@ -38,7 +38,7 @@
                 <span style="margin-left: 50px;" class="error" v-if="users[index].error">{{ users[index].error }}</span>
                 <input style="margin-left: 50px;" type="checkbox" v-model="users[index].isAdmin" /><span>是否为管理员</span>
                 <button style="margin-left: 50px;" type="button" class="button" @click="updateUser(index)">修改</button>
-                <button style="margin-left: 50px;" type="button" class="button" @click="deleteUser(index)">删除</button>
+                <button style="margin-left: 50px; background-color: var(--dl-color-danger-700);" type="button" class="button" @click="deleteUser(index)">删除</button>
               </div>
             </div>
           </li>
