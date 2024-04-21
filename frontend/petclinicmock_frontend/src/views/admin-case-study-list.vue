@@ -50,7 +50,7 @@
 
       <div class="admin-case-study-list-title">修改现有疾病</div>
       <div class="admin-case-study-list-container07">
-        <button v-for="(diseaseType, index) in diseaseTypes" :key="index" :class="`case-study-menu-navlink1 button`"
+        <button v-for="(diseaseType, index) in diseaseTypes" :key="index" :class="`case-study-menu-navlink1 button`" :style="`margin-right: 10px;`"
           @click="chooseType(diseaseType)">
           <span class="heading3">{{ diseaseType }}</span>
         </button>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="admin-case-study-list-container11">
                   <input type="text" v-model="disease.diseaseName" :placeholder="`${disease.diseaseName}`" class="input" />
-                  <button type="button" class="admin-case-study-list-button2 button" @click=renameDisease(index)>
+                  <button type="button" class="admin-case-study-list-button3 button" @click=renameDisease(index)>
                     <span class="admin-case-study-list-text19 bodyLarge">
                       <span>重命名</span>
                       <br />
@@ -88,7 +88,7 @@
                 <div class="admin-case-study-list-container12">
                   <input type="text" v-model="inputType[index]" :placeholder="`${currentType}`" class="input" />
                   <button type="button" class="admin-case-study-list-button3 button" @click=renameDisease(index)>
-                    <span class="admin-case-study-list-text22 bodyLarge">
+                    <span class="admin-case-study-list-text19 bodyLarge">
                       修改类型
                     </span>
                   </button>
@@ -574,6 +574,8 @@ export default {
   align-self: center;
   text-decoration: none;
   background-color: var(--dl-color-custom-primary1);
+  font-size: 16px;
+  margin-left: 8px;
 }
 
 .admin-case-study-list-container11 {
@@ -595,7 +597,9 @@ export default {
 }
 
 .admin-case-study-list-text19 {
-  text-align: center;
+  align-self: center;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .admin-case-study-list-container12 {
@@ -609,11 +613,12 @@ export default {
 
 .admin-case-study-list-button3 {
   color: var(--dl-color-gray-white);
-  width: 192px;
-  height: 41px;
+  width: 100px;
+  height: 37px;
   align-self: center;
   text-align: center;
   background-color: var(--dl-color-custom-primary2);
+  margin-left: 8px;
 }
 
 .admin-case-study-list-text22 {
