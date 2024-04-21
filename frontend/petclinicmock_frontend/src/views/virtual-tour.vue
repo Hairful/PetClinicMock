@@ -111,6 +111,7 @@ onMounted(async () => {
   proEquipItem.setItemInfo('处理设备');
 
   function createVideoEle(videoURL, detailContent) {
+    
     // 创建一个视频元素
     const videoElement = document.createElement('video');
     videoElement.src = videoURL;
@@ -146,7 +147,7 @@ onMounted(async () => {
       document.body.removeChild(videoContainer); // 移除视频框
       videoElement.pause(); // 暂停视频播放
     });
-
+    
     videoContainer.appendChild(closeButton);
 
     // 创建详情按钮
@@ -219,11 +220,17 @@ onMounted(async () => {
     document.body.appendChild(videoContainer); // 将视频框添加到文档中
     videoElement.play(); // 播放视频
 
-    // 监听页面即将关闭事件
-    window.addEventListener('beforeunload', () => {
-      document.body.removeChild(videoContainer);
-      videoElement.pause();
+    // // 监听页面即将关闭事件
+    // window.addEventListener('beforeunload', () => {
+    //   document.body.removeChild(videoContainer);
+    //   videoElement.pause();
+    // });
+     // 监听页面 unload 事件
+     // 监听浏览器的历史变化事件
+    window.addEventListener('popstate', () => {
+        document.body.removeChild(videoContainer);
     });
+
     // 阻止事件冒泡
     videoContainer.addEventListener('click', (event) => {
         event.stopPropagation();
