@@ -61,11 +61,11 @@
 
       <div class="admin-case-study-detail-container05" v-for="(caseItem, index) in cases" :key="index">
         <h1 class="admin-case-study-detail-hero-heading2 heading1">
-          <span class="heading1">Case {{ index + 1 }}</span>
+          <span class="heading1">病例 {{ index + 1 }}</span>
           <br />
 
         </h1>
-        <button type="button" class="button" style="align-self: center;" @click="deleteCase(index)">
+        <button type="button" class="button" style="align-self: center; background-color: var(--dl-color-danger-700);" @click="deleteCase(index)">
           <span>删除</span>
         </button>
         <div class="admin-case-study-detail-container10">
@@ -86,12 +86,12 @@
             <div v-for="(pic, picIndex) in summaryPictures[index]" :key="`summary-pic-${picIndex}`"
               class="admin-case-study-detail-container11">
               <img alt="image" :src="pic" class="admin-case-study-detail-image02" />
-              <button type="button" class="button" @click="deleteImage(index, picIndex, 0)">
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, picIndex, 0)">
                 <span>删除</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-text142">videos:
+          <div class="admin-case-study-detail-text142">视频：
             <input @change="img($event, index, 1)" type="file">
             <span id="dropzone" v-on:dragover.prevent v-on:drop="handleDrop($event, index, 1)"
               class="admin-case-study-detail-image">
@@ -100,15 +100,15 @@
             <div v-for="(vid, vidIndex) in summaryVideos[index]" :key="`summary-vid-${vidIndex}`"
               class="admin-case-study-detail-container12">
               <video :src="vid" class="admin-case-study-detail-video02" controls></video>
-              <button type="button" class="button" @click="deleteImage(index, vidIndex, 1)">
-                <span>Delete</span>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, vidIndex, 1)">
+                <span>删除</span>
               </button>
             </div>
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
-          <span class="admin-case-study-detail-text142 heading2">examine</span>
-          <div class="admin-case-study-detail-text142">images:
+          <span class="admin-case-study-detail-text142 heading2">检查结果</span>
+          <div class="admin-case-study-detail-text142">图片：
             <input @change="img($event, index, 2)" type="file">
             <span id="dropzone" v-on:dragover.prevent v-on:drop="handleDrop($event, index, 2)"
               class="admin-case-study-detail-image">
@@ -117,12 +117,12 @@
             <div v-for="(pic, picIndex) in examinePictures[index]" :key="`examine-pic-${picIndex}`"
               class="admin-case-study-detail-container11">
               <img alt="image" :src="pic" class="admin-case-study-detail-image02" />
-              <button type="button" class="button" @click="deleteImage(index, picIndex, 2)">
-                <span>Delete</span>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, picIndex, 2)">
+                <span>删除</span>
               </button>
             </div>
           </div>
-          <div class="admin-case-study-detail-text142">videos:
+          <div class="admin-case-study-detail-text142">视频：
             <input @change="img($event, index, 3)" type="file">
             <span id="dropzone" v-on:dragover.prevent v-on:drop="handleDrop($event, index, 3)"
               class="admin-case-study-detail-image">
@@ -131,15 +131,15 @@
             <div v-for="(vid, vidIndex) in examineVideos[index]" :key="`examine-vid-${vidIndex}`"
               class="admin-case-study-detail-container12">
               <video :src="vid" class="admin-case-study-detail-video02" controls></video>
-              <button type="button" class="button" @click="deleteImage(index, vidIndex, 3)">
-                <span>Delete</span>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, vidIndex, 3)">
+                <span>删除</span>
               </button>
             </div>
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
           <span class="admin-case-study-detail-text142 heading2">诊断结果</span>
-          <div class="admin-case-study-detail-text142">图像：
+          <div class="admin-case-study-detail-text142">图片：
             <input @change="img($event, index, 4)" type="file">
             <span id="dropzone" v-on:dragover.prevent v-on:drop="handleDrop($event, index, 4)"
               class="admin-case-study-detail-image">
@@ -148,8 +148,8 @@
             <div v-for="(pic, picIndex) in diagnosePictures[index]" :key="`diagnose-pic-${picIndex}`"
               class="admin-case-study-detail-container11">
               <img alt="image" :src="pic" class="admin-case-study-detail-image02" />
-              <button type="button" class="button" @click="deleteImage(index, picIndex, 4)">
-                <span>Delete</span>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, picIndex, 4)">
+                <span>删除</span>
               </button>
             </div>
           </div>
@@ -162,8 +162,8 @@
             <div v-for="(vid, vidIndex) in diagnoseVideos[index]" :key="`diagnose-vid-${vidIndex}`"
               class="admin-case-study-detail-container12">
               <video :src="vid" class="admin-case-study-detail-video02" controls></video>
-              <button type="button" class="button" @click="deleteImage(index, vidIndex, 5)">
-                <span>Delete</span>
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, vidIndex, 5)">
+                <span>删除</span>
               </button>
             </div>
           </div>
@@ -179,7 +179,7 @@
             <div v-for="(pic, picIndex) in treatmentPictures[index]" :key="`treatment-pic-${picIndex}`"
               class="admin-case-study-detail-container11">
               <img alt="image" :src="pic" class="admin-case-study-detail-image02"></img>
-              <button type="button" class="button" @click="deleteImage(index, picIndex, 6)">
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, picIndex, 6)">
                 <span>删除</span>
               </button>
             </div>
@@ -193,7 +193,7 @@
             <div v-for="(vid, vidIndex) in treatmentVideos[index]" :key="`treatment-vid-${vidIndex}`"
               class="admin-case-study-detail-container12">
               <video :src="vid" class="admin-case-study-detail-video02" controls></video>
-              <button type="button" class="button" @click="deleteImage(index, vidIndex, 7)">
+              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteImage(index, vidIndex, 7)">
                 <span>删除</span>
               </button>
             </div>
@@ -205,7 +205,7 @@
             <div v-for="(medicine, medIndex) in medicines[index]" :key="`medicine-${medIndex}`" to="/pharmacy"
               class="admin-case-study-detail-text111 bodyLarge">
               <div>药品{{ medIndex + 1 }}
-                <button type="button" class="button" @click="deleteMed(index, medIndex)">删除</button>
+                <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteMed(index, medIndex)">删除</button>
               </div>
               <span type="text">
                 {{ medicine.medicineName }}
@@ -223,7 +223,7 @@
               </select>
               <input type="text" v-model="newMedDosage[index]" placeholder="用量" class="input" />
               <div class="admin-case-study-detail-container91">
-                <button type="button" class="button" @click="addMed(index)">添加</button>
+                <button type="button" class="button" style="background-color: var(--dl-color-success-700);" @click="addMed(index)">添加</button>
               </div>
             </div>
           </div>
@@ -1704,6 +1704,7 @@ export default {
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: var(--dl-space-space-sixunits);
 }
 
 .admin-case-study-detail-container55 {
@@ -2339,6 +2340,7 @@ export default {
 .admin-case-study-detail-button71 {
   align-self: center;
   margin-top: var(--dl-space-space-twounits);
+  background-color: var(--dl-color-success-700);
 }
 
 .admin-case-study-detail-container94 {
