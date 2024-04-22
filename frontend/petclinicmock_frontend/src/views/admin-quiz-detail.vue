@@ -53,7 +53,7 @@
           删除
         </button>
         <div class="admin-quiz-detail-container06">
-          <textarea v-model="newText[index]" :placeholder="`${prob.probText}`"
+          <textarea v-model="prob.probText"
             class="admin-quiz-detail-textarea textarea"></textarea>
           <div class="admin-quiz-detail-container10">
             <span class="admin-quiz-detail-text33 bodyLarge">
@@ -141,7 +141,6 @@ export default {
       quizName: '',
       totalCredits: '',
       options: [],
-      newText: [],
       images: [],
       urls: [],
       addedOption: '',
@@ -157,46 +156,14 @@ export default {
     }
   },
   methods: {
+    notify(str){
+      this.$message(str)
+    },
     logout() {
       localStorage.clear();
       this.$router.push('/');
     },
-    async add_clearImage() {
-      const Result = await client.delete(this.addedProb.probImg);
-      console.log('删除成功:', Result);
-      this.addedProb.probImg = '';
-    },
-    async add_handleDrop(e) {
-      e.preventDefault();
-      let files = e.dataTransfer.files;
 
-      if (!files.length) return;
-
-      let file = files[0];
-      let reader = new FileReader();
-
-      reader.onload = (e) => {
-        this.image = e.target.result[0];
-      };
-
-      const uploadResult = await client.put('quiz/' + file.name, file);
-      this.addedProb.probImg = uploadResult.url;
-      console.log('上传成功:', uploadResult);
-
-    },
-
-    async add_img(e) {
-      try {
-        let file = e.target.files[0];
-        const uploadResult = await client.put('quiz/' + file.name, file);
-        this.addedProb.probImg = uploadResult.url;
-        console.log('上传成功:', uploadResult);
-        //上传至阿里云
-      } catch (error) {
-        // 在此处添加错误处理逻辑。
-        console.error('发生错误:', error);
-      }
-    },
     handleDrop(e, index) {
       e.preventDefault();
       let files = e.dataTransfer.files;
@@ -247,16 +214,14 @@ export default {
       this.addedProb.probAns = this.option2ans(this.addedOption);
       this.addedProb.probNumber = this.probs.length + 1;
       this.probs.push(this.addedProb);
-      console.log(this.probs);
-      //this.save();
+      //console.log(this.probs);
     },
     save() {
       let totalcredit = 0;
       let index = 0;
       this.probs.forEach(prob => {
-        totalcredit += prob.probCredit;
+        totalcredit += parseInt(prob.probCredit);
         prob.probImg = this.urls[index];
-        prob.probText = this.newText[index];
         prob.probAns = this.option2ans(this.options[index]);
         index++;
       });
@@ -285,7 +250,6 @@ export default {
     },
     fetchProb() {
       this.options = [];
-      this.newText = [];
       this.images = [];
       axios.get(`/quiz/detail?quizID=${this.quizID}`,
         {
@@ -301,7 +265,6 @@ export default {
             if (this.probs) {
               this.probs.forEach(prob => {
               this.options.push(this.ans2option(prob.probAns));
-              this.newText.push(prob.probText);
               this.images.push(prob.probImg);
               });
             }
@@ -311,9 +274,8 @@ export default {
         });
     },
     modifyProb(index) {
-      this.probs[index].probText = this.newText[index];
       this.probs[index].probAns = this.option2ans(this.options[index]);
-
+      this.save();
     },
     async clearImage(index) {
       this.images[index] = '';//赋值
@@ -381,7 +343,6 @@ export default {
           if (this.probs) {
             this.probs.forEach(prob => {
               this.options.push(this.ans2option(prob.probAns));
-              this.newText.push(prob.probText);
               this.images.push(prob.probImg);
               this.urls.push(prob.probImg);
             });

@@ -111,7 +111,8 @@ export default {
       })
         .then(response => {
           if (response.status === 200) {
-            console.log(response.data.message); // "成功"
+            this.$message('修改成功');
+            //console.log(response.data.message); // "成功"
             this.fetchUsers(); // fetch users after the axios request has completed
           }
         })
@@ -142,7 +143,8 @@ export default {
       })
         .then(response => {
           if (response.status === 200) {
-            console.log(response.data.message); // "成功"
+            this.$message('修改成功');
+            //console.log(response.data.message); // "成功"
             this.fetchUsers(); // fetch users after the axios request has completed
           }
         })
