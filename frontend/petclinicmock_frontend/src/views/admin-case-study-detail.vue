@@ -287,6 +287,9 @@ export default {
     }
   },
   methods: {
+    notify(str){
+      this.$message(str)
+    },
     modifyMed(index) {
       axios({
         method: 'put',
@@ -302,6 +305,7 @@ export default {
       })
         .then(response => {
           this.fetchCases();
+          this.notify('修改成功');
         })
         .catch(error => {
           // handle error
@@ -348,6 +352,7 @@ export default {
       })
         .then(response => {
           this.fetchCases();
+          this.notify('修改成功');
         })
         .catch(error => {
           // handle error
@@ -376,7 +381,8 @@ export default {
       })
         .then(response => {
           this.fetchCases();
-          console.log(response);
+          //console.log(response);
+          this.notify('修改成功');
         })
         .catch(error => {
           // handle error
@@ -485,6 +491,7 @@ export default {
           }
         });
         this.fetchCases();
+        this.notify('修改成功');
       } catch (error) {
         console.log(error);
       }
@@ -571,8 +578,9 @@ export default {
         }
       })
         .then(response => {
-          console.log(response.data);
+          //console.log(response.data);
           this.fetchDisease();
+          this.notify('修改成功');
         })
         .catch(error => {
           // handle error
@@ -594,6 +602,7 @@ export default {
       })
         .then(response => {
           this.fetchCases();
+          this.notify('修改成功');
         })
         .catch(error => {
           // handle error

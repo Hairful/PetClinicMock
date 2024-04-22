@@ -176,7 +176,7 @@ export default {
             if (response.data.status === 0) {
               this.jobDetails.push(response.data.jobDetail);
             } else {
-              console.log(response.data.message);
+              //console.log(response.data.message);
               // Remove the job from jobs array if its details couldn't be fetched
               this.jobs.splice(index, 1);
             }
@@ -205,7 +205,8 @@ export default {
         })
           .then(response => {
             if (response.status === 200) {
-              console.log(response.data.message); // "成功"
+              this.$message('修改成功');
+              //console.log(response.data.message); // "成功"
               this.fetchJobs(); // fetch jobs after the axios request has completed
             }
           })
@@ -241,7 +242,8 @@ export default {
         })
           .then(response => {
             if (response.status === 200) {
-              console.log(response.data.message); // "成功"
+              this.$message('修改成功');
+              //console.log(response.data.message); // "成功"
               this.fetchJobs(); // fetch jobs after the axios request has completed
             }
           })
@@ -278,7 +280,8 @@ export default {
       })
         .then(response => {
           if (response.status === 200) {
-            console.log(response.data.message); // "成功"
+            this.$message('修改成功');
+            //console.log(response.data.message); // "成功"
             this.fetchJobs(); // fetch jobs after the axios request has completed
           }
         })
@@ -304,7 +307,8 @@ export default {
         });
 
         if (response.status === 200) {
-          console.log(response.data.message); // "成功"
+          this.$message('修改成功');
+          //console.log(response.data.message); // "成功"
           this.fetchJobs(); // fetch jobs after the axios request has completed
         }
       } catch (error) {
