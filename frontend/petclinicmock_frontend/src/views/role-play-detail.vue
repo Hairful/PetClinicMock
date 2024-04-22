@@ -415,7 +415,7 @@ export default {
 
 .role-play-detail-container5 {
   flex: 0 0 auto;
-  width: auto;
+  width: 80%;
   height: 100%;
   display: flex;
   align-items: flex-start;

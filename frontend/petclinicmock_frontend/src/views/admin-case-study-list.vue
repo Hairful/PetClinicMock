@@ -32,24 +32,30 @@
       </router-link>
     </div>
     <div class="admin-case-study-list-hero1 heroContainer">
-      <div class="admin-case-study-list-title">新增疾病</div>
-      <div class="admin-case-study-list-container04">
-        <div class="admin-case-study-list-container05">
-          <input type="text" v-model="newName" placeholder="名称" class="input" />
+      <div class="containerCenter">
+        <div class="containerCenter">
+          <button type="button" class="admin-case-study-list-button button" @click="isAdd">
+            新增疾病
+          </button>
+          <div v-if="isAdding" class="admin-case-study-list-container04">
+            <div class="admin-case-study-list-container05">
+              <input type="text" v-model="newName" placeholder="名称" class="input" />
+            </div>
+            <div class="admin-case-study-list-container06">
+              <input type="text" v-model="newType" placeholder="类型" class="input" />
+            </div>
+            <div class="admin-case-study-list-container06">
+              <input type="text" v-model="newIntro" placeholder="介绍" class="input" />
+            </div>
+            <button type="button" class="admin-case-study-list-button button" @click="addDisease">
+              保存
+            </button>
+          </div>
         </div>
-        <div class="admin-case-study-list-container06">
-          <input type="text" v-model="newType" placeholder="类型" class="input" />
-        </div>
-        <div class="admin-case-study-list-container06">
-          <input type="text" v-model="newIntro" placeholder="介绍" class="input" />
-        </div>
-        <button type="button" class="admin-case-study-list-button button" @click="addDisease">
-          新增疾病
-        </button>
       </div>
 
       <div class="admin-case-study-list-title">修改现有疾病</div>
-      <div class="admin-case-study-list-container07">
+      <div class="containerCenter">
         <button v-for="(diseaseType, index) in diseaseTypes" :key="index" :class="`case-study-menu-navlink1 button`" :style="`margin-right: 10px;`"
           @click="chooseType(diseaseType)">
           <span class="heading3">{{ diseaseType }}</span>
@@ -86,7 +92,7 @@
                   </button>
                 </div>
                 <div class="admin-case-study-list-container12">
-                  <input type="text" v-model="inputType[index]" :placeholder="`${currentType}`" class="input" />
+                  <input type="text" v-model="inputType[index]"  class="input" />
                   <button type="button" class="admin-case-study-list-button3 button" @click=renameDisease(index)>
                     <span class="admin-case-study-list-text19 bodyLarge">
                       修改类型
@@ -124,6 +130,7 @@ export default {
   props: {},
   data() {
     return {
+      isAdding:false,
       currentType: '',
       diseaseTypes: [],
       diseases: [],
@@ -135,6 +142,12 @@ export default {
     }
   },
   methods: {
+    notify(str){
+      this.$message(str)
+    },
+    isAdd(){
+      this.isAdding = !this.isAdding;
+    },
     logout() {
       localStorage.clear();
       this.$router.push('/');
@@ -158,6 +171,7 @@ export default {
       })
         .then(response => {
           this.chooseType(this.inputType[index]);
+          this.notify('修改成功');
         })
         .catch(error => {
           // handle error
@@ -175,9 +189,11 @@ export default {
         this.refresh();
         if (this.diseases.length <= 1) {
           this.chooseType('');
+          this.notify('删除成功');
         }
         else {
           this.chooseType(this.currentType);
+          this.notify('删除成功');
         }
       } catch (error) {
         console.log(error);
@@ -200,6 +216,7 @@ export default {
         .then(response => {
           this.refresh();
           this.chooseType(this.newType);
+          this.notify('新建成功');
         })
         .catch(error => {
           // handle error
@@ -208,6 +225,7 @@ export default {
     },
     chooseType(type) {
       this.currentType = type;
+      this.inputType = [];
       axios
         .get(`/disease/list?diseaseType=${this.currentType}`,
           {
@@ -218,6 +236,10 @@ export default {
         .then((response) => {
           if (response.data.status === 0) {
             this.diseases = response.data.diseases;
+            this.diseases.forEach(disease => {
+            this.inputType.push(this.currentType)
+            });
+            
           } else {
             console.log(response.data.message);
           }
@@ -798,6 +820,7 @@ export default {
 
   .admin-case-study-list-hero1 {
     flex-direction: column;
+    justify-content: center;
   }
 }
 

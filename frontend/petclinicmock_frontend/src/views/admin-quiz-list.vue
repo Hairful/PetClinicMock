@@ -46,7 +46,7 @@
             <span class="heading3">测试 {{ quiz.quizID }}</span>
             <div class="admin-quiz-list-container07">
               <div class="admin-quiz-list-container08">
-                <input type="text" v-model="inputName[index]" :placeholder="`${quiz.quizName}`" class="input" />
+                <input type="text" v-model="quiz.quizName" class="input" />
                 <button type="button" class="button" @click="renameQuiz(index)">重命名</button>
               </div>
               <div class="admin-quiz-list-container08">
@@ -133,6 +133,7 @@ export default {
         }
       })
         .then(response => {
+          this.$message('修改成功');
           this.refresh();
         })
         .catch(error => {
@@ -141,9 +142,6 @@ export default {
         });
     },
     renameQuiz(index) {
-      const quizName = this.inputName[index];
-      const quizID = this.quizzes[index].quizID;
-      const timer = this.quizzes[index].timer;
       axios({
         method: 'put',
         url: '/admin/quiz',
@@ -152,9 +150,9 @@ export default {
           'Content-Type': 'application/json'
         },
         data: {
-          quizID: quizID,
-          quizName: quizName,
-          timer: timer,
+          quizID: this.quizzes[index].quizID,
+          quizName: this.quizzes[index].quizName,
+          timer: this.quizzes[index].timer,
           totalCredits: this.quizzes[index].totalCredits,
           probs: this.quizzes[index].probs,
         }
@@ -177,7 +175,8 @@ export default {
             'Content-Type': 'application/json'
           }
         });
-        console.log(response.data);
+        //console.log(response.data);
+        this.$message('修改成功');
         this.refresh();
       } catch (error) {
         console.log(error);
