@@ -9,8 +9,8 @@ const { tokenKey } = require('../config/authConfig');
 const User = require('../models/User');
 
 const loggerConfigurations = [
-    { name: 'auth', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-auth', level: 'info' },
+    { name: 'error-auth', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -41,7 +41,7 @@ exports.isTokenValid = async (req, res, next) => {
     const user = await User.findByPk(decoded.userID);
     if (!user) {
         logger.info({ userID: decoded.userID, message: `UserID not found in database` });
-        return res.status(401).json({ status: 401, message: '身份验证失败' });
+        return res.status(401).json({ status: -1, message: '身份验证失败' });
     }
     logger.info({ userID: decoded.userID, token: req.headers.authorization, message: 'Token is valid' })
     // 将用户信息添加到请求中，以便后续程序使用

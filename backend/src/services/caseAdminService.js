@@ -8,10 +8,10 @@ const Case = require('../models/Case');
 const Disease = require('../models/Disease');
 const Medicine = require('../models/Medicine');
 const Media = require('../models/Media');
-
+const { redisClient } = require('../config/redisClient');
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -133,8 +133,12 @@ exports.updateCase = async (caseData) => {
                     };
                 }
             }
+            await redisClient.del(`caseInfo:${caseData.caseID}`);
+            await redisClient.del(`caseMedicines:${caseData.caseID}`);
             return { status: 0, message: "成功" };
         } else {
+            await redisClient.del(`caseInfo:${caseData.caseID}`);
+            await redisClient.del(`caseMedicines:${caseData.caseID}`);
             return { status: 0, message: "成功" };
         }
     } catch (error) {
@@ -155,6 +159,8 @@ exports.deleteCase = async (caseID) => {
             return { status: 1, message: "无对应caseID" };
         }
         await caseToDelete.destroy();
+        await redisClient.del(`caseInfo:${caseID}`);
+        await redisClient.del(`caseMedicines:${caseID}`);
         return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /caseAdminService.js/deleteCase', error);

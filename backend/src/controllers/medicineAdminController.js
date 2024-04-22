@@ -7,8 +7,8 @@
 const { createMedicine, updateMedicine, deleteMedicineById } = require('../services/medicineAdminService');
 
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

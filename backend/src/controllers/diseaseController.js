@@ -7,8 +7,8 @@
 const { getDiseaseList, getDiseaseTypes, getDiseasesByID } = require('../services/diseaseService');
 
 const loggerConfigurations = [
-    { name: 'disease', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-disease', level: 'info' },
+    { name: 'error-disease', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

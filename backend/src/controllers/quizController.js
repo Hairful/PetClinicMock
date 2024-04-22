@@ -7,8 +7,8 @@
 const { getQuizDetails, getQuizList, recordExamEntry } = require('../services/quizService')
 
 const loggerConfigurations = [
-    { name: 'quiz', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-quiz', level: 'info' },
+    { name: 'error-quiz', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 

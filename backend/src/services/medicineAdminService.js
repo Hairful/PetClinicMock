@@ -5,10 +5,10 @@
  */
 
 const Medicine = require('../models/Medicine');
-
+const { redisClient } = require('../config/redisClient');
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -25,10 +25,15 @@ exports.createMedicine = async (medicineData) => {
             where: { medicineName: medicineData.medicineName }
         });
         if (existingmedicine) {
-            return { status: 1, message: "重复的medicineName" };
+            return { status: 1, message: "重复的药品名称" };
         }
         // 如果不存在，创建新的Disease实例
         const newMedicine = await Medicine.create(medicineData);
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return {
             status: 0,
             message: "成功",
@@ -52,11 +57,16 @@ exports.deleteMedicineById = async (medicineId) => {
             where: { medicineID: medicineId }
         });
         if (result > 0) {
+            redisClient.flushAll().then((result) => {
+                logger.info('FlushAll result:', result);
+            }).catch((error) => {
+                logger.error('FlushAll error:', error);
+            });
             // 如果找到并删除了记录，返回成功的状态和消息
             return { status: 0, message: "成功" };
         } else {
             // 没有找到，返回错误
-            return { status: 1, message: "无对应medicineID" };
+            return { status: 1, message: "无对应药品ID" };
         }
     } catch (error) {
         logger.error('Error in /medicineAdminService.js/deleteMedicineById: ', error);
@@ -77,11 +87,11 @@ exports.updateMedicine = async (medicineID, updates) => {
             where: { medicineName: updates.medicineName }
         });
         if (medicineExistByName && medicineExistByName.medicineID !== medicineID) {
-            return { status: 1, message: "重复的medicineName" };
+            return { status: 1, message: "重复的药品名称" };
         }
         const medicine = await Medicine.findByPk(medicineID);
         if (!medicine) {
-            return { status: 2, message: "无对应medicineID" };
+            return { status: 2, message: "无对应药品ID" };
         }
         for (const key in updates) {
             if (medicine[key] !== undefined && updates.hasOwnProperty(key)) {
@@ -89,6 +99,11 @@ exports.updateMedicine = async (medicineID, updates) => {
             }
         }
         await medicine.save();
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /medicineAdminService.js/updateMedicine: ', error);
