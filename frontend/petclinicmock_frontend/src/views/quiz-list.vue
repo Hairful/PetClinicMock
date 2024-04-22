@@ -110,7 +110,7 @@ export default {
     },
     getQuizLink(quiz) {
       // Check if there exists a last try
-      if (quiz.lastTry) {
+      if (quiz.lastTryTime) {
         return `/quiz-result?quizID=${quiz.quizID}`;
       } else {
         return `/quiz-detail?quizID=${quiz.quizID}`;

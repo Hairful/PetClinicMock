@@ -86,6 +86,9 @@ export default {
     }
   },
   methods: {
+    notify(str){
+      this.$message(str)
+    },
     logout() {
       localStorage.clear();
       this.$router.push('/');
@@ -136,7 +139,8 @@ export default {
         .then(response => {
           const data = response.data;
           if (data.status === 0) {
-            console.log(data.message);
+            this.notify('修改成功')
+            //console.log(data.message);
             this.fetchMedicines();
           } else {
             this.$message.warning(data.message);
@@ -152,7 +156,8 @@ export default {
         .then(response => {
           const data = response.data;
           if (data.status === 0) {
-            console.log(data.message);
+            this.notify('修改成功')
+            //console.log(data.message);
             this.fetchMedicines();
           } else {
             this.$message.warning(data.message);
@@ -168,7 +173,8 @@ export default {
         .then(response => {
           const data = response.data;
           if (data.status === 0) {
-            console.log(data.message);
+            this.notify('修改成功')
+            //console.log(data.message);
             this.fetchMedicines();
           } else {
             this.$message.warning(data.message);

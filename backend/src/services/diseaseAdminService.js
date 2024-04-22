@@ -5,10 +5,10 @@
  */
 
 const Disease = require('../models/Disease');
-
+const { redisClient } = require('../config/redisClient');
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -23,10 +23,15 @@ exports.createDisease = async (diseaseData) => {
             where: { diseaseName: diseaseData.diseaseName }
         });
         if (existingDisease) {
-            return { status: 1, message: "重复的diseaseName" };
+            return { status: 1, message: "重复的疾病名称" };
         }
         // 如果不存在，创建新的Disease实例
         const newDisease = await Disease.create(diseaseData);
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return {
             status: 0,
             message: "成功",
@@ -50,9 +55,14 @@ exports.deleteDiseaseById = async (diseaseId) => {
             where: { diseaseID: diseaseId }
         });
         if (result > 0) {
+            redisClient.flushAll().then((result) => {
+                logger.info('FlushAll result:', result);
+            }).catch((error) => {
+                logger.error('FlushAll error:', error);
+            });
             return { status: 0, message: "成功" };
         } else {
-            return { status: 1, message: "无对应diseaseID" };
+            return { status: 1, message: "无对应疾病ID" };
         }
     } catch (error) {
         logger.error('Error in /diseaseAdminService.js/deleteDiseaseById: ', error);
@@ -71,7 +81,7 @@ exports.updateDisease = async (diseaseID, updates) => {
     try {
         const disease = await Disease.findByPk(diseaseID);
         if (!disease) {
-            return { status: 1, message: "无对应diseaseID" };
+            return { status: 1, message: "无对应疾病ID" };
         }
         for (const key in updates) {
             if (disease[key] !== undefined && updates.hasOwnProperty(key)) {
@@ -79,6 +89,11 @@ exports.updateDisease = async (diseaseID, updates) => {
             }
         }
         await disease.save();
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /diseaseAdminService.js/updateDisease: ', error);

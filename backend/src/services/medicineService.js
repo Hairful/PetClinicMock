@@ -7,8 +7,8 @@
 const Medicine = require('../models/Medicine');
 
 const loggerConfigurations = [
-    { name: 'medicine', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-medicine', level: 'info' },
+    { name: 'error-medicine', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -59,7 +59,7 @@ exports.getMedicineById = async (medicineId) => {
                 medicineIntro: medicine.medicineIntro
             };
         } else {
-            return { status: 1, message: "无对应medicineID" };
+            return { status: 1, message: "无对应药品ID" };
         }
     } catch (error) {
         logger.error('Error in /medicineService.js/getMedicineById', error);

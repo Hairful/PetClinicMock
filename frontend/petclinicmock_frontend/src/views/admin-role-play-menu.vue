@@ -10,7 +10,6 @@
             <span>
               <span>
                 登录用户：
-                <span v-html="rawl4zz"></span>
               </span>
               <span class="admin-role-play-menu-text02">{{ name }}</span>
             </span>
@@ -83,14 +82,6 @@ export default {
   props: {},
   data() {
     return {
-      rawl4zz: ' ',
-      rawdfv6: ' ',
-      raw64ur: ' ',
-      rawza51: ' ',
-      rawpc08: ' ',
-      rawupn0: ' ',
-      rawbggx: ' ',
-      raw4mlw: ' ',
       name: localStorage.getItem('username'),
     }
   },

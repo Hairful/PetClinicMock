@@ -1,10 +1,16 @@
+/**
+ * 文件: /src/server.js
+ * 描述: 服务器入口文件
+ * 作者: {YYZ}
+ */
 const sequelize = require('./config/database');
 const app = require('./app');
+const { warn, level } = require('winston');
 const PORT = process.env.PORT || 3000;
 
 const loggerConfigurations = [
-    { name: 'server', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-server', level: 'info' },
+    { name: 'error-server', level: 'warn' }
 ];
 const logger = require('./utils/logUtil')(loggerConfigurations);
 

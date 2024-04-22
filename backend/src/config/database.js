@@ -4,8 +4,6 @@
  * 作者: {YYZ}
  */
 
-// require('dotenv').config({ path: `.env.${process.env.NODE_ENV || 'default'}` });
-
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(process.env.DB_NAME || 'PetClinicMock', process.env.DB_USER || 'PCM', process.env.DB_PASSWORD || 'Pcm123456@', {
@@ -13,7 +11,8 @@ const sequelize = new Sequelize(process.env.DB_NAME || 'PetClinicMock', process.
     dialect: process.env.DB_TYPE || 'mysql',
     define: {
         freezeTableName: true
-    }
+    },
+    logging: false
 });
 
 module.exports = sequelize;

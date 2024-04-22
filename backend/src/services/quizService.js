@@ -11,8 +11,8 @@ const UserProb = require('../models/UserProb');
 const UserQuiz = require('../models/UserQuiz');
 
 const loggerConfigurations = [
-    { name: 'quiz', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-quiz', level: 'info' },
+    { name: 'error-quiz', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
@@ -93,11 +93,11 @@ exports.getQuizDetails = async (userID, quizID) => {
     try {
         const quiz = await Quiz.findByPk(quizID);
         if (!quiz) {
-            return { status: 1, message: "无对应quizID" };
+            return { status: 1, message: "无对应试题ID" };
         }
         const userExist = await User.findOne({ where: { userID } });
         if (!userExist) {
-            return { status: 2, message: '无对应userID' };
+            return { status: 2, message: '无对应用户ID' };
         }
         response.quizName = quiz.quizName;
         response.totalCredits = quiz.totalCredits;
@@ -154,11 +154,11 @@ exports.recordExamEntry = async (input) => {
         const { quizID, userID, credit, lastTryTime, answers } = input;
         const quizExist = await Quiz.findByPk(quizID);
         if (!quizExist) {
-            return { "status": 1, "message": "无对应quizID" };
+            return { "status": 1, "message": "无对应试题ID" };
         }
         const userExist = await User.findByPk(userID);
         if (!userExist) {
-            return { "status": 2, "message": "无对应userID" };
+            return { "status": 2, "message": "无对应用户ID" };
         }
         let time
         if (!lastTryTime) {
@@ -189,12 +189,12 @@ exports.recordExamEntry = async (input) => {
             // 检查 Prob 表中是否存在对应的 probNumber
             const prob = await Prob.findOne({ where: { "probID": probNumber } });
             if (!prob) {
-                return { "status": 3, "message": "无对应probNumber" };
+                return { "status": 3, "message": "无对应题目ID" };
             }
             //TODO: 需要看题目本身类型，但是我们没必要为这个多建一个字段存类型（吗？）
             // 检查答案是否有效
             if (![1, 2, 3, 4].includes(ans)) {
-                return { "status": 4, "message": "无对应probAns" };
+                return { "status": 4, "message": "无对应题目答案" };
             }
             // 检查 UserProb 表中是否存在相同的 userID 和 probID 的记录，（不）存在则更新（创建）
             const userProbEntry = await UserProb.findOne({

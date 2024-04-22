@@ -4,11 +4,12 @@
  * 作者: {YYZ}
  */
 
+const { level } = require('winston');
 const { createCase, updateCase, deleteCase } = require('../services/caseAdminService');
 
 const loggerConfigurations = [
-    { name: 'admin', level: 'info' },
-    { name: 'error', level: 'error' }
+    { name: 'info-admin', level: 'info' },
+    { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 
