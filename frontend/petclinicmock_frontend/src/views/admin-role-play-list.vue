@@ -299,7 +299,7 @@ export default {
     },
     async deleteJob(index) {
       try {
-        const response = await axios.delete(`/admin/roleplaying?role=1&job=${this.jobs[index]}`, {
+        const response = await axios.delete(`/admin/roleplaying?role=${this.role2number(this.role)}&job=${this.jobs[index]}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'

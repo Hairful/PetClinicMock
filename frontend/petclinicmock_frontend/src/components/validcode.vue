@@ -93,7 +93,7 @@
           this.randomNum(this.fontSizeMin, this.fontSizeMax) + "px SimHei"; // 随机生成字体大小
         let x = (i + 1) * (this.contentWidth / (this.identifyCode.length + 1));
         let y = this.randomNum(this.fontSizeMax, this.contentHeight - 5);
-        var deg = this.randomNum(-30, 30);
+        var deg = this.randomNum(-10, 10);
         // 修改坐标原点和旋转角度
         ctx.translate(x, y);
         ctx.rotate((deg * Math.PI) / 180);
@@ -105,7 +105,7 @@
   
       // 绘制干扰线
       drawLine(ctx) {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 2; i++) {
           ctx.strokeStyle = this.randomColor(100, 200);
           ctx.beginPath();
           ctx.moveTo(
@@ -122,7 +122,7 @@
   
       // 绘制干扰点
       drawDot(ctx) {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 10; i++) {
           ctx.fillStyle = this.randomColor(0, 255);
           ctx.beginPath();
           ctx.arc(
