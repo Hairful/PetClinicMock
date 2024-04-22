@@ -12,7 +12,7 @@ const Media = sequelize.define('Media', {
         allowNull: false
     },
     mediaURL: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     }
 });

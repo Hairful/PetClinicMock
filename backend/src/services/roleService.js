@@ -31,6 +31,7 @@ exports.getJobList = async (role) => {
             status: 0,
             message: '成功',
             jobs: jobs,
+
         };
     } catch (error) {
         logger.error('Error In /roleService.js/getJobList', error);
@@ -57,7 +58,8 @@ exports.getJobDetail = async (role, job) => {
         return {
             status: 0,
             message: '成功',
-            jobDetail: roleInstance.jobDetail
+            jobDetail: roleInstance.jobDetail,
+            roomID: roleInstance.roomID
         }
     } catch (error) {
         logger.error('Error in /roleService.js/getJobDetail: ', error);
