@@ -127,7 +127,7 @@ exports.loginUser = async (userName, password) => {
         } else {
             logger.warn('Unable to manage data from Redis as Redis is not available.');
         }
-        const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '1h' });
+        const token = jwt.sign({ userID: userExist.userID, isAdmin: userExist.isAdmin }, tokenKey, { expiresIn: '2h' });
         return { status: 0, message: '登录成功', userID: userExist.userID, token: token, isAdmin: userExist.isAdmin };
     } catch (error) {
         logger.error('Error in /userAuthService.js/loginUser :', error);
