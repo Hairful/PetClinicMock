@@ -193,9 +193,13 @@ exports.recordExamEntry = async (input) => {
             }
             //TODO: 需要看题目本身类型，但是我们没必要为这个多建一个字段存类型（吗？）
             // 检查答案是否有效
+            if (ans === -1) {
+                continue;
+            }
             if (![1, 2, 3, 4].includes(ans)) {
                 return { "status": 4, "message": "无对应题目答案" };
             }
+
             // 检查 UserProb 表中是否存在相同的 userID 和 probID 的记录，（不）存在则更新（创建）
             const userProbEntry = await UserProb.findOne({
                 where: { "UserUserID": userID, "ProbProbID": prob.probID }

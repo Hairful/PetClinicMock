@@ -10,7 +10,7 @@ const { createJob, updateJob, deleteJob } = require('../controllers/roleAdminCon
 const { isQueryValid, isBodyValid } = require('../middlewares/formatCheck');
 const { isTokenValid, isTokenAdmin } = require('../middlewares/authMiddleware');
 
-const paramsInBodyOfCreate = ['role', 'job', 'jobDetail'];
+const paramsInBodyOfCreate = ['role', 'job', 'jobDetail', 'roomID'];
 const paramsInQueryOfDelete = ['role', 'job']
 
 router.post('', isTokenValid, isTokenAdmin, isBodyValid(paramsInBodyOfCreate), createJob);

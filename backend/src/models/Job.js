@@ -19,6 +19,10 @@ const Job = sequelize.define('Job', {
     jobDetail: {
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    roomID: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 });
 module.exports = Job;
