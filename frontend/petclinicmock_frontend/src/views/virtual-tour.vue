@@ -25,8 +25,11 @@ import gsap from "gsap";
 import SpriteCanvas from "../three/SpriteCanvas";
 
 
+
 let tagDiv = ref(null);
 let progress = ref(0);
+// 创建一个响应式引用来存储传递的参数
+const receivedParam = ref('');
 
 // 初始化场景
 const scene = new THREE.Scene();
@@ -38,7 +41,7 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 // 设置相机位置
-camera.position.set(0, 0, 0);
+camera.position.set(3, 10, 5);
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -51,11 +54,17 @@ const render = () => {
 };
 
 
+
+
+
 // 添加立方体
 const geometry = new THREE.BoxGeometry(10, 10, 10);
 geometry.scale(1, 1, -1);
 
 onMounted(async () => {
+
+  const rooms = [];
+
   const frontdeskItem = new Item();
   frontdeskItem.setItemInfo('前台');
 
@@ -109,6 +118,19 @@ onMounted(async () => {
 
   const proEquipItem = new Item();
   proEquipItem.setItemInfo('处理设备');
+  // 检查 URL 查询参数是否存在
+ function checkForQueryParam(rooms) {
+  const queryParams = new URLSearchParams(window.location.search);
+  if (queryParams.has('roomID')) {
+    //如果存在，则获取参数的值并存储
+    // receivedParam.value = 0;
+    receivedParam.value = queryParams.get('roomID');
+    camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
+    // camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
+    //在此处你可以对参数进行进一步处理
+    console.log('Received parameter:', receivedParam.value);
+  }
+}
 
   function createVideoEle(videoURL, detailContent) {
     
@@ -321,6 +343,7 @@ transform: translate(100px,110px);
   let livingUrl = "./img/frontdesk/";
   let livingPosition = new THREE.Vector3(0, 0, 0);
   const living = new Room("前台", livingIndex, livingUrl, livingPosition);
+  rooms.push(living);
 
   // 创建走廊
   let kitPosition = new THREE.Vector3(3, 10, 5);
@@ -328,6 +351,7 @@ transform: translate(100px,110px);
   let textureUrl = "./img/corridor/";
   let kitEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const room = new Room("走廊", kitIndex, textureUrl, kitPosition, kitEuler);
+  rooms.push(room);
   // 创建文字精灵
   const text = new SpriteCanvas(camera, "走廊", new THREE.Vector3(3, 0, 0.5));
   // text.mesh.rotation.y = Math.PI / 3;
@@ -367,6 +391,7 @@ transform: translate(100px,110px);
   let labUrl = "./img/lab/";
   let labEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const lab = new Room("化验室", labIndex, labUrl, labPosition, labEuler);
+  rooms.push(lab);
 
   // 创建化验室文字精灵
   const labtext = new SpriteCanvas(
@@ -410,6 +435,7 @@ transform: translate(100px,110px);
   let pathUrl = "./img/pathology/";
   let pathEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const path = new Room("病理室", pathIndex, pathUrl, pathPosition, pathEuler);
+  rooms.push(path);
 
   // 创建病理室室文字精灵
   const pathtext = new SpriteCanvas(
@@ -453,8 +479,9 @@ transform: translate(100px,110px);
   let conUrl = "./img/consultroom/";
   let conEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const con = new Room("诊室", conIndex, conUrl, conPosition, conEuler);
+  rooms.push(con);
 
-  // 创建免疫室室文字精灵
+  // 创建诊室文字精灵
   const context = new SpriteCanvas(
     camera,
     "诊室",
@@ -499,6 +526,7 @@ transform: translate(100px,110px);
   let immUrl = "./img/imm/";
   let immEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const imm = new Room("免疫室", immIndex, immUrl, immPosition, immEuler);
+  rooms.push(imm);
 
   // 创建免疫室室文字精灵
   const immtext = new SpriteCanvas(
@@ -542,8 +570,9 @@ transform: translate(100px,110px);
   let psurUrl = "./img/presur/";
   let psurEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const psur = new Room("手术准备室", psurIndex, psurUrl, psurPosition, psurEuler);
+  rooms.push(psur);
 
-  // 创建免疫室室文字精灵
+  // 创建手术准备室室文字精灵
   const psurtext = new SpriteCanvas(
     camera,
     "手术准备室",
@@ -585,6 +614,7 @@ transform: translate(100px,110px);
   let disUrl = "./img/dis/";
   let disEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const dis = new Room("处理室", disIndex, disUrl, disPosition, disEuler);
+  rooms.push(dis);
 
   // 创建处理室室文字精灵
   const distext = new SpriteCanvas(
@@ -628,6 +658,7 @@ transform: translate(100px,110px);
   let impUrl = "./img/impatient/";
   let impEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const imp = new Room("住院室", impIndex, impUrl, impPosition, impEuler);
+  rooms.push(imp);
 
   // 创建住院室文字精灵
   const imptext = new SpriteCanvas(
@@ -671,6 +702,7 @@ transform: translate(100px,110px);
   let surUrl = "./img/sur/";
   let surEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const sur = new Room("手术室", surIndex, surUrl, surPosition, surEuler);
+  rooms.push(sur);
 
   // 创建手术室文字精灵
   const surtext = new SpriteCanvas(
@@ -714,6 +746,7 @@ transform: translate(100px,110px);
   let pharUrl = "./img/phar/";
   let pharEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const phar = new Room("药房", pharIndex, pharUrl, pharPosition, pharEuler);
+  rooms.push(phar);
 
   // 创建药房文字精灵
   const phartext = new SpriteCanvas(
@@ -757,6 +790,7 @@ transform: translate(100px,110px);
   let specUrl = "./img/spec/";
   let specEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const spec = new Room("专科诊室", specIndex, specUrl, specPosition, specEuler);
+  rooms.push(spec);
 
   // 创建专科室文字精灵
   const spectext = new SpriteCanvas(
@@ -800,6 +834,7 @@ transform: translate(100px,110px);
   let imaUrl = "./img/ima/";
   let imaEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const ima = new Room("影像室", imaIndex, imaUrl, imaPosition, imaEuler);
+  rooms.push(ima);
 
   // 创建影像室室文字精灵
   const imatext = new SpriteCanvas(
@@ -855,12 +890,13 @@ transform: translate(100px,110px);
     moveTag("前台");
   });
 
-  // 创建影像室
+  // 创建档案室
   let arcPosition = new THREE.Vector3(10, 20, 10);
   let arcIndex = 66;
   let arcUrl = "./img/arc/";
   let arcEuler = new THREE.Euler(0, -Math.PI / 2, 0);
   const arc = new Room("档案室", arcIndex, arcUrl, arcPosition, arcEuler);
+  rooms.push(arc);
 
   // 创建影像室室文字精灵
   const arctext = new SpriteCanvas(
@@ -897,6 +933,10 @@ transform: translate(100px,110px);
     });
     moveTag("走廊");
   });
+
+  // camera.position.set(rooms[0].position.x,rooms[0].position.y,rooms[0].position.z);
+  checkForQueryParam(rooms);
+ 
 
   //创建前台流程
   const desk = new SpriteCanvas(
@@ -1132,9 +1172,10 @@ transform: translate(100px,110px);
     createVideoEle(proEquipItem.itemURL, proEquipItem.itemDetail);
   });
 
-
   container.value.appendChild(renderer.domElement);
   render();
+
+  
 
   let isMouseDown = false;
 
@@ -1209,6 +1250,7 @@ class Room {
     euler = new THREE.Euler(0, 0, 0)
   ) {
     this.name = name;
+    this.position = position;
     // 添加立方体
     const geometry = new THREE.BoxGeometry(10, 10, 10);
     geometry.scale(1, 1, -1);
