@@ -12,12 +12,6 @@ const { isTokenValid } = require('../middlewares/authMiddleware');
 
 const paramsInQueryOfDetail = ['caseID'];
 
-//不启用Token认证
-/*
-router.get('/list', getCaseList);
-router.get('/detail', isQueryValid(paramsInQueryOfDetail), getCaseDetail);
-*/
-
 //启用Token认证
 router.get('/list', isTokenValid, getCaseList);
 router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getCaseDetail);

@@ -85,43 +85,34 @@ exports.updateCase = async (caseData) => {
         if (!existingCase) {
             return { status: 1, message: "无对应caseID" };
         }
-        if (caseData.diseaseID !== undefined) {
-            const existingDisease = await Disease.findByPk(caseData.diseaseID);
-            if (!existingDisease) {
-                return { status: 2, message: "无对应diseaseID" };
-            }
-        }
-        // 更新Case表中的记录
-        await existingCase.update({
-            summary: caseData.summary || existingCase.summary,
-            examine: caseData.examine || existingCase.examine,
-            diagnose: caseData.diagnose || existingCase.diagnose,
-            treatment: caseData.treatment || existingCase.treatment,
-            diseaseID: caseData.diseaseID || existingCase.diseaseID
-        });
-        // 处理Media信息
-        const existingMedias = await existingCase.getMedia();
-        const newMediaInstances = [];
-        const mediaTypes = ['summaryPictures', 'summaryVideos', 'examinePictures', 'examineVideos', 'diagnosePictures', 'diagnoseVideos', 'treatmentPictures', 'treatmentVideos'];
-        for (let type of mediaTypes) {
-            if (caseData[type]) {
-                for (let url of caseData[type]) {
-                    const media = await Media.create({
-                        mediaType: type,
-                        mediaURL: url
-                    });
-                    newMediaInstances.push(media);
+        let updateObject = {};
+        if (caseData.summary) updateObject.summary = caseData.summary;
+        if (caseData.examine) updateObject.examine = caseData.examine;
+        if (caseData.diagnose) updateObject.diagnose = caseData.diagnose;
+        if (caseData.treatment) updateObject.treatment = caseData.treatment;
+        if (caseData.diseaseID) updateObject.diseaseID = caseData.diseaseID;
+        await existingCase.update(updateObject);
+        if (caseData.summaryPictures || caseData.summaryVideos || caseData.examinePictures || caseData.examineVideos || caseData.diagnosePictures || caseData.diagnoseVideos || caseData.treatmentPictures || caseData.treatmentVideos) {
+            const existingMedias = await existingCase.getMedia();
+            await existingCase.removeMedia(existingMedias);
+            const newMediaInstances = [];
+            const mediaTypes = ['summaryPictures', 'summaryVideos', 'examinePictures', 'examineVideos', 'diagnosePictures', 'diagnoseVideos', 'treatmentPictures', 'treatmentVideos'];
+            for (let type of mediaTypes) {
+                if (caseData[type]) {
+                    for (let url of caseData[type]) {
+                        const media = await Media.create({
+                            mediaType: type,
+                            mediaURL: url
+                        });
+                        newMediaInstances.push(media);
+                    }
                 }
             }
+            await existingCase.addMedia(newMediaInstances);
         }
-        // 更新Case和Media的关联
-        await existingCase.removeMedia(existingMedias);
-        await existingCase.addMedia(newMediaInstances);
-        // 移除所有现有的Medicine关联
-        const existingMedicines = await existingCase.getMedicines();
-        await existingCase.removeMedicines(existingMedicines);
-        // 添加新的Medicine关联
         if (caseData.medicines) {
+            const existingMedicines = await existingCase.getMedicines();
+            await existingCase.removeMedicines(existingMedicines);
             for (let medicineData of caseData.medicines) {
                 const medicine = await Medicine.findByPk(medicineData.medicineID);
                 if (medicine) {
@@ -133,20 +124,16 @@ exports.updateCase = async (caseData) => {
                     };
                 }
             }
-            await redisClient.del(`caseInfo:${caseData.caseID}`);
-            await redisClient.del(`caseMedicines:${caseData.caseID}`);
-            return { status: 0, message: "成功" };
-        } else {
-            await redisClient.del(`caseInfo:${caseData.caseID}`);
-            await redisClient.del(`caseMedicines:${caseData.caseID}`);
-            return { status: 0, message: "成功" };
         }
+        await redisClient.del(`caseInfo:${caseData.caseID}`);
+        await redisClient.del(`caseMedicines:${caseData.caseID}`);
+
+        return { status: 0, message: "成功" };
     } catch (error) {
         logger.error('Error in /caseAdminService.js/updateCase', error);
         return { status: -9, message: "失败" };
     }
-}
-
+};
 /**
  * deleteCase - 删除病例
  * @param {integer} caseID - 病例ID
