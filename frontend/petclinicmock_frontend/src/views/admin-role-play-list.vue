@@ -223,6 +223,7 @@ export default {
               }
             } else {
               console.log(error);
+              this.$message.warning(error.message);
             }
           });
       } else {
@@ -260,6 +261,7 @@ export default {
               }
             } else {
               console.log(error);
+              this.$message.warning(error.message);
             }
           });
       }
@@ -286,15 +288,7 @@ export default {
           }
         })
         .catch(error => {
-          if (error.response) {
-            if (error.response.status === 404) {
-              this.$message.warning(error.response.data.message); // "无对应role"
-            } else if (error.response.status === 400) {
-              this.$message.warning(error.response.data.message); // "重复的job"
-            }
-          } else {
-            console.log(error);
-          }
+          this.$message.warning(error.message);
         });
     },
     async deleteJob(index) {
@@ -322,6 +316,7 @@ export default {
           }
         } else {
           console.log(error);
+          this.$message.warning(error.message);
         }
       }
     }
