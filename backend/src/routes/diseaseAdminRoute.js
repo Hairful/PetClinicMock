@@ -13,12 +13,6 @@ const { isTokenValid, isTokenAdmin } = require('../middlewares/authMiddleware');
 const paramsInBodyOfCreate = ['diseaseType', 'diseaseName', 'diseaseIntro'];
 const paramsInQueryOfDelete = ['diseaseID']
 
-//不启用Token认证
-/*
-router.post('', isBodyValid(paramsInBodyOfCreate), createDisease);
-router.put('', updateDisease);
-router.delete('', isQueryValid(paramsInQueryOfDelete), deleteDisease);
-*/
 //启用Token认证
 
 router.post('', isTokenValid, isTokenAdmin, isBodyValid(paramsInBodyOfCreate), createDisease);

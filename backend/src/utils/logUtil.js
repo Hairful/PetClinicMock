@@ -3,7 +3,6 @@ require('winston-daily-rotate-file');
 
 function createLogger(configurations) {
     const transports = [];
-
     configurations.forEach(config => {
         if (config.name && config.level) {
             const transport = new winston.transports.DailyRotateFile({
@@ -44,5 +43,4 @@ function createLogger(configurations) {
     });
     return logger;
 }
-
 module.exports = createLogger;
