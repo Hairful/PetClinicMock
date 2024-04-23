@@ -132,6 +132,7 @@ export default {
         })
         .catch(error => {
           console.error(error);
+          this.$message.warning(error.message);
         });
     },
     async addMedicine() {

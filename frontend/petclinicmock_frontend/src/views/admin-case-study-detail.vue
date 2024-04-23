@@ -525,6 +525,7 @@ export default {
         this.notify('修改成功');
       } catch (error) {
         console.log(error);
+        this.$message.warning(error.message);
       }
     },
     fetchDisease() {
@@ -616,6 +617,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     modifySummary(index) {
@@ -638,6 +640,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
 

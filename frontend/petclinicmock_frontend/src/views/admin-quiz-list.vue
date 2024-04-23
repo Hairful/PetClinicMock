@@ -115,6 +115,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     addQuiz() {
@@ -182,7 +183,7 @@ export default {
         this.refresh();
       } catch (error) {
         console.log(error);
-          this.$message.warning(error.message);
+        this.$message.warning(error.message);
       }
     },
   },
@@ -203,6 +204,7 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+        this.$message.warning(error.message);
       });
   },
   metaInfo: {

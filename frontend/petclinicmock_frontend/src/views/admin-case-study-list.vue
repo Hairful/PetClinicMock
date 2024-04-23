@@ -249,6 +249,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     refresh() {
@@ -268,6 +269,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
   },
@@ -288,6 +290,7 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+        this.$message.warning(error.message);
       });
   },
   metaInfo: {
