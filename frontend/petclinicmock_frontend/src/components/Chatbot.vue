@@ -2,7 +2,10 @@
     <div class="chatbot" :class="{ expanded: isExpanded }" @click="toggleChatbot">
         <div>
             <div v-if="isExpanded">
-                <button> 关闭 </button>
+                <body>
+                   <!-- 使用style属性直接在HTML中实现 -->
+                   <button style="float: right;"> X </button>
+                </body>
             </div>
             <iframe v-if="isExpanded" :src="externalLink" width="100%" height="500px" frameborder="0"></iframe>
             <div v-else>
