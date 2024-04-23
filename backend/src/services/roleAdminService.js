@@ -71,7 +71,7 @@ exports.updateJob = async (role, prevJob, job, jobDetail, roomID) => {
                 result.jobDetail = jobDetail;
 
             }
-            if (roomID != undefined) {
+            if (roomID !== undefined) {
                 result.roomID = roomID
             }
             await result.save();
@@ -106,7 +106,7 @@ exports.updateJob = async (role, prevJob, job, jobDetail, roomID) => {
                 result.jobDetail = jobDetail;
 
             }
-            if (roomID != undefined) {
+            if (roomID !== undefined) {
                 result.roomID = roomID
             }
             await result.save();
