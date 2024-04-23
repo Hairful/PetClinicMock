@@ -54,7 +54,7 @@
             </span>      
           </div>
           <div class="role-play-detail-container5" >
-            <router-link class="buttonFilled" :to="`/virtual-tour?roomID=${this.roomID}`"> 查看细节 </router-link>
+            <router-link v-if="this.roomID!=null" class="buttonFilled" :to="`/virtual-tour?roomID=${this.roomID}`"> 查看细节 </router-link>
           </div>
         </div>
       </div>

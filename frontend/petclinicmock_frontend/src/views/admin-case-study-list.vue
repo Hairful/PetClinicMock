@@ -175,6 +175,7 @@ export default {
         })
         .catch(error => {
           // handle error
+          this.notify(response.data.message);
           console.log(error);
           this.$message.warning(error.message);
         });
