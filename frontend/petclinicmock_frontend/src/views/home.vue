@@ -66,7 +66,12 @@ export default {
   data() {
     return {
       name:localStorage.getItem('username'),
-
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.name = '';
     }
   },
   methods: {
