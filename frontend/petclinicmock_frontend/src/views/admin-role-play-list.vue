@@ -205,7 +205,6 @@ export default {
         .catch(error => console.log(error));
     },
     async renameJob(index) {
-      console.log(this.rooms);
       const job = this.jobs[index];
       const detail = this.jobDetails[index];
       const role = this.role2number(this.role);
