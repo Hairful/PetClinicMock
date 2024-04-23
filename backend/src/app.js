@@ -25,7 +25,7 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
-
+app.set('trust proxy', true);
 app.use(limiter);
 app.use(httpLogger);
 
