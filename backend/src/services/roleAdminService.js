@@ -19,7 +19,7 @@ const logger = require('../utils/logUtil')(loggerConfigurations);
  * @param {string} jobDetail - 工作详情
  * @returns {Object} 对象
  */
-exports.createJob = async (role, job, jobDetail) => {
+exports.createJob = async (role, job, jobDetail, roomID) => {
     try {
         const jobexist = await Job.findOne({
             where: { job: job }
@@ -27,7 +27,7 @@ exports.createJob = async (role, job, jobDetail) => {
         if (jobexist) {
             return { status: 2, message: '重复的工作' };
         }
-        const result = await Job.create({ role, job, jobDetail });
+        const result = await Job.create({ role, job, jobDetail, roomID });
         return { status: 0, message: '成功' };
     } catch (error) {
         logger.error('Error in /roleAdminService.js/createJob: ', error);
@@ -42,7 +42,7 @@ exports.createJob = async (role, job, jobDetail) => {
  * @param {string} jobDetail - 工作详情
  * @returns {Object} 对象
  */
-exports.updateJob = async (role, prevJob, job, jobDetail) => {
+exports.updateJob = async (role, prevJob, job, jobDetail, roomID) => {
     try {
 
         if (prevJob == undefined) {
@@ -64,6 +64,10 @@ exports.updateJob = async (role, prevJob, job, jobDetail) => {
 
             if (jobDetail !== undefined) {
                 result.jobDetail = jobDetail;
+
+            }
+            if (roomID != undefined) {
+                result.roomID = roomID
             }
             await result.save();
             return { status: 0, message: '成功' };
@@ -95,6 +99,10 @@ exports.updateJob = async (role, prevJob, job, jobDetail) => {
             result.job = job;
             if (jobDetail !== undefined) {
                 result.jobDetail = jobDetail;
+
+            }
+            if (roomID != undefined) {
+                result.roomID = roomID
             }
             await result.save();
             return { status: 0, message: '成功' };

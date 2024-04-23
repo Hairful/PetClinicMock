@@ -14,8 +14,8 @@ const logger = require('../utils/logUtil')(loggerConfigurations);
 
 exports.createJob = async (req, res) => {
     try {
-        const { role, job, jobDetail } = req.body;
-        const result = await createJob(role, job, jobDetail);
+        const { role, job, jobDetail, roomID } = req.body;
+        const result = await createJob(role, job, jobDetail, roomID);
         let httpStatus;
         switch (result.status) {
             case 0:
@@ -41,8 +41,8 @@ exports.createJob = async (req, res) => {
 
 exports.updateJob = async (req, res) => {
     try {
-        const { role, prevJob, job, jobDetail } = req.body;
-        const result = await updateJob(role, prevJob, job, jobDetail);
+        const { role, prevJob, job, jobDetail, roomID } = req.body;
+        const result = await updateJob(role, prevJob, job, jobDetail, roomID);
         let httpStatus;
         switch (result.status) {
             case 0:
