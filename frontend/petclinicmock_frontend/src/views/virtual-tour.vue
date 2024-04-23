@@ -14,8 +14,7 @@
     <div class="title">3D导览</div>
     <!-- Button added here -->
     <button @click="exit3DNavigation">退出3D导览</button>
-    <!-- Button added here -->
-    <button @click="exit3DNavigation">退出3D导览</button>
+
   </div>
 </template>
 
@@ -23,7 +22,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
-import { defineAsyncComponent, ref, onMounted, onUnmounted } from "vue";
 import { defineAsyncComponent, ref, onMounted, onUnmounted } from "vue";
 import axios from 'axios';
 import gsap from "gsap";
