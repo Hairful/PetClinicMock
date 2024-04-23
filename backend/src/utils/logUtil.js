@@ -11,6 +11,8 @@ function createLogger(configurations) {
                 level: config.level,
                 datePattern: 'YYYY-MM-DD',
                 maxSize: '1m',
+                maxFiles: '3',
+                zippedArchive: true
             });
             transports.push(transport);
         }
