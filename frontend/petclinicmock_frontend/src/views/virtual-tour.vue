@@ -60,7 +60,17 @@ const geometry = new THREE.BoxGeometry(10, 10, 10);
 geometry.scale(1, 1, -1);
 
 window.addEventListener('popstate', () => {
-  window.location.href = '/menu';
+  const previousUrl = document.referrer; // 获取前一个页面的 URL
+  if(previousUrl=='/role-play-list?role=前台'){
+    previousUrl='/role-play-list?role=前台'
+  }
+  if(previousUrl=='/role-play-list?role=医助'){
+    previousUrl=='/role-play-list?role=医助'
+  }
+  if(previousUrl=='/role-play-list?role=医生'){
+    previousUrl=='/role-play-list?role=医生'
+  }
+  window.location.href = previousUrl;
     });
 
  // 定义处理点击事件的函数
@@ -78,6 +88,7 @@ window.addEventListener('popstate', () => {
     // 从数组中删除第一个元素
     meshs.shift();
   }
+
 
   // var previousPageURL = document.referrer;
   // 设置要返回的页面
