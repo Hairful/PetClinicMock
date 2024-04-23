@@ -17,7 +17,6 @@ function createLogger(configurations) {
             transports.push(transport);
         }
     });
-
     const logger = winston.createLogger({
         level: 'info',
         format: winston.format.combine(
@@ -43,7 +42,6 @@ function createLogger(configurations) {
             })
         ]
     });
-
     return logger;
 }
 
