@@ -7,7 +7,7 @@ function createLogger(configurations) {
     configurations.forEach(config => {
         if (config.name && config.level) {
             const transport = new winston.transports.DailyRotateFile({
-                filename: `./logs/${config.name}-%DATE%.log`,
+                filename: `logs/${config.name}-%DATE%.log`,
                 level: config.level,
                 datePattern: 'YYYY-MM-DD',
                 maxSize: '1m',

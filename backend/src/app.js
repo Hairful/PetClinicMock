@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-require('./utils/logUploader');
 const httpLogger = require('./middlewares/httpLogger');
 const { limiter } = require('./middlewares/rateLimit');
 
