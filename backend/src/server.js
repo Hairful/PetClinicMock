@@ -5,7 +5,6 @@
  */
 const sequelize = require('./config/database');
 const app = require('./app');
-const { warn, level } = require('winston');
 const PORT = process.env.PORT || 3000;
 
 const loggerConfigurations = [
