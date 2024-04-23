@@ -159,6 +159,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     refresh() {

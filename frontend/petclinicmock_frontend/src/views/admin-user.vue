@@ -97,6 +97,7 @@ export default {
         })
         .catch(error => {
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     async deleteUser(index) {
@@ -123,6 +124,7 @@ export default {
             }
           } else {
             console.log(error);
+            this.$message.warning(error.message);
           }
         });
     },
@@ -157,6 +159,7 @@ export default {
             }
           } else {
             console.log(error);
+            this.$message.warning(error.message);
           }
         });
     }

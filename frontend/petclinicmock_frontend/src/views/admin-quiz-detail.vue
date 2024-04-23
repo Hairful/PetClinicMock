@@ -190,6 +190,7 @@ export default {
       } catch (error) {
         // 在此处添加错误处理逻辑。
         console.error('发生错误:', error);
+        this.$message.warning(error.message);
       }
     },
     async saveImage(file, index) {
@@ -246,6 +247,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     fetchProb() {

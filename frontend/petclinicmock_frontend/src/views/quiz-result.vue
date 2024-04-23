@@ -161,6 +161,9 @@ export default {
         } else if (response.data.status === 1) {
           console.log('No corresponding quizID');
         }
+      }).catch(error => {
+        console.log(error);
+        this.$message.warning(error.message);
       });
   },
   metaInfo: {

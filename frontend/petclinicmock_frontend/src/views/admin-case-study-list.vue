@@ -175,7 +175,9 @@ export default {
         })
         .catch(error => {
           // handle error
+          this.notify(response.data.message);
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     async deleteDisease(index) {
@@ -197,6 +199,7 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        this.$message.warning(error.message);
       }
     },
     addDisease() {
@@ -221,6 +224,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     chooseType(type) {
@@ -246,6 +250,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     refresh() {
@@ -265,6 +270,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
   },
@@ -285,6 +291,7 @@ export default {
       })
       .catch((error) => {
         console.log(error);
+        this.$message.warning(error.message);
       });
   },
   metaInfo: {
