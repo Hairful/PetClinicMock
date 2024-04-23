@@ -45,7 +45,7 @@ exports.getCaseList = async (diseaseID) => {
         }))
       };
     } else {
-      return { status: 1, message: "无对应diseaseID" };
+      return { status: 0, message: "成功", cases: [] };
     }
   } catch (error) {
     logger.error('Error in /caseService.js/getCaseList: ', error);
