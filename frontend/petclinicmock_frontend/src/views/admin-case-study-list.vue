@@ -176,6 +176,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     async deleteDisease(index) {
@@ -197,6 +198,7 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        this.$message.warning(error.message);
       }
     },
     addDisease() {
@@ -221,6 +223,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     chooseType(type) {
