@@ -14,13 +14,6 @@ const paramsInQueryOfList = [];
 const paramsInBodyOfResult = ['quizID', 'credit', 'answers'];
 const paramsInQueryOfDetail = ['quizID'];
 
-//不启用Token认证
-/*
-router.get('/list', isQueryValid(paramsInQueryOfList), getQuizList);
-router.get('/detail', isQueryValid(paramsInQueryOfDetail), getQuizDetail);
-router.post('/result', isBodyValid(paramsInBodyOfResult), recordExamEntry);
-*/
-
 //启用Token认证
 
 router.get('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getQuizList);

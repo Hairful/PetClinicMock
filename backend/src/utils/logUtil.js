@@ -3,11 +3,10 @@ require('winston-daily-rotate-file');
 
 function createLogger(configurations) {
     const transports = [];
-
     configurations.forEach(config => {
         if (config.name && config.level) {
             const transport = new winston.transports.DailyRotateFile({
-                filename: `logs/${config.name}-%DATE%.log`,
+                filename: `./logs/${config.name}-%DATE%.log`,
                 level: config.level,
                 datePattern: 'YYYY-MM-DD',
                 maxSize: '1m',
@@ -17,7 +16,6 @@ function createLogger(configurations) {
             transports.push(transport);
         }
     });
-
     const logger = winston.createLogger({
         level: 'info',
         format: winston.format.combine(
@@ -43,8 +41,6 @@ function createLogger(configurations) {
             })
         ]
     });
-
     return logger;
 }
-
 module.exports = createLogger;
