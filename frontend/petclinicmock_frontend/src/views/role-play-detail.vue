@@ -53,6 +53,9 @@
               {{ this.jobDetail }}
             </span>      
           </div>
+          <div class="role-play-detail-container5" >
+            <router-link class="buttonFilled" :to="`/virtual-tour?roomID=${this.roomID}`"> 查看细节 </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +80,7 @@
 <script>
 import axios from 'axios';
 import Chatbot from '../components/Chatbot.vue';
+import router from '../router';
 
 export default {
   name: 'RolePlayDetail',
@@ -89,6 +93,7 @@ export default {
       role: ' ',
       job: ' ',
       jobDetail: ' ',
+      roomID:'',
       name: localStorage.getItem('username'),
     }
   },
@@ -122,7 +127,9 @@ export default {
         })
       .then((response) => {
         if (response.data.status === 0) {
+          //console.log(response.data);
           this.jobDetail = response.data.jobDetail;
+          this.roomID = response.data.roomID;
         } else if (response.data.status === 1) {
           console.log('No corresponding role');
         } else if (response.data.status === 2) {
@@ -422,7 +429,6 @@ export default {
   justify-content: center;
   margin: 5%;
 }
-
 
 
 .role-play-detail-footer {

@@ -4,7 +4,17 @@
       <header data-thq="thq-navbar" class="home-navbar-interactive navbarContainer">
         <span class="logo">PETCLINICMOCK</span>
         <div data-thq="thq-navbar-nav" class="home-desktop-menu">
-          <div class="home-buttons">
+          <div v-if="name" class="menu-container1">
+          <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
+              <span>
+                登录用户：
+              </span>
+              <span class="menu-text02">{{ name }}</span>
+          </div>
+            <router-link style="margin-top: 10px;" class="home-login buttonFilled" to="/menu"> 进入菜单 </router-link>
+            <button style="margin-top: 10px;" class="home-login buttonFilled" @click="logout"> 登出系统 </button>
+        </div>
+          <div v-else class="home-buttons">
             <router-link to="/login" class="home-login buttonFlat">
               登录
             </router-link>
@@ -55,13 +65,14 @@ export default {
   props: {},
   data() {
     return {
-      raw4lfp: ' ',
-      rawdg2p: ' ',
-      rawvmsq: ' ',
-      raw3m1y: ' ',
-      raw0kbt: ' ',
-      rawaqg9: ' ',
-      raww3ko: ' ',
+      name:localStorage.getItem('username'),
+
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.name = '';
     }
   },
   metaInfo: {
@@ -77,6 +88,23 @@ export default {
 </script>
 
 <style scoped>
+.menu-text02 {
+  color: var(--dl-color-custom-primary1);
+  font-weight: 700;
+}
+.menu-container1 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display:flex;
+  align-items: space-between;
+  flex-direction: column;
+}
+.menu-desktop-menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
 .home-container {
   width: 100%;
   display: flex;
