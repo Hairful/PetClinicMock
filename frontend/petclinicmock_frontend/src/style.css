@@ -61,6 +61,8 @@
 }
 .button {
   color: var(--dl-color-gray-black);
+  height: fit-content;
+  width: fit-content;
   display: inline-block;
   padding: 0.5rem 1rem;
   border-color: var(--dl-color-gray-black);
@@ -109,6 +111,7 @@
 
 .buttonFilled {
   color: var(--dl-color-custom-neutral-light);
+  width: fit-content;
   transition: 0.3s;
   font-family: Noto Sans;
   font-weight: bold;

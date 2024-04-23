@@ -120,7 +120,7 @@
             <span class="case-study-detail-heading2 underLine1">药物使用</span>
             <li v-for="(medicine, medIndex) in caseItem.details.medicines" :key="`medicine-${medIndex}`"
               class="bodyLarge">
-              <span class="bodyLarge"> {{ medIndex }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{
+              <span class="bodyLarge"> {{ medIndex+1 }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{
                     medicine.medicineIntro }}<br /> &emsp; 使用剂量：{{ medicine.dosage }}</span>
               <br />
             </li>

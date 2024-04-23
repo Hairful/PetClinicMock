@@ -109,6 +109,7 @@ export default {
           if (response.data.status === 0) {
             // Login successful
             this.token = response.data.token;
+            console.log(response);
             localStorage.setItem('Token', this.token);//将token存在localstorage中
             localStorage.setItem('username', this.formLogin.name);
             localStorage.setItem('userID', response.data.userID);

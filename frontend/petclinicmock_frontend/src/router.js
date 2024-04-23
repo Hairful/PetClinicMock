@@ -177,7 +177,7 @@ router.beforeEach((to, from, next) => {
     if (token === null || token === '') {
       next('/login');
     } else {
-      if((to.path.indexOf('admin')!=-1) && !localStorage.getItem('isAdmin'))
+      if((to.path.indexOf('admin')!=-1) && !(localStorage.getItem('isAdmin')=='true'))
       {
         window.alert("无对应权限");
         next(from.path);

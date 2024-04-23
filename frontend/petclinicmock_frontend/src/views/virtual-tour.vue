@@ -126,6 +126,7 @@ onMounted(async () => {
     // receivedParam.value = 0;
     receivedParam.value = queryParams.get('roomID');
     camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
+    moveTag(rooms[receivedParam.value].name);
     // camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
     //在此处你可以对参数进行进一步处理
     console.log('Received parameter:', receivedParam.value);
