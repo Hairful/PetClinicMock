@@ -73,6 +73,14 @@ export default {
     logout() {
       localStorage.clear();
       this.name = '';
+      name:localStorage.getItem('username'),
+
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.name = '';
     }
   },
   metaInfo: {
@@ -88,6 +96,23 @@ export default {
 </script>
 
 <style scoped>
+.menu-text02 {
+  color: var(--dl-color-custom-primary1);
+  font-weight: 700;
+}
+.menu-container1 {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display:flex;
+  align-items: space-between;
+  flex-direction: column;
+}
+.menu-desktop-menu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
 .menu-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;

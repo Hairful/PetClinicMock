@@ -12,6 +12,8 @@
       <span>医院加载中：{{ progress }}%</span>
     </div>
     <div class="title">3D导览</div>
+    <!-- Button added here -->
+    <button @click="exit3DNavigation">退出3D导览</button>
   </div>
 </template>
 
@@ -19,7 +21,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
-import { defineAsyncComponent, ref, onMounted } from "vue";
+import { defineAsyncComponent, ref, onMounted, onUnmounted } from "vue";
 import axios from 'axios';
 import gsap from "gsap";
 import SpriteCanvas from "../three/SpriteCanvas";
@@ -30,7 +32,6 @@ let tagDiv = ref(null);
 let progress = ref(0);
 // 创建一个响应式引用来存储传递的参数
 const receivedParam = ref('');
-
 // 初始化场景
 const scene = new THREE.Scene();
 // 初始化相机
@@ -47,24 +48,47 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const container = ref(null);
+const meshs = [];
 
 const render = () => {
   renderer.render(scene, camera);
   requestAnimationFrame(render);
 };
 
-
-
-
-
 // 添加立方体
 const geometry = new THREE.BoxGeometry(10, 10, 10);
 geometry.scale(1, 1, -1);
 
+window.addEventListener('popstate', () => {
+  window.location.href = '/menu';
+    });
+
+ // 定义处理点击事件的函数
+ const exit3DNavigation = () => {
+  // window.removeEventListener('click');
+  // 从 DOM 中移除整个容器
+  // 移除所有子元素
+  // 假设 meshs 是一个包含多个 mesh 的数组
+  while (meshs.length > 0) {
+    var mesh = meshs[0].mesh; // 获取数组中第一个元素对应的 mesh
+    // 移除第一个元素对应的 mesh
+    if (mesh && mesh.parentNode) {
+        mesh.parentNode.removeChild(mesh);
+    }
+    // 从数组中删除第一个元素
+    meshs.shift();
+  }
+
+  // var previousPageURL = document.referrer;
+  // 设置要返回的页面
+  window.location.href = '/menu';
+ 
+};
+
 onMounted(async () => {
-
+  
   const rooms = [];
-
+  
   const frontdeskItem = new Item();
   frontdeskItem.setItemInfo('前台');
 
@@ -357,6 +381,7 @@ transform: translate(100px,110px);
   const text = new SpriteCanvas(camera, "走廊", new THREE.Vector3(3, 0, 0.5));
   // text.mesh.rotation.y = Math.PI / 3;
   scene.add(text.mesh);
+  meshs.push(text);
   text.onClick(() => {
     console.log("走廊");
     gsap.to(camera.position, {
@@ -375,6 +400,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(4, 8, 1)
   );
   scene.add(textLiving.mesh);
+  meshs.push(textLiving);
   textLiving.onClick(() => {
     console.log("前台");
     gsap.to(camera.position, {
@@ -401,6 +427,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(1, 0, 4.5)
   );
   scene.add(labtext.mesh);
+  meshs.push(labtext);
   labtext.onClick(() => {
     console.log("化验室");
     gsap.to(camera.position, {
@@ -419,6 +446,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(3, 0, 11)
   );
   scene.add(fro1text.mesh);
+  meshs.push(fro1text);
   fro1text.onClick(() => {
     console.log("前台");
     gsap.to(camera.position, {
@@ -445,6 +473,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-4, 0, 1.3)
   );
   scene.add(pathtext.mesh);
+  meshs.push(pathtext);
   pathtext.onClick(() => {
     console.log("病理室");
     gsap.to(camera.position, {
@@ -463,6 +492,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-6, 0, 4)
   );
   scene.add(fro2text.mesh);
+  meshs.push(fro2text);
   fro2text.onClick(() => {
     console.log("前台");
     gsap.to(camera.position, {
@@ -489,6 +519,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-3, 0, -0.5)
   );
   scene.add(context.mesh);
+  meshs.push(context);
   context.onClick(() => {
     scene.add(context.mesh);
     context.onClick(() => {
@@ -510,6 +541,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-13, -1, -7)
   );
   scene.add(fro3text.mesh);
+  meshs.push(fro3text);
   fro3text.onClick(() => {
     console.log("前台");
     gsap.to(camera.position, {
@@ -536,6 +568,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(3.5, 0, -1.5)
   );
   scene.add(immtext.mesh);
+  meshs.push(immtext);
   immtext.onClick(() => {
     console.log("免疫室");
     gsap.to(camera.position, {
@@ -554,6 +587,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(10, -1, -7)
   );
   scene.add(fro4text.mesh);
+  meshs.push(fro4text);
   fro4text.onClick(() => {
     console.log("前台");
     gsap.to(camera.position, {
@@ -580,6 +614,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(3, 10, 7.5)
   );
   scene.add(psurtext.mesh);
+  meshs.push(psurtext);
   psurtext.onClick(() => {
     console.log("手术准备室");
     gsap.to(camera.position, {
@@ -598,6 +633,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(11.5, 10, 18)
   );
   scene.add(fro5text.mesh);
+  meshs.push(fro5text);
   fro5text.onClick(() => {
     console.log("走廊");
     gsap.to(camera.position, {
@@ -624,6 +660,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(8, 10, 16)
   );
   scene.add(distext.mesh);
+  meshs.push(distext);
   distext.onClick(() => {
     console.log("处理室");
     gsap.to(camera.position, {
@@ -642,6 +679,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(16, 10, 14)
   );
   scene.add(fro6text.mesh);
+  meshs.push(fro6text);
   fro6text.onClick(() => {
     console.log("走廊");
     gsap.to(camera.position, {
@@ -668,6 +706,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-1, 10, 7)
   );
   scene.add(imptext.mesh);
+  meshs.push(imptext);
   imptext.onClick(() => {
     console.log("住院室");
     gsap.to(camera.position, {
@@ -686,6 +725,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-7, 10, 16)
   );
   scene.add(fro7text.mesh);
+  meshs.push(fro7text);
   fro7text.onClick(() => {
     console.log("回走廊");
     gsap.to(camera.position, {
@@ -712,6 +752,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-4, 10, 19)
   );
   scene.add(surtext.mesh);
+  meshs.push(surtext);
   surtext.onClick(() => {
     console.log("手术室");
     gsap.to(camera.position, {
@@ -730,6 +771,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-5, 10, 28)
   );
   scene.add(fro8text.mesh);
+  meshs.push(fro8text);
   fro8text.onClick(() => {
     console.log("住院室");
     gsap.to(camera.position, {
@@ -756,6 +798,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-2, 10, 32)
   );
   scene.add(phartext.mesh);
+  meshs.push(phartext);
   phartext.onClick(() => {
     console.log("药房");
     gsap.to(camera.position, {
@@ -774,6 +817,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(2, 10, 36)
   );
   scene.add(fro9text.mesh);
+  meshs.push(fro9text);
   fro9text.onClick(() => {
     console.log("手术室");
     gsap.to(camera.position, {
@@ -800,6 +844,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(8, 10, 38.5)
   );
   scene.add(spectext.mesh);
+  meshs.push(spectext);
   spectext.onClick(() => {
     console.log("专科诊室");
     gsap.to(camera.position, {
@@ -818,6 +863,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(14, 10, 43)
   );
   scene.add(fro10text.mesh);
+  meshs.push(fro10text);
   fro10text.onClick(() => {
     console.log("药房");
     gsap.to(camera.position, {
@@ -844,6 +890,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(5, 0, 12)
   );
   scene.add(imatext.mesh);
+  meshs.push(imatext);
   imatext.onClick(() => {
     console.log("影像室");
     gsap.to(camera.position, {
@@ -862,6 +909,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(8, 0, 18)
   );
   scene.add(fro11text.mesh);
+  meshs.push(fro11text);
   fro11text.onClick(() => {
     console.log("化验室");
     gsap.to(camera.position, {
@@ -880,6 +928,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(16, 0, 18)
   );
   scene.add(fro12text.mesh);
+  meshs.push(fro12text);
   fro12text.onClick(() => {
     console.log("回前台");
     gsap.to(camera.position, {
@@ -906,6 +955,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(3, 11, 1)
   );
   scene.add(arctext.mesh);
+  meshs.push(arctext);
   arctext.onClick(() => {
     console.log("档案室");
     gsap.to(camera.position, {
@@ -924,6 +974,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(10, 20, 8)
   );
   scene.add(fro13text.mesh);
+  meshs.push(fro13text);
   fro13text.onClick(() => {
     console.log("回二楼走廊");
     gsap.to(camera.position, {
@@ -946,6 +997,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-1, 0, 4)
   );
   scene.add(desk.mesh);
+  meshs.push(desk);
 
   desk.onClick(() => {
     createVideoEle(frontdeskItem.itemURL, frontdeskItem.itemDetail);
@@ -958,6 +1010,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-5, 9.5, 34)
   );
   scene.add(surgeryknife.mesh);
+  meshs.push(surgeryknife);
 
   // 点击手术刀时弹出视频框
   surgeryknife.onClick(() => {
@@ -971,6 +1024,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(1, 0, 12)
   );
   scene.add(labdesk.mesh);
+  meshs.push(labdesk);
 
   // 点击化验台时弹出视频框
   labdesk.onClick(() => {
@@ -984,6 +1038,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(12, 0, 18)
   );
   scene.add(film.mesh);
+  meshs.push(film);
 
   // 点击影像台时弹出视频框
   film.onClick(() => {
@@ -997,6 +1052,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-5, 9.5, 32)
   );
   scene.add(surgerydesk.mesh);
+  meshs.push(surgerydesk);
   // 点击手术仪器时弹出视频框
   surgerydesk.onClick(() => {
     createVideoEle(surgerydeskItem.itemURL, surgerydeskItem.itemDetail);
@@ -1010,6 +1066,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-7, 9.5, 32)
   );
   scene.add(surgeryEquipment.mesh);
+  meshs.push(surgeryEquipment);
 
   // 点击手术仪器时弹出视频框
   surgeryEquipment.onClick(() => {
@@ -1023,6 +1080,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(8, -1, -5)
   );
   scene.add(immRoom.mesh);
+  meshs.push(immRoom);
 
   // 点击免疫室时弹出视频框
   immRoom.onClick(() => {
@@ -1036,6 +1094,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-8, 0, 6)
   );
   scene.add(pathRoom.mesh);
+  meshs.push(pathRoom);
 
   // 点击病理室时弹出视频框
   pathRoom.onClick(() => {
@@ -1050,6 +1109,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-16, -1, -7)
   );
   scene.add(consultRoom.mesh);
+  meshs.push(consultRoom);
 
   // 点击诊室时弹出视频框
   consultRoom.onClick(() => {
@@ -1063,6 +1123,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-6, 10, 21)
   );
   scene.add(livingRoom.mesh);
+  meshs.push(livingRoom);
 
   // 点击动物仓时弹出视频框
   livingRoom.onClick(() => {
@@ -1076,6 +1137,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(-8, 10, 18)
   );
   scene.add(washingRoom.mesh);
+  meshs.push(washingRoom);
 
   // 点击动物洗浴区时弹出视频框
   washingRoom.onClick(() => {
@@ -1089,6 +1151,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(2, 11, 42)
   );
   scene.add(med.mesh);
+  meshs.push(med);
 
   // 点击药品时弹出视频框
   med.onClick(() => {
@@ -1102,6 +1165,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(2, 9.5, 40)
   );
   scene.add(medEquipment.mesh);
+  meshs.push(medEquipment);
 
   // 点击称量仪器时弹出视频框
   medEquipment.onClick(() => {
@@ -1115,6 +1179,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(13, 10, 39)
   );
   scene.add(specDetail.mesh);
+  meshs.push(specDetail);
 
   // 点击特殊诊室时弹出视频框
   specDetail.onClick(() => {
@@ -1128,7 +1193,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(9, 20, 9)
   );
   scene.add(arcDetail.mesh);
-
+  meshs.push(arcDetail);
   // 点击档案室时弹出视频框
   arcDetail.onClick(() => {
     createVideoEle(archItem.itemURL, archItem.itemDetail);
@@ -1141,6 +1206,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(6, 10, 18)
   );
   scene.add(preDetail.mesh);
+  meshs.push(preDetail);
 
   // 点击手术准备室时弹出视频框
   preDetail.onClick(() => {
@@ -1154,6 +1220,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(13.8, 8.8, 10)
   );
   scene.add(proDetail.mesh);
+  meshs.push(proDetail);
 
   // 点击处理台时弹出视频框
   proDetail.onClick(() => {
@@ -1167,6 +1234,7 @@ transform: translate(100px,110px);
     new THREE.Vector3(16, 10.5, 9)
   );
   scene.add(proEquipment.mesh);
+  meshs.push(proEquipment);
 
   // 点击处理台设备时弹出视频框
   proEquipment.onClick(() => {
@@ -1176,7 +1244,6 @@ transform: translate(100px,110px);
   container.value.appendChild(renderer.domElement);
   render();
 
-  
 
   let isMouseDown = false;
 
@@ -1207,7 +1274,10 @@ transform: translate(100px,110px);
     },
     false
   );
+
 });
+
+
 
 class Item {
   constructor() {
@@ -1294,6 +1364,8 @@ class Room {
     };
   }
 }
+
+
 
 </script>
 
