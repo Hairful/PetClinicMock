@@ -11,8 +11,8 @@
               </span>
               <span class="menu-text02">{{ name }}</span>
           </div>
-            <router-link style="margin-top: 10px;" class="home-login buttonFilled" to="/menu"> 进入菜单 </router-link>
-            <button style="margin-top: 10px;" class="home-login buttonFilled" @click="logout"> 登出系统 </button>
+            <router-link style="margin-top: 10px;" class="buttonFilled" to="/menu"> 进入菜单 </router-link>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
         </div>
           <div v-else class="home-buttons">
             <router-link to="/login" class="home-login buttonFlat">
