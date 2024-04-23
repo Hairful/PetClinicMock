@@ -11,8 +11,8 @@
               </span>
               <span class="menu-text02">{{ name }}</span>
           </div>
-            <router-link style="margin-top: 10px;" class="home-login buttonFilled" to="/menu"> 进入菜单 </router-link>
-            <button style="margin-top: 10px;" class="home-login buttonFilled" @click="logout"> 登出系统 </button>
+            <router-link style="margin-top: 10px;" class="buttonFilled" to="/menu"> 进入菜单 </router-link>
+            <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
         </div>
           <div v-else class="home-buttons">
             <router-link to="/login" class="home-login buttonFlat">
@@ -93,23 +93,6 @@ export default {
 </script>
 
 <style scoped>
-.menu-text02 {
-  color: var(--dl-color-custom-primary1);
-  font-weight: 700;
-}
-.menu-container1 {
-  flex: 0 0 auto;
-  width: auto;
-  height: auto;
-  display:flex;
-  align-items: space-between;
-  flex-direction: column;
-}
-.menu-desktop-menu {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-}
 .menu-text02 {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;

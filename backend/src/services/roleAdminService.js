@@ -27,12 +27,7 @@ exports.createJob = async (role, job, jobDetail, roomID) => {
         if (jobexist) {
             return { status: 2, message: '重复的工作' };
         }
-        if (roomID != undefined) {
-            const result = await Job.create({ role, job, jobDetail, roomID });
-        }
-        else {
-            const result = await Job.create({ role, job, jobDetail })
-        }
+        const result = await Job.create({ role, job, jobDetail, roomID });
         return { status: 0, message: '成功' };
     } catch (error) {
         logger.error('Error in /roleAdminService.js/createJob: ', error);
