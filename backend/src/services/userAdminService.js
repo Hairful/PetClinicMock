@@ -12,7 +12,7 @@ const loggerConfigurations = [
     { name: 'error-admin', level: 'warn' }
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
-
+const { redisStatus, redisClient } = require('../config/redisClient');
 /**
  * getAllUser - 获取所有用户
  * @returns {Object} 对象
@@ -53,6 +53,11 @@ exports.createUser = async (userName, password, isAdmin) => {
             'password': hashedPassword,
             'isAdmin': isAdmin,
             'salt': salt
+        });
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
         });
         return { status: 0, message: '成功', userID: newUser.userID };
     }
@@ -96,6 +101,11 @@ exports.updateUser = async (userID, userName, password, isAdmin) => {
         if (isAdmin !== undefined) user.isAdmin = isAdmin;
         await user.save({ transaction: t });
         await t.commit();
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return { status: 0, message: '成功' };
     } catch (error) {
         await t.rollback();
@@ -117,6 +127,11 @@ exports.deleteUser = async (userID) => {
             return { status: 1, message: '无对应用户ID' };
         }
         await user.destroy();
+        redisClient.flushAll().then((result) => {
+            logger.info('FlushAll result:', result);
+        }).catch((error) => {
+            logger.error('FlushAll error:', error);
+        });
         return { status: 0, message: '成功' };
     } catch (error) {
         logger.error('Error in /userAdminService.js/deleteUser: ', error);
