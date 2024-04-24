@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 require('./utils/logUploader');
 const httpLogger = require('./middlewares/httpLogger');
 const { limiter } = require('./middlewares/rateLimit');
-
+const probDbAdminRoute = require('./routes/probDbAdminRoute');
 const userAuthRoute = require('./routes/userAuthRoute');
 const diseaseRoute = require('./routes/diseaseRoute');
 const quizRoute = require('./routes/quizRoute');
@@ -45,6 +45,8 @@ app.use('/admin/medicine', medicineAdminRoute);
 app.use('/admin/case', caseAdminRoute);
 app.use('/admin/quiz', quizAdminRoute);
 app.use('/admin', vtAdminRoute);
+app.use('/admin/probDb', probDbAdminRoute);
 app.use('/admin/roleplaying', roleAdminRoute);
+
 
 module.exports = app;
