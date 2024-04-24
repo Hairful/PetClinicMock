@@ -56,7 +56,7 @@
                 <input type="text" v-model="quiz.timer"  class="input" />
                 <button type="button" class="button" @click="renameQuiz(index)">修改限时</button>
               </div>
-              <router-link :to="`/admin-quiz-detail?quizID=${quiz.quizID}`" class="admin-quiz-list-navlink1 button">
+              <router-link :to="`/admin-quiz-detail?quizID=${quiz.quizID}`" class="admin-quiz-list-navlink2 button">
                 管理问题
               </router-link>
               <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteQuiz(index)">删除测试</button>
