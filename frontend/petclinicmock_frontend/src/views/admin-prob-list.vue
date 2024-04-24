@@ -21,20 +21,17 @@
     <div class="admin-quiz-list-container01"></div>
     <div class="heroContainer admin-quiz-list-hero">
       <div class="admin-quiz-list-container02">
-        <h1 class="admin-quiz-list-hero-heading">测试管理</h1>
+        <h1 class="admin-quiz-list-hero-heading">题库管理</h1>
       </div>
     </div>
     <div class="admin-quiz-list-container03">
       <router-link to="/admin-menu" class="admin-quiz-list-navlink button">
         <span>返回管理员菜单</span>
       </router-link>
-      <router-link to="/admin-menu" class="admin-quiz-list-navlink1 button">
-        <span>题库管理</span>
-      </router-link>
     </div>
     <div class="admin-quiz-list-hero1 heroContainer">
       <h1 class="admin-quiz-list-hero-heading1">
-        <span class="heading1">选择测试</span>
+        <span class="heading1">选择题目</span>
         <br />
       </h1>
       <div class="admin-quiz-list-container04">
