@@ -159,6 +159,7 @@ exports.getCaseDetail = async (caseID) => {
       summary: caseInfo.summary,
       treatment: caseInfo.treatment,
       diseases: caseInfo.Disease,
+      diagnose: caseInfo.diagnose,
       medicines: medicines.map(med => {
         const caseMedicine = caseMedicines.find(cm => cm.MedicineMedicineID === med.medicineID);
         return {
