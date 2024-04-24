@@ -12,9 +12,11 @@
       <span>医院加载中：{{ progress }}%</span>
     </div>
     <div class="title">3D导览</div>
-    <!-- Button added here -->
-    <button @click="exit3DNavigation">退出3D导览</button>
+     <!-- 第一个按钮 -->
+      <button @click="exit3DNavigation" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;">返回主页</button>
 
+     <!-- 第二个按钮 -->
+      <button @click="exit3DtoRole" style="padding: 10px 20px; background-color: #008CBA; color: white; border: none; cursor: pointer; border-radius: 5px;">返回角色扮演</button>
   </div>
 </template>
 
@@ -61,19 +63,33 @@ const render = () => {
 const geometry = new THREE.BoxGeometry(10, 10, 10);
 geometry.scale(1, 1, -1);
 
-window.addEventListener('popstate', () => {
+function popstateHandler() {
   const previousUrl = document.referrer; // 获取前一个页面的 URL
-  if(previousUrl=='/role-play-list?role=前台'){
-    previousUrl='/role-play-list?role=前台'
+  window.location.href = '/menu';
+}
+
+window.addEventListener('popstate', popstateHandler);
+
+ // 定义处理点击事件的函数
+ const exit3DtoRole = () => {
+  // window.removeEventListener('click');
+  // 从 DOM 中移除整个容器
+  // 移除所有子元素
+  // 假设 meshs 是一个包含多个 mesh 的数组
+  while (meshs.length > 0) {
+    var mesh = meshs[0].mesh; // 获取数组中第一个元素对应的 mesh
+    // 移除第一个元素对应的 mesh
+    if (mesh && mesh.parentNode) {
+        mesh.parentNode.removeChild(mesh);
+    }
+    // 从数组中删除第一个元素
+    meshs.shift();
   }
-  if(previousUrl=='/role-play-list?role=医助'){
-    previousUrl=='/role-play-list?role=医助'
-  }
-  if(previousUrl=='/role-play-list?role=医生'){
-    previousUrl=='/role-play-list?role=医生'
-  }
-  window.location.href = previousUrl;
-    });
+  // var previousPageURL = document.referrer;
+  // 设置要返回的页面
+  window.location.href = '/role-play-menu';
+ 
+};
 
  // 定义处理点击事件的函数
  const exit3DNavigation = () => {

@@ -30,39 +30,22 @@
     <div class="heroContainer">
       <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="containerCenter">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>测试编号</th>
-              <th>测试名称</th>
-              <th>总分</th>
-              <th>测试限时(分钟)</th>
-              <th>最后尝试分数</th>
-              <th>最后尝试时间</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(quiz, index) in filteredQuizzes" :key="quiz.quizID" :class="`tr-color-` + index % 2 + ` bodyLarge`">
-              <td>{{ index + 1 }}</td>
-              <td style="width: 30%;">
-                <router-link :to="getQuizLink(quiz)" :class="`routerlink`">
-                  {{ quiz.quizName }}
-                </router-link>
-              </td>
-              <td>{{ quiz.totalCredits }}</td>
-              <td>{{ quiz.timer }}</td>
-              <td>{{ quiz.lastTry }}</td>
-              <td>{{ quiz.lastTryTime }}</td>
-              <td>
-                <router-link :to="getQuizLink(quiz)" :class="`quiz-list-navlink1 button-common`">
-                  <div v-if="quiz.lastTryTime">查看结果</div>
-                  <div v-else>开始新的</div>
-                </router-link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <el-card style="width: 80%;">
+          <el-table :data="filteredQuizzes"  stripe><!-- 带边框、斑马纹 -->
+              <el-table-column label="测试编号" type="index"></el-table-column>
+              <el-table-column label="测试名称" prop="quizName"></el-table-column>
+              <el-table-column label="总分" prop="totalCredits"></el-table-column>
+              <el-table-column label="测试限时(分钟)" prop="timer"></el-table-column>
+              <el-table-column label="最后尝试分数" prop="lastTry"></el-table-column>
+              <el-table-column label="最后尝试时间" prop="lastTryTime"></el-table-column>
+              <el-table-column label="操作" width="200px">
+                  <template slot-scope="scope">
+                    <el-button v-if="scope.row.lastTryTime" size= "mini" type="primary" icon="el-icon-search" @click="checkResult(scope.row.quizID)">查看结果</el-button>  
+                    <el-button v-else size= "mini" type="primary" icon="el-icon-edit"  @click="doQuiz(scope.row.quizID)">开始测试</el-button>  
+                  </template>
+              </el-table-column>
+          </el-table>
+        </el-card>
       </div>
     </div>
     <div class="quiz-list-footer">
@@ -85,6 +68,7 @@
 
 <script>
 import axios from 'axios';
+import router from '../router';
 export default {
   name: 'QuizList',
   props: {},
@@ -104,6 +88,12 @@ export default {
     },
   },
   methods: {
+    checkResult(id){
+      router.push(`/quiz-result?quizID=${id}`);
+    },
+    doQuiz(id){
+      router.push(`/quiz-detail?quizID=${id}`);
+    },
     logout() {
       localStorage.clear();
       this.$router.push('/');
