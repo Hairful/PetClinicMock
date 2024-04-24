@@ -116,6 +116,13 @@
         </div>
         <div class="admin-case-study-detail-container10">
           <span style="width: 100%;" class="admin-case-study-detail-text142 heading2">检查结果</span>
+          <div class="admin-case-study-detail-container57">
+            <textarea v-model="caseItem.details.examine" :placeholder="`${caseItem.details.examine}`"
+              class="admin-case-study-detail-textarea5 textarea"></textarea>
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyExamine(index)">
+              修改
+            </button>
+          </div>
           <div class="admin-case-study-detail-container45">
             <div class="admin-case-study-detail-text142">图片：
               <input @change="img($event, index, 2)" type="file">
@@ -193,7 +200,13 @@
           </div>
         </div>
         <div class="admin-case-study-detail-container10">
-          <span style="width: 100%;" class="admin-case-study-detail-text142 heading2">治疗方案</span>
+          <span style="width: 100%;" class="admin-case-study-detail-text142 heading2">治疗方案</span>          <div class="admin-case-study-detail-container57">
+            <textarea v-model="caseItem.details.treatment" :placeholder="`${caseItem.details.treatment}`"
+              class="admin-case-study-detail-textarea5 textarea"></textarea>
+            <button type="button" class="admin-case-study-detail-button40 button" @click="modifyTreatment(index)">
+              修改
+            </button>
+          </div>
           <div class="admin-case-study-detail-container45">
             <div class="admin-case-study-detail-text142">图片：
               <input @change="img($event, index, 6)" type="file">
@@ -646,7 +659,52 @@ export default {
           this.$message.warning(error.message);
         });
     },
-
+    modifyExamine(index) {
+      axios({
+        method: 'put',
+        url: '/admin/case',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          caseID: this.cases[index].caseID,
+          examine: this.cases[index].details.examine,
+        }
+      })
+        .then(response => {
+          this.fetchCases();
+          this.notify('修改成功');
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+          this.$message.warning(error.message);
+        });
+    },
+    modifyTreatment(index) {
+      axios({
+        method: 'put',
+        url: '/admin/case',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          caseID: this.cases[index].caseID,
+          treatment: this.cases[index].details.treatment,
+        }
+      })
+        .then(response => {
+          this.fetchCases();
+          this.notify('修改成功');
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+          this.$message.warning(error.message);
+        });
+    },
   },
   created() {
     this.diseaseType = this.$route.query.diseaseType;
