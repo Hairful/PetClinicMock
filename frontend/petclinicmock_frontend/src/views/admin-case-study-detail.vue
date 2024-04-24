@@ -342,6 +342,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     deleteMed(index, medIndex) {
@@ -389,6 +390,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     modifyPV(index) {
@@ -419,6 +421,7 @@ export default {
         .catch(error => {
           // handle error
           console.log(error);
+          this.$message.warning(error.message);
         });
     },
     async deleteImage(index, pvIndex, kind) {
