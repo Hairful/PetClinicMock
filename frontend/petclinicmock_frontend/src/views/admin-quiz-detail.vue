@@ -43,7 +43,43 @@
         </span>
       </router-link>
     </div>
+    
     <div class="admin-quiz-detail-hero1 heroContainer">
+      <div class="admin-quiz-detail-container19">
+        <h1 class="admin-quiz-detail-hero-heading3 heading1">
+          <span class="heading1">添加问题</span>
+          <br />
+        </h1>
+        <div class="containerCenter">
+          <button type="button" class="admin-quiz-detail-button14 button" @click="addProb">添加</button>
+          <button type="button" style="margin-left: 50px;" class="admin-quiz-detail-button14 button" @click="openLinkWindow">从题库导入</button>
+        </div>
+      </div>
+      <div class="admin-quiz-detail-container26">
+        <button to="/admin-quiz-list" class="admin-quiz-detail-navlink2 button" @click="save">
+          保存
+        </button>
+      </div>
+      <el-dialog
+          title="导入题目"
+          :visible.sync="linkVisible"
+          v-if="linkVisible"
+          width="60%"
+          style="margin-top: 10%;"
+        >
+        <el-table :data="probDb"  stripe><!-- 带边框、斑马纹 -->
+              <el-table-column width="100px" label="题目编号" prop="probDbID"></el-table-column>
+              <el-table-column label="题目内容" prop="probDbText"></el-table-column>
+              <el-table-column align="right" width="100px">
+                <template slot-scope="scope">
+                  <el-button size= "mini" type="primary"  @click="addToQuiz(scope.row)">导入</el-button>
+                </template>
+              </el-table-column>
+          </el-table>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="linkVisible = false">退出</el-button>
+        </span>
+      </el-dialog>
       <div v-for="(prob, index) in probs" class="admin-quiz-detail-container05">
         <h1 class="admin-quiz-detail-hero-heading1 heading1">
           <span class="heading1">问题 {{ index + 1 }}</span>
@@ -90,22 +126,6 @@
         </div>
       </div>
 
-      <div class="admin-quiz-detail-container19">
-        <h1 class="admin-quiz-detail-hero-heading3 heading1">
-          <span class="heading1">添加问题</span>
-          <br />
-        </h1>
-        <div class="admin-quiz-detail-container20">
-          <button type="button" class="admin-quiz-detail-button14 button" @click="addProb">
-            添加
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="admin-quiz-detail-container26">
-      <button to="/admin-quiz-list" class="admin-quiz-detail-navlink2 button" @click="save">
-        保存
-      </button>
     </div>
     <div class="admin-quiz-detail-footer">
       <footer class="admin-quiz-detail-footer1 footerContainer">
@@ -153,9 +173,62 @@ export default {
         lastAns: '',
       },
       totalTime:0,
+      linkVisible:false,
+      probDb:[],
     }
   },
   methods: {
+    addToQuiz(prob){
+      axios({
+        method: 'post',
+        url: '/admin/probDb/link',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          probDbID : prob.probDbID,
+          quizID: this.quizID,
+        }
+      })
+        .then(response => {
+          this.fetchProb();
+          this.$message("导入成功");
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+          this.$message.warning(error.message);
+        });
+    },
+    openLinkWindow(){
+      axios
+        .get(`/admin/probDb/list`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('Token')}`
+            }
+          })
+        .then((response) => {
+          if (response.data.status === 0) {
+            this.probDb = response.data.probDbs;
+            this.probDb.forEach(prob => {
+              prob.probDbText = prob.probDbText.split('<br/>')[0];
+              if(prob.probDbText.length>=20)
+              {
+                prob.probDbText = prob.probDbText.substring(0,19) + "...";
+              }
+            });
+          } else {
+            console.log(response.data.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$message.warning(error.message);
+        });
+      this.linkVisible = true;
+    },
     notify(str){
       this.$message(str)
     },
@@ -584,9 +657,9 @@ export default {
 
 .admin-quiz-detail-hero1 {
   padding-top: 0px;
+  padding-bottom: 200px;
   border-color: rgba(0, 0, 0, 0);
   border-width: 1px;
-  padding-bottom: 0px;
   background-color: var(--dl-color-gray-black);
 }
 
