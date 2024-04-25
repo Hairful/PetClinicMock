@@ -210,7 +210,6 @@
 <script>
 import axios from 'axios';
 import client from '../oss.js';
-import { string } from 'three/examples/jsm/nodes/Nodes.js';
 export default {
   name: 'AdminQuizList',
   props: {},
