@@ -56,8 +56,8 @@
 
       <div class="admin-case-study-list-title">修改现有疾病</div>
       <div class="containerCenter">
-        <button v-for="(diseaseType, index) in diseaseTypes" :key="index" :class="`case-study-menu-navlink1 button`" :style="`margin-right: 10px;`"
-          @click="chooseType(diseaseType)">
+        <button v-for="(diseaseType, index) in diseaseTypes" :key="index" :class="`case-study-menu-navlink1 button`"
+          :style="`margin-right: 10px;`" @click="chooseType(diseaseType)">
           <span class="heading3">{{ diseaseType }}</span>
         </button>
       </div>
@@ -83,7 +83,8 @@
                   </router-link>
                 </div>
                 <div class="admin-case-study-list-container11">
-                  <input type="text" v-model="disease.diseaseName" :placeholder="`${disease.diseaseName}`" class="input" />
+                  <input type="text" v-model="disease.diseaseName" :placeholder="`${disease.diseaseName}`"
+                    class="input" />
                   <button type="button" class="admin-case-study-list-button3 button" @click=renameDisease(index)>
                     <span class="admin-case-study-list-text19 bodyLarge">
                       <span>重命名</span>
@@ -92,7 +93,7 @@
                   </button>
                 </div>
                 <div class="admin-case-study-list-container12">
-                  <input type="text" v-model="inputType[index]"  class="input" />
+                  <input type="text" v-model="inputType[index]" class="input" />
                   <button type="button" class="admin-case-study-list-button3 button" @click=renameDisease(index)>
                     <span class="admin-case-study-list-text19 bodyLarge">
                       修改类型
@@ -130,7 +131,7 @@ export default {
   props: {},
   data() {
     return {
-      isAdding:false,
+      isAdding: false,
       currentType: '',
       diseaseTypes: [],
       diseases: [],
@@ -142,10 +143,10 @@ export default {
     }
   },
   methods: {
-    notify(str){
+    notify(str) {
       this.$message(str)
     },
-    isAdd(){
+    isAdd() {
       this.isAdding = !this.isAdding;
     },
     logout() {
@@ -241,9 +242,9 @@ export default {
           if (response.data.status === 0) {
             this.diseases = response.data.diseases;
             this.diseases.forEach(disease => {
-            this.inputType.push(this.currentType)
+              this.inputType.push(this.currentType)
             });
-            
+
           } else {
             console.log(response.data.message);
           }

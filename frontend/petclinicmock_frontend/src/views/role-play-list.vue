@@ -44,7 +44,7 @@
           <div class="labelContainer">
             <router-link to="/menu" class="routerlink">>主菜单</router-link>
             <router-link to="/role-play-menu" class="routerlink">>角色扮演</router-link>
-            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{this.role}}</router-link>
+            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{ this.role }}</router-link>
           </div>
         </div>
         <div class="containerCenter">
@@ -52,12 +52,12 @@
             <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
           </div>
           <div class="role-play-list-container4">
-              <div v-for="(job, index) in filteredJobs" :key="index" class="role-play-list=li list-item Content">
-                <router-link :to="{ path: '/role-play-detail', query: { role: role, job: job } }"
-                  class="role-play-list-navlink2 bodyLarge button">
-                  {{ job }}
-                </router-link>
-              </div>
+            <div v-for="(job, index) in filteredJobs" :key="index" class="role-play-list=li list-item Content">
+              <router-link :to="{ path: '/role-play-detail', query: { role: role, job: job } }"
+                class="role-play-list-navlink2 bodyLarge button">
+                {{ job }}
+              </router-link>
+            </div>
           </div>
         </div>
       </div>

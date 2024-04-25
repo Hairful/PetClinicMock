@@ -40,154 +40,133 @@
       <div class="admin-quiz-list-container04">
       </div>
       <el-card style="width: 80%;">
-          <el-table :data="probs"  stripe><!-- 带边框、斑马纹 -->
-              <el-table-column width="100px" label="题目编号" prop="probDbID"></el-table-column>
-              <el-table-column label="题目内容" prop="probDbText"></el-table-column>
-              <el-table-column align="right" width="300px">
-                <template slot="header" slot-scope="scope">
-                  <el-button size= "big" type="success" @click="openAddWindow">新增</el-button>
-                </template>
-                <template slot-scope="scope">
-                    <el-button size= "mini" type="primary" icon="el-icon-edit" @click="openEditWindow(scope.row)">编辑</el-button>
-                    <el-button size= "mini" type="danger" icon="el-icon-delete" @click="deleteProb(scope.row)">删除</el-button>
-                </template>
-              </el-table-column>
-          </el-table>
-          <el-dialog title="添加题目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed"
-            :close-on-click-modal='false'>
-              <!-- 内容主体区 -->
-              <el-form :model="addForm" ref="addFormRef" label-width="70px">
-                <el-form-item label="题目" required>
-                  <el-input v-model="addForm.text" ></el-input>
-                </el-form-item>
-                <el-form-item label="选项" required>
-                  <el-row></el-row>
-                  <el-row :gutter="50">
-                    <el-col :span="11">
-                      <div>选项A</div>
-                      <el-input v-model="addForm.option1" ></el-input>
-                    </el-col>
-                    <el-col :span="11">
-                      <div>选项B</div>
-                      <el-input v-model="addForm.option2" ></el-input>
-                    </el-col>
-                  </el-row>
-                  <el-row :gutter="50">
-                    <el-col :span="11">
-                      <div>选项C</div>
-                      <el-input v-model="addForm.option3" ></el-input>
-                    </el-col>
-                    <el-col :span="11">
-                      <div>选项D</div>
-                      <el-input v-model="addForm.option4" ></el-input>
-                    </el-col>
-                  </el-row>
-                </el-form-item>
-                <el-form-item label="正确选项" required>
-                  <el-radio-group v-model="addForm.ans">
-                    <el-radio :label="1">A</el-radio>
-                    <el-radio :label="2">B</el-radio>
-                    <el-radio :label="3">C</el-radio>
-                    <el-radio :label="4">D</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="分数" required>
-                  <el-input v-model="addForm.credit"></el-input>
-                </el-form-item>
-                <el-form-item label="图片">
-                  <el-upload
-                    class="upload-demo"
-                    drag
-                    action="#"
-                    list-type="picture"
-                    :http-request="UploadImage"
-                    :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove"
-                    :before-upload="beforeAvatarUpload"
-                    :limit="1"
-                    :on-change="handleChange"
-                    :on-exceed="handleExceed"
-                    :file-list="formData.fileList"
-                    multiple>
-                    <i class="el-icon-upload"></i>
-                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                  </el-upload>
-                </el-form-item>
-              </el-form>
-              <!-- 底部区 -->
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="addDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="AddProb()">确 定</el-button>
-              </span>
-            </el-dialog>
-          <el-dialog title="修改题目" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed"
-            :close-on-click-modal='false'>
-              <!-- 内容主体区 -->
-              <el-form :model="editForm" ref="editFormRef" label-width="70px">
-                <el-form-item label="题目" required>
-                  <el-input v-model="editForm.text" @input="change($event)"></el-input>
-                </el-form-item>
-                <el-form-item label="选项" required>
-                  <el-row></el-row>
-                  <el-row :gutter="50">
-                    <el-col :span="11">
-                      <div>选项A</div>
-                      <el-input v-model="editForm.option1" @input="change($event)"></el-input>
-                    </el-col>
-                    <el-col :span="11">
-                      <div>选项B</div>
-                      <el-input v-model="editForm.option2" @input="change($event)"></el-input>
-                    </el-col>
-                  </el-row>
-                  <el-row :gutter="50">
-                    <el-col :span="11">
-                      <div>选项C</div>
-                      <el-input v-model="editForm.option3" @input="change($event)"></el-input>
-                    </el-col>
-                    <el-col :span="11">
-                      <div>选项D</div>
-                      <el-input v-model="editForm.option4" @input="change($event)"></el-input>
-                    </el-col>
-                  </el-row>
-                </el-form-item>
-                <el-form-item label="正确选项" required>
-                  <el-radio-group v-model="editForm.ans" @input="change($event)">
-                    <el-radio :label="1">A</el-radio>
-                    <el-radio :label="2">B</el-radio>
-                    <el-radio :label="3">C</el-radio>
-                    <el-radio :label="4">D</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="分数" required>
-                  <el-input v-model="editForm.credit" @input="change($event)"></el-input>
-                </el-form-item>
-                <el-form-item label="图片">
-                  <el-upload
-                    class="upload-demo"
-                    drag
-                    action="#"
-                    list-type="picture"
-                    :http-request="UploadImage"
-                    :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove"
-                    :before-upload="beforeAvatarUpload"
-                    :limit="1"
-                    :on-change="handleChange"
-                    :on-exceed="handleExceed"
-                    :file-list="formData.fileList"
-                    multiple>
-                    <i class="el-icon-upload"></i>
-                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                  </el-upload>
-                </el-form-item>
-              </el-form>
-              <!-- 底部区 -->
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="editDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="EditProb()">确 定</el-button>
-              </span>
-            </el-dialog>
-        </el-card>
+        <el-table :data="probs" stripe><!-- 带边框、斑马纹 -->
+          <el-table-column width="100px" label="题目编号" prop="probDbID"></el-table-column>
+          <el-table-column label="题目内容" prop="probDbText"></el-table-column>
+          <el-table-column align="right" width="300px">
+            <template slot="header" slot-scope="scope">
+              <el-button size="big" type="success" @click="openAddWindow">新增</el-button>
+            </template>
+            <template slot-scope="scope">
+              <el-button size="mini" type="primary" icon="el-icon-edit"
+                @click="openEditWindow(scope.row)">编辑</el-button>
+              <el-button size="mini" type="danger" icon="el-icon-delete" @click="deleteProb(scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-dialog title="添加题目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed"
+          :close-on-click-modal='false'>
+          <!-- 内容主体区 -->
+          <el-form :model="addForm" ref="addFormRef" label-width="70px">
+            <el-form-item label="题目" required>
+              <el-input v-model="addForm.text"></el-input>
+            </el-form-item>
+            <el-form-item label="选项" required>
+              <el-row></el-row>
+              <el-row :gutter="50">
+                <el-col :span="11">
+                  <div>选项A</div>
+                  <el-input v-model="addForm.option1"></el-input>
+                </el-col>
+                <el-col :span="11">
+                  <div>选项B</div>
+                  <el-input v-model="addForm.option2"></el-input>
+                </el-col>
+              </el-row>
+              <el-row :gutter="50">
+                <el-col :span="11">
+                  <div>选项C</div>
+                  <el-input v-model="addForm.option3"></el-input>
+                </el-col>
+                <el-col :span="11">
+                  <div>选项D</div>
+                  <el-input v-model="addForm.option4"></el-input>
+                </el-col>
+              </el-row>
+            </el-form-item>
+            <el-form-item label="正确选项" required>
+              <el-radio-group v-model="addForm.ans">
+                <el-radio :label="1">A</el-radio>
+                <el-radio :label="2">B</el-radio>
+                <el-radio :label="3">C</el-radio>
+                <el-radio :label="4">D</el-radio>
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="分数" required>
+              <el-input v-model="addForm.credit"></el-input>
+            </el-form-item>
+            <el-form-item label="图片">
+              <el-upload class="upload-demo" drag action="#" list-type="picture" :http-request="UploadImage"
+                :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :before-upload="beforeAvatarUpload"
+                :limit="1" :on-change="handleChange" :on-exceed="handleExceed" :file-list="formData.fileList" multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+              </el-upload>
+            </el-form-item>
+          </el-form>
+          <!-- 底部区 -->
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="addDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="AddProb()">确 定</el-button>
+          </span>
+        </el-dialog>
+        <el-dialog title="修改题目" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed"
+          :close-on-click-modal='false'>
+          <!-- 内容主体区 -->
+          <el-form :model="editForm" ref="editFormRef" label-width="70px">
+            <el-form-item label="题目" required>
+              <el-input v-model="editForm.text" @input="change($event)"></el-input>
+            </el-form-item>
+            <el-form-item label="选项" required>
+              <el-row></el-row>
+              <el-row :gutter="50">
+                <el-col :span="11">
+                  <div>选项A</div>
+                  <el-input v-model="editForm.option1" @input="change($event)"></el-input>
+                </el-col>
+                <el-col :span="11">
+                  <div>选项B</div>
+                  <el-input v-model="editForm.option2" @input="change($event)"></el-input>
+                </el-col>
+              </el-row>
+              <el-row :gutter="50">
+                <el-col :span="11">
+                  <div>选项C</div>
+                  <el-input v-model="editForm.option3" @input="change($event)"></el-input>
+                </el-col>
+                <el-col :span="11">
+                  <div>选项D</div>
+                  <el-input v-model="editForm.option4" @input="change($event)"></el-input>
+                </el-col>
+              </el-row>
+            </el-form-item>
+            <el-form-item label="正确选项" required>
+              <el-radio-group v-model="editForm.ans" @input="change($event)">
+                <el-radio :label="1">A</el-radio>
+                <el-radio :label="2">B</el-radio>
+                <el-radio :label="3">C</el-radio>
+                <el-radio :label="4">D</el-radio>
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="分数" required>
+              <el-input v-model="editForm.credit" @input="change($event)"></el-input>
+            </el-form-item>
+            <el-form-item label="图片">
+              <el-upload class="upload-demo" drag action="#" list-type="picture" :http-request="UploadImage"
+                :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :before-upload="beforeAvatarUpload"
+                :limit="1" :on-change="handleChange" :on-exceed="handleExceed" :file-list="formData.fileList" multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+              </el-upload>
+            </el-form-item>
+          </el-form>
+          <!-- 底部区 -->
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="editDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="EditProb()">确 定</el-button>
+          </span>
+        </el-dialog>
+      </el-card>
     </div>
     <div class="admin-quiz-list-footer">
       <footer class="admin-quiz-list-footer1 footerContainer">
@@ -210,7 +189,6 @@
 <script>
 import axios from 'axios';
 import client from '../oss.js';
-import { string } from 'three/examples/jsm/nodes/Nodes.js';
 export default {
   name: 'AdminQuizList',
   props: {},
@@ -220,16 +198,16 @@ export default {
       probs: [],
       name: localStorage.getItem('username'),
       addDialogVisible: false,
-      addForm:{},
+      addForm: {},
       editDialogVisible: false,
-      editForm:{},
+      editForm: {},
       formData: {
         fileList: [],
       },
     }
   },
   methods: {
-    change(){
+    change() {
       this.$forceUpdate();
     },
     handleRemove(file, fileList) {
@@ -255,10 +233,10 @@ export default {
       let file = param.file;
       const uploadResult = await client.put('prob/' + file.name, file);
       this.formData.fileList.push({
-            name: file.name,
-            url: uploadResult.url,
-            uid: file.uid,
-          });
+        name: file.name,
+        url: uploadResult.url,
+        uid: file.uid,
+      });
       console.log('上传成功:', uploadResult);
     },
     // 上传检测
@@ -291,13 +269,13 @@ export default {
     handleExceed(files, fileList) {
       this.$message.warning(`最多上传1个文件`);
     },
-    
-    editDialogClosed(){
+
+    editDialogClosed() {
       this.editForm = {};
       this.$refs.editFormRef.resetFields();
       this.formData.fileList = [];
     },
-    openEditWindow(prob){
+    openEditWindow(prob) {
       axios
         .get(`/admin/probDb/detail?probDbID=${prob.probDbID}`,
           {
@@ -309,7 +287,7 @@ export default {
           if (response.data.status === 0) {
             this.editForm.credit = response.data.probDbCredit;
             this.editForm.ans = response.data.probDbAns;
-            if(response.data.probDbImg){
+            if (response.data.probDbImg) {
               this.formData.fileList.push({
                 name: response.data.probDbImg,
                 url: response.data.probDbImg,
@@ -317,7 +295,7 @@ export default {
               })
             }
             else {
-              this.formData.fileList=[];
+              this.formData.fileList = [];
             }
             let texts = response.data.probDbText.split("<br/>");
             this.editForm.text = texts[0];
@@ -336,10 +314,10 @@ export default {
         });
       this.editDialogVisible = true;
     },
-    EditProb(){
+    EditProb() {
       let probDbCredit = this.editForm.credit;
       let probDbImg = '';
-      if(this.formData.fileList[0]){
+      if (this.formData.fileList[0]) {
         probDbImg = this.formData.fileList[0].url;
       }
       else {
@@ -357,7 +335,7 @@ export default {
           'Content-Type': 'application/json'
         },
         data: {
-          probDbID : probDbID,
+          probDbID: probDbID,
           probDbCredit: probDbCredit,
           probDbText: probDbText,
           probDbImg: probDbImg,
@@ -378,18 +356,18 @@ export default {
       this.formData.fileList = [];
       this.editDialogVisible = false;
     },
-    addDialogClosed(){
+    addDialogClosed() {
       this.addForm = {};
       this.$refs.addFormRef.resetFields();
       this.formData.fileList = [];
     },
-    openAddWindow(){
+    openAddWindow() {
       this.addDialogVisible = true;
     },
-    AddProb(){
+    AddProb() {
       let probDbCredit = this.addForm.credit;
       let probDbImg = '';
-      if(this.formData.fileList[0]){
+      if (this.formData.fileList[0]) {
         probDbImg = this.formData.fileList[0].url;
       }
       else {
@@ -425,7 +403,7 @@ export default {
       this.formData.fileList = [];
       this.addDialogVisible = false;
     },
-    async deleteProb(porb){
+    async deleteProb(porb) {
       try {
         const response = await axios.delete(`/admin/probDb?probDbID=${porb.probDbID}`, {
           headers: {
@@ -465,7 +443,7 @@ export default {
           this.$message.warning(error.message);
         });
     },
-    
+
   },
   created() {
     this.refresh();

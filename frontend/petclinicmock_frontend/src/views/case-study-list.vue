@@ -30,31 +30,32 @@
     </div>
     <div class="heroContainer">
       <div class="shadowContainer">
-          <div class="containerLeft">
-            <div class="case-study-list-hero-heading underLine">
-              <span class="heading2">疾病种类：</span>
-              <span class="case-study-list-text04 heading2"> {{ this.diseaseType }} </span>
-            </div>
+        <div class="containerLeft">
+          <div class="case-study-list-hero-heading underLine">
+            <span class="heading2">疾病种类：</span>
+            <span class="case-study-list-text04 heading2"> {{ this.diseaseType }} </span>
           </div>
-          <div class="containerLeft">
-            <div class="labelContainer">
-              <router-link to="/menu" class="routerlink">>主菜单</router-link>
-              <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
-              <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`" class="routerlink">>{{this.diseaseType}}</router-link>
-            </div>
+        </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
+            <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`"
+              class="routerlink">>{{ this.diseaseType }}</router-link>
           </div>
-          <div class="containerCenter" style="margin: 20px;">
-            <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
+        </div>
+        <div class="containerCenter" style="margin: 20px;">
+          <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
+        </div>
+        <div class="case-study-list-container4">
+          <div v-for="(disease, index) in filteredDiseases" :key="disease.diseaseID"
+            :class="`case-study-list-li Content list-item`">
+            <router-link
+              :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
+              :class="`case-study-list-navlink2 bodyLarge button`">
+              {{ disease.diseaseName }}
+            </router-link>
           </div>
-          <div class="case-study-list-container4">
-            <div v-for="(disease, index) in filteredDiseases" :key="disease.diseaseID"
-              :class="`case-study-list-li Content list-item`">
-              <router-link
-                :to="`/case-study-detail?diseaseID=${disease.diseaseID}&diseaseName=${disease.diseaseName}&diseaseType=${diseaseType}`"
-                :class="`case-study-list-navlink2 bodyLarge button`">
-                {{ disease.diseaseName }}
-              </router-link>
-            </div>
         </div>
       </div>
     </div>
@@ -143,7 +144,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -153,10 +154,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -167,6 +170,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .rounded-input {
   border-radius: 2px;
   padding: 5px;

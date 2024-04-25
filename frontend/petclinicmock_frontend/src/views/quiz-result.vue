@@ -47,7 +47,8 @@
           </div>
         </div>
         <div class="containerCenter" style="margin-top: 20px;">
-          <router-link :to="{ path: '/quiz-detail', query: { quizID: this.quizID } }" class="quiz-result-navlink button">
+          <router-link :to="{ path: '/quiz-detail', query: { quizID: this.quizID } }"
+            class="quiz-result-navlink button">
             重新测试
           </router-link>
           <router-link to="/quiz-list" class="quiz-result-navlink1 button">
@@ -67,7 +68,7 @@
           <div class="quiz-result-container06">
             <span class="bodyLarge" v-html="prob.probText"></span>
             <div class="quiz-result-container07">
-              <img v-if="prob.probImg" :src="prob.probImg" class="quiz-result-image"  />
+              <img v-if="prob.probImg" :src="prob.probImg" class="quiz-result-image" />
             </div>
             <div class="quiz-result-container09">
               <div class="quiz-result-container08">
@@ -144,7 +145,7 @@ export default {
   },
   created() {
     this.quizID = this.$route.query.quizID;
-    const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
+    const authToken = localStorage.getItem('Token');
     // Fetch disease details
     axios.get(`/quiz/detail?quizID=${this.quizID}`,
       {
@@ -179,7 +180,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -189,10 +190,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -203,6 +206,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .quiz-result-container {
   width: 100%;
   display: flex;

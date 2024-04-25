@@ -40,21 +40,22 @@
           <div class="labelContainer">
             <router-link to="/menu" class="routerlink">>主菜单</router-link>
             <router-link to="/role-play-menu" class="routerlink">>角色扮演</router-link>
-            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{role}}</router-link>
-            <span class="routerlink">>{{job}}</span>
+            <router-link :to="`/role-play-list?role=${this.role}`" class="routerlink">>{{ role }}</router-link>
+            <span class="routerlink">>{{ job }}</span>
           </div>
         </div>
         <div class="containerCenter">
-          <div class="role-play-detail-container5" >
+          <div class="role-play-detail-container5">
             <span class="heading2"> 工作名: {{ this.job }} </span>
           </div>
           <div class="role-play-detail-container5">
             <span class="bodyLarge">
               {{ this.jobDetail }}
-            </span>      
+            </span>
           </div>
-          <div class="role-play-detail-container5" >
-            <router-link v-if="this.roomID!=null" class="buttonFilled" :to="`/virtual-tour?roomID=${this.roomID}`"> 查看细节 </router-link>
+          <div class="role-play-detail-container5">
+            <router-link v-if="this.roomID != null" class="buttonFilled" :to="`/virtual-tour?roomID=${this.roomID}`"> 查看细节
+            </router-link>
           </div>
         </div>
       </div>
@@ -93,7 +94,7 @@ export default {
       role: ' ',
       job: ' ',
       jobDetail: ' ',
-      roomID:'',
+      roomID: '',
       name: localStorage.getItem('username'),
     }
   },
@@ -156,7 +157,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -166,10 +167,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -180,6 +183,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .role-play-detail-container {
   width: 100%;
   display: flex;

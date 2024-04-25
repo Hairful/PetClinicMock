@@ -39,14 +39,15 @@
             <span class="case-study-detail-text04 heading2"> {{ diseaseName }} </span>
           </div>
         </div>
-          <div class="containerLeft">
-            <div class="labelContainer">
-              <router-link to="/menu" class="routerlink">>主菜单</router-link>
-              <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
-              <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`" class="routerlink">>{{this.diseaseType}}</router-link>
-              <span>>{{this.diseaseName}}</span>
-            </div>
+        <div class="containerLeft">
+          <div class="labelContainer">
+            <router-link to="/menu" class="routerlink">>主菜单</router-link>
+            <router-link to="/case-study-menu" class="routerlink">>病例学习</router-link>
+            <router-link :to="`case-study-list?diseaseType=${this.diseaseType}`" class="routerlink">>{{ this.diseaseType
+              }}</router-link>
+            <span>>{{ this.diseaseName }}</span>
           </div>
+        </div>
         <div class="case-study-detail-container02"></div>
         <div class="case-study-detail-container05 ">
           <h1 class="case-study-detail-hero-heading underLine1 ">
@@ -65,7 +66,7 @@
         <div class="case-study-detail-container02"></div>
         <div class="shadowContainer">
           <h1 class="case-study-detail-hero-heading2 heading1">
-            <span class="heading1">病例 {{ index+1 }}</span>
+            <span class="heading1">病例 {{ index + 1 }}</span>
             <br />
           </h1>
           <div class="case-study-detail-container10">
@@ -76,8 +77,8 @@
                 alt="image" :src="pic" class="case-study-detail-image02" />
             </div>
             <div class="case-study-detail-container12">
-              <video v-for="(vid, vidIndex) in caseItem.details.summaryVideos" :key="`summary-vid-${vidIndex}`" :src="vid"
-                class="case-study-detail-video02" controls></video>
+              <video v-for="(vid, vidIndex) in caseItem.details.summaryVideos" :key="`summary-vid-${vidIndex}`"
+                :src="vid" class="case-study-detail-video02" controls></video>
             </div>
           </div>
           <div class="case-study-detail-container10">
@@ -88,8 +89,8 @@
                 alt="image" :src="pic" class="case-study-detail-image02" />
             </div>
             <div class="case-study-detail-container12">
-              <video v-for="(vid, vidIndex) in caseItem.details.examineVideos" :key="`examine-vid-${vidIndex}`" :src="vid"
-                class="case-study-detail-video02" controls></video>
+              <video v-for="(vid, vidIndex) in caseItem.details.examineVideos" :key="`examine-vid-${vidIndex}`"
+                :src="vid" class="case-study-detail-video02" controls></video>
             </div>
           </div>
           <div class="case-study-detail-container10">
@@ -120,8 +121,8 @@
             <span class="case-study-detail-heading2 underLine1">药物使用</span>
             <li v-for="(medicine, medIndex) in caseItem.details.medicines" :key="`medicine-${medIndex}`"
               class="bodyLarge">
-              <span class="bodyLarge"> {{ medIndex+1 }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{
-                    medicine.medicineIntro }}<br /> &emsp; 使用剂量：{{ medicine.dosage }}</span>
+              <span class="bodyLarge"> {{ medIndex + 1 }}. 药物名称：{{ medicine.medicineName }}<br /> &emsp; 药物介绍：{{
+                medicine.medicineIntro }}<br /> &emsp; 使用剂量：{{ medicine.dosage }}</span>
               <br />
             </li>
           </div>
@@ -177,7 +178,7 @@ export default {
     this.diseaseID = this.$route.query.diseaseID;
     this.diseaseName = this.$route.query.diseaseName;
 
-    const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
+    const authToken = localStorage.getItem('Token');
 
     // Fetch disease details
     axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
@@ -248,7 +249,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -258,10 +259,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -272,6 +275,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .case-study-detail-container {
   width: 100%;
   display: flex;
@@ -446,6 +450,7 @@ export default {
   font-family: "STIX Two Text";
   line-height: 150%;
 }
+
 .case-study-detail-text04 {
   color: var(--dl-color-custom-primary2);
   font-weight: 900;
