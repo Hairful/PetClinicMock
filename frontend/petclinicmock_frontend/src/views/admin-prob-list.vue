@@ -28,6 +28,9 @@
       <router-link to="/admin-menu" class="admin-quiz-list-navlink button">
         <span>返回管理员菜单</span>
       </router-link>
+      <router-link to="/admin-quiz-list" style="margin-left: 50px;" class="admin-quiz-list-navlink button">
+        <span>返回测试管理</span>
+      </router-link>
     </div>
     <div class="admin-quiz-list-hero1 heroContainer">
       <h1 class="admin-quiz-list-hero-heading1">
