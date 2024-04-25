@@ -43,7 +43,6 @@
         </span>
       </router-link>
     </div>
-
     <div class="admin-quiz-detail-hero1 heroContainer">
       <div class="admin-quiz-detail-container19">
         <h1 class="admin-quiz-detail-hero-heading3 heading1">
@@ -173,6 +172,7 @@ export default {
   },
   methods: {
     addToQuiz(prob) {
+
       axios({
         method: 'post',
         url: '/admin/probDb/link',

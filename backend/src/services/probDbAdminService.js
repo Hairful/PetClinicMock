@@ -1,5 +1,6 @@
 const ProbDb = require('../models/probDb');
 const Prob = require('../models/Prob');
+const sequelize = require('../config/database');
 exports.addProbDb = async (req) => {
     const { probDbCredit, probDbText, probDbImg, probDbAns } = req.body;
     try {
@@ -73,6 +74,7 @@ exports.linkProbDbToProb = async (req) => {
             probAns: probDbData.probDbAns,
             quizID: quizID
         });
+        await sequelize.query(`UPDATE quiz SET totalCredits = totalCredits + ${probDbData.probDbCredit} WHERE quizID = ${quizID}`);
         return ({
             status: 0,
             message: "成功"
