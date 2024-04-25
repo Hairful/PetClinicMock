@@ -90,7 +90,7 @@ export default {
   },
   computed: {
     filteredDiseaseTypes() {
-      return this.diseaseTypes.filter(diseaseType => 
+      return this.diseaseTypes.filter(diseaseType =>
         diseaseType.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -135,10 +135,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -149,6 +151,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .rounded-input {
   border-radius: 2px;
   padding: 5px;
@@ -345,7 +348,7 @@ export default {
   color: var(--dl-color-gray-black);
   width: 100%;
   text-align: start;
-  border-bottom-color:black;
+  border-bottom-color: black;
   border-bottom-width: 1px;
 }
 
@@ -359,6 +362,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .case-study-menu-containerfix {
   width: 80%;
   flex-wrap: wrap;
@@ -368,6 +372,7 @@ export default {
   align-items: center;
   justify-content: baseline;
 }
+
 .case-study-menu-navlink1 {
   width: 180px;
   height: 100px;

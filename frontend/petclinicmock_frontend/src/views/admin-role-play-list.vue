@@ -48,7 +48,8 @@
         <div class="admin-role-play-list-container05">
           <input type="text" v-model="newJob" placeholder="添加新的工作" class="input" />
           <textarea v-model="newJobDetail" placeholder="新工作的细节" class="textarea"> </textarea>
-          <button type="button" class="button" style="background-color: var(--dl-color-success-700);" @click="addNewJob()">
+          <button type="button" class="button" style="background-color: var(--dl-color-success-700);"
+            @click="addNewJob()">
             <span>
               <span>添加</span>
               <br />
@@ -70,7 +71,8 @@
                 </button>
               </div>
               <div class="admin-role-play-list-container08">
-                <textarea v-model="jobDetails[index]" placeholder="" class="textarea" style="width: 300px; height: 100px;"> </textarea>
+                <textarea v-model="jobDetails[index]" placeholder="" class="textarea"
+                  style="width: 300px; height: 100px;"> </textarea>
                 <button type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">
                   <span>
                     <span>修改</span>
@@ -80,16 +82,18 @@
               </div>
               <div class="admin-role-play-list-container08">
                 <div class="admin-case-study-detail-text142">选择关联房间</div>
-                  <select v-model="rooms[index]" name="fff">
-                    <option v-for="(room, index) in Allrooms" :key="`${index}`" :value=index>
-                      {{ room }}
-                    </option>
-                  </select>
-                  <div class="admin-case-study-detail-container91">
-                    <button type="button" class="admin-role-play-list-button2 button" @click="renameJob(index)">设置</button>
-                  </div>
+                <select v-model="rooms[index]" name="fff">
+                  <option v-for="(room, index) in Allrooms" :key="`${index}`" :value=index>
+                    {{ room }}
+                  </option>
+                </select>
+                <div class="admin-case-study-detail-container91">
+                  <button type="button" class="admin-role-play-list-button2 button"
+                    @click="renameJob(index)">设置</button>
+                </div>
               </div>
-              <button type="button" class="admin-role-play-list-button2 button" style="background-color: var(--dl-color-danger-700);" @click="deleteJob(index)">
+              <button type="button" class="admin-role-play-list-button2 button"
+                style="background-color: var(--dl-color-danger-700);" @click="deleteJob(index)">
                 <span>
                   <span>删除</span>
                   <br />
@@ -132,10 +136,10 @@ export default {
       jobDetails: [],
       newJob: '',
       newJobDetail: '',
-      rooms:[],
-      Allrooms:['无','前台','走廊','化验室','病理室','诊室','免疫室',
-      '手术准备室','处理室','住院室','手术室','药房','专科诊室','影像室',
-      '档案室'],
+      rooms: [],
+      Allrooms: ['无', '前台', '走廊', '化验室', '病理室', '诊室', '免疫室',
+        '手术准备室', '处理室', '住院室', '手术室', '药房', '专科诊室', '影像室',
+        '档案室'],
       name: localStorage.getItem('username'),
     }
   },
@@ -191,10 +195,10 @@ export default {
           responses.forEach((response, index) => {
             if (response.data.status === 0) {
               this.jobDetails.push(response.data.jobDetail);
-              if(response.data.roomID==null)
+              if (response.data.roomID == null)
                 this.rooms.push(0);
               else
-                this.rooms.push(response.data.roomID+1);
+                this.rooms.push(response.data.roomID + 1);
             } else {
               //console.log(response.data.message);
               // Remove the job from jobs array if its details couldn't be fetched
@@ -208,8 +212,8 @@ export default {
       const job = this.jobs[index];
       const detail = this.jobDetails[index];
       const role = this.role2number(this.role);
-      let room = (this.rooms[index]==0)?null:this.rooms[index]-1;
-      if(room == -1){
+      let room = (this.rooms[index] == 0) ? null : this.rooms[index] - 1;
+      if (room == -1) {
         room = null;
       }
       console.log(room);
@@ -380,10 +384,10 @@ export default {
         responses.forEach((response, index) => {
           if (response.data.status === 0) {
             this.jobDetails.push(response.data.jobDetail);
-            if(response.data.roomID==null)
+            if (response.data.roomID == null)
               this.rooms.push(0);
             else
-              this.rooms.push(response.data.roomID+1);
+              this.rooms.push(response.data.roomID + 1);
           } else {
             console.log(response.data.message);
             // Remove the job from jobs array if its details couldn't be fetched

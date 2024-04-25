@@ -13,10 +13,10 @@
         </div>
         <div class="menu-container1">
           <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
-              <span>
-                登录用户：
-              </span>
-              <span class="menu-text02">{{ name }}</span>
+            <span>
+              登录用户：
+            </span>
+            <span class="menu-text02">{{ name }}</span>
           </div>
           <div>
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
@@ -25,52 +25,44 @@
       </header>
     </div>
     <div class="heroContainer">
-        <div class="menu-container2">
-          <h1 class="menu-hero-heading">
-            <span class="heading1">选择功能</span>
-            <br />
-          </h1>
+      <div class="menu-container2">
+        <h1 class="menu-hero-heading">
+          <span class="heading1">选择功能</span>
+          <br />
+        </h1>
+      </div>
+      <div class="menu-container3">
+        <div class="menu-container4">
+          <router-link to="/virtual-tour" class="button-common">
+            <img src="@/assets/yiyuan.png" />
+            <span class="heading3">
+              <span>3D 虚拟导览</span>
+              <br />
+            </span>
+          </router-link>
+          <router-link to="/role-play-menu" class="button-common">
+            <img src="@/assets/yishengxinxi.png" />
+            <span class="heading3">
+              <span>角色扮演</span>
+              <br />
+            </span>
+          </router-link>
         </div>
-        <div class="menu-container3">
-          <div class="menu-container4">
-              <router-link to="/virtual-tour" class="button-common" >
-                <img 
-                src="@/assets/yiyuan.png"
-                />
-                <span class="heading3">
-                  <span>3D 虚拟导览</span>
-                  <br />
-                </span>
-              </router-link>
-              <router-link to="/role-play-menu" class="button-common">
-                <img 
-                src="@/assets/yishengxinxi.png"
-                />
-                <span class="heading3">
-                  <span>角色扮演</span>
-                  <br />
-                </span>
-              </router-link>
-          </div>
-          <div class="menu-container4">
-              <router-link to="/case-study-menu" class="button-common">
-                <img 
-                src="@/assets/xuexi.png"
-                />
-                <span class="heading3">
-                  <span>病例学习</span>
-                  <br />
-                </span>
-              </router-link>
-              <router-link to="/quiz-list" class="button-common">
-                <img 
-                src="@/assets/xinxitianxie.png"
-                />
-                <span class="heading3">测试</span>
-              </router-link>
-          </div>
+        <div class="menu-container4">
+          <router-link to="/case-study-menu" class="button-common">
+            <img src="@/assets/xuexi.png" />
+            <span class="heading3">
+              <span>病例学习</span>
+              <br />
+            </span>
+          </router-link>
+          <router-link to="/quiz-list" class="button-common">
+            <img src="@/assets/xinxitianxie.png" />
+            <span class="heading3">测试</span>
+          </router-link>
         </div>
       </div>
+    </div>
     <div class="menu-footer">
       <footer class="menu-footer1 footerContainer">
         <div class="menu-container6">
@@ -122,7 +114,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   font-size: 24px;
   text-align: center;
   font-family: STIX Two Text;
@@ -130,10 +122,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   font-size: 24px;
   font-family: STIX Two Text;
   font-weight: 600;
@@ -142,6 +136,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .menu-item {
   width: 400px;
   height: 400px;
@@ -396,13 +391,15 @@ export default {
   text-decoration: none;
   display: flex;
   justify-content: center;
-  
+
   align-items: center
 }
+
 .menu-navlink3:hover {
   color: var(--dl-color-gray-white);
   background-color: rgb(49, 144, 245);
 }
+
 .menu-footer {
   flex: 0 0 auto;
   width: 100%;

@@ -29,43 +29,39 @@
     </div>
     <div class="heroContainer">
       <div class="containerCenter">
-        <el-dialog
-          title="确认提交"
-          :visible.sync="dialogFormVisible"
-          v-if="dialogFormVisible"
-          width="600px"
-          style="margin-top: 10%;"
-        >
-        <div class="containerCenter" style="flex-direction: column;align-content: center;display: flex;">
-          <div v-if="isUnfinished" class="bodyLarge"  style="margin: 4%;">
-            尚有未完成的题目
+        <el-dialog title="确认提交" :visible.sync="dialogFormVisible" v-if="dialogFormVisible" width="600px"
+          style="margin-top: 10%;">
+          <div class="containerCenter" style="flex-direction: column;align-content: center;display: flex;">
+            <div v-if="isUnfinished" class="bodyLarge" style="margin: 4%;">
+              尚有未完成的题目
+            </div>
+            <div class="bodyLarge" style="margin: 4%;">
+              是否确认提交
+            </div>
+            <div>
+              <button class="quiz-detail-navlink2 button" @click="confirmSubmit(1)">确认</button>
+              <button class="quiz-detail-navlink2 button" @click="confirmSubmit(0)">取消</button>
+            </div>
           </div>
-          <div class="bodyLarge"  style="margin: 4%;">
-            是否确认提交
-          </div>
-          <div>
-            <button class="quiz-detail-navlink2 button" @click="confirmSubmit(1)">确认</button>
-            <button class="quiz-detail-navlink2 button" @click="confirmSubmit(0)">取消</button>
-          </div>
-        </div>
         </el-dialog>
         <suspenPopup top="500" left="60" height="150" width="650">
           <div class="supen-popup">
-            <div> 
+            <div>
               剩余时间：{{ rest_h }}:{{ rest_min }}:{{ rest_s }}<br></br>
             </div>
             <div>
               题目完成情况：
             </div>
             <div class="quiz-situation">
-              <div v-for="(prob,index) in probs" >
-                <button v-if="ans[index]" class="quiz-finished button" @click="switchProb(index)"> {{index+1}} </button>
-                <button v-else="!ans[index]" class="quiz-unfinished button" @click="switchProb(index)"> {{index+1}} </button>
+              <div v-for="(prob, index) in probs">
+                <button v-if="ans[index]" class="quiz-finished button" @click="switchProb(index)"> {{ index + 1 }} </button>
+                <button v-else="!ans[index]" class="quiz-unfinished button" @click="switchProb(index)"> {{ index + 1 }}
+                </button>
               </div>
             </div>
           </div>
         </suspenPopup>
-      </div>  
+      </div>
       <div class="shadowContainer-white">
         <div class="containerCenter" v-if="probs && probs.length > 0">
           <div class="quiz-detail-container05">
@@ -77,7 +73,8 @@
               <span class="bodyLarge">({{ probs[this.currentProb].probCredit }}分)</span>
               <span class="bodyLarge" v-html="probs[this.currentProb].probText"></span>
               <div class="quiz-detail-container07">
-                <img v-if="probs[this.currentProb].probImg" alt="image" :src="`${probs[this.currentProb].probImg}`" class="quiz-detail-image" />
+                <img v-if="probs[this.currentProb].probImg" alt="image" :src="`${probs[this.currentProb].probImg}`"
+                  class="quiz-detail-image" />
               </div>
               <div class="quiz-detail-container08">
                 <select class="quiz-detail-select" v-model="ans[currentProb]">
@@ -90,8 +87,7 @@
             </div>
           </div>
         </div>
-        <div class="containerCenter" 
-        style="
+        <div class="containerCenter" style="
         margin-top: 10%;
         ">
           <button class="quiz-detail-navlink2 button" @click="lastProb">上一题</button>
@@ -125,8 +121,8 @@ export default {
   name: 'QuizDetail',
   props: {},
   components: {
-			suspenPopup,
-		},
+    suspenPopup,
+  },
   data() {
     return {
       name: localStorage.getItem('username'),
@@ -145,24 +141,23 @@ export default {
       rest_min: 0,
       rest_s: 0,
       rest_ms: 0,
-      dialogFormVisible:false,
-      confirm:false,
-      isUnfinished:false,
+      dialogFormVisible: false,
+      confirm: false,
+      isUnfinished: false,
     }
   },
   methods: {
-    confirmSubmit(flag){
-      this.dialogFormVisible=false;
-      this.isUnfinished=false;
-      if(flag){
-        this.confirm=true;
+    confirmSubmit(flag) {
+      this.dialogFormVisible = false;
+      this.isUnfinished = false;
+      if (flag) {
+        this.confirm = true;
       }
-      if(this.confirm)
-      {
+      if (this.confirm) {
         this.submit();
       }
     },
-    switchProb(num){
+    switchProb(num) {
       this.currentProb = num;
     },
     async pushResult() {
@@ -250,9 +245,9 @@ export default {
     stopTimer() {
       clearInterval(this.timer);
     },
-    trySubmit(){
-      for(let i=0;i<this.probs.length;i++ ){
-        if(!this.ans[i]){
+    trySubmit() {
+      for (let i = 0; i < this.probs.length; i++) {
+        if (!this.ans[i]) {
           this.isUnfinished = true;
           break;
         }
@@ -318,7 +313,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -328,10 +323,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -342,7 +339,8 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
-.quiz-unfinished{
+
+.quiz-unfinished {
   border: 2px solid #aaa;
   align-self: center;
   width: 40px;
@@ -351,7 +349,8 @@ export default {
   margin-right: 5px;
   background-color: var(--dl-color-danger-700);
 }
-.quiz-finished{
+
+.quiz-finished {
   border: 2px solid #aaa;
   align-self: center;
   width: 40px;
@@ -360,30 +359,33 @@ export default {
   margin-right: 5px;
   background-color: var(--dl-color-success-700);
 }
+
 .supen-popup {
-    flex-direction: column;
-		display: flex;
-		justify-content: center;
-		align-items:center;
-		border-radius: 20px;
-		box-sizing: border-box;
-    padding: 10px;
-		background: white;
-		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		border: 5px solid #aaa;
-		font-size: 24rpx;
-		width: 200px;
-		height: auto ;
-	}
-  .quiz-situation {
-    flex-wrap: wrap;
-		display: flex;
-		justify-content: center;
-		align-items:center;
-    padding: 10px;
-		width: 200px;
-		height: auto ;
-	}
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 10px;
+  background: white;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border: 5px solid #aaa;
+  font-size: 24rpx;
+  width: 200px;
+  height: auto;
+}
+
+.quiz-situation {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 200px;
+  height: auto;
+}
+
 .quiz-detail-container {
   width: 100%;
   display: flex;
@@ -773,9 +775,11 @@ export default {
   text-decoration: none;
   background-color: var(--dl-color-custom-primary1);
 }
+
 .quiz-detail-navlink2:hover {
   background-color: var(--dl-color-custom-primary2);
 }
+
 .quiz-detail-footer {
   flex: 0 0 auto;
   width: 100%;

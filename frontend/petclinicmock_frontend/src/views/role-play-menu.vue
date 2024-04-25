@@ -29,12 +29,12 @@
       </header>
     </div>
     <div class="heroContainer">
-        <div class="shadowContainer">
-          <div class="containerLeft underLine">
-            <div class="heading1">
-              <span class="heading2">选择一个角色</span>
-            </div>
+      <div class="shadowContainer">
+        <div class="containerLeft underLine">
+          <div class="heading1">
+            <span class="heading2">选择一个角色</span>
           </div>
+        </div>
         <div class="containerLeft">
           <div class="labelContainer">
             <router-link to="/menu" class="routerlink">>主菜单</router-link>
@@ -43,25 +43,19 @@
         </div>
         <div class="containerCenter">
           <div class="role-play-menu-container5">
-            <router-link :to="{ path: '/role-play-list', query: { role: '前台' } }" class="role-play-menu-navlink1 button-common">
-              <img
-              src="@/assets/qiantai_1.png"
-              style="width: 100px; height: 100px; margin-right: 50px;"
-              />
+            <router-link :to="{ path: '/role-play-list', query: { role: '前台' } }"
+              class="role-play-menu-navlink1 button-common">
+              <img src="@/assets/qiantai_1.png" style="width: 100px; height: 100px; margin-right: 50px;" />
               <span class="heading3">前台</span>
             </router-link>
-            <router-link :to="{ path: '/role-play-list', query: { role: '医助' } }" class="role-play-menu-navlink1 button-common">
-              <img
-              src="@/assets/hushi-01.png"
-              style="width: 100px; height: 100px; margin-right: 50px;"
-              />
+            <router-link :to="{ path: '/role-play-list', query: { role: '医助' } }"
+              class="role-play-menu-navlink1 button-common">
+              <img src="@/assets/hushi-01.png" style="width: 100px; height: 100px; margin-right: 50px;" />
               <span class="heading3">医助</span>
             </router-link>
-            <router-link :to="{ path: '/role-play-list', query: { role: '医生' } }" class="role-play-menu-navlink1 button-common">
-              <img
-              src="@/assets/yisheng.png"
-              style="width: 100px; height: 100px; margin-right: 50px;"
-              />
+            <router-link :to="{ path: '/role-play-list', query: { role: '医生' } }"
+              class="role-play-menu-navlink1 button-common">
+              <img src="@/assets/yisheng.png" style="width: 100px; height: 100px; margin-right: 50px;" />
               <span class="heading3">医生</span>
             </router-link>
           </div>
@@ -119,7 +113,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -129,10 +123,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -143,6 +139,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .role-play-menu-container {
   width: 100%;
   display: flex;
@@ -352,7 +349,7 @@ export default {
   display: flex;
   align-self: center;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
 }
 

@@ -15,24 +15,24 @@
         </div>
       </header>
     </div>
-    <div class="login-hero"  @keyup.enter="submit">
+    <div class="login-hero" @keyup.enter="submit">
       <div class="login-hero1 heroContainer">
         <div class="login-container1">
           <h1 class="login-hero-heading heading1">登录</h1>
           <h1 class="login-hero-heading1 heading1">欢迎回来 🤗</h1>
         </div>
-        <el-form :model="formLogin" class="login-form" method="get" :rules="rules" ref="formLogin" >
+        <el-form :model="formLogin" class="login-form" method="get" :rules="rules" ref="formLogin">
           <el-form-item prop="name" class="login-textinput">
             <el-input prop="name" type="text" placeholder="请输入用户名" autocomplete="true"
               v-model="formLogin.name" /></el-form-item>
           <el-form-item prop="password" class="login-textinput">
             <el-input prop="password" type="password" placeholder="请输入密码" show-password autocomplete="true"
-              v-model="formLogin.password"/>
+              v-model="formLogin.password" />
           </el-form-item>
           <table>
             <tr>
               <td>
-                <el-input  class="login-validcode" type="text" placeholder="请输入验证码" v-model="formLogin.code" />
+                <el-input class="login-validcode" type="text" placeholder="请输入验证码" v-model="formLogin.code" />
               </td>
               <td width="100%" @click="refreshCode">
                 <ValidCode class="login-code" :identifyCode="identifyCode"></ValidCode>

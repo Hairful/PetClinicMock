@@ -109,11 +109,11 @@ export default {
   },
   created() {
     axios.get('/admin/user', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
-          'Content-Type': 'application/json'
-        }
-      })
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+        'Content-Type': 'application/json'
+      }
+    })
   },
   metaInfo: {
     title: 'AdminMenu - PetClinicMock',

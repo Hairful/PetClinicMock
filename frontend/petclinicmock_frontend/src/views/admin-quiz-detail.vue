@@ -43,7 +43,7 @@
         </span>
       </router-link>
     </div>
-    
+
     <div class="admin-quiz-detail-hero1 heroContainer">
       <div class="admin-quiz-detail-container19">
         <h1 class="admin-quiz-detail-hero-heading3 heading1">
@@ -52,7 +52,8 @@
         </h1>
         <div class="containerCenter">
           <button type="button" class="admin-quiz-detail-button14 button" @click="addProb">添加</button>
-          <button type="button" style="margin-left: 50px;" class="admin-quiz-detail-button14 button" @click="openLinkWindow">从题库导入</button>
+          <button type="button" style="margin-left: 50px;" class="admin-quiz-detail-button14 button"
+            @click="openLinkWindow">从题库导入</button>
         </div>
       </div>
       <div class="admin-quiz-detail-container26">
@@ -60,22 +61,16 @@
           保存
         </button>
       </div>
-      <el-dialog
-          title="导入题目"
-          :visible.sync="linkVisible"
-          v-if="linkVisible"
-          width="60%"
-          style="margin-top: 10%;"
-        >
-        <el-table :data="probDb"  stripe><!-- 带边框、斑马纹 -->
-              <el-table-column width="100px" label="题目编号" prop="probDbID"></el-table-column>
-              <el-table-column label="题目内容" prop="probDbText"></el-table-column>
-              <el-table-column align="right" width="100px">
-                <template slot-scope="scope">
-                  <el-button size= "mini" type="primary"  @click="addToQuiz(scope.row)">导入</el-button>
-                </template>
-              </el-table-column>
-          </el-table>
+      <el-dialog title="导入题目" :visible.sync="linkVisible" v-if="linkVisible" width="60%" style="margin-top: 10%;">
+        <el-table :data="probDb" stripe><!-- 带边框、斑马纹 -->
+          <el-table-column width="100px" label="题目编号" prop="probDbID"></el-table-column>
+          <el-table-column label="题目内容" prop="probDbText"></el-table-column>
+          <el-table-column align="right" width="100px">
+            <template slot-scope="scope">
+              <el-button size="mini" type="primary" @click="addToQuiz(scope.row)">导入</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
         <span slot="footer" class="dialog-footer">
           <el-button @click="linkVisible = false">退出</el-button>
         </span>
@@ -89,8 +84,7 @@
           删除
         </button>
         <div class="admin-quiz-detail-container06">
-          <textarea v-model="prob.probText"
-            class="admin-quiz-detail-textarea textarea"></textarea>
+          <textarea v-model="prob.probText" class="admin-quiz-detail-textarea textarea"></textarea>
           <div class="admin-quiz-detail-container10">
             <span class="admin-quiz-detail-text33 bodyLarge">
               正确答案：
@@ -172,13 +166,13 @@ export default {
         probAns: '',
         lastAns: '',
       },
-      totalTime:0,
-      linkVisible:false,
-      probDb:[],
+      totalTime: 0,
+      linkVisible: false,
+      probDb: [],
     }
   },
   methods: {
-    addToQuiz(prob){
+    addToQuiz(prob) {
       axios({
         method: 'post',
         url: '/admin/probDb/link',
@@ -187,7 +181,7 @@ export default {
           'Content-Type': 'application/json'
         },
         data: {
-          probDbID : prob.probDbID,
+          probDbID: prob.probDbID,
           quizID: this.quizID,
         }
       })
@@ -201,7 +195,7 @@ export default {
           this.$message.warning(error.message);
         });
     },
-    openLinkWindow(){
+    openLinkWindow() {
       axios
         .get(`/admin/probDb/list`,
           {
@@ -214,9 +208,8 @@ export default {
             this.probDb = response.data.probDbs;
             this.probDb.forEach(prob => {
               prob.probDbText = prob.probDbText.split('<br/>')[0];
-              if(prob.probDbText.length>=20)
-              {
-                prob.probDbText = prob.probDbText.substring(0,19) + "...";
+              if (prob.probDbText.length >= 20) {
+                prob.probDbText = prob.probDbText.substring(0, 19) + "...";
               }
             });
           } else {
@@ -229,7 +222,7 @@ export default {
         });
       this.linkVisible = true;
     },
-    notify(str){
+    notify(str) {
       this.$message(str)
     },
     logout() {
@@ -339,8 +332,8 @@ export default {
             this.totalCredits = response.data.totalCredits;
             if (this.probs) {
               this.probs.forEach(prob => {
-              this.options.push(this.ans2option(prob.probAns));
-              this.images.push(prob.probImg);
+                this.options.push(this.ans2option(prob.probAns));
+                this.images.push(prob.probImg);
               });
             }
           } else if (response.data.status === 1) {

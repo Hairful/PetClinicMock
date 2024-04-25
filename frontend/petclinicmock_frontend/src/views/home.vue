@@ -5,15 +5,15 @@
         <span class="logo">PETCLINICMOCK</span>
         <div data-thq="thq-navbar-nav" class="home-desktop-menu">
           <div v-if="name" class="menu-container1">
-          <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
+            <div data-thq="thq-navbar-nav" class="menu-desktop-menu">
               <span>
                 登录用户：
               </span>
               <span class="menu-text02">{{ name }}</span>
-          </div>
+            </div>
             <router-link style="margin-top: 10px;" class="buttonFilled" to="/menu"> 进入菜单 </router-link>
             <button style="margin-top: 10px;" class="buttonFilled" @click="logout"> 登出系统 </button>
-        </div>
+          </div>
           <div v-else class="home-buttons">
             <router-link to="/login" class="home-login buttonFlat">
               登录
@@ -65,7 +65,7 @@ export default {
   props: {},
   data() {
     return {
-      name:localStorage.getItem('username'),
+      name: localStorage.getItem('username'),
     }
   },
   methods: {
@@ -97,19 +97,22 @@ export default {
   color: var(--dl-color-custom-primary1);
   font-weight: 700;
 }
+
 .menu-container1 {
   flex: 0 0 auto;
   width: auto;
   height: auto;
-  display:flex;
+  display: flex;
   align-items: space-between;
   flex-direction: column;
 }
+
 .menu-desktop-menu {
   flex: 1;
   display: flex;
   justify-content: flex-start;
 }
+
 .home-container {
   width: 100%;
   display: flex;

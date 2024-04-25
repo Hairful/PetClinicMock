@@ -12,11 +12,13 @@
       <span>医院加载中：{{ progress }}%</span>
     </div>
     <div class="title">3D导览</div>
-     <!-- 第一个按钮 -->
-      <button @click="exit3DNavigation" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;">返回主页</button>
+    <!-- 第一个按钮 -->
+    <button @click="exit3DNavigation"
+      style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;">返回主页</button>
 
-     <!-- 第二个按钮 -->
-      <button @click="exit3DtoRole" style="padding: 10px 20px; background-color: #008CBA; color: white; border: none; cursor: pointer; border-radius: 5px;">返回角色扮演</button>
+    <!-- 第二个按钮 -->
+    <button @click="exit3DtoRole"
+      style="padding: 10px 20px; background-color: #008CBA; color: white; border: none; cursor: pointer; border-radius: 5px;">返回角色扮演</button>
   </div>
 </template>
 
@@ -70,8 +72,8 @@ function popstateHandler() {
 
 window.addEventListener('popstate', popstateHandler);
 
- // 定义处理点击事件的函数
- const exit3DtoRole = () => {
+// 定义处理点击事件的函数
+const exit3DtoRole = () => {
   // window.removeEventListener('click');
   // 从 DOM 中移除整个容器
   // 移除所有子元素
@@ -80,7 +82,7 @@ window.addEventListener('popstate', popstateHandler);
     var mesh = meshs[0].mesh; // 获取数组中第一个元素对应的 mesh
     // 移除第一个元素对应的 mesh
     if (mesh && mesh.parentNode) {
-        mesh.parentNode.removeChild(mesh);
+      mesh.parentNode.removeChild(mesh);
     }
     // 从数组中删除第一个元素
     meshs.shift();
@@ -88,11 +90,11 @@ window.addEventListener('popstate', popstateHandler);
   // var previousPageURL = document.referrer;
   // 设置要返回的页面
   window.location.href = '/role-play-menu';
- 
+
 };
 
- // 定义处理点击事件的函数
- const exit3DNavigation = () => {
+// 定义处理点击事件的函数
+const exit3DNavigation = () => {
   // window.removeEventListener('click');
   // 从 DOM 中移除整个容器
   // 移除所有子元素
@@ -101,7 +103,7 @@ window.addEventListener('popstate', popstateHandler);
     var mesh = meshs[0].mesh; // 获取数组中第一个元素对应的 mesh
     // 移除第一个元素对应的 mesh
     if (mesh && mesh.parentNode) {
-        mesh.parentNode.removeChild(mesh);
+      mesh.parentNode.removeChild(mesh);
     }
     // 从数组中删除第一个元素
     meshs.shift();
@@ -111,15 +113,15 @@ window.addEventListener('popstate', popstateHandler);
   // var previousPageURL = document.referrer;
   // 设置要返回的页面
   window.location.href = '/menu';
- 
+
 };
 
 onMounted(async () => {
-  
-  
+
+
   const rooms = [];
-  
-  
+
+
   const frontdeskItem = new Item();
   frontdeskItem.setItemInfo('前台');
 
@@ -174,22 +176,22 @@ onMounted(async () => {
   const proEquipItem = new Item();
   proEquipItem.setItemInfo('处理设备');
   // 检查 URL 查询参数是否存在
- function checkForQueryParam(rooms) {
-  const queryParams = new URLSearchParams(window.location.search);
-  if (queryParams.has('roomID')) {
-    //如果存在，则获取参数的值并存储
-    // receivedParam.value = 0;
-    receivedParam.value = queryParams.get('roomID');
-    camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
-    moveTag(rooms[receivedParam.value].name);
-    // camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
-    //在此处你可以对参数进行进一步处理
-    console.log('Received parameter:', receivedParam.value);
+  function checkForQueryParam(rooms) {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.has('roomID')) {
+      //如果存在，则获取参数的值并存储
+      // receivedParam.value = 0;
+      receivedParam.value = queryParams.get('roomID');
+      camera.position.set(rooms[receivedParam.value].position.x, rooms[receivedParam.value].position.y, rooms[receivedParam.value].position.z);
+      moveTag(rooms[receivedParam.value].name);
+      // camera.position.set(rooms[receivedParam.value].position.x,rooms[receivedParam.value].position.y,rooms[receivedParam.value].position.z);
+      //在此处你可以对参数进行进一步处理
+      console.log('Received parameter:', receivedParam.value);
+    }
   }
-}
 
   function createVideoEle(videoURL, detailContent) {
-    
+
     // 创建一个视频元素
     const videoElement = document.createElement('video');
     videoElement.src = videoURL;
@@ -225,7 +227,7 @@ onMounted(async () => {
       document.body.removeChild(videoContainer); // 移除视频框
       videoElement.pause(); // 暂停视频播放
     });
-    
+
     videoContainer.appendChild(closeButton);
 
     // 创建详情按钮
@@ -252,7 +254,7 @@ onMounted(async () => {
       detailBox.style.borderRadius = '10px';
       detailBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
       detailBox.style.zIndex = '9999';
-      
+
 
       const closeButton = document.createElement('button');
       closeButton.innerText = 'X';
@@ -278,7 +280,7 @@ onMounted(async () => {
 
     });
 
-    
+
 
     // 创建操作流程按钮
     const workflowButton = document.createElement('button');
@@ -303,15 +305,15 @@ onMounted(async () => {
     //   document.body.removeChild(videoContainer);
     //   videoElement.pause();
     // });
-     // 监听页面 unload 事件
-     // 监听浏览器的历史变化事件
+    // 监听页面 unload 事件
+    // 监听浏览器的历史变化事件
     window.addEventListener('popstate', () => {
-        document.body.removeChild(videoContainer);
+      document.body.removeChild(videoContainer);
     });
 
     // 阻止事件冒泡
     videoContainer.addEventListener('click', (event) => {
-        event.stopPropagation();
+      event.stopPropagation();
     });
     // 添加拖拽功能
     makeDraggable(videoContainer);
@@ -319,49 +321,49 @@ onMounted(async () => {
 
   function makeDraggable(element) {
     let pos1 = 0,
-        pos2 = 0,
-        pos3 = 0,
-        pos4 = 0;
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
     if (document.getElementById(element.id + '-header')) {
-        // 如果存在标题栏，则标题栏用于拖动
-        document.getElementById(element.id + '-header').onmousedown = dragMouseDown;
+      // 如果存在标题栏，则标题栏用于拖动
+      document.getElementById(element.id + '-header').onmousedown = dragMouseDown;
     } else {
-        // 否则，直接在元素上点击拖动
-        element.onmousedown = dragMouseDown;
+      // 否则，直接在元素上点击拖动
+      element.onmousedown = dragMouseDown;
     }
 
     function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // 获取鼠标点击位置与元素当前位置的差值
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        // 鼠标移动时调用 elementDrag 函数
-        document.onmousemove = elementDrag;
+      e = e || window.event;
+      e.preventDefault();
+      // 获取鼠标点击位置与元素当前位置的差值
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // 鼠标移动时调用 elementDrag 函数
+      document.onmousemove = elementDrag;
     }
 
     function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // 计算元素新的位置
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // 设置元素新的位置
-        element.style.top = (element.offsetTop - pos2) + "px";
-        element.style.left = (element.offsetLeft - pos1) + "px";
+      e = e || window.event;
+      e.preventDefault();
+      // 计算元素新的位置
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // 设置元素新的位置
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
     }
 
     function closeDragElement() {
-        // 停止拖动时清除事件监听
-        document.onmouseup = null;
-        document.onmousemove = null;
+      // 停止拖动时清除事件监听
+      document.onmouseup = null;
+      document.onmousemove = null;
     }
-}
+  }
 
-  
+
 
   function moveTag(name) {
     let positions = {
@@ -1046,7 +1048,7 @@ transform: translate(100px,110px);
 
   // camera.position.set(rooms[0].position.x,rooms[0].position.y,rooms[0].position.z);
   checkForQueryParam(rooms);
- 
+
 
   //创建前台流程
   const desk = new SpriteCanvas(

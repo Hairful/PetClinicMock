@@ -31,19 +31,21 @@
       <input type="text" v-model="searchQuery" placeholder="输入以搜索" class="rounded-input">
       <div class="containerCenter">
         <el-card style="width: 80%;">
-          <el-table :data="filteredQuizzes"  stripe><!-- 带边框、斑马纹 -->
-              <el-table-column label="测试编号" type="index"></el-table-column>
-              <el-table-column label="测试名称" prop="quizName"></el-table-column>
-              <el-table-column label="总分" prop="totalCredits"></el-table-column>
-              <el-table-column label="测试限时(分钟)" prop="timer"></el-table-column>
-              <el-table-column label="最后尝试分数" prop="lastTry"></el-table-column>
-              <el-table-column label="最后尝试时间" prop="lastTryTime"></el-table-column>
-              <el-table-column label="操作" width="200px">
-                  <template slot-scope="scope">
-                    <el-button v-if="scope.row.lastTryTime" size= "mini" type="primary" icon="el-icon-search" @click="checkResult(scope.row.quizID)">查看结果</el-button>  
-                    <el-button v-else size= "mini" type="primary" icon="el-icon-edit"  @click="doQuiz(scope.row.quizID)">开始测试</el-button>  
-                  </template>
-              </el-table-column>
+          <el-table :data="filteredQuizzes" stripe><!-- 带边框、斑马纹 -->
+            <el-table-column label="测试编号" type="index"></el-table-column>
+            <el-table-column label="测试名称" prop="quizName"></el-table-column>
+            <el-table-column label="总分" prop="totalCredits"></el-table-column>
+            <el-table-column label="测试限时(分钟)" prop="timer"></el-table-column>
+            <el-table-column label="最后尝试分数" prop="lastTry"></el-table-column>
+            <el-table-column label="最后尝试时间" prop="lastTryTime"></el-table-column>
+            <el-table-column label="操作" width="200px">
+              <template slot-scope="scope">
+                <el-button v-if="scope.row.lastTryTime" size="mini" type="primary" icon="el-icon-search"
+                  @click="checkResult(scope.row.quizID)">查看结果</el-button>
+                <el-button v-else size="mini" type="primary" icon="el-icon-edit"
+                  @click="doQuiz(scope.row.quizID)">开始测试</el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </el-card>
       </div>
@@ -88,10 +90,10 @@ export default {
     },
   },
   methods: {
-    checkResult(id){
+    checkResult(id) {
       router.push(`/quiz-result?quizID=${id}`);
     },
-    doQuiz(id){
+    doQuiz(id) {
       router.push(`/quiz-detail?quizID=${id}`);
     },
     logout() {
@@ -141,7 +143,7 @@ export default {
 </script>
 
 <style scoped>
-.head-router{
+.head-router {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -151,10 +153,12 @@ export default {
   line-height: 150%;
   margin-left: 20px;
 }
-.head-router:hover{
+
+.head-router:hover {
   color: gray;
 }
-.head-router-current{
+
+.head-router-current {
   width: 50px;
   height: auto;
   font-size: 24px;
@@ -165,6 +169,7 @@ export default {
   border-bottom-color: var(--dl-color-custom-primary1);
   border-bottom-width: 4px;
 }
+
 .rounded-input {
   border-radius: 2px;
   padding: 5px;
