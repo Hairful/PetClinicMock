@@ -35,32 +35,156 @@
         <br />
       </h1>
       <div class="admin-quiz-list-container04">
-        <div class="admin-quiz-list-container05">
-          <input type="text" v-model="newQuizName" placeholder="输入名称" class="input" />
-          <button type="button" class="button" style="background-color: var(--dl-color-success-700);" @click="addQuiz">添加</button>
-        </div>
       </div>
-      <div v-for="(quiz, index) in quizzes" :key="quiz.quizID" class="admin-quiz-list-container06">
-        <ul class="admin-quiz-list-ul list">
-          <li class="admin-quiz-list-li list-item Content">
-            <span class="heading3">测试 {{ quiz.quizID }}</span>
-            <div class="admin-quiz-list-container07">
-              <div class="admin-quiz-list-container08">
-                <input type="text" v-model="quiz.quizName" class="input" />
-                <button type="button" class="button" @click="renameQuiz(index)">重命名</button>
-              </div>
-              <div class="admin-quiz-list-container08">
-                <input type="text" v-model="quiz.timer"  class="input" />
-                <button type="button" class="button" @click="renameQuiz(index)">修改限时</button>
-              </div>
-              <router-link :to="`/admin-quiz-detail?quizID=${quiz.quizID}`" class="admin-quiz-list-navlink2 button">
-                管理问题
-              </router-link>
-              <button type="button" class="button" style="background-color: var(--dl-color-danger-700);" @click="deleteQuiz(index)">删除测试</button>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <el-card style="width: 80%;">
+          <el-table :data="probs"  stripe><!-- 带边框、斑马纹 -->
+              <el-table-column width="100px" label="题目编号" prop="probDbID"></el-table-column>
+              <el-table-column label="题目内容" prop="probDbText"></el-table-column>
+              <el-table-column align="right" width="300px">
+                <template slot="header" slot-scope="scope">
+                  <el-button size= "big" type="success" @click="openAddWindow">新增</el-button>
+                </template>
+                <template slot-scope="scope">
+                    <el-button size= "mini" type="primary" icon="el-icon-edit" @click="openEditWindow(scope.row)">编辑</el-button>
+                    <el-button size= "mini" type="danger" icon="el-icon-delete" @click="deleteProb(scope.row)">删除</el-button>
+                </template>
+              </el-table-column>
+          </el-table>
+          <el-dialog title="添加题目" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed"
+            :close-on-click-modal='false'>
+              <!-- 内容主体区 -->
+              <el-form :model="addForm" ref="addFormRef" label-width="70px">
+                <el-form-item label="题目" required>
+                  <el-input v-model="addForm.text" ></el-input>
+                </el-form-item>
+                <el-form-item label="选项" required>
+                  <el-row></el-row>
+                  <el-row :gutter="50">
+                    <el-col :span="11">
+                      <div>选项A</div>
+                      <el-input v-model="addForm.option1" ></el-input>
+                    </el-col>
+                    <el-col :span="11">
+                      <div>选项B</div>
+                      <el-input v-model="addForm.option2" ></el-input>
+                    </el-col>
+                  </el-row>
+                  <el-row :gutter="50">
+                    <el-col :span="11">
+                      <div>选项C</div>
+                      <el-input v-model="addForm.option3" ></el-input>
+                    </el-col>
+                    <el-col :span="11">
+                      <div>选项D</div>
+                      <el-input v-model="addForm.option4" ></el-input>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="正确选项" required>
+                  <el-radio-group v-model="addForm.ans">
+                    <el-radio :label="1">A</el-radio>
+                    <el-radio :label="2">B</el-radio>
+                    <el-radio :label="3">C</el-radio>
+                    <el-radio :label="4">D</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="分数" required>
+                  <el-input v-model="addForm.credit"></el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                  <el-upload
+                    class="upload-demo"
+                    drag
+                    action="#"
+                    list-type="picture"
+                    :http-request="UploadImage"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove"
+                    :before-upload="beforeAvatarUpload"
+                    :limit="1"
+                    :on-change="handleChange"
+                    :on-exceed="handleExceed"
+                    :file-list="formData.fileList"
+                    multiple>
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <!-- 底部区 -->
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="addDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="AddProb()">确 定</el-button>
+              </span>
+            </el-dialog>
+          <el-dialog title="修改题目" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed"
+            :close-on-click-modal='false'>
+              <!-- 内容主体区 -->
+              <el-form :model="editForm" ref="editFormRef" label-width="70px">
+                <el-form-item label="题目" required>
+                  <el-input v-model="editForm.text" @input="change($event)"></el-input>
+                </el-form-item>
+                <el-form-item label="选项" required>
+                  <el-row></el-row>
+                  <el-row :gutter="50">
+                    <el-col :span="11">
+                      <div>选项A</div>
+                      <el-input v-model="editForm.option1" @input="change($event)"></el-input>
+                    </el-col>
+                    <el-col :span="11">
+                      <div>选项B</div>
+                      <el-input v-model="editForm.option2" @input="change($event)"></el-input>
+                    </el-col>
+                  </el-row>
+                  <el-row :gutter="50">
+                    <el-col :span="11">
+                      <div>选项C</div>
+                      <el-input v-model="editForm.option3" @input="change($event)"></el-input>
+                    </el-col>
+                    <el-col :span="11">
+                      <div>选项D</div>
+                      <el-input v-model="editForm.option4" @input="change($event)"></el-input>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="正确选项" required>
+                  <el-radio-group v-model="editForm.ans" @input="change($event)">
+                    <el-radio :label="1">A</el-radio>
+                    <el-radio :label="2">B</el-radio>
+                    <el-radio :label="3">C</el-radio>
+                    <el-radio :label="4">D</el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="分数" required>
+                  <el-input v-model="editForm.credit" @input="change($event)"></el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                  <el-upload
+                    class="upload-demo"
+                    drag
+                    action="#"
+                    list-type="picture"
+                    :http-request="UploadImage"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove"
+                    :before-upload="beforeAvatarUpload"
+                    :limit="1"
+                    :on-change="handleChange"
+                    :on-exceed="handleExceed"
+                    :file-list="formData.fileList"
+                    multiple>
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <!-- 底部区 -->
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="editDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="EditProb()">确 定</el-button>
+              </span>
+            </el-dialog>
+        </el-card>
     </div>
     <div class="admin-quiz-list-footer">
       <footer class="admin-quiz-list-footer1 footerContainer">
@@ -82,25 +206,97 @@
 
 <script>
 import axios from 'axios';
+import client from '../oss.js';
+import { string } from 'three/examples/jsm/nodes/Nodes.js';
 export default {
   name: 'AdminQuizList',
   props: {},
   data() {
     return {
       newQuizName: '',
-      quizzes: [],
-      inputName: [],
+      probs: [],
       name: localStorage.getItem('username'),
+      addDialogVisible: false,
+      addForm:{},
+      editDialogVisible: false,
+      editForm:{},
+      formData: {
+        fileList: [],
+      },
     }
   },
   methods: {
-    logout() {
-      localStorage.clear();
-      this.$router.push('/');
+    change(){
+      this.$forceUpdate();
     },
-    refresh() {
+    handleRemove(file, fileList) {
+      //   判断是否是正确格式图片才能执行删除
+      if (file && file.status === "success") {
+
+        let Pics = this.formData.fileList;
+        Pics.forEach((item, index) => {
+          if (file.name == item.name) {
+            Pics.splice(index, 1);
+          }
+        });
+      }
+    },
+    //查看图片
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handleChange(file, fileList) {
+    },
+    async UploadImage(param) {
+      let file = param.file;
+      const uploadResult = await client.put('prob/' + file.name, file);
+      this.formData.fileList.push({
+            name: file.name,
+            url: uploadResult.url,
+            uid: file.uid,
+          });
+      console.log('上传成功:', uploadResult);
+    },
+    // 上传检测
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      this.isname = true;
+      // 不能在foreach中增加else判断,否则会进行多次执行
+      //   forEach 会遍历数组中的所有元素，满足条件后还继续执行了循环，
+      // 可以通过 try catch 抛出异常的方式跳出循环
+      this.formData.fileList.forEach((item, index) => {
+        if (file.name === item.name) {
+          this.isname = false;
+        }
+      });
+      if (!this.isname) {
+        this.$message.error("图片重复");
+      }
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+        // this.$refs.upload.handleRemove(file);
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+        // this.$refs.upload.handleRemove(file);
+      }
+      return isJPG && isLt2M && this.isname;
+    },
+    //控制上传数量提示
+    handleExceed(files, fileList) {
+      this.$message.warning(`最多上传1个文件`);
+    },
+    
+    editDialogClosed(){
+      this.editForm = {};
+      this.$refs.editFormRef.resetFields();
+      this.formData.fileList = [];
+    },
+    openEditWindow(prob){
       axios
-        .get(`/quiz/list`,
+        .get(`/admin/probDb/detail?probDbID=${prob.probDbID}`,
           {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('Token')}`
@@ -108,7 +304,25 @@ export default {
           })
         .then((response) => {
           if (response.data.status === 0) {
-            this.quizzes = response.data.quizzes;
+            this.editForm.credit = response.data.probDbCredit;
+            this.editForm.ans = response.data.probDbAns;
+            if(response.data.probDbImg){
+              this.formData.fileList.push({
+                name: response.data.probDbImg,
+                url: response.data.probDbImg,
+                uid: null,
+              })
+            }
+            else {
+              this.formData.fileList=[];
+            }
+            let texts = response.data.probDbText.split("<br/>");
+            this.editForm.text = texts[0];
+            this.editForm.option1 = texts[1];
+            this.editForm.option2 = texts[2];
+            this.editForm.option3 = texts[3];
+            this.editForm.option4 = texts[4];
+            this.editForm.id = response.data.probDbID;
           } else {
             console.log(response.data.message);
           }
@@ -117,46 +331,34 @@ export default {
           console.log(error);
           this.$message.warning(error.message);
         });
+      this.editDialogVisible = true;
     },
-    addQuiz() {
-      axios({
-        method: 'post',
-        url: '/admin/quiz',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
-          'Content-Type': 'application/json'
-        },
-        data: {
-          quizName: this.newQuizName,
-          totalCredits: 1,
-          probs: [],
-          timer: 0,
-        }
-      })
-        .then(response => {
-          this.$message('修改成功');
-          this.refresh();
-        })
-        .catch(error => {
-          // handle error
-          console.log(error);
-          this.$message.warning(error.message);
-        });
-    },
-    renameQuiz(index) {
+    EditProb(){
+      let probDbCredit = this.editForm.credit;
+      let probDbImg = '';
+      if(this.formData.fileList[0]){
+        probDbImg = this.formData.fileList[0].url;
+      }
+      else {
+        probDbImg = null;
+      }
+      let probDbAns = this.editForm.ans;
+      let probDbText = this.editForm.text;
+      let probDbID = this.editForm.id;
+      probDbText = probDbText + '<br/>' + this.editForm.option1 + '<br/>' + this.editForm.option3 + '<br/>' + this.editForm.option3 + '<br/>' + this.editForm.option4;
       axios({
         method: 'put',
-        url: '/admin/quiz',
+        url: '/admin/probDb',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('Token')}`,
           'Content-Type': 'application/json'
         },
         data: {
-          quizID: this.quizzes[index].quizID,
-          quizName: this.quizzes[index].quizName,
-          timer: this.quizzes[index].timer,
-          totalCredits: this.quizzes[index].totalCredits,
-          probs: this.quizzes[index].probs,
+          probDbID : probDbID,
+          probDbCredit: probDbCredit,
+          probDbText: probDbText,
+          probDbImg: probDbImg,
+          probDbAns: probDbAns,
         }
       })
         .then(response => {
@@ -168,11 +370,61 @@ export default {
           console.log(error);
           this.$message.warning(error.message);
         });
+      this.editForm = {};
+      this.$refs.editFormRef.resetFields();
+      this.formData.fileList = [];
+      this.editDialogVisible = false;
     },
-
-    async deleteQuiz(index) {
+    addDialogClosed(){
+      this.addForm = {};
+      this.$refs.addFormRef.resetFields();
+      this.formData.fileList = [];
+    },
+    openAddWindow(){
+      this.addDialogVisible = true;
+    },
+    AddProb(){
+      let probDbCredit = this.addForm.credit;
+      let probDbImg = '';
+      if(this.formData.fileList[0]){
+        probDbImg = this.formData.fileList[0].url;
+      }
+      else {
+        probDbImg = null;
+      }
+      let probDbAns = this.addForm.ans;
+      let probDbText = this.addForm.text;
+      probDbText = probDbText + '<br/>' + this.addForm.option1 + '<br/>' + this.addForm.option3 + '<br/>' + this.addForm.option3 + '<br/>' + this.addForm.option4;
+      axios({
+        method: 'post',
+        url: '/admin/probDb',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          probDbCredit: probDbCredit,
+          probDbText: probDbText,
+          probDbImg: probDbImg,
+          probDbAns: probDbAns,
+        }
+      })
+        .then(response => {
+          this.$message('修改成功');
+          this.refresh();
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+          this.$message.warning(error.message);
+        });
+      this.$refs.addFormRef.resetFields();
+      this.formData.fileList = [];
+      this.addDialogVisible = false;
+    },
+    async deleteProb(porb){
       try {
-        const response = await axios.delete(`/admin/quiz?quizID=${this.quizzes[index].quizID}`, {
+        const response = await axios.delete(`/admin/probDb?probDbID=${porb.probDbID}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
             'Content-Type': 'application/json'
@@ -186,26 +438,34 @@ export default {
         this.$message.warning(error.message);
       }
     },
-  },
-  created() {
-    axios
-      .get(`/quiz/list`,
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('Token')}`
+    logout() {
+      localStorage.clear();
+      this.$router.push('/');
+    },
+    refresh() {
+      axios
+        .get(`/admin/probDb/list`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('Token')}`
+            }
+          })
+        .then((response) => {
+          if (response.data.status === 0) {
+            this.probs = response.data.probDbs;
+          } else {
+            console.log(response.data.message);
           }
         })
-      .then((response) => {
-        if (response.data.status === 0) {
-          this.quizzes = response.data.quizzes;
-        } else {
-          console.log(response.data.message);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        this.$message.warning(error.message);
-      });
+        .catch((error) => {
+          console.log(error);
+          this.$message.warning(error.message);
+        });
+    },
+    
+  },
+  created() {
+    this.refresh();
   },
   metaInfo: {
     title: 'AdminQuizList - PetClinicMock',
