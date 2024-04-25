@@ -174,7 +174,6 @@ export default {
           this.$router.push(`/quiz-result?quizID=${this.quizID}`); // Navigate to menu page
         } else if (response.data.status === 1) {
           // Login failed
-          // Show error message
           this.$message.warning('Wrong username or password.');
         } else {
           // Handle other status
@@ -270,7 +269,7 @@ export default {
   created() {
     this.quizID = this.$route.query.quizID;
     this.currentProb = 0;
-    const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
+    const authToken = localStorage.getItem('Token');
     // Fetch disease details
     axios.get(`/quiz/detail?quizID=${this.quizID}`,
       {

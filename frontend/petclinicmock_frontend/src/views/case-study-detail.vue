@@ -178,7 +178,7 @@ export default {
     this.diseaseID = this.$route.query.diseaseID;
     this.diseaseName = this.$route.query.diseaseName;
 
-    const authToken = localStorage.getItem('Token'); // replace 'authToken' with the key you used to store the token
+    const authToken = localStorage.getItem('Token');
 
     // Fetch disease details
     axios.get(`/disease/detail?diseaseID=${this.diseaseID}`, {
