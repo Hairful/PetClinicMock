@@ -28,6 +28,8 @@ import CaseStudyMenu from './views/case-study-menu'
 import Login from './views/login'
 import AdminUser from './views/admin-user'
 import AdminPharmacy from './views/admin-pharmacy.vue'
+import AdminProbList from './views/admin-prob-list.vue'
+import AdminProbDetail from './views/admin-prob-detail.vue'
 import './style.css'
 
 Vue.use(Router)
@@ -159,6 +161,16 @@ const router = new Router({
       name: 'AdminPharmacy',
       path: '/admin-pharmacy',
       component: AdminPharmacy,
+    },
+    {
+      name: 'AdminProbList',
+      path: '/admin-prob-list',
+      component: AdminProbList,
+    },
+    {
+      name: 'AdminProbDetail',
+      path: '/admin-prob-detail',
+      component: AdminProbDetail,
     },
     {
       name: 'Page',
