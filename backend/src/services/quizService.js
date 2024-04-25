@@ -186,7 +186,6 @@ exports.recordExamEntry = async (input) => {
         // 遍历答案数组，处理每个答案
         for (const answer of answers) {
             const { probNumber, ans } = answer;
-            // 检查 Prob 表中是否存在对应的 probNumber
             const prob = await Prob.findOne({ where: { "probID": probNumber } });
             if (!prob) {
                 return { "status": 3, "message": "无对应题目ID" };

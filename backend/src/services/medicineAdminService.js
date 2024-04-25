@@ -52,7 +52,6 @@ exports.createMedicine = async (medicineData) => {
  */
 exports.deleteMedicineById = async (medicineId) => {
     try {
-        // 使用diseaseID查找疾病记录
         const result = await Medicine.destroy({
             where: { medicineID: medicineId }
         });
@@ -62,10 +61,8 @@ exports.deleteMedicineById = async (medicineId) => {
             }).catch((error) => {
                 logger.error('FlushAll error:', error);
             });
-            // 如果找到并删除了记录，返回成功的状态和消息
             return { status: 0, message: "成功" };
         } else {
-            // 没有找到，返回错误
             return { status: 1, message: "无对应药品ID" };
         }
     } catch (error) {

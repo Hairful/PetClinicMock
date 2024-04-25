@@ -14,15 +14,6 @@ const paramsInQueryOfList = [];
 const paramsInBodyOfCreate = ['userName', 'password', 'isAdmin'];
 const paramsInQueryOfDelete = ['userID']
 
-//不启用Token认证
-/*
-router.get('', isQueryValid(paramsInQueryOfList), getUserList);
-router.post('', isBodyValid(paramsInBodyOfCreate), createUser);
-router.put('', updateUser);
-router.delete('', isQueryValid(paramsInQueryOfDelete), deleteUser);
-*/
-//启用Token认证
-
 router.get('', isTokenValid, isTokenAdmin, isQueryValid(paramsInQueryOfList), getUserList);
 router.post('', isTokenValid, isTokenAdmin, isBodyValid(paramsInBodyOfCreate), createUser);
 router.put('', isTokenValid, isTokenAdmin, updateUser);

@@ -59,7 +59,6 @@ exports.getDiseaseTypes = async () => {
             attributes: ['diseaseType'],
             group: ['diseaseType']
         });
-        // 从每个实例中提取diseaseType并创建列表
         const disease_types_list = unique_disease_types.map(disease => disease.diseaseType);
         return {
             status: 0,

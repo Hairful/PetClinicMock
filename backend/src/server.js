@@ -17,6 +17,7 @@ sequelize.authenticate()
     .then(async () => {
         logger.info('Successfully connect to the database');
         //await sequelize.sync({ alter: true });
+        //启用这条，会尝试建立数据库模型
         app.listen(PORT, () => {
             logger.info(`The server is running on port: ${PORT}`);
         });
