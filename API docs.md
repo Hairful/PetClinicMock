@@ -2,7 +2,7 @@
 
 ## 常用status
 
-```json
+```js
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 {
@@ -57,7 +57,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /register
 Content-Type: application/json
 {
@@ -76,7 +76,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -106,7 +106,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /login
 Content-Type: application/json
 {
@@ -126,7 +126,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -172,7 +172,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /casestudy/disease/type
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -187,7 +187,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -211,7 +211,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /casestudy/disease/list?diseaseType="寄生虫病"
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -233,7 +233,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -273,7 +273,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /casestudy/disease/detail?diseaseID=1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -291,7 +291,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -327,7 +327,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /casestudy/case/list?diseaseID=1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -349,7 +349,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -384,7 +384,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /casestudy/case/search?searchString=发热咳嗽
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -399,7 +399,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -422,7 +422,9 @@ Content-Type: application/json
         }
     ]
 }
-```json
+```
+
+```js
 HTTP/1.1 404 Not Found
 Content-Type: application/json
 {
@@ -444,7 +446,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /casestudy/case/detail?caseID=1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -484,7 +486,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -543,7 +545,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /disease/type
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -558,7 +560,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -583,7 +585,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /disease/list?page=1&pageSize=10&diseaseType="寄生虫病"
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -605,7 +607,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -640,7 +642,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /disease/detail?diseaseID=1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -658,7 +660,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -692,7 +694,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /medicine/list?page=1&pageSize=10&diseaseType="寄生虫病"
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -714,7 +716,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -750,7 +752,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /medicine/detail?medicineID=1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -767,7 +769,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -800,7 +802,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /roleplaying/list?role=0
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -815,7 +817,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -846,7 +848,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /roleplaying/detail?role=2&job=注射
 : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
@@ -865,7 +867,7 @@ Authorization: fakeToken
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -904,7 +906,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /quiz/list?userID=2
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -925,12 +927,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | quizID       | Body | integer | 是   | 测试ID   |
 | quizName     | Body | string  | 是   | 测试名称 |
 | totalCredits | Body | integer | 是   | 总分     |
+|timer|Body|integer|是|计时|
 | lastTry      | Body | integer | 否   | 上次得分 |
 | lastTryTime  | Body | string  | 否   | 上次时间 |
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -941,6 +944,7 @@ Content-Type: application/json
             "quizID":1,
             "quizName": "测试1",
             "totalCredits": 100,
+            "timer":1,
             "lastTry": 30,
             "lastTryTime": "2024年11月20日 11:59PM"
         },
@@ -948,6 +952,7 @@ Content-Type: application/json
             "quizID":2,
             "quizName": "测试2",
             "totalCredits": 50,
+            "timer":1
         }
     ]
 }
@@ -988,6 +993,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 | totalCredits | Body | integer  | 否   | 总分     |
 | lastTry      | Body | integer  | 否   | 上次得分 |
 | lastTryTime  | Body | string   | 否   | 上次时间 |
+|timer|Body|integer|否|计时|
 | probs        | Body | object[] | 否   | 题目     |
 
 对于probs的元素
@@ -1002,7 +1008,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1012,6 +1018,7 @@ Content-Type: application/json
     "totalCredits": 20,
     "lastTry": 30,
     "lastTryTime": "2024年11月20日 11:59PM",
+    "timer":1,
     "probs":[
         {
             "probNumber": 1,
@@ -1068,7 +1075,7 @@ TODO: 个人觉得probNumber应换成probID，试卷中题目题号前端自行�
 
 `Example`
 
-```json
+```js
 POST /quiz/result
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1098,7 +1105,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1149,7 +1156,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /3DVirtualTour/item
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -1171,7 +1178,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1217,7 +1224,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /admin/users
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -1240,7 +1247,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1277,7 +1284,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /admin/user
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1298,7 +1305,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1331,7 +1338,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/user
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1351,7 +1358,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1387,7 +1394,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 DELETE /admin/user?userID=3
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -1401,7 +1408,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1434,7 +1441,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /admin/disease
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1456,7 +1463,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1490,7 +1497,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/disease
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1509,7 +1516,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1546,7 +1553,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 DELETE /admin/disease?diseaseID=3
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -1560,7 +1567,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1591,7 +1598,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /admin/medicine
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1612,7 +1619,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1645,7 +1652,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/medicine
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1664,7 +1671,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1700,7 +1707,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 DELETE /admin/medicine?medicineID=2
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -1714,7 +1721,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1746,7 +1753,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 GET /admin/case?diseaseID=1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -1768,7 +1775,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1832,7 +1839,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /admin/case
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1872,7 +1879,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -1931,7 +1938,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/case
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -1960,7 +1967,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2005,7 +2012,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 DELETE /admin/case?caseID=1
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -2019,7 +2026,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2050,7 +2057,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /admin/roleplaying
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -2070,7 +2077,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2109,7 +2116,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/roleplaying
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -2130,7 +2137,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2174,7 +2181,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 DELETE /admin/roleplaying?role=1&job="注射"
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -2188,7 +2195,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2236,7 +2243,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 POST /admin/quiz
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -2269,7 +2276,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2313,7 +2320,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/quiz
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -2346,7 +2353,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2376,7 +2383,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 DELETE /admin/quiz?quizID=1
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
@@ -2390,7 +2397,7 @@ Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2423,7 +2430,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 PUT /admin/disease
 Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 Content-Type: application/json
@@ -2443,7 +2450,7 @@ Content-Type: application/json
 
 `Example`
 
-```json
+```js
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -2458,4 +2465,224 @@ Content-Type: application/json
     "message": "无对应物品ID"
 }
 
+```
+
+## `POST /admin/probDb`
+
+向题库中上传试题
+
+### 发送参数
+
+| 名称          | 位置   | 类型    | 必选 | 备注          |
+| ------------- | ------ | ------- | ---- | ------------- |
+| Authorization | Header | string  | 是   | 身份验证token |
+| probDbCredit        | Body   | integer | 是   | 题库中题目分数        |
+| probDbText      | Body   | string  | 是   | 题库中题目文本      |
+| probDbImg     | Body   | string  | 否   | 题库中题目图片/可不传      |
+| probDbAns     | Body   | integer  | 是   | 题库中题目答案     |
+
+`Example`
+
+```js
+POST /admin/quiz
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Content-Type: application/json
+{
+    "probDbCredit": 10,
+    "probDbText": "雏鸡出现持续性喷嚏、呼吸急促、眼部浮肿、腹泻等症状，可能患上下列哪种疾病？<br/>A.禽流感；<br/>B.鸡传染性鼻气管炎；<br/>C.禽蓝耳病；<br/>D.手足口病",
+    "probDbImg": "https://pcm123.oss-cn-shanghai.aliyuncs.com/%E9%B8%A1.png",
+    "probDbAns": 2
+}
+```
+
+### 返回响应
+
+| 名称    | 位置 | 类型    | 必选 | 备注 |
+| ------- | ---- | ------- | ---- | ---- |
+| status  | Body | integer | 是   | 状态 |
+| message | Body | string  | 是   | 消息 |
+
+```js
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功"
+}
+```
+
+## `PUT /admin/probDb`
+
+修改题库中某题目
+传了字段就覆盖
+不传字段默认不改
+probDbID必须传
+
+### 发送参数
+
+`Example`
+
+```js
+PUT /admin/probDb
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+{
+    "probDbID":1
+    "probDbCredit": 100,
+    "probDbImg": "https://pcm123.oss-cn-shanghai.aliyuncs.com/%E9%B8%A1.png",
+    "probDbAns": 2
+}
+```
+
+### 返回响应
+
+`Example`
+
+```js
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功"
+}
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json
+{
+    "status": 1, 
+    "message": "无对应题库题目ID"
+}
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json
+{
+    "status": 2, 
+    "message": "无对应题库题目答案"
+}
+```
+
+## `DELETE /admin/probDb`
+
+删除题库中某题目
+
+### 发送参数
+
+`Example`
+
+```js
+DELETE /admin/probDb?probDbID=1
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+`Example`
+
+```js
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+    "status": 0, 
+    "message": "成功"
+}
+
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json
+{
+    "status": 1, 
+    "message": "无对应题库题目ID"
+}
+```
+
+## `GET /admin/probDb/list`
+
+返回所有题库题目列表，包括id和题目
+
+### 发送参数
+
+`Example`
+
+```js
+GET /admin/probDb/list
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+`Example`
+
+```js
+{
+    "status": 0
+    "message":"成功",
+    "probDbs":[
+        {
+            "probDbID": 361,
+            "probDbText": "雏鸡出现持续性喷嚏、呼吸急促、眼部浮肿、腹泻等症状，可能患上下列哪种疾病？<br/>A.禽流感；<br/>B.鸡传染性鼻气管炎；<br/>C.禽蓝耳病；<br/>D.手足口病"
+        }
+        {
+            "probDbID": 362,
+            "probDbText": "大鸡出现持续性喷嚏、呼吸急促、眼部浮肿、腹泻等症状，可能患上下列哪种疾病？<br/>A.禽流感；<br/>B.鸡传染性鼻气管炎；<br/>C.禽蓝耳病；<br/>D.手足口病"
+        }
+        {
+            "probDbID": 363,
+            "probDbText": "小鸡出现持续性喷嚏、呼吸急促、眼部浮肿、腹泻等症状，可能患上下列哪种疾病？<br/>A.禽流感；<br/>B.鸡传染性鼻气管炎；<br/>C.禽蓝耳病；<br/>D.手足口病"
+        }
+    ]
+}
+```
+
+## `GET /admin/probDb/detail`
+
+返回某题库题目全部信息
+
+### 发送参数
+
+`Example`
+
+```js
+GET /admin/probDb/detail?probDbID=361
+Authorization: ADMINGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+```
+
+### 返回响应
+
+`Example`
+
+```js
+{
+    "status": 0
+    "message":"成功",
+    "probDbID": 361,
+    "probDbCredit": 10,
+    "probDbText": "雏鸡出现持续性喷嚏、呼吸急促、眼部浮肿、腹泻等症状，可能患上下列哪种疾病？<br/>A.禽流感；<br/>B.鸡传染性鼻气管炎；<br/>C.禽蓝耳病；<br/>D.手足口病",
+    "probDbImg": "\nhttps://pcm123.oss-cn-shanghai.aliyuncs.com/%E9%B8%A1.png",
+    "probDbAns": 2,
+}
+```
+
+## `POST /admin/probDb/link`
+
+将题库中某题添加到某quiz
+如果想要删除/修改这个添加，需要去quiz那删除
+仅在题库里删除/修改不会影响到quiz里的这道题
+
+### 发送参数
+
+`Example`
+
+```js
+POST /admin/probDb/link
+{
+    "probDbID": 10,
+    "quizID":1
+}
+```
+
+### 返回响应
+
+`Example`
+
+```js
+{
+    "status": 0
+    "message":"成功"
+}
 ```
