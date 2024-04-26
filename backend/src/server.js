@@ -1,10 +1,8 @@
-/**
- * 文件: /src/server.js
- * 描述: 服务器入口文件
- * 作者: {YYZ}
- */
+const cluster = require('cluster');
+const os = require('os');
 const sequelize = require('./config/database');
 const app = require('./app');
+const { warn, level } = require('winston');
 const PORT = process.env.PORT || 3000;
 
 const loggerConfigurations = [
@@ -13,14 +11,23 @@ const loggerConfigurations = [
 ];
 const logger = require('./utils/logUtil')(loggerConfigurations);
 
-sequelize.authenticate()
-    .then(async () => {
-        logger.info('Successfully connect to the database');
-        //await sequelize.sync({ alter: true });
-        app.listen(PORT, () => {
-            logger.info(`The server is running on port: ${PORT}`);
+if (cluster.isMaster) {
+    // 主进程
+    const cpuCount = os.cpus().length;
+    for (let i = 0; i < cpuCount; i++) {
+        cluster.fork(); // 创建一个子进程
+    }
+} else {
+    // 子进程
+    sequelize.authenticate()
+        .then(async () => {
+            logger.info('Successfully connect to the database');
+            await sequelize.sync({ alter: true });
+            app.listen(PORT, () => {
+                logger.info(`The server is running on port: ${PORT}`);
+            });
+        })
+        .catch(err => {
+            logger.error('Unable to connect to database', err);
         });
-    })
-    .catch(err => {
-        logger.error('Unable to connect to database', err);
-    });
+}

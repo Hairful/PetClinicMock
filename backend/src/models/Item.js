@@ -20,7 +20,10 @@ const Item = sequelize.define('Item', {
         type: DataTypes.STRING,
         allowNull: true
     },
-}
+},
+    {
+        version: true
+    }
 );
 
 Item.belongsTo(Department, { foreignKey: 'departmentID' });

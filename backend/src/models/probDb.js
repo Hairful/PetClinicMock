@@ -22,5 +22,8 @@ const ProbDb = sequelize.define('ProbDb', {
         type: DataTypes.INTEGER,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 module.exports = ProbDb;

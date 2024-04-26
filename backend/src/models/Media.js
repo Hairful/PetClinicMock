@@ -15,6 +15,10 @@ const Media = sequelize.define('Media', {
         type: DataTypes.TEXT,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    }
+);
 
 module.exports = Media;

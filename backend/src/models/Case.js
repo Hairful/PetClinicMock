@@ -26,7 +26,10 @@ const Case = sequelize.define('Case', {
         type: DataTypes.TEXT,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 Case.belongsTo(Disease, { foreignKey: 'diseaseID' });
 Case.belongsToMany(Medicine, { through: CaseMedicine });

@@ -6,5 +6,8 @@ const CaseMedicine = sequelize.define('CaseMedicine', {
         type: DataTypes.STRING,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 module.exports = CaseMedicine;

@@ -24,5 +24,9 @@ const Job = sequelize.define('Job', {
         type: DataTypes.INTEGER,
         allowNull: true
     }
-});
+},
+    {
+        version: true
+    }
+);
 module.exports = Job;

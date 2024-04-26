@@ -22,7 +22,10 @@ const Quiz = sequelize.define('Quiz', {
         type: DataTypes.INTEGER,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 Quiz.hasMany(Prob, { foreignKey: 'quizID' });
 

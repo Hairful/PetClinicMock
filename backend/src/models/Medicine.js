@@ -15,6 +15,9 @@ const Medicine = sequelize.define('Medicine', {
         type: DataTypes.TEXT,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 module.exports = Medicine;

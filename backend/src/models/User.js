@@ -28,7 +28,10 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 User.belongsToMany(Quiz, { through: UserQuiz });
 User.belongsToMany(Prob, { through: UserProb });

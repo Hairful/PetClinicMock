@@ -7,6 +7,9 @@ const UserProb = sequelize.define('UserProb', {
         type: DataTypes.INTEGER,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 module.exports = UserProb;

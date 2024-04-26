@@ -23,6 +23,9 @@ const Prob = sequelize.define('Prob', {
         type: DataTypes.INTEGER,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 module.exports = Prob;

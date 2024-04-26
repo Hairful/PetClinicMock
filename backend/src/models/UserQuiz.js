@@ -11,6 +11,9 @@ const UserQuiz = sequelize.define('UserQuiz', {
         type: DataTypes.DATE,
         allowNull: true
     }
-});
+},
+    {
+        version: true
+    });
 
 module.exports = UserQuiz;

@@ -15,6 +15,9 @@ const Department = sequelize.define('Department', {
         type: DataTypes.TEXT,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 module.exports = Department;

@@ -19,6 +19,9 @@ const Disease = sequelize.define('Disease', {
         type: DataTypes.TEXT,
         allowNull: false
     }
-});
+},
+    {
+        version: true
+    });
 
 module.exports = Disease;

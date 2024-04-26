@@ -6,7 +6,7 @@
 
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DB_NAME || 'PetClinicMock', process.env.DB_USER || 'PCM', process.env.DB_PASSWORD || 'Pcm123456@', {
+const sequelize = new Sequelize(process.env.DB_NAME || 'cluster', process.env.DB_USER || 'PCM', process.env.DB_PASSWORD || 'Pcm123456@', {
     host: process.env.DB_HOST || 'rm-uf6ow60l06e5otd9ego.mysql.rds.aliyuncs.com',
     dialect: process.env.DB_TYPE || 'mysql',
     define: {
