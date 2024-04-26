@@ -133,7 +133,7 @@ export default {
         },
         data: {
           quizName: this.newQuizName,
-          totalCredits: 1,
+          totalCredits: 0,
           probs: [],
           timer: 0,
         }

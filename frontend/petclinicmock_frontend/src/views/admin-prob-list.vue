@@ -326,7 +326,7 @@ export default {
       let probDbAns = this.editForm.ans;
       let probDbText = this.editForm.text;
       let probDbID = this.editForm.id;
-      probDbText = probDbText + ' A.' + this.editForm.option1 + ';B.' + this.editForm.option3 + ';C.' + this.editForm.option3 + ';D.' + this.editForm.option4;
+      probDbText = probDbText + ' A.' + this.editForm.option1 + ';B.' + this.editForm.option2 + ';C.' + this.editForm.option3 + ';D.' + this.editForm.option4;
       axios({
         method: 'put',
         url: '/admin/probDb',
