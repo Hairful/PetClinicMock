@@ -297,7 +297,7 @@ export default {
             else {
               this.formData.fileList = [];
             }
-            let texts = response.data.probDbText.split("<br/>");
+            let texts = response.data.probDbText.split(/[\s;；]?[ABCD]\./);
             this.editForm.text = texts[0];
             this.editForm.option1 = texts[1];
             this.editForm.option2 = texts[2];
@@ -326,7 +326,7 @@ export default {
       let probDbAns = this.editForm.ans;
       let probDbText = this.editForm.text;
       let probDbID = this.editForm.id;
-      probDbText = probDbText + '<br/>' + this.editForm.option1 + '<br/>' + this.editForm.option3 + '<br/>' + this.editForm.option3 + '<br/>' + this.editForm.option4;
+      probDbText = probDbText + ' A.' + this.editForm.option1 + ';B.' + this.editForm.option3 + ';C.' + this.editForm.option3 + ';D.' + this.editForm.option4;
       axios({
         method: 'put',
         url: '/admin/probDb',
@@ -375,7 +375,7 @@ export default {
       }
       let probDbAns = this.addForm.ans;
       let probDbText = this.addForm.text;
-      probDbText = probDbText + '<br/>' + this.addForm.option1 + '<br/>' + this.addForm.option3 + '<br/>' + this.addForm.option3 + '<br/>' + this.addForm.option4;
+      probDbText = probDbText + ' A.' + this.addForm.option1 + ';B.' + this.addForm.option3 + ';C.' + this.addForm.option3 + ';D.' + this.addForm.option4;
       axios({
         method: 'post',
         url: '/admin/probDb',
