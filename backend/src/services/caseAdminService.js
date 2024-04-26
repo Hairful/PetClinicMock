@@ -26,14 +26,12 @@ exports.createCase = async (caseData) => {
         if (!disease) {
             return { status: 1, message: "无对应diseaseID" };
         }
-        // 检查medicineIDs是否存在
         for (let medicineData of caseData.medicines) {
             const medicine = await Medicine.findByPk(medicineData.medicineID);
             if (!medicine) {
                 return { status: 2, message: "无对应medicineID" };
             }
         }
-        // 创建新的Case实例
         const newCase = await Case.create({
             summary: caseData.examine,
             examine: caseData.examine,
@@ -41,7 +39,6 @@ exports.createCase = async (caseData) => {
             treatment: caseData.treatment,
             diseaseID: caseData.diseaseID
         });
-        // 添加Media记录
         const mediaInstances = [];
         const mediaTypes = ['summaryPictures', 'summaryVideos', 'examinePictures', 'examineVideos', 'diagnosePictures', 'diagnoseVideos', 'treatmentPictures', 'treatmentVideos'];
         for (let type of mediaTypes) {
@@ -55,11 +52,9 @@ exports.createCase = async (caseData) => {
                 }
             }
         }
-        // 关联Case和Media
         if (mediaInstances.length > 0) {
             await newCase.addMedia(mediaInstances);
         }
-        // 关联Medicine记录
         for (let medicineData of caseData.medicines) {
             await newCase.addMedicine(medicineData.medicineID, { through: { dosage: medicineData.dosage } });
         }
@@ -134,6 +129,7 @@ exports.updateCase = async (caseData) => {
         return { status: -9, message: "失败" };
     }
 };
+
 /**
  * deleteCase - 删除病例
  * @param {integer} caseID - 病例ID

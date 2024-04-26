@@ -111,7 +111,6 @@ exports.updateQuiz = async (quizData) => {
         if (probs !== undefined) {
             await Prob.destroy({ where: { quizID } });
             await UserQuiz.destroy({ where: { QuizQuizID: quizID } });
-            // 遍历并创建问题
             for (const prob of probs) {
                 await Prob.create({
                     quizID: quizID,

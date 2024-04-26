@@ -13,6 +13,7 @@ const loggerConfigurations = [
 ];
 const logger = require('../utils/logUtil')(loggerConfigurations);
 const { redisStatus, redisClient } = require('../config/redisClient');
+
 /**
  * getAllUser - 获取所有用户
  * @returns {Object} 对象
