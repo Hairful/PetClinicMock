@@ -1,6 +1,83 @@
 # PCM-BACKEND
 
-此文件主要介绍后端采用的代码结构组织，以及相关规范
+此文件主要介绍后端的以下信息
+
+1. 部署方式
+2. 架构设计
+3. 代码规范
+
+## 部署方式
+
+### 服务器启动
+
+```bash
+cd backend
+npm install
+node src/server.js
+```
+
+### 环境变量设置
+
+==请不要使用缺省值，资源已被释放，无法连接==
+
+```js
+// database env
+process.env.DB_HOST
+process.env.DB_TYPE
+process.env.DB_NAME
+process.env.DB_USER
+process.env.DB_PASSWORD
+process.env.REDIS_URL
+
+//encrypt env
+process.env.CRYPTO_MENT
+process.env.CRYPTO_IV
+
+// OSS env
+process.env.OSS_REGION,
+process.env.OSS_ACCESS_KEY_ID,
+process.env.OSS_ACCESS_KEY_SECRET,
+process.env.OSS_BUCKET
+
+// JWT env
+process.env.TOKEN_KEY
+```
+
+### 云部署
+
+以阿里云为例
+
+#### 配置git环境并设置ssh
+
+```shell
+yum install git -y
+git config --global user.name "your name"
+git config --global user.email "your email"
+ssh-keygen -t rsa -C "ssh-keygen"
+git clone "ssh URL"
+```
+
+#### 部署Node.js环境
+
+```shell
+echo ". ~/.nvm/nvm.sh" >> /etc/profile
+source /etc/profile
+export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node
+nvm list-remote
+nvm install v20.12.0
+nvm use v20.12.0
+```
+
+#### 部署redis
+
+```shell
+sudo systemctl stop firewalld
+tar -zxvf redis-6.2.4.tar.gz
+mv redis-6.2.4 /usr/local/
+cd /usr/local/redis-6.2.4/
+make  ./bin/redis-server ./redis.conf
+chmod 777 bin/redis-server redis.conf ./bin/redis-cli
+```
 
 ## 规范
 
@@ -77,7 +154,7 @@ commit具有以下格式，一般使用vscode git时只需填写第一行Commit 
 
 ### src 目录
 
-- **config**：存放配置文件，包括数据库配置、日志配置、身份认证配置等。
+- **config**：存放配置文件，包括数据库配置、加密配置、身份认证配置等。
 - **controllers**：处理请求的逻辑，将请求转发给服务层处理。
 
 >**接收请求参数** 从HTTP请求中获取需要的参数，例如req.body中的userName和password。
@@ -97,10 +174,4 @@ commit具有以下格式，一般使用vscode git时只需填写第一行Commit 
 
 - **utils**：存放工具函数或工具类，例如加密解密函数、日期处理函数等。
 - **app.js**：Express 应用的入口文件，定义中间件、路由等。
-- **database.js**：数据库连接文件，定义数据库连接池、初始化等。
 - **server.js**：服务器启动文件，创建 Express 实例并监听端口。
-
-### test 目录
-
-- **unit**：存放单元测试相关的代码。
-- **integration**：存放集成测试相关的代码。
