@@ -14,16 +14,6 @@ const paramsInQueryOfDepartmentList = [];
 const paramsInQueryOfDepartmentDetail = ['departmentID'];
 const paramsInQueryOfItemDetail = ['itemID'];
 
-//不启用Token认证
-/*
-router.get('/item/detail', isQueryValid(paramsInQueryOfItemDetail), getItemDetail);
-router.get('/department/detail', isQueryValid(paramsInQueryOfDepartmentDetail), getDepartmentDetail);
-router.get('/department/list', isQueryValid(paramsInQueryOfDepartmentList), getDepartmentList);
-*/
-
-//启用Token认证
-
 router.get('/item', isTokenValid, getItemDetail);
-
 
 module.exports = router;

@@ -108,7 +108,6 @@ exports.getCaseDetail = async (caseID) => {
     }
     if (redisStatus()) {
       try {
-        // 尝试从Redis获取药品信息
         caseMedicines = await redisClient.get(`caseMedicines:${caseID}`);
         if (caseMedicines) {
           caseMedicines = JSON.parse(caseMedicines);
@@ -138,7 +137,6 @@ exports.getCaseDetail = async (caseID) => {
         });
       }
     }
-    // 查询所有相关药品的详细信息
     const medicineIDs = caseMedicines.map(cm => cm.MedicineMedicineID);
     let medicines = await Medicine.findAll({
       where: { medicineID: medicineIDs },
@@ -201,13 +199,9 @@ exports.getCaseByString = async (searchString) => {
     const options = {
       includeScore: true,
       keys: ['caseID', 'summary', 'examine', 'diagnose', 'treatment'],
-      threshold: 0.7, // 调整匹配敏感度
+      threshold: 0.7, // 门限
     };
-
-    // 创建Fuse对象
     const fuse = new Fuse(cases, options);
-
-    // 使用Fuse.js进行搜索
     const results = fuse.search(searchString);
 
     if (results.length > 0) {
@@ -249,15 +243,10 @@ exports.getCaseByString = async (searchString) => {
     const options = {
       includeScore: true,
       keys: ['caseID', 'summary', 'examine', 'diagnose', 'treatment'],
-      threshold: 0.7, // 调整匹配敏感度
+      threshold: 0.7,
     };
-
-    // 创建Fuse对象
     const fuse = new Fuse(cases, options);
-
-    // 使用Fuse.js进行搜索
     const results = fuse.search(searchString);
-
     if (results.length > 0) {
       return {
         status: 0,
