@@ -13,6 +13,8 @@ const { getJobList, getJobDetail } = require('../controllers/roleController');
 const paramsInQueryOfDetail = ['role', 'job'];
 const paramsInQueryOfList = ['role'];
 
+//启用Token认证
+
 router.get('/list', isTokenValid, isQueryValid(paramsInQueryOfList), getJobList);
 router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getJobDetail);
 

@@ -13,6 +13,8 @@ const { isTokenValid } = require('../middlewares/authMiddleware');
 const paramsInQueryOfType = [];
 const paramsInQueryOfDetail = ['diseaseID'];
 
+//启用Token认证
+
 router.get('/type', isTokenValid, isQueryValid(paramsInQueryOfType), getDiseaseTypes);
 router.get('/list', isTokenValid, getDiseaseList);
 router.get('/detail', isTokenValid, isQueryValid(paramsInQueryOfDetail), getDiseaseDetail);
